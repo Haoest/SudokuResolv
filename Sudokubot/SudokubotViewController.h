@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface SudokubotViewController : UIViewController {
-    
+
 }
+
+@property (nonatomic, retain) IBOutlet UIImageView *MainImageView;
+@property (nonatomic, retain) IBOutlet UIButton *btnChange;
+-(void) ShowPuzzle;
+- (IBAction) btnChange_Click;
 
 @end

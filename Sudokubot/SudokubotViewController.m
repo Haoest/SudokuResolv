@@ -6,9 +6,14 @@
 //  Copyright 2011 none. All rights reserved.
 //
 
+#import <opencv2/core/core.hpp>
 #import "SudokubotViewController.h"
+#import "cvutil.hpp"
 
 @implementation SudokubotViewController
+
+@synthesize MainImageView;
+@synthesize btnChange;
 
 - (void)dealloc
 {
@@ -40,10 +45,22 @@
     // e.g. self.myOutlet = nil;
 }
 
+-(void) ShowPuzzle{
+    UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"puzzle1.png"]];
+    [MainImageView setImage:img];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (IBAction) btnChange_Click{
+    UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"puzzle1.png"]];
+//    [MainImageView setImage:[cvutil BlurImage:img]];
+    [MainImageView setImage:[cvutil FindLines:img]];
+    
+    
+}
 @end
