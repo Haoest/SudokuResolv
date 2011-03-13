@@ -7,13 +7,13 @@
 //
 
 #import <opencv2/core/core.hpp>
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-//using namespace cv;
+using namespace cv;
 
-@interface cvutil  {
-    
+@interface cvutil :NSObject {
+
 }
 +(IplImage *) CreateIplImageFromUIImage: (UIImage*) image;
 +(UIImage*) CreateUIImageFromIplImage: (IplImage*) image;
@@ -21,8 +21,9 @@
 +(UIImage*) BlurImage: (UIImage*) image;
 +(UIImage*) FindLines: (UIImage*) image;
 
-//void MergeAdjacentLines(vector<Vec2f>* lines)
-//bool LineComparator( Vec2f line1,  Vec2f line2)
+void MergeAdjacentLines(vector<Vec2f>* lines);
+bool LineComparator( Vec2f line1,  Vec2f line2);
 
++(void) Log;
 
 @end

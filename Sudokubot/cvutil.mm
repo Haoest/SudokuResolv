@@ -98,10 +98,10 @@ using namespace cv;
     cvtColor(dst, dst_color, CV_GRAY2BGR);
     vector<Vec2f> lines;
     HoughLines(dst, lines, 1, CV_PI/180, cvimage->width * 0.6);
-    NSLog([NSString stringWithFormat:@"number of lines: %d", lines.size()]);
+//    NSLog([NSString stringWithFormat:@"number of lines: %d", lines.size()]);
     
-    //MergeAdjacentLines(&lines);
-    NSString *lineInfo = @"";
+    MergeAdjacentLines(&lines);
+    //NSString *lineInfo = @"";
     // draw lines found
     for( size_t i = 0; i < lines.size(); i++ )
     {
@@ -114,9 +114,9 @@ using namespace cv;
         cv::Point pt2(cvRound(x0 - 1000*(-b)),
                   cvRound(y0 - 1000*(a)));
         line( dst_color, pt1, pt2, Scalar(255,0,0), 3, 8 );
-        lineInfo = [NSString stringWithFormat:@"%@\n%f\t\t%f", lineInfo, lines[i][0], lines[i][1]]; 
+        //lineInfo = [NSString stringWithFormat:@"%@\n%f\t\t%f", lineInfo, lines[i][0], lines[i][1]]; 
     }
-    NSLog(lineInfo);
+//    NSLog(lineInfo);
     IplImage rv = dst_color;
     return [cvutil CreateUIImageFromIplImage:&rv];
 }
@@ -132,10 +132,12 @@ bool LineComparator( Vec2f line1,  Vec2f line2){
 }
 
 void MergeAdjacentLines(vector<Vec2f>* lines){
-    sort(lines->begin(), lines->end(), LineComparator);
+    //sort(lines->begin(), lines->end(), LineComparator);
 }
 
-
++(void) Log{
+    NSLog(@"dfdfdf");
+}
 
 
 @end
