@@ -22,8 +22,7 @@ using namespace cv;
 +(UIImage*) FindLines: (UIImage*) image;
 
 void MergeAdjacentLines(vector<Vec2f>* lines);
-bool LineComparator( Vec2f line1,  Vec2f line2);
-
-+(void) Log;
+bool CompareLineByTheta( Vec2f line1,  Vec2f line2);
+bool CompareLineByRho(Vec2f line1, Vec2f line2);
 
 @end

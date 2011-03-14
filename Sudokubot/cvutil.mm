@@ -98,10 +98,10 @@ using namespace cv;
     cvtColor(dst, dst_color, CV_GRAY2BGR);
     vector<Vec2f> lines;
     HoughLines(dst, lines, 1, CV_PI/180, cvimage->width * 0.6);
-//    NSLog([NSString stringWithFormat:@"number of lines: %d", lines.size()]);
+    NSLog([NSString stringWithFormat:@"number of lines: %d", lines.size()]);
     
     MergeAdjacentLines(&lines);
-    //NSString *lineInfo = @"";
+    NSString *lineInfo = @"";
     // draw lines found
     for( size_t i = 0; i < lines.size(); i++ )
     {
@@ -114,30 +114,32 @@ using namespace cv;
         cv::Point pt2(cvRound(x0 - 1000*(-b)),
                   cvRound(y0 - 1000*(a)));
         line( dst_color, pt1, pt2, Scalar(255,0,0), 3, 8 );
-        //lineInfo = [NSString stringWithFormat:@"%@\n%f\t\t%f", lineInfo, lines[i][0], lines[i][1]]; 
+        lineInfo = [NSString stringWithFormat:@"%@\n%f\t\t%f", lineInfo, lines[i][0], lines[i][1]]; 
     }
-//    NSLog(lineInfo);
+    NSLog(lineInfo);
     IplImage rv = dst_color;
     return [cvutil CreateUIImageFromIplImage:&rv];
 }
 
-//line should be in [rho][theta] form
-bool LineComparator( Vec2f line1,  Vec2f line2){
-    float line1rho = line1[0];
-    float line2rho = line2[0];
-    float line1theta = line1[1];
-    float line2theta = line2[1];
-    if (line1theta < line2theta) return true;
-    return line1rho < line2rho;
+//line should be in the form where [0] is rho and [1] is theta
+bool CompareLineByTheta( Vec2f line1,  Vec2f line2){
+    return line1[1] < line2[1];
+    
+}
+
+//line should be in the form where [0] is rho and [1] is theta
+bool CompareLineByRho(Vec2f line1, Vec2f line2){
+    return line1[0] < line2[0];
 }
 
 void MergeAdjacentLines(vector<Vec2f>* lines){
-    //sort(lines->begin(), lines->end(), LineComparator);
+    stable_sort(lines->begin(), lines->end(), CompareLineByRho);
+    stable_sort(lines->begin(), lines->end(), CompareLineByTheta);
+    vector<int> removableLines;
+    Vec2f& lastLine = lines->at(0);;
+    for(int i=1; i<lines->size(); i++){
+        
+    }
 }
-
-+(void) Log{
-    NSLog(@"dfdfdf");
-}
-
 
 @end
