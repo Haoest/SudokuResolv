@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A582759132CF031003F8ACC /* puzzle1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A582757132CF031003F8ACC /* puzzle1.png */; };
 		3A8FEDCF132CD99F00654072 /* cvutil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8FEDCE132CD99F00654072 /* cvutil.mm */; };
 		3A9E6C4A13295D120055628C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9E6C4913295D120055628C /* UIKit.framework */; };
 		3A9E6C4C13295D120055628C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9E6C4B13295D120055628C /* Foundation.framework */; };
 		3A9E6C4E13295D120055628C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9E6C4D13295D120055628C /* CoreGraphics.framework */; };
 		3A9E6C5413295D120055628C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E6C5213295D120055628C /* InfoPlist.strings */; };
-		3A9E6C5713295D120055628C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E6C5613295D120055628C /* main.m */; };
+		3A9E6C5713295D120055628C /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E6C5613295D120055628C /* main.mm */; };
 		3A9E6C5A13295D120055628C /* SudokubotAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E6C5913295D120055628C /* SudokubotAppDelegate.mm */; };
 		3A9E6C5D13295D120055628C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E6C5B13295D120055628C /* MainWindow.xib */; };
-		3A9E6C6013295D120055628C /* SudokubotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E6C5F13295D120055628C /* SudokubotViewController.m */; };
+		3A9E6C6013295D120055628C /* SudokubotViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E6C5F13295D120055628C /* SudokubotViewController.mm */; };
 		3A9E6C6313295D120055628C /* SudokubotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E6C6113295D120055628C /* SudokubotViewController.xib */; };
 		3A9E6C6A13295D120055628C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9E6C4913295D120055628C /* UIKit.framework */; };
 		3A9E6C6B13295D120055628C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9E6C4B13295D120055628C /* Foundation.framework */; };
@@ -23,7 +24,6 @@
 		3A9E6C7413295D130055628C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E6C7213295D120055628C /* InfoPlist.strings */; };
 		3A9E6C7713295D130055628C /* SudokubotTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E6C7613295D130055628C /* SudokubotTests.h */; };
 		3A9E6C7913295D130055628C /* SudokubotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E6C7813295D130055628C /* SudokubotTests.m */; };
-		3A9E6C8813296B7E0055628C /* puzzle1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E6C8613296B7E0055628C /* puzzle1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A582758132CF031003F8ACC /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/puzzle1.png; sourceTree = "<group>"; };
 		3A8FEDCD132CD99F00654072 /* cvutil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cvutil.hpp; sourceTree = "<group>"; };
 		3A8FEDCE132CD99F00654072 /* cvutil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cvutil.mm; sourceTree = "<group>"; };
 		3A9E6C4513295D120055628C /* Sudokubot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sudokubot.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,12 +47,12 @@
 		3A9E6C5113295D120055628C /* Sudokubot-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Sudokubot-Info.plist"; sourceTree = "<group>"; };
 		3A9E6C5313295D120055628C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A9E6C5513295D120055628C /* Sudokubot-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sudokubot-Prefix.pch"; sourceTree = "<group>"; };
-		3A9E6C5613295D120055628C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3A9E6C5613295D120055628C /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		3A9E6C5813295D120055628C /* SudokubotAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudokubotAppDelegate.h; sourceTree = "<group>"; };
 		3A9E6C5913295D120055628C /* SudokubotAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SudokubotAppDelegate.mm; sourceTree = "<group>"; };
 		3A9E6C5C13295D120055628C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		3A9E6C5E13295D120055628C /* SudokubotViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudokubotViewController.h; sourceTree = "<group>"; };
-		3A9E6C5F13295D120055628C /* SudokubotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SudokubotViewController.m; sourceTree = "<group>"; };
+		3A9E6C5F13295D120055628C /* SudokubotViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SudokubotViewController.mm; sourceTree = "<group>"; };
 		3A9E6C6213295D120055628C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SudokubotViewController.xib; sourceTree = "<group>"; };
 		3A9E6C6913295D120055628C /* SudokubotTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SudokubotTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9E6C7113295D120055628C /* SudokubotTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SudokubotTests-Info.plist"; sourceTree = "<group>"; };
@@ -59,7 +60,6 @@
 		3A9E6C7513295D130055628C /* SudokubotTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SudokubotTests-Prefix.pch"; sourceTree = "<group>"; };
 		3A9E6C7613295D130055628C /* SudokubotTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SudokubotTests.h; sourceTree = "<group>"; };
 		3A9E6C7813295D130055628C /* SudokubotTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SudokubotTests.m; sourceTree = "<group>"; };
-		3A9E6C8713296B7E0055628C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/puzzle1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +123,7 @@
 				3A9E6C5913295D120055628C /* SudokubotAppDelegate.mm */,
 				3A9E6C5B13295D120055628C /* MainWindow.xib */,
 				3A9E6C5E13295D120055628C /* SudokubotViewController.h */,
-				3A9E6C5F13295D120055628C /* SudokubotViewController.m */,
+				3A9E6C5F13295D120055628C /* SudokubotViewController.mm */,
 				3A9E6C6113295D120055628C /* SudokubotViewController.xib */,
 				3A9E6C5013295D120055628C /* Supporting Files */,
 				3A8FEDCD132CD99F00654072 /* cvutil.hpp */,
@@ -138,7 +138,7 @@
 				3A9E6C5113295D120055628C /* Sudokubot-Info.plist */,
 				3A9E6C5213295D120055628C /* InfoPlist.strings */,
 				3A9E6C5513295D120055628C /* Sudokubot-Prefix.pch */,
-				3A9E6C5613295D120055628C /* main.m */,
+				3A9E6C5613295D120055628C /* main.mm */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -166,7 +166,7 @@
 		3A9E6C8213296AFB0055628C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3A9E6C8613296B7E0055628C /* puzzle1.png */,
+				3A582757132CF031003F8ACC /* puzzle1.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -244,7 +244,7 @@
 				3A9E6C5413295D120055628C /* InfoPlist.strings in Resources */,
 				3A9E6C5D13295D120055628C /* MainWindow.xib in Resources */,
 				3A9E6C6313295D120055628C /* SudokubotViewController.xib in Resources */,
-				3A9E6C8813296B7E0055628C /* puzzle1.png in Resources */,
+				3A582759132CF031003F8ACC /* puzzle1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,9 +280,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A9E6C5713295D120055628C /* main.m in Sources */,
+				3A9E6C5713295D120055628C /* main.mm in Sources */,
 				3A9E6C5A13295D120055628C /* SudokubotAppDelegate.mm in Sources */,
-				3A9E6C6013295D120055628C /* SudokubotViewController.m in Sources */,
+				3A9E6C6013295D120055628C /* SudokubotViewController.mm in Sources */,
 				3A8FEDCF132CD99F00654072 /* cvutil.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,6 +306,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3A582757132CF031003F8ACC /* puzzle1.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A582758132CF031003F8ACC /* en */,
+			);
+			name = puzzle1.png;
+			sourceTree = "<group>";
+		};
 		3A9E6C5213295D120055628C /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -336,14 +344,6 @@
 				3A9E6C7313295D120055628C /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		3A9E6C8613296B7E0055628C /* puzzle1.png */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A9E6C8713296B7E0055628C /* en */,
-			);
-			name = puzzle1.png;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -399,7 +399,7 @@
 					"\"$(SRCROOT)/Sudokubot/opencv/lib/Release-iphonesimulator\"",
 					"\"$(SRCROOT)/Sudokubot/opencv/lib/release-universal\"",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lopencv_core",
@@ -432,7 +432,7 @@
 					"\"$(SRCROOT)/Sudokubot/opencv/lib/Release-iphonesimulator\"",
 					"\"$(SRCROOT)/Sudokubot/opencv/lib/release-universal\"",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lopencv_core",
