@@ -98,27 +98,39 @@ using namespace cv;
     cvtColor(dst, dst_color, CV_GRAY2BGR);
     vector<Vec2f> lines;
     HoughLines(dst, lines, 1, CV_PI/180, cvimage->width * 0.6);
-    NSLog([NSString stringWithFormat:@"number of lines: %d", lines.size()]);
-    
-    MergeAdjacentLines(&lines);
-    NSString *lineInfo = @"";
+    NSLog([NSString stringWithFormat:@"raw total number of lines: %d", lines.size()]);
+    vector<Vec2f> horizontalLines;
+    vector<Vec2f> verticalLines;
+    SplitIntoHorizontalAndVeriticalLines(&lines, &horizontalLines, &verticalLines);
+    MergeAdjacentLines(&horizontalLines);
+    MergeAdjacentLines(&verticalLines);
+    NSLog([NSString stringWithFormat:@"total number of horizontal lines %d", horizontalLines.size()]);
+    NSLog([NSString stringWithFormat:@"total number of vertical lines %d", verticalLines.size()]);
+    drawLines(&dst_color, &horizontalLines);
+    drawLines(&dst_color, &verticalLines);
     // draw lines found
-    for( size_t i = 0; i < lines.size(); i++ )
+
+
+    IplImage rv = dst_color;
+    return [cvutil CreateUIImageFromIplImage:&rv];
+}
+
+void drawLines(Mat *mat, vector<Vec2f> *lines){
+    NSString *lineInfo = @"";
+    for( size_t i = 0; i < lines->size(); i++ )
     {
-        float rho = lines[i][0];
-        float theta = lines[i][1];
+        float rho = lines->at(i)[0];
+        float theta = lines->at(i)[1];
         double a = cos(theta), b = sin(theta);
         double x0 = a*rho, y0 = b*rho;
         cv::Point pt1(cvRound(x0 + 1000*(-b)),
                   cvRound(y0 + 1000*(a)));
         cv::Point pt2(cvRound(x0 - 1000*(-b)),
                   cvRound(y0 - 1000*(a)));
-        line( dst_color, pt1, pt2, Scalar(255,0,0), 3, 8 );
-        lineInfo = [NSString stringWithFormat:@"%@\n%f\t\t%f", lineInfo, lines[i][0], lines[i][1]]; 
+        line( *mat, pt1, pt2, Scalar(255,0,0), 1, 8 );
+        lineInfo = [NSString stringWithFormat:@"%@\n%f\t\t%f", lineInfo, lines->at(i)[0], lines->at(i)[1]]; 
     }
     NSLog(lineInfo);
-    IplImage rv = dst_color;
-    return [cvutil CreateUIImageFromIplImage:&rv];
 }
 
 //line should be in the form where [0] is rho and [1] is theta
@@ -135,10 +147,31 @@ bool CompareLineByRho(Vec2f line1, Vec2f line2){
 void MergeAdjacentLines(vector<Vec2f>* lines){
     stable_sort(lines->begin(), lines->end(), CompareLineByRho);
     stable_sort(lines->begin(), lines->end(), CompareLineByTheta);
-    vector<int> removableLines;
-    Vec2f& lastLine = lines->at(0);;
+    float distance = lines->back()[0] - lines->front()[0];
+    vector<Vec2f> goodLines;
+    int prevPivotIndex = 0;
+    goodLines.push_back(lines->at(0));
     for(int i=1; i<lines->size(); i++){
-        
+        if (!(lines->at(i)[0] - lines->at(prevPivotIndex)[0] < distance / 10 / 2)){
+            prevPivotIndex = i;
+            goodLines.push_back(lines->at(i));
+        }
+    }
+    lines = &goodLines;
+}
+
+void SplitIntoHorizontalAndVeriticalLines(vector<Vec2f>* allLines, vector<Vec2f>* horizontalLines, vector<Vec2f>* verticalLines){
+    horizontalLines->clear();
+    verticalLines->clear();
+    float tolerance = 15.0/360.0;
+    for(int i=0; i<allLines->size(); i++){
+        float theta = allLines->at(i)[1];
+        if ( theta < tolerance || theta > CV_PI - tolerance){
+            horizontalLines->push_back( allLines->at(i));
+        }
+        if (theta > CV_PI / 2.0 - tolerance && theta < CV_PI / 2.0 + tolerance){
+            verticalLines->push_back( allLines->at(i));
+        }
     }
 }
 
