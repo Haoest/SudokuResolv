@@ -8,7 +8,8 @@
 
 #import <opencv2/core/core.hpp>
 #import "SudokubotViewController.h"
-#import "cvutil.hpp"
+#import "PuzzleParser.hpp"
+#import "basicOCR.hpp"
 
 @implementation SudokubotViewController
 
@@ -58,10 +59,12 @@
 
 - (IBAction) btnChange_Click{
     UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"puzzle1.png"]];
-//    [MainImageView setImage:[cvutil BlurImage:img]];
-    [MainImageView setImage:[cvutil FindLines:img]];
-
-    
-    
+    [MainImageView setImage:[PuzzleParser FindLines:img]];
+//    basicOCR *ocr = new basicOCR();
+//    ocr->test();
+    IplImage *iplImage = [cvutil LoadPbmAsIplImage:@"000"];
+    UIImage* uiimage = [cvutil CreateUIImageFromIplImage:iplImage];
+    [MainImageView setImage:uiimage];
+//    cv::ReleaseImage(&iplImage);
 }
 @end
