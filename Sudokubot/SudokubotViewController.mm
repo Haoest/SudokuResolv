@@ -58,13 +58,17 @@
 }
 
 - (IBAction) btnChange_Click{
+
     UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"puzzle1.png"]];
     [MainImageView setImage:[PuzzleParser FindLines:img]];
 //    basicOCR *ocr = new basicOCR();
 //    ocr->test();
-    IplImage *iplImage = [cvutil LoadPbmAsIplImage:@"000"];
-    UIImage* uiimage = [cvutil CreateUIImageFromIplImage:iplImage];
-    [MainImageView setImage:uiimage];
-//    cv::ReleaseImage(&iplImage);
+//    IplImage *iplimage = [cvutil LoadPbmAsIplImage:@"000"];
+//    IplImage *colorImage = [cvutil GetNormalizedImageFromBlackNWhite:iplimage];
+//    UIImage* uiimage = [cvutil CreateUIImageFromIplImage:colorImage];
+//    cvReleaseImage(&iplimage);
+//    cvReleaseImage(&colorImage);
+//    [MainImageView setImage:uiimage];
+
 }
 @end

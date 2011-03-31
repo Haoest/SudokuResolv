@@ -70,27 +70,40 @@ using namespace cv;
 }
 
 +(IplImage*) LoadPbmAsIplImage: (NSString*) fileName{
+    int firstLineOfImageData = 5;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"pbm"];
     NSData *data = [NSData dataWithContentsOfFile:filePath];
-    NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSString *content = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
     NSArray *lines = [content componentsSeparatedByString:@"\n"];
-    NSString *secondLine = [lines objectAtIndex:1]; //because first line (index 0) contains meta data
-    int width = [secondLine length];
-    int height = [lines count]-1;
-    Mat *mat = new Mat(width, height, CV_8UC4);
-    MatIterator_<uint> it = mat->begin<uint>();
-    for (int i=0; i<[lines count]; i++){
+    NSString *first = [lines objectAtIndex:firstLineOfImageData]; //because first line (index 0) contains meta data
+    int width = [first length];
+    int height = [lines count]-firstLineOfImageData-1;
+    IplImage *img = cvCreateImage(cvSize(width, height), IPL_DEPTH_8U, 1);
+    for (int i=firstLineOfImageData; i<[lines count]; i++){
         for (int j=0; j<[[lines objectAtIndex:i] length]; j++){
-            int pixelValue = 0;
-            if ([[lines objectAtIndex:i] characterAtIndex:j] == '1'){
-                pixelValue = 255;
+            int pixelValue = 1;
+            unichar c = [[lines objectAtIndex:i] characterAtIndex:j];
+            if (c == '1'){
+                pixelValue = 0;
             }
-            *it = pixelValue;
+            *(img->imageData + (i-firstLineOfImageData) * img->widthStep + j) = pixelValue;
         }
     }
-    IplImage iplImage = *mat;
-    IplImage* rv = cvCreateImage(cvSize(iplImage.width, iplImage.height), IPL_DEPTH_8U, 3);
-    cvCvtColor(mat, rv, CV_RGBA2BGR);
+    return img;
+}
+
++(IplImage*) GetNormalizedImageFromBlackNWhite:(IplImage*) blackWhiteImage{
+    IplImage* rv = cvCreateImage(cvGetSize(blackWhiteImage), IPL_DEPTH_8U, 3);
+    for(int y=0; y<rv->height; y++){
+        uchar *dstx0 = (uchar*)(rv->imageData + y*rv->widthStep);
+        uchar *srcx0 = (uchar*)(blackWhiteImage->imageData + y*blackWhiteImage->widthStep);
+        for(int x=0; x<rv->width; x++){
+            uchar pixelValue = (*(srcx0+x)) * 255;
+            dstx0[3*x+0] = pixelValue;
+            dstx0[3*x+1] = pixelValue;
+            dstx0[3*x+2] = pixelValue;
+        }
+    }
     return rv;
 }
 

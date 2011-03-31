@@ -24,6 +24,8 @@ bool CompareLineByTheta( Vec2f line1,  Vec2f line2);
 bool CompareLineByRho(Vec2f line1, Vec2f line2);
 void SplitIntoHorizontalAndVeriticalLines(vector<Vec2f>* allLines, vector<Vec2f>* horizontalLines, vector<Vec2f>* verticalLines);
 void drawLines(Mat *mat, vector<Vec2f> *lines);
-void GetRectanglesFromLines(cv::Rect **dst_rectangles, vector<Vec2f>* horizontalLines, vector<Vec2f>* verticalLines);
+void GetRectanglesFromLines(cv::Rect dst_rectangles[], vector<Vec2f>* horizontalLines, vector<Vec2f>* verticalLines);
+void ParseFromImage(IplImage* puzzle, int grid[][]);
 
+void FindExistingNumbers(IplImage* puzzle, cv::Rect grids[], int numbers[][]);
 @end

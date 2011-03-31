@@ -48,18 +48,10 @@ using namespace cv;
     MergeAdjacentLines(&verticalLines);
     NSLog([NSString stringWithFormat:@"total number of horizontal lines %d", horizontalLines.size()]);
     NSLog([NSString stringWithFormat:@"total number of vertical lines %d", verticalLines.size()]);
-    //    drawLines(&dst_color, &horizontalLines);
-    //    drawLines(&dst_color, &verticalLines);
-    cv::Rect **rects;
-    rects = new cv::Rect*[9];
-    for(int i=0; i<9;i++){
-        rects[i] = new cv::Rect[9];
-    }
+    cv::Rect rects[9*9];
     GetRectanglesFromLines(rects, &horizontalLines, &verticalLines);
-    for(int i=0; i<9;i++){
-        for(int j=0; j<9; j++){
-            rectangle(dst_color, cvPoint(rects[i][j].x, rects[i][j].y), cvPoint(rects[i][j].width + rects[i][j].x, rects[i][j].height + rects[i][j].y), Scalar(255,0,0));
-        }
+    for(int i=0; i<9*9;i++){
+        rectangle(dst_color, cvPoint(rects[i].x, rects[i].y), cvPoint(rects[i].width + rects[i].x, rects[i].height + rects[i].y), Scalar(255,0,0));
     }
     IplImage rv = dst_color;
     return [cvutil CreateUIImageFromIplImage:&rv];
@@ -130,15 +122,42 @@ void SplitIntoHorizontalAndVeriticalLines(vector<Vec2f>* allLines, vector<Vec2f>
     }
 }
 
-void GetRectanglesFromLines(cv::Rect **dst_rectangles, vector<Vec2f>* horizontalLines, vector<Vec2f>* verticalLines){
+void GetRectanglesFromLines(cv::Rect dst_rectangles[], vector<Vec2f>* horizontalLines, vector<Vec2f>* verticalLines){
+    int index = 0;
     for(int i=0; i<horizontalLines->size()-1; i++){
         for(int j=0; j<verticalLines->size()-1; j++){
             int x0 = horizontalLines->at(i)[0];
             int y0 = verticalLines->at(j)[0];
             int width = verticalLines->at(j+1)[0] - y0;
             int height = horizontalLines->at(i+1)[0] - x0;
-            dst_rectangles[i][j] = cv::Rect(x0,y0, width, height);
+            dst_rectangles[index++] = cv::Rect(x0,y0, width, height);
         }
+    }
+}
+
+void ParseFromImage(IplImage* puzzle, int grid[][]){
+    IplImage* cvimage = puzzle;
+    IplImage *cvimage_gray = cvCreateImage(cvGetSize(cvimage), IPL_DEPTH_8U, 1);
+    cvCvtColor(cvimage, cvimage_gray, CV_BGR2GRAY);
+    Mat src(cvimage_gray, true);
+    Mat dst, dst_color;
+    Canny(src, dst, 50, 200, 3);
+    cvtColor(dst, dst_color, CV_GRAY2BGR);
+    vector<Vec2f> lines;
+    HoughLines(dst, lines, 1, CV_PI/180, cvimage->width * 0.6);
+    vector<Vec2f> horizontalLines;
+    vector<Vec2f> verticalLines;
+    SplitIntoHorizontalAndVeriticalLines(&lines, &horizontalLines, &verticalLines);
+    MergeAdjacentLines(&horizontalLines);
+    MergeAdjacentLines(&verticalLines);
+    cv::Rect rects[9*9];
+    GetRectanglesFromLines(rects, &horizontalLines, &verticalLines);
+    
+}
+
+void FindExistingNumbers(IplImage* puzzle, cv::Rect grids[], int numbers[][]){
+    for(int i=0; i<9*9; i++){
+        
     }
 }
 
