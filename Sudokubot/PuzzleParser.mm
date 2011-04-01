@@ -9,13 +9,27 @@
 #import <opencv2/imgproc/imgproc.hpp>
 #import <opencv2/imgproc/imgproc_c.h>
 #import "PuzzleParser.hpp"
-
+#import "preprocessing.hpp"
+#import "SudokubotViewController.h"
 
 using namespace cv;
 
 
 @implementation PuzzleParser
+static basicOCR *ocr = nil;
 
+basicOCR* GetOCR(){
+    if (!ocr){
+        ocr = new basicOCR();
+    }
+    return ocr;
+}
+
+void CleanUp(){
+    if(ocr){
+        delete ocr;
+    }
+}
 
 +(UIImage*) BlurImage: (UIImage*) image{
     IplImage *cvimg = [cvutil CreateIplImageFromUIImage: image];
@@ -37,7 +51,7 @@ using namespace cv;
     Mat src(cvimage_gray, true);
     Mat dst, dst_color;
     Canny(src, dst, 50, 200, 3);
-    cvtColor(dst, dst_color, CV_GRAY2BGR);
+    cvtColor(src, dst_color, CV_GRAY2BGR);
     vector<Vec2f> lines;
     HoughLines(dst, lines, 1, CV_PI/180, cvimage->width * 0.6);
     NSLog([NSString stringWithFormat:@"raw total number of lines: %d", lines.size()]);
@@ -135,16 +149,15 @@ void GetRectanglesFromLines(cv::Rect dst_rectangles[], vector<Vec2f>* horizontal
     }
 }
 
-void ParseFromImage(IplImage* puzzle, int grid[][]){
-    IplImage* cvimage = puzzle;
-    IplImage *cvimage_gray = cvCreateImage(cvGetSize(cvimage), IPL_DEPTH_8U, 1);
-    cvCvtColor(cvimage, cvimage_gray, CV_BGR2GRAY);
+IplImage* ParseFromImage(UIImage* puzzleUIImage){
+    IplImage *puzzle = [cvutil CreateIplImageFromUIImage: puzzleUIImage];
+    IplImage *cvimage_gray = cvCreateImage(cvGetSize(puzzle), IPL_DEPTH_8U, 1);
+    cvCvtColor(puzzle, cvimage_gray, CV_BGR2GRAY);
     Mat src(cvimage_gray, true);
-    Mat dst, dst_color;
+    Mat dst;
     Canny(src, dst, 50, 200, 3);
-    cvtColor(dst, dst_color, CV_GRAY2BGR);
     vector<Vec2f> lines;
-    HoughLines(dst, lines, 1, CV_PI/180, cvimage->width * 0.6);
+    HoughLines(dst, lines, 1, CV_PI/180, puzzle->width * 0.6);
     vector<Vec2f> horizontalLines;
     vector<Vec2f> verticalLines;
     SplitIntoHorizontalAndVeriticalLines(&lines, &horizontalLines, &verticalLines);
@@ -152,12 +165,27 @@ void ParseFromImage(IplImage* puzzle, int grid[][]){
     MergeAdjacentLines(&verticalLines);
     cv::Rect rects[9*9];
     GetRectanglesFromLines(rects, &horizontalLines, &verticalLines);
-    
+    int solutionGrid[9][9];
+    return FindExistingNumbers(puzzle, rects, solutionGrid);
+    if (false);
 }
 
-void FindExistingNumbers(IplImage* puzzle, cv::Rect grids[], int numbers[][]){
+IplImage* FindExistingNumbers(IplImage* puzzle, cv::Rect grids[], int numbers[][9]){
+    IplImage *gray = cvCreateImage(cvGetSize(puzzle), IPL_DEPTH_8U, 1);
+    static int mark = 1;
+    cvCvtColor(puzzle, gray, CV_BGR2GRAY);
     for(int i=0; i<9*9; i++){
-        
+        IplImage *region = cvCreateImageHeader(cvSize(grids[i].width, grids[i].height), gray->depth, gray->nChannels);
+        region->origin = gray->origin;
+        region->imageData = gray->imageData + grids[i].y * gray->widthStep + grids[i].x;
+if (i==mark++) return region;
+        basicOCR *ocr = GetOCR();
+        IplImage processedRegion = preprocessing(region, 40, 40);
+        int result = (int)ocr->classify(&processedRegion, 0);
+        if (result < 0){
+            result = 0;
+        }
+        numbers[i/9][i%9] = result;
     }
 }
 
