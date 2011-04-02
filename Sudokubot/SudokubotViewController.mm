@@ -63,9 +63,9 @@
     IplImage *color = cvCreateImage(cvGetSize(ipl), IPL_DEPTH_8U, 3);
     cvCvtColor(ipl, color, CV_GRAY2BGR);
     UIImage *ui = [cvutil CreateUIImageFromIplImage:color];
-    [MainImageView setImage:ui];
     
-    if (true);
+    [MainImageView setImage:ui];
+
 //    basicOCR *ocr = new basicOCR();
 //    ocr->test();
 //    IplImage *iplimage = [cvutil LoadPbmAsIplImage:@"000"];

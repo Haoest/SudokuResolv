@@ -17,6 +17,7 @@ using namespace cv;
 
 @implementation PuzzleParser
 static basicOCR *ocr = nil;
+static int mark = 0;
 
 basicOCR* GetOCR(){
     if (!ocr){
@@ -139,11 +140,11 @@ void SplitIntoHorizontalAndVeriticalLines(vector<Vec2f>* allLines, vector<Vec2f>
 void GetRectanglesFromLines(cv::Rect dst_rectangles[], vector<Vec2f>* horizontalLines, vector<Vec2f>* verticalLines){
     int index = 0;
     for(int i=0; i<horizontalLines->size()-1; i++){
+        int y0 = horizontalLines->at(i)[0];
         for(int j=0; j<verticalLines->size()-1; j++){
-            int x0 = horizontalLines->at(i)[0];
-            int y0 = verticalLines->at(j)[0];
-            int width = verticalLines->at(j+1)[0] - y0;
-            int height = horizontalLines->at(i+1)[0] - x0;
+            int x0 = verticalLines->at(j)[0];
+            int width = verticalLines->at(j+1)[0] - x0;
+            int height = horizontalLines->at(i+1)[0] - y0;
             dst_rectangles[index++] = cv::Rect(x0,y0, width, height);
         }
     }
@@ -172,21 +173,34 @@ IplImage* ParseFromImage(UIImage* puzzleUIImage){
 
 IplImage* FindExistingNumbers(IplImage* puzzle, cv::Rect grids[], int numbers[][9]){
     IplImage *gray = cvCreateImage(cvGetSize(puzzle), IPL_DEPTH_8U, 1);
-    static int mark = 1;
     cvCvtColor(puzzle, gray, CV_BGR2GRAY);
+    cvThreshold(gray, gray, 255/2.0, 255, CV_THRESH_BINARY);
+    int matrix[9][9];
+    for (int i=0; i<81; i++) matrix[i/9][i%9] = -1;
     for(int i=0; i<9*9; i++){
-        IplImage *region = cvCreateImageHeader(cvSize(grids[i].width, grids[i].height), gray->depth, gray->nChannels);
-        region->origin = gray->origin;
-        region->imageData = gray->imageData + grids[i].y * gray->widthStep + grids[i].x;
-if (i==mark++) return region;
+        IplImage *region = CreateSubImage(gray, grids[i]);
         basicOCR *ocr = GetOCR();
         IplImage processedRegion = preprocessing(region, 40, 40);
+        if (i==mark){
+            mark ++;
+            return region;
+        }
+
         int result = (int)ocr->classify(&processedRegion, 0);
         if (result < 0){
             result = 0;
         }
-        numbers[i/9][i%9] = result;
+        matrix[i/9][i%9] = result;
     }
+    return gray;
+}
+
+IplImage* CreateSubImage(IplImage* fullImage, cv::Rect& region){
+    IplImage *rv = cvCreateImage(cvSize(region.width, region.height), fullImage->depth, fullImage->nChannels);
+    cvSetImageROI(fullImage, region);
+    cvCopy(fullImage, rv, NULL);
+    cvResetImageROI(fullImage);
+    return rv;
 }
 
 @end

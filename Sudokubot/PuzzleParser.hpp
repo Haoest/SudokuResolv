@@ -32,4 +32,5 @@ void GetRectanglesFromLines(cv::Rect dst_rectangles[], vector<Vec2f>* horizontal
 IplImage* ParseFromImage(UIImage* puzzleUIImage);
 IplImage* FindExistingNumbers(IplImage* puzzle, cv::Rect grids[], int numbers[][9]);
 
+IplImage* CreateSubImage(IplImage* fullImage, cv::Rect& region);
 @end
