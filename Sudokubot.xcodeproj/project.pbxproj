@@ -1031,8 +1031,6 @@
 		3A9E6C7713295D130055628C /* SudokubotTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E6C7613295D130055628C /* SudokubotTests.h */; };
 		3A9E6C7913295D130055628C /* SudokubotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E6C7813295D130055628C /* SudokubotTests.m */; };
 		3AC35C74133466FA0099F669 /* PuzzleParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3AC35C73133466F90099F669 /* PuzzleParser.mm */; };
-		3ADEFBAE1337AA7E008F4870 /* testtext.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3ADEFBAD1337AA7E008F4870 /* testtext.rtf */; };
-		3ADEFBB21337C1F8008F4870 /* testtext.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3ADEFBB11337C1F8008F4870 /* testtext.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2082,8 +2080,6 @@
 		3A9E6C7813295D130055628C /* SudokubotTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SudokubotTests.m; sourceTree = "<group>"; };
 		3AC35C72133466F80099F669 /* PuzzleParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PuzzleParser.hpp; sourceTree = "<group>"; };
 		3AC35C73133466F90099F669 /* PuzzleParser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PuzzleParser.mm; sourceTree = "<group>"; };
-		3ADEFBAD1337AA7E008F4870 /* testtext.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = testtext.rtf; path = 0/testtext.rtf; sourceTree = "<group>"; };
-		3ADEFBB11337C1F8008F4870 /* testtext.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testtext.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2146,7 +2142,6 @@
 				3A94CF591331B60900B380B2 /* 7 */,
 				3A94CFBE1331B60900B380B2 /* 8 */,
 				3A94D0231331B60900B380B2 /* 9 */,
-				3ADEFBAD1337AA7E008F4870 /* testtext.rtf */,
 			);
 			path = OCR;
 			sourceTree = "<group>";
@@ -3306,7 +3301,6 @@
 		3A9E6C8213296AFB0055628C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3ADEFBB11337C1F8008F4870 /* testtext.txt */,
 				3A94CC6E1331B46000B380B2 /* numerics0to9.png */,
 				3A996BE0132FF9700061CCFD /* simpleLines.png */,
 				3A582757132CF031003F8ACC /* puzzle1.png */,
@@ -4391,8 +4385,6 @@
 				3A94D46D1331B60A00B380B2 /* 997.pbm in Resources */,
 				3A94D46E1331B60A00B380B2 /* 998.pbm in Resources */,
 				3A94D46F1331B60A00B380B2 /* 999.pbm in Resources */,
-				3ADEFBAE1337AA7E008F4870 /* testtext.rtf in Resources */,
-				3ADEFBB21337C1F8008F4870 /* testtext.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4631,7 +4623,16 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SudokubotTests/SudokubotTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = "/Users/haoest/Development/Sudokubot/Sudokubot/opencv/include/**";
 				INFOPLIST_FILE = "SudokubotTests/SudokubotTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/haoest/Development/Sudokubot/Sudokubot/opencv/lib/debug-iphonesimulator/",
+					"\"$(SRCROOT)/Sudokubot/opencv/lib/debug-iphoneos\"",
+					"\"$(SRCROOT)/Sudokubot/opencv/lib/debug-universal\"",
+					"\"$(SRCROOT)/Sudokubot/opencv/lib/release-iphoneos\"",
+					"\"$(SRCROOT)/Sudokubot/opencv/lib/Release-iphonesimulator\"",
+					"\"$(SRCROOT)/Sudokubot/opencv/lib/release-universal\"",
+				);
 				OTHER_LDFLAGS = (
 					"-framework",
 					SenTestingKit,
@@ -4653,7 +4654,16 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SudokubotTests/SudokubotTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = "/Users/haoest/Development/Sudokubot/Sudokubot/opencv/include/**";
 				INFOPLIST_FILE = "SudokubotTests/SudokubotTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/haoest/Development/Sudokubot/Sudokubot/opencv/lib/debug-iphonesimulator/",
+					"\"$(SRCROOT)/Sudokubot/opencv/lib/debug-iphoneos\"",
+					"\"$(SRCROOT)/Sudokubot/opencv/lib/debug-universal\"",
+					"\"$(SRCROOT)/Sudokubot/opencv/lib/release-iphoneos\"",
+					"\"$(SRCROOT)/Sudokubot/opencv/lib/Release-iphonesimulator\"",
+					"\"$(SRCROOT)/Sudokubot/opencv/lib/release-universal\"",
+				);
 				OTHER_LDFLAGS = (
 					"-framework",
 					SenTestingKit,
