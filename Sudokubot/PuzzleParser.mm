@@ -8,6 +8,7 @@
 
 #import <opencv2/imgproc/imgproc.hpp>
 #import <opencv2/imgproc/imgproc_c.h>
+#import <opencv2/core/core_c.h>
 #import "PuzzleParser.hpp"
 #import "preprocessing.hpp"
 #import "SudokubotViewController.h"
@@ -180,17 +181,18 @@ IplImage* FindExistingNumbers(IplImage* puzzle, cv::Rect grids[], int numbers[][
     for(int i=0; i<9*9; i++){
         IplImage *region = CreateSubImage(gray, grids[i]);
         basicOCR *ocr = GetOCR();
+        whitenBorders(region);
         IplImage processedRegion = preprocessing(region, 40, 40);
-        if (i==mark){
-            mark ++;
-            return region;
-        }
-
+        IplImage* clone = cvCloneImage(&processedRegion);
         int result = (int)ocr->classify(&processedRegion, 0);
         if (result < 0){
             result = 0;
         }
         matrix[i/9][i%9] = result;
+        if (i==mark && false){
+            mark ++;
+            return clone;
+        }
     }
     return gray;
 }
