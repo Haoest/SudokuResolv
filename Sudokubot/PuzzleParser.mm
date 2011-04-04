@@ -189,7 +189,7 @@ IplImage* FindExistingNumbers(IplImage* puzzle, cv::Rect grids[], int numbers[][
             result = 0;
         }
         matrix[i/9][i%9] = result;
-        if (i==mark && false){
+        if (i==mark){
             mark ++;
             return clone;
         }

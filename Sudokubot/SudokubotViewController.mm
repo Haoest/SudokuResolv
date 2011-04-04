@@ -10,11 +10,13 @@
 #import "SudokubotViewController.h"
 #import "PuzzleParser.hpp"
 #import "basicOCR.hpp"
+#import "preprocessing.hpp"
 
 @implementation SudokubotViewController
 
 @synthesize MainImageView;
 @synthesize btnChange;
+@synthesize btnPbm;
 
 - (void)dealloc
 {
@@ -75,6 +77,15 @@
 //    cvReleaseImage(&colorImage);
 //    [MainImageView setImage:uiimage];
 
+}
+
+-(IBAction) btnPbm_Click{
+    IplImage* ipl = [cvutil LoadPbmAsIplImage:@"500"];
+    IplImage processed = preprocessing(ipl, 40, 40);
+    IplImage* color = cvCreateImage(cvGetSize(&processed), IPL_DEPTH_8U, 3);
+    cvCvtColor(&processed, color, CV_GRAY2BGR);
+    UIImage* ui = [cvutil CreateUIImageFromIplImage:color];
+    [MainImageView setImage:ui];
 }
 
 @end

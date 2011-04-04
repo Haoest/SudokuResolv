@@ -15,8 +15,9 @@
 
 @property (nonatomic, retain) IBOutlet UIImageView *MainImageView;
 @property (nonatomic, retain) IBOutlet UIButton *btnChange;
+@property (nonatomic, retain) IBOutlet UIButton *btnPbm;
 -(void) ShowPuzzle;
 -(IBAction) btnChange_Click;
-
+-(IBAction) btnPbm_Click;
 
 @end

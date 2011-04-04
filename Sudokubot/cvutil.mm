@@ -81,7 +81,7 @@ using namespace cv;
     IplImage *img = cvCreateImage(cvSize(width, height), IPL_DEPTH_8U, 1);
     for (int i=firstLineOfImageData; i<[lines count]; i++){
         for (int j=0; j<[[lines objectAtIndex:i] length]; j++){
-            int pixelValue = 1;
+            int pixelValue = 255;
             unichar c = [[lines objectAtIndex:i] characterAtIndex:j];
             if (c == '1'){
                 pixelValue = 0;
