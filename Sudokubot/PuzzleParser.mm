@@ -151,7 +151,7 @@ void GetRectanglesFromLines(cv::Rect dst_rectangles[], vector<Vec2f>* horizontal
     }
 }
 
-IplImage* ParseFromImage(UIImage* puzzleUIImage){
+void ParseFromImage(UIImage* puzzleUIImage, int board[][9]){
     IplImage *puzzle = [cvutil CreateIplImageFromUIImage: puzzleUIImage];
     IplImage *cvimage_gray = cvCreateImage(cvGetSize(puzzle), IPL_DEPTH_8U, 1);
     cvCvtColor(puzzle, cvimage_gray, CV_BGR2GRAY);
@@ -167,34 +167,29 @@ IplImage* ParseFromImage(UIImage* puzzleUIImage){
     MergeAdjacentLines(&verticalLines);
     cv::Rect rects[9*9];
     GetRectanglesFromLines(rects, &horizontalLines, &verticalLines);
-    int solutionGrid[9][9];
-    return FindExistingNumbers(puzzle, rects, solutionGrid);
-    if (false);
+    FindExistingNumbers(puzzle, rects, board);
 }
 
-IplImage* FindExistingNumbers(IplImage* puzzle, cv::Rect grids[], int numbers[][9]){
+void FindExistingNumbers(IplImage* puzzle, cv::Rect grids[], int board[9][9]){
     IplImage *gray = cvCreateImage(cvGetSize(puzzle), IPL_DEPTH_8U, 1);
     cvCvtColor(puzzle, gray, CV_BGR2GRAY);
     cvThreshold(gray, gray, 255/2.0, 255, CV_THRESH_BINARY);
-    int matrix[9][9];
-    for (int i=0; i<81; i++) matrix[i/9][i%9] = -1;
     for(int i=0; i<9*9; i++){
         IplImage *region = CreateSubImage(gray, grids[i]);
         basicOCR *ocr = GetOCR();
         whitenBorders(region);
         IplImage processedRegion = preprocessing(region, 40, 40);
-        IplImage* clone = cvCloneImage(&processedRegion);
-        int result = (int)ocr->classify(&processedRegion, 0);
-        if (result < 0){
-            result = 0;
+        int result = 0;
+        if (processedRegion.width!=0 && processedRegion.height!=0){
+            result = (int)ocr->classify(&processedRegion, 0);
         }
-        matrix[i/9][i%9] = result;
-        if (i==mark){
+//        IplImage* clone = cvCloneImage(&processedRegion);
+        board[i/9][i%9] = result;
+        if (i==mark && false){
             mark ++;
-            return clone;
+//            return clone;
         }
     }
-    return gray;
 }
 
 IplImage* CreateSubImage(IplImage* fullImage, cv::Rect& region){

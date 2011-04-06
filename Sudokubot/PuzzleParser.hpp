@@ -29,8 +29,8 @@ bool CompareLineByRho(Vec2f line1, Vec2f line2);
 void SplitIntoHorizontalAndVeriticalLines(vector<Vec2f>* allLines, vector<Vec2f>* horizontalLines, vector<Vec2f>* verticalLines);
 void drawLines(Mat *mat, vector<Vec2f> *lines);
 void GetRectanglesFromLines(cv::Rect dst_rectangles[], vector<Vec2f>* horizontalLines, vector<Vec2f>* verticalLines);
-IplImage* ParseFromImage(UIImage* puzzleUIImage);
-IplImage* FindExistingNumbers(IplImage* puzzle, cv::Rect grids[], int numbers[][9]);
+void ParseFromImage(UIImage* puzzleUIImage, int board[9][9]);
+void FindExistingNumbers(IplImage* puzzle, cv::Rect grids[], int board[9][9]);
 
 IplImage* CreateSubImage(IplImage* fullImage, cv::Rect& region);
 @end

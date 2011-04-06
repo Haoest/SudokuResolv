@@ -11,6 +11,7 @@
 #import "PuzzleParser.hpp"
 #import "basicOCR.hpp"
 #import "preprocessing.hpp"
+#import "solver.hpp"
 
 @implementation SudokubotViewController
 
@@ -61,21 +62,22 @@
 
 - (IBAction) btnChange_Click{
     UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"puzzle1.png"]];
-    IplImage* ipl = ParseFromImage(img);
-    IplImage *color = cvCreateImage(cvGetSize(ipl), IPL_DEPTH_8U, 3);
-    cvCvtColor(ipl, color, CV_GRAY2BGR);
-    UIImage *ui = [cvutil CreateUIImageFromIplImage:color];
+    int board[9][9];
+    ParseFromImage(img, board);
+    solver *solv = [solver solverWithPartialBoard:board];
+    int ** solution = [solv trySolve];
     
-    [MainImageView setImage:ui];
+    NSMutableString *s =    [NSMutableString  stringWithFormat:@""];
+    for(int i=0; i<9; i++){
+        for (int j=0; j<9; j++){
+            [s appendFormat:@"%d ", solution[i][j]];
+        }
+        [s appendString:@"\n"];
+    }
+    NSLog(s);
+    int a;
+    a = 1;
 
-//    basicOCR *ocr = new basicOCR();
-//    ocr->test();
-//    IplImage *iplimage = [cvutil LoadPbmAsIplImage:@"000"];
-//    IplImage *colorImage = [cvutil GetNormalizedImageFromBlackNWhite:iplimage];
-//    UIImage* uiimage = [cvutil CreateUIImageFromIplImage:colorImage];
-//    cvReleaseImage(&iplimage);
-//    cvReleaseImage(&colorImage);
-//    [MainImageView setImage:uiimage];
 
 }
 
