@@ -7,10 +7,12 @@
 //
 
 #import <opencv2/core/core.hpp>
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 #import "cvutil.hpp"
 #import "basicOCR.hpp"
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
 
 using namespace cv;
 @interface PuzzleParser : NSObject {

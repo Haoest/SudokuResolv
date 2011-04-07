@@ -42,33 +42,36 @@ using namespace std;
     return nil;
 }
 
-bool trySolveRecursively(int** board, set<int> boxSpace[9][9], int boxIndex){
+bool trySolveRecursively(int** currentBoard, set<int> boxSpace[9][9], int boxIndex){
     if (boxIndex == 9*9){
         return true;
     }
     set<int> &curBox = boxSpace[boxIndex/9][boxIndex%9];
     if (curBox.size() ==0){ // is prefilled box value
-        return trySolveRecursively(board, boxSpace, boxIndex+1);
+        return trySolveRecursively(currentBoard, boxSpace, boxIndex+1);
     }
     for(set<int>::iterator it = curBox.begin(); it != curBox.end(); it++){
-        if (isUniqueInRowAndColumn(board, *it, boxIndex)){
-            board[boxIndex/9][boxIndex%9] = *it;
-            if (trySolveRecursively(board, boxSpace, boxIndex+1)){
+        if (isUniqueInRowAndColumn(currentBoard, *it, boxIndex)){
+            currentBoard[boxIndex/9][boxIndex%9] = *it;
+            if (boxIndex==0){
+                int adf;
+                adf = 1;
+            }
+            if (trySolveRecursively(currentBoard, boxSpace, boxIndex+1)){
                 return true;
             }
         }
     }
-    board[boxIndex/9][boxIndex%9] = 0;
+    currentBoard[boxIndex/9][boxIndex%9] = 0;
     return false;
 }
 
-bool isUniqueInRowAndColumn(int** board, int boxValue, int boxIndex){
+bool isUniqueInRowAndColumn(int** currentBoard, int boxValue, int boxIndex){
     for (int i=0; i<9; i++){
-        //row
-        if (board[boxIndex/9][i] == boxValue){
+        if (currentBoard[boxIndex/9][i] == boxValue){
             return false;
         }
-        if (board[i][boxIndex%9] == boxValue){
+        if (currentBoard[i][boxIndex%9] == boxValue){
             return false;
         }
     }
@@ -91,6 +94,24 @@ set<int> getBoxSampleSpace(int **currentBoard, int rowPosition, int columnPositi
         }
     }
     return rv;
+}
+
+bool verifySolution(int** currentBoard){
+    for (int i=0; i<9; i++){
+        for(int j=0; j<9; j++){
+            for (int k=0; k<9; k++){
+                // horizontal check
+                if (k != j && currentBoard[i][k] == currentBoard[i][j]){
+                    return false;
+                }
+                // vertical
+                if (k != i && currentBoard[k][j] == currentBoard[i][j]){
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
 }
 
 set<int> getBagOfNine(){

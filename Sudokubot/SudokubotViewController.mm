@@ -66,18 +66,7 @@
     ParseFromImage(img, board);
     solver *solv = [solver solverWithPartialBoard:board];
     int ** solution = [solv trySolve];
-    
-    NSMutableString *s =    [NSMutableString  stringWithFormat:@""];
-    for(int i=0; i<9; i++){
-        for (int j=0; j<9; j++){
-            [s appendFormat:@"%d ", solution[i][j]];
-        }
-        [s appendString:@"\n"];
-    }
-    NSLog(s);
-    int a;
-    a = 1;
-
+    bool solved = verifySolution(solution);
 
 }
 
