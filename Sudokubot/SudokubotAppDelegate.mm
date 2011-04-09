@@ -23,7 +23,6 @@
      
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
-    [self.viewController ShowPuzzle];
     return YES;
 }
 

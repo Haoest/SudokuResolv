@@ -18,4 +18,7 @@
 +(UIImage*) CreateUIImageFromIplImage: (IplImage*) image;
 +(IplImage*) LoadPbmAsIplImage: (NSString*) fileName;
 +(IplImage*) GetNormalizedImageFromBlackNWhite:(IplImage*) blackWhiteImage;
++(int**) ReadBoardFromFile:(NSString*) fileName;
+
+
 @end

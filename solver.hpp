@@ -5,9 +5,11 @@
 //  Created by Haoest on 4/5/11.
 //  Copyright 2011 none. All rights reserved.
 //
+
+#import "PuzzleParser.hpp"
 #import <set>
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 
 using namespace std;
 
@@ -16,7 +18,8 @@ using namespace std;
 }
 @property (nonatomic) int** board;
            
-+(solver*) solverWithPartialBoard: (int[9][9]) partialBoard;
++(solver*) solverWithPartialBoard: (int**) partialBoard;
++(solver*) solverWithImage: (UIImage*) imageBoard;
 
 //return null if no solution
 -(int**) trySolve;

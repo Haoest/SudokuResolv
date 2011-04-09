@@ -107,4 +107,30 @@ using namespace cv;
     return rv;
 }
 
++(int**) ReadBoardFromFile:(NSString*) fileName{
+    int **a;
+    a = new int*[9];
+    for(int i=0; i<9; i++){
+        a[i] = new int[9];
+    }
+    NSString *s = [NSString stringWithContentsOfFile:fileName encoding:NSASCIIStringEncoding error:nil];
+    NSArray *rawBoard = [s componentsSeparatedByString:@" "];
+    if ([rawBoard count] != 9){
+        return nil;
+    }
+    for(int i=0; i<9; i++){
+        NSString *line = [rawBoard objectAtIndex:i];
+        if ([line length] != 9){
+            return nil;
+        }
+        for(int j=0; j<9; j++){
+            a[i][j] = ((int) [line characterAtIndex:j]) - 48;
+            if (a[i][j] <1 || a[i][j] >9){
+                return nil;
+            }
+        }
+    }
+    return a;
+}
+
 @end

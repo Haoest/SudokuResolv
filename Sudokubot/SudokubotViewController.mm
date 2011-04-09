@@ -12,12 +12,19 @@
 #import "basicOCR.hpp"
 #import "preprocessing.hpp"
 #import "solver.hpp"
+#import "BoardViewController.h"
 
 @implementation SudokubotViewController
 
 @synthesize MainImageView;
-@synthesize btnChange;
-@synthesize btnPbm;
+@synthesize btnCaptureFromCamera;
+@synthesize btnOpenFromPhotoLibrary;
+@synthesize btnOpenFromClipboard;
+@synthesize btnArchive;
+@synthesize btnHelp;
+
+@synthesize imagePicker;
+
 
 - (void)dealloc
 {
@@ -34,13 +41,16 @@
 
 #pragma mark - View lifecycle
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+
+                   
 }
-*/
+
 
 - (void)viewDidUnload
 {
@@ -49,34 +59,49 @@
     // e.g. self.myOutlet = nil;
 }
 
--(void) ShowPuzzle{
-    UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"puzzle1.png"]];
-    [MainImageView setImage:img];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (IBAction) btnChange_Click{
-    UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"puzzle1.png"]];
-    int board[9][9];
-    ParseFromImage(img, board);
-    solver *solv = [solver solverWithPartialBoard:board];
-    int ** solution = [solv trySolve];
-    bool solved = verifySolution(solution);
+- (IBAction) btnOpenFromPhotoLibrary_touchDown{
+    imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentModalViewController:imagePicker animated:NO];
+    }
+}
+
+-(IBAction) btnHelp_touchDown{
 
 }
 
--(IBAction) btnPbm_Click{
-    IplImage* ipl = [cvutil LoadPbmAsIplImage:@"500"];
-    IplImage processed = preprocessing(ipl, 40, 40);
-    IplImage* color = cvCreateImage(cvGetSize(&processed), IPL_DEPTH_8U, 3);
-    cvCvtColor(&processed, color, CV_GRAY2BGR);
-    UIImage* ui = [cvutil CreateUIImageFromIplImage:color];
-    [MainImageView setImage:ui];
+-(IBAction) btnOpenFromClipboard_touchDown{
+
 }
 
+-(IBAction) btnArchive_touchDown{
+    
+}
+
+-(IBAction) btnCaptureFromCamera_touchDown{
+    
+}
+         
+         
+ - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [self dismissModalViewControllerAnimated:YES];
+    UIImage* img = [info valueForKey:UIImagePickerControllerOriginalImage];
+    BoardViewController* boardViewController = [BoardViewController boardWithImage:img];
+    [self.view addSubview: boardViewController.view];
+    
+}
+ 
+ - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissModalViewControllerAnimated:YES];
+}         
 @end

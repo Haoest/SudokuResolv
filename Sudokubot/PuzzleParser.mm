@@ -18,7 +18,6 @@ using namespace cv;
 
 @implementation PuzzleParser
 static basicOCR *ocr = nil;
-static int mark = 0;
 
 basicOCR* GetOCR(){
     if (!ocr){
@@ -151,7 +150,7 @@ void GetRectanglesFromLines(cv::Rect dst_rectangles[], vector<Vec2f>* horizontal
     }
 }
 
-void ParseFromImage(UIImage* puzzleUIImage, int board[][9]){
+int** ParseFromImage(UIImage* puzzleUIImage){
     IplImage *puzzle = [cvutil CreateIplImageFromUIImage: puzzleUIImage];
     IplImage *cvimage_gray = cvCreateImage(cvGetSize(puzzle), IPL_DEPTH_8U, 1);
     cvCvtColor(puzzle, cvimage_gray, CV_BGR2GRAY);
@@ -167,10 +166,14 @@ void ParseFromImage(UIImage* puzzleUIImage, int board[][9]){
     MergeAdjacentLines(&verticalLines);
     cv::Rect rects[9*9];
     GetRectanglesFromLines(rects, &horizontalLines, &verticalLines);
-    FindExistingNumbers(puzzle, rects, board);
+    return FindExistingNumbers(puzzle, rects);
 }
 
-void FindExistingNumbers(IplImage* puzzle, cv::Rect grids[], int board[9][9]){
+int** FindExistingNumbers(IplImage* puzzle, cv::Rect grids[]){
+    int** board = new int*[9];
+    for(int i=0; i<9; i++){
+        board[i] = new int[9];
+    }
     IplImage *gray = cvCreateImage(cvGetSize(puzzle), IPL_DEPTH_8U, 1);
     cvCvtColor(puzzle, gray, CV_BGR2GRAY);
     cvThreshold(gray, gray, 255/2.0, 255, CV_THRESH_BINARY);
@@ -183,13 +186,9 @@ void FindExistingNumbers(IplImage* puzzle, cv::Rect grids[], int board[9][9]){
         if (processedRegion.width!=0 && processedRegion.height!=0){
             result = (int)ocr->classify(&processedRegion, 0);
         }
-//        IplImage* clone = cvCloneImage(&processedRegion);
         board[i/9][i%9] = result;
-        if (i==mark && false){
-            mark ++;
-//            return clone;
-        }
     }
+    return board;
 }
 
 IplImage* CreateSubImage(IplImage* fullImage, cv::Rect& region){

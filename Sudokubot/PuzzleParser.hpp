@@ -31,8 +31,13 @@ bool CompareLineByRho(Vec2f line1, Vec2f line2);
 void SplitIntoHorizontalAndVeriticalLines(vector<Vec2f>* allLines, vector<Vec2f>* horizontalLines, vector<Vec2f>* verticalLines);
 void drawLines(Mat *mat, vector<Vec2f> *lines);
 void GetRectanglesFromLines(cv::Rect dst_rectangles[], vector<Vec2f>* horizontalLines, vector<Vec2f>* verticalLines);
-void ParseFromImage(UIImage* puzzleUIImage, int board[9][9]);
-void FindExistingNumbers(IplImage* puzzle, cv::Rect grids[], int board[9][9]);
+
+// parse a sudoku partial board, and return a 9x9 grid of int with hints in their corresponding slot in the board
+int** ParseFromImage(UIImage* puzzleUIImage);
+
+//given the original board as image, and a list of adjucent grids as bounds, look into each grid and try to OCR a number
+// return the OCR-ed 9x9 board with each recognized number in their corresponding slot.
+int** FindExistingNumbers(IplImage* puzzle, cv::Rect grids[]);
 
 IplImage* CreateSubImage(IplImage* fullImage, cv::Rect& region);
 @end

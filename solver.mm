@@ -8,24 +8,31 @@
 
 #import "solver.hpp"
 
+
 using namespace std;
 
 @implementation solver
 
 @synthesize board;
 
-+(solver*) solverWithPartialBoard: (int[9][9]) partialBoard{
++(solver*) solverWithPartialBoard: (int**) partialBoard{
     solver *rv = [[solver alloc] init];
     rv.board = new int*[9];
     for (int i=0; i<9; i++){
         rv.board[i] = new int[9];
     }
     for (int i=0; i<9; i++){
-        for (int j=0; j<9; j++){
+        for(int j=0; j<9; j++){
             rv.board[i][j] = partialBoard[i][j];
         }
     }
     return rv;
+}
+
++(solver*) solverWithImage: (UIImage*) imageBoard{
+    int** _board;
+    _board = ParseFromImage(imageBoard);
+    return [solver solverWithPartialBoard:_board];
 }
 
 //return null if no solution
@@ -53,10 +60,6 @@ bool trySolveRecursively(int** currentBoard, set<int> boxSpace[9][9], int boxInd
     for(set<int>::iterator it = curBox.begin(); it != curBox.end(); it++){
         if (isUniqueInRowAndColumn(currentBoard, *it, boxIndex)){
             currentBoard[boxIndex/9][boxIndex%9] = *it;
-            if (boxIndex==0){
-                int adf;
-                adf = 1;
-            }
             if (trySolveRecursively(currentBoard, boxSpace, boxIndex+1)){
                 return true;
             }
