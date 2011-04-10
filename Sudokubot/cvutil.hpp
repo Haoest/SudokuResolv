@@ -19,6 +19,6 @@
 +(IplImage*) LoadPbmAsIplImage: (NSString*) fileName;
 +(IplImage*) GetNormalizedImageFromBlackNWhite:(IplImage*) blackWhiteImage;
 +(int**) ReadBoardFromFile:(NSString*) fileName;
-
++(NSString*) SerializeBoard:(int**)board;
 
 @end

@@ -15,8 +15,10 @@
 
 @implementation BoardViewController
 
-@synthesize imageView;
-@synthesize board, solution;
+
+
+@synthesize imageView, saveToArchiveButton, mainMenuButton, commentTextField;
+@synthesize board, solution, comments;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,14 +46,22 @@
 
 - (void)viewDidLoad
 {
-
     [super viewDidLoad];
     [self loadBoard];
+    [self wireupControls];
+
     // Do any additional setup after loading the view from its nib.
 }
 
 -(void) loadBoard{
     [imageView setImage:[self drawGrids]];
+}
+
+-(void) wireupControls{
+    [self.saveToArchiveButton setTarget:self];
+    [self.saveToArchiveButton setAction:@selector(saveToArchive)];
+    [commentTextField setPlaceholder:@"Enter comment here"];
+
 }
 
 -(UIImage*) drawGrids{
@@ -109,7 +119,25 @@
     return rv;
 }
 
-
+-(void) saveToArchive{
+    NSString *serializedString = [cvutil SerializeBoard:solution];
+    NSString *archiveEntry;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
+    archiveEntry = [NSString stringWithFormat:@"%@\t%@\n", [formatter stringFromDate:[NSDate date]], serializedString];
+    [formatter release];
+    
+    NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:archiveFileName];
+    if (fileHandle == Nil){
+        NSFileManager* fileManager = [NSFileManager defaultManager];
+        [fileManager createFileAtPath:archiveFileName 
+                    contents:[archiveEntry dataUsingEncoding:NSUTF8StringEncoding] 
+                    attributes:Nil];
+    }else{
+        [fileHandle writeData:[archiveEntry dataUsingEncoding:NSUTF8StringEncoding]];
+        [fileHandle closeFile];
+    }
+}
 
 
 @end

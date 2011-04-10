@@ -133,4 +133,15 @@ using namespace cv;
     return a;
 }
 
++(NSString*) SerializeBoard:(int**)board{
+    NSMutableString *rv = [NSMutableString stringWithFormat:@""];
+    for(int i=0; i<9; i++){
+        for(int j=0; j<9; j++){
+            [rv appendFormat:@"%d", board[i][j]];
+        }
+        [rv appendString:@" "];
+    }
+    return [NSString stringWithString:rv];
+}
+
 @end

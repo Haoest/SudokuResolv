@@ -12,14 +12,27 @@
 @interface BoardViewController : UIViewController {
 
 }
+
+
+
 @property(nonatomic, retain) IBOutlet UIImageView* imageView;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem* saveToArchiveButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem* mainMenuButton;
+@property(nonatomic, retain) IBOutlet UITextField *commentTextField;
 
 @property(nonatomic, assign) int** board;
 @property(nonatomic, assign) int** solution;
 
+@property(nonatomic, retain) NSString *comments;
+
+
+-(void) saveToArchive;
+
 +(BoardViewController*) boardWithImage:(UIImage*) board;
 -(void) loadBoard;
 -(UIImage*) drawGrids;
-
+-(void) wireupControls;
 
 @end
+
+static NSString *archiveFileName = [NSString stringWithString:@"archive.txt"];

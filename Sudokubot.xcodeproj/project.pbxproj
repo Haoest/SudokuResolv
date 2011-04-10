@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		3A582759132CF031003F8ACC /* puzzle1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A582757132CF031003F8ACC /* puzzle1.png */; };
+		3A7E57D1134EB0B7003CCF9D /* BoardViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E57CF134EB0B7003CCF9D /* BoardViewController.mm */; };
+		3A7E57D2134EB0B7003CCF9D /* BoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E57D0134EB0B7003CCF9D /* BoardViewController.xib */; };
+		3A7E57D6134EB3D4003CCF9D /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E57D4134EB3D3003CCF9D /* HelpViewController.m */; };
+		3A7E57D7134EB3D4003CCF9D /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E57D5134EB3D4003CCF9D /* HelpViewController.xib */; };
 		3A8F9E6D134BADC000E43520 /* solver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8F9E6C134BADC000E43520 /* solver.mm */; };
 		3A8FEDCF132CD99F00654072 /* cvutil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8FEDCE132CD99F00654072 /* cvutil.mm */; };
 		3A94CC701331B46000B380B2 /* numerics0to9.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A94CC6E1331B46000B380B2 /* numerics0to9.png */; };
 		3A94CC911331B5F700B380B2 /* basicOCR.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A94CC891331B5F700B380B2 /* basicOCR.mm */; };
-		3A94CC921331B5F700B380B2 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A94CC8B1331B5F700B380B2 /* CMakeLists.txt */; };
-		3A94CC931331B5F700B380B2 /* main.cpp2 in Sources */ = {isa = PBXBuildFile; fileRef = 3A94CC8C1331B5F700B380B2 /* main.cpp2 */; };
 		3A94CC941331B5F700B380B2 /* preprocessing.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A94CC8D1331B5F700B380B2 /* preprocessing.mm */; };
 		3A94D0881331B60A00B380B2 /* 000.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 3A94CC971331B60800B380B2 /* 000.pbm */; };
 		3A94D0EC1331B60A00B380B2 /* 100.pbm in Resources */ = {isa = PBXBuildFile; fileRef = 3A94CCFC1331B60800B380B2 /* 100.pbm */; };
@@ -56,6 +58,12 @@
 
 /* Begin PBXFileReference section */
 		3A582758132CF031003F8ACC /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/puzzle1.png; sourceTree = "<group>"; };
+		3A7E57CE134EB0B7003CCF9D /* BoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardViewController.h; sourceTree = "<group>"; };
+		3A7E57CF134EB0B7003CCF9D /* BoardViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BoardViewController.mm; sourceTree = "<group>"; };
+		3A7E57D0134EB0B7003CCF9D /* BoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BoardViewController.xib; sourceTree = "<group>"; };
+		3A7E57D3134EB3D3003CCF9D /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		3A7E57D4134EB3D3003CCF9D /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		3A7E57D5134EB3D4003CCF9D /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
 		3A8F9E6B134BADC000E43520 /* solver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = solver.hpp; path = ../solver.hpp; sourceTree = "<group>"; };
 		3A8F9E6C134BADC000E43520 /* solver.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = solver.mm; path = ../solver.mm; sourceTree = "<group>"; };
 		3A8FEDCD132CD99F00654072 /* cvutil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cvutil.hpp; sourceTree = "<group>"; };
@@ -66,8 +74,6 @@
 		3A94CC6F1331B46000B380B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/numerics0to9.png; sourceTree = "<group>"; };
 		3A94CC891331B5F700B380B2 /* basicOCR.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = basicOCR.mm; sourceTree = "<group>"; };
 		3A94CC8A1331B5F700B380B2 /* basicOCR.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = basicOCR.hpp; sourceTree = "<group>"; };
-		3A94CC8B1331B5F700B380B2 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
-		3A94CC8C1331B5F700B380B2 /* main.cpp2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.cpp2; sourceTree = "<group>"; };
 		3A94CC8D1331B5F700B380B2 /* preprocessing.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = preprocessing.mm; sourceTree = "<group>"; };
 		3A94CC8E1331B5F700B380B2 /* preprocessing.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = preprocessing.hpp; sourceTree = "<group>"; };
 		3A94CC971331B60800B380B2 /* 000.pbm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 000.pbm; sourceTree = "<group>"; };
@@ -142,17 +148,16 @@
 		3A94CC861331B5F700B380B2 /* basicOCR */ = {
 			isa = PBXGroup;
 			children = (
+				3A94CC951331B60800B380B2 /* Training Files */,
 				3A94CC891331B5F700B380B2 /* basicOCR.mm */,
 				3A94CC8A1331B5F700B380B2 /* basicOCR.hpp */,
-				3A94CC8B1331B5F700B380B2 /* CMakeLists.txt */,
-				3A94CC8C1331B5F700B380B2 /* main.cpp2 */,
 				3A94CC8D1331B5F700B380B2 /* preprocessing.mm */,
 				3A94CC8E1331B5F700B380B2 /* preprocessing.hpp */,
 			);
 			path = basicOCR;
 			sourceTree = "<group>";
 		};
-		3A94CC951331B60800B380B2 /* OCR */ = {
+		3A94CC951331B60800B380B2 /* Training Files */ = {
 			isa = PBXGroup;
 			children = (
 				3A94CC961331B60800B380B2 /* 0 */,
@@ -166,7 +171,8 @@
 				3A94CFBE1331B60900B380B2 /* 8 */,
 				3A94D0231331B60900B380B2 /* 9 */,
 			);
-			path = OCR;
+			name = "Training Files";
+			path = ../OCR;
 			sourceTree = "<group>";
 		};
 		3A94CC961331B60800B380B2 /* 0 */ = {
@@ -282,7 +288,6 @@
 		3A9E6C4F13295D120055628C /* Sudokubot */ = {
 			isa = PBXGroup;
 			children = (
-				3A94CC951331B60800B380B2 /* OCR */,
 				3A94CC861331B5F700B380B2 /* basicOCR */,
 				3A9E6C8213296AFB0055628C /* Resources */,
 				3A9E6C5813295D120055628C /* SudokubotAppDelegate.h */,
@@ -298,6 +303,12 @@
 				3AC35C73133466F90099F669 /* PuzzleParser.mm */,
 				3A8F9E6B134BADC000E43520 /* solver.hpp */,
 				3A8F9E6C134BADC000E43520 /* solver.mm */,
+				3A7E57CE134EB0B7003CCF9D /* BoardViewController.h */,
+				3A7E57CF134EB0B7003CCF9D /* BoardViewController.mm */,
+				3A7E57D0134EB0B7003CCF9D /* BoardViewController.xib */,
+				3A7E57D3134EB3D3003CCF9D /* HelpViewController.h */,
+				3A7E57D4134EB3D3003CCF9D /* HelpViewController.m */,
+				3A7E57D5134EB3D4003CCF9D /* HelpViewController.xib */,
 			);
 			path = Sudokubot;
 			sourceTree = "<group>";
@@ -419,7 +430,6 @@
 				3A582759132CF031003F8ACC /* puzzle1.png in Resources */,
 				3A996BE2132FF9700061CCFD /* simpleLines.png in Resources */,
 				3A94CC701331B46000B380B2 /* numerics0to9.png in Resources */,
-				3A94CC921331B5F700B380B2 /* CMakeLists.txt in Resources */,
 				3A94D0881331B60A00B380B2 /* 000.pbm in Resources */,
 				3A94D0EC1331B60A00B380B2 /* 100.pbm in Resources */,
 				3A94D1501331B60A00B380B2 /* 200.pbm in Resources */,
@@ -430,6 +440,8 @@
 				3A94D3441331B60A00B380B2 /* 700.pbm in Resources */,
 				3A94D3A81331B60A00B380B2 /* 800.pbm in Resources */,
 				3A94D40C1331B60A00B380B2 /* 900.pbm in Resources */,
+				3A7E57D2134EB0B7003CCF9D /* BoardViewController.xib in Resources */,
+				3A7E57D7134EB3D4003CCF9D /* HelpViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,10 +482,11 @@
 				3A9E6C6013295D120055628C /* SudokubotViewController.mm in Sources */,
 				3A8FEDCF132CD99F00654072 /* cvutil.mm in Sources */,
 				3A94CC911331B5F700B380B2 /* basicOCR.mm in Sources */,
-				3A94CC931331B5F700B380B2 /* main.cpp2 in Sources */,
 				3A94CC941331B5F700B380B2 /* preprocessing.mm in Sources */,
 				3AC35C74133466FA0099F669 /* PuzzleParser.mm in Sources */,
 				3A8F9E6D134BADC000E43520 /* solver.mm in Sources */,
+				3A7E57D1134EB0B7003CCF9D /* BoardViewController.mm in Sources */,
+				3A7E57D6134EB3D4003CCF9D /* HelpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 
 
 #import "SudokubotTests.hpp"
-
+#import "BoardViewController.h"
 
 //using namespace std;
 
@@ -46,8 +46,7 @@
 
 -(void) testReadBoard{
     UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"puzzle1.png"]];
-    int detectedBoard[9][9];
-    ParseFromImage(img, detectedBoard);
+    int** detectedBoard = ParseFromImage(img);
     int ** actualBoard = getBoard();
     for(int i=0; i<9; i++){
         for(int j=0; j<9; j++){
@@ -58,13 +57,7 @@
 
 -(void) testGetBoxSampleSpace{
     int** board = getBoard();
-    int a[9][9];
-    for (int i=0; i<9; i++){
-        for(int j=0; j<9; j++){
-            a[i][j] = board[i][j];
-        }
-    }
-    solver *s = [solver solverWithPartialBoard:a];
+    solver *s = [solver solverWithPartialBoard:board];
     STAssertTrue(isUniqueInRowAndColumn(board, 1, 2), @"0 2");
     STAssertFalse(isUniqueInRowAndColumn(board, 1, 4), @"0 3");
     STAssertTrue(isUniqueInRowAndColumn(board, 1, 18), @"");
@@ -72,6 +65,24 @@
     STAssertFalse(isUniqueInRowAndColumn(board, 9, 28),@"");
     STAssertFalse(isUniqueInRowAndColumn(board, 8, 28),@"");
     STAssertFalse(isUniqueInRowAndColumn(board, 3, 28), @"");
+}
+
+-(void) testSaveBoardToArchive{
+    NSFileHandle *fileHandler = [NSFileHandle fileHandleForReadingAtPath:archiveFileName];
+    if (fileHandler != Nil){
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        [fileManager removeItemAtPath:archiveFileName error:Nil];
+    }
+    fileHandler = [NSFileHandle fileHandleForReadingAtPath:archiveFileName];
+    STAssertNil(fileHandler, @"%@ should not be present", archiveFileName);
+    BoardViewController* boardViewController = [BoardViewController boardWithImage:[UIImage imageNamed:@"puzzle1.png"]];
+    [boardViewController saveToArchive];
+    NSString* archiveContent = [NSString stringWithContentsOfFile:archiveFileName encoding:NSUTF8StringEncoding error:Nil];
+    STAssertTrue([archiveContent length] > 0, @"archive file should not be empty");
+    
+    solver* s = [solver solverWithImage:[UIImage imageNamed:@"puzzle1.png"]];
+    NSString *solution = [cvutil SerializeBoard:[s trySolve]];
+    STAssertTrue([archiveContent rangeOfString:solution].length >0, @"archive file should contain serialized representation of the borad");
 }
 
 int** getBoard(){
