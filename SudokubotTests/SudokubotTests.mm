@@ -68,21 +68,25 @@
 }
 
 -(void) testSaveBoardToArchive{
-    NSFileHandle *fileHandler = [NSFileHandle fileHandleForReadingAtPath:archiveFileName];
+    NSString *aFileName = [NSString stringWithCString:archiveFileName encoding:NSASCIIStringEncoding];
+    NSString *commentText = [NSString stringWithFormat:@"this is the best game ever"];
+    NSFileHandle *fileHandler = [NSFileHandle fileHandleForReadingAtPath:aFileName];
     if (fileHandler != Nil){
         NSFileManager *fileManager = [NSFileManager defaultManager];
-        [fileManager removeItemAtPath:archiveFileName error:Nil];
+        [fileManager removeItemAtPath:aFileName error:Nil];
     }
-    fileHandler = [NSFileHandle fileHandleForReadingAtPath:archiveFileName];
+    fileHandler = [NSFileHandle fileHandleForReadingAtPath:aFileName];
     STAssertNil(fileHandler, @"%@ should not be present", archiveFileName);
     BoardViewController* boardViewController = [BoardViewController boardWithImage:[UIImage imageNamed:@"puzzle1.png"]];
+    STAssertEquals([boardViewController.commentTextField text], commentText, @"comment should be set");
     [boardViewController saveToArchive];
-    NSString* archiveContent = [NSString stringWithContentsOfFile:archiveFileName encoding:NSUTF8StringEncoding error:Nil];
+    NSString* archiveContent = [NSString stringWithContentsOfFile:aFileName encoding:NSUTF8StringEncoding error:Nil];
     STAssertTrue([archiveContent length] > 0, @"archive file should not be empty");
     
     solver* s = [solver solverWithImage:[UIImage imageNamed:@"puzzle1.png"]];
     NSString *solution = [cvutil SerializeBoard:[s trySolve]];
     STAssertTrue([archiveContent rangeOfString:solution].length >0, @"archive file should contain serialized representation of the borad");
+
 }
 
 int** getBoard(){

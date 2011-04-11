@@ -15,10 +15,8 @@
 
 @implementation BoardViewController
 
-
-
-@synthesize imageView, saveToArchiveButton, mainMenuButton, commentTextField;
-@synthesize board, solution, comments;
+@synthesize imageView, saveToArchiveButton, mainMenuButton, commentTextField, contentsView, navigationBar;
+@synthesize board, solution;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -60,8 +58,7 @@
 -(void) wireupControls{
     [self.saveToArchiveButton setTarget:self];
     [self.saveToArchiveButton setAction:@selector(saveToArchive)];
-    [commentTextField setPlaceholder:@"Enter comment here"];
-
+    self.commentTextField.delegate = self;
 }
 
 -(UIImage*) drawGrids{
@@ -113,30 +110,58 @@
 }
 
 +(BoardViewController*) boardWithImage:(UIImage*) boardAsImage{
-    BoardViewController *rv = [[[BoardViewController alloc] initWithNibName:@"BoardViewController" bundle:nil] autorelease];
+    BoardViewController *rv = [[BoardViewController alloc] initWithNibName:@"BoardViewController" bundle:nil];
     rv.board = ParseFromImage(boardAsImage);
     rv.solution = [[solver solverWithPartialBoard:rv.board] trySolve];
     return rv;
 }
 
 -(void) saveToArchive{
-    NSString *serializedString = [cvutil SerializeBoard:solution];
+    NSString *serializedBoard = [cvutil SerializeBoard:solution];
     NSString *archiveEntry;
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
-    archiveEntry = [NSString stringWithFormat:@"%@\t%@\n", [formatter stringFromDate:[NSDate date]], serializedString];
+    archiveEntry = [NSString stringWithFormat:@"%@\t%@\t%@\n", [formatter stringFromDate:[NSDate date]], serializedBoard, commentTextField.text];
     [formatter release];
     
-    NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:archiveFileName];
+    NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:[NSString stringWithCString:archiveFileName encoding:NSASCIIStringEncoding]];
     if (fileHandle == Nil){
         NSFileManager* fileManager = [NSFileManager defaultManager];
-        [fileManager createFileAtPath:archiveFileName 
+        [fileManager createFileAtPath:[NSString stringWithCString:archiveFileName encoding:NSASCIIStringEncoding] 
                     contents:[archiveEntry dataUsingEncoding:NSUTF8StringEncoding] 
                     attributes:Nil];
     }else{
         [fileHandle writeData:[archiveEntry dataUsingEncoding:NSUTF8StringEncoding]];
         [fileHandle closeFile];
     }
+}
+
+-(void) textFieldDidBeginEditing:(UITextField *)textField{
+    [self animateTextField:textField up:YES];
+    [self.view bringSubviewToFront:navigationBar];
+}
+
+-(void) textFieldDidEndEditing:(UITextField *)textField{
+    [self animateTextField:textField up:NO];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *) textField{
+    [textField resignFirstResponder];
+    return NO;
+}
+
+- (void) animateTextField: (UITextField*) textField up: (BOOL) up
+{
+    const int movementDistance = 200; // tweak as needed
+    const float movementDuration = 0.3f; // tweak as needed
+    
+    int movement = (up ? -movementDistance : movementDistance);
+    
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.contentsView.frame = CGRectOffset(self.contentsView.frame, 0, movement);
+    [UIView commitAnimations];
 }
 
 
