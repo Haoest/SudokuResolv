@@ -7,9 +7,11 @@
 //
 
 #import "ArchiveViewController.h"
-
+#import "BoardViewController.h"
 
 @implementation ArchiveViewController
+@synthesize archiveTableViewController;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,7 +40,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewDidUnload
@@ -52,6 +53,14 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
++(ArchiveViewController*) archiveViewControllerFromDefaultArchive{
+    ArchiveViewController* rv = [[ArchiveViewController alloc] initWithNibName:@"ArchiveViewController" bundle:Nil];
+    rv.archiveTableViewController = [ArchiveTableViewController archiveTableViewControllerFromDefaultArchive];
+    rv.archiveTableViewController.view.frame = CGRectMake(0, 44, 328, 416);
+    [rv.view addSubview:rv.archiveTableViewController.view];
+    return rv;
 }
 
 @end

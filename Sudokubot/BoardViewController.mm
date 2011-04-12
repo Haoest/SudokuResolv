@@ -11,12 +11,14 @@
 #import "solver.hpp"
 #import "PuzzleParser.hpp"
 #import "BoardViewController.h"
+#import "ArchiveViewController.h"
 
 
 @implementation BoardViewController
 
-@synthesize imageView, saveToArchiveButton, mainMenuButton, commentTextField, contentsView, navigationBar;
-@synthesize board, solution;
+@synthesize imageView, commentTextField, contentsView, navigationBar;
+@synthesize saveToArchiveButton, backToArchiveButton, mainMenuButton;
+@synthesize board, solution, allowSaving;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,8 +58,19 @@
 }
 
 -(void) wireupControls{
-    [self.saveToArchiveButton setTarget:self];
-    [self.saveToArchiveButton setAction:@selector(saveToArchive)];
+    if (self.allowSaving){
+        [self.saveToArchiveButton setTarget:self];
+        [self.saveToArchiveButton setAction:@selector(saveToArchive)];
+        NSMutableArray *buttons = [[self.navigationBar.items mutableCopy] autorelease];
+        [buttons removeObject:backToArchiveButton];
+        self.navigationBar.items = buttons;
+    }else{
+        [self.backToArchiveButton setTarget:self];
+        [self.backToArchiveButton setAction:@selector(backToArchive)];
+        NSMutableArray *buttons = [[self.navigationBar.items mutableCopy] autorelease];
+        [buttons removeObject:saveToArchiveButton];
+        self.navigationBar.items = buttons;
+    }
     self.commentTextField.delegate = self;
 }
 
@@ -113,6 +126,21 @@
     BoardViewController *rv = [[BoardViewController alloc] initWithNibName:@"BoardViewController" bundle:nil];
     rv.board = ParseFromImage(boardAsImage);
     rv.solution = [[solver solverWithPartialBoard:rv.board] trySolve];
+    rv.allowSaving = true;
+    return rv;
+}
+
++(BoardViewController*) boardWithSolution:(int**) solution{
+    BoardViewController *rv = [[BoardViewController alloc] initWithNibName:@"BoardViewController" bundle:nil];
+    int** solutionCopy;
+    solutionCopy = new int *[9];
+    for (int i=0; i<9; i++){
+        for (int j=0; j<9; j++){
+            solutionCopy[i][j] = solution[i][j];
+        }
+    }
+    rv.solution = solutionCopy;
+    rv.allowSaving = false;
     return rv;
 }
 
@@ -134,6 +162,13 @@
         [fileHandle writeData:[archiveEntry dataUsingEncoding:NSUTF8StringEncoding]];
         [fileHandle closeFile];
     }
+    ArchiveViewController* archieveViewController = [ArchiveViewController archiveViewControllerFromDefaultArchive];
+    [self.view addSubview:archieveViewController.view];
+    
+}
+
+-(void) backToAchive{
+    
 }
 
 -(void) textFieldDidBeginEditing:(UITextField *)textField{

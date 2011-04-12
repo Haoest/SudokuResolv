@@ -45,6 +45,7 @@
 		3A9E6C7413295D130055628C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E6C7213295D120055628C /* InfoPlist.strings */; };
 		3A9E6C7713295D130055628C /* SudokubotTests.hpp in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E6C7613295D130055628C /* SudokubotTests.hpp */; };
 		3A9E6C7913295D130055628C /* SudokubotTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E6C7813295D130055628C /* SudokubotTests.mm */; };
+		3A9FE1261354243700B4E21A /* ArchiveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FE1251354243700B4E21A /* ArchiveTableViewController.m */; };
 		3AC35C74133466FA0099F669 /* PuzzleParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3AC35C73133466F90099F669 /* PuzzleParser.mm */; };
 /* End PBXBuildFile section */
 
@@ -112,6 +113,8 @@
 		3A9E6C7513295D130055628C /* SudokubotTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SudokubotTests-Prefix.pch"; sourceTree = "<group>"; };
 		3A9E6C7613295D130055628C /* SudokubotTests.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SudokubotTests.hpp; sourceTree = "<group>"; };
 		3A9E6C7813295D130055628C /* SudokubotTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SudokubotTests.mm; sourceTree = "<group>"; };
+		3A9FE1241354243700B4E21A /* ArchiveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveTableViewController.h; sourceTree = "<group>"; };
+		3A9FE1251354243700B4E21A /* ArchiveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveTableViewController.m; sourceTree = "<group>"; };
 		3AC35C72133466F80099F669 /* PuzzleParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PuzzleParser.hpp; sourceTree = "<group>"; };
 		3AC35C73133466F90099F669 /* PuzzleParser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PuzzleParser.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -295,13 +298,9 @@
 			children = (
 				3A94CC861331B5F700B380B2 /* basicOCR */,
 				3A9E6C8213296AFB0055628C /* Resources */,
-				3A9E6C5813295D120055628C /* SudokubotAppDelegate.h */,
-				3A9E6C5913295D120055628C /* SudokubotAppDelegate.mm */,
-				3A9E6C5B13295D120055628C /* MainWindow.xib */,
 				3A9E6C5E13295D120055628C /* SudokubotViewController.h */,
 				3A9E6C5F13295D120055628C /* SudokubotViewController.mm */,
 				3A9E6C6113295D120055628C /* SudokubotViewController.xib */,
-				3A9E6C5013295D120055628C /* Supporting Files */,
 				3A8FEDCD132CD99F00654072 /* cvutil.hpp */,
 				3A8FEDCE132CD99F00654072 /* cvutil.mm */,
 				3AC35C72133466F80099F669 /* PuzzleParser.hpp */,
@@ -317,6 +316,12 @@
 				3A951C1B1352CE12006ACF0C /* ArchiveViewController.h */,
 				3A951C1C1352CE13006ACF0C /* ArchiveViewController.m */,
 				3A951C1D1352CE14006ACF0C /* ArchiveViewController.xib */,
+				3A9E6C5813295D120055628C /* SudokubotAppDelegate.h */,
+				3A9E6C5913295D120055628C /* SudokubotAppDelegate.mm */,
+				3A9E6C5B13295D120055628C /* MainWindow.xib */,
+				3A9FE1241354243700B4E21A /* ArchiveTableViewController.h */,
+				3A9FE1251354243700B4E21A /* ArchiveTableViewController.m */,
+				3A9E6C5013295D120055628C /* Supporting Files */,
 			);
 			path = Sudokubot;
 			sourceTree = "<group>";
@@ -497,6 +502,7 @@
 				3A7E57D1134EB0B7003CCF9D /* BoardViewController.mm in Sources */,
 				3A7E57D6134EB3D4003CCF9D /* HelpViewController.m in Sources */,
 				3A951C1E1352CE17006ACF0C /* ArchiveViewController.m in Sources */,
+				3A9FE1261354243700B4E21A /* ArchiveTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

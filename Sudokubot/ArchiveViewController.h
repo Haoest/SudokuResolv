@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ArchiveTableViewController.h"
 
 @interface ArchiveViewController : UIViewController {
     
 }
+
+@property(nonatomic, retain) ArchiveTableViewController* archiveTableViewController;
+
++(ArchiveViewController*) archiveViewControllerFromDefaultArchive;
 
 @end

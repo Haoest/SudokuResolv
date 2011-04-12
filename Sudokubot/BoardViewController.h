@@ -15,17 +15,22 @@
 
 @property(nonatomic, retain) IBOutlet UIImageView* imageView;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem* saveToArchiveButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem* backToArchiveButton;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem* mainMenuButton;
 @property(nonatomic, retain) IBOutlet UITextField *commentTextField;
 @property(nonatomic, retain) IBOutlet UIView *contentsView;
 @property(nonatomic, retain) IBOutlet UIToolbar *navigationBar;
 
+@property(nonatomic, assign) bool allowSaving;
 @property(nonatomic, assign) int** board;
 @property(nonatomic, assign) int** solution;
 
 -(void) saveToArchive;
+-(void) backToArchive;
 
 +(BoardViewController*) boardWithImage:(UIImage*) board;
++(BoardViewController*) boardWithSolution:(int**) solution;
+
 -(void) loadBoard;
 -(UIImage*) drawGrids;
 -(void) wireupControls;

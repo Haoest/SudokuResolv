@@ -13,6 +13,7 @@
 #import "preprocessing.hpp"
 #import "solver.hpp"
 #import "BoardViewController.h"
+#import "ArchiveViewController.h"
 
 @implementation SudokubotViewController
 
@@ -83,7 +84,8 @@
 }
 
 -(IBAction) btnArchive_touchDown{
-    
+    ArchiveViewController* archive = [ArchiveViewController archiveViewControllerFromDefaultArchive];
+    [self.view addSubview:archive.view];
 }
 
 -(IBAction) btnCaptureFromCamera_touchDown{
