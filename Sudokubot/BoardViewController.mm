@@ -159,6 +159,7 @@
                     contents:[archiveEntry dataUsingEncoding:NSUTF8StringEncoding] 
                     attributes:Nil];
     }else{
+        [fileHandle seekToEndOfFile];
         [fileHandle writeData:[archiveEntry dataUsingEncoding:NSUTF8StringEncoding]];
         [fileHandle closeFile];
     }

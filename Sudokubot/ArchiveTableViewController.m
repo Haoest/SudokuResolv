@@ -23,8 +23,15 @@
     ArchiveTableViewController* rv = [[ArchiveTableViewController alloc] initWithStyle:UITableViewStylePlain];
     NSString *archiveContent = [NSString stringWithContentsOfFile:
                                 [NSString stringWithCString:archiveFileName encoding:NSASCIIStringEncoding] 
-                                                         encoding:NSUTF8StringEncoding error:Nil];
-    rv.archiveContents = [archiveContent componentsSeparatedByString:@"\n"];
+                                 encoding:NSUTF8StringEncoding error:Nil];
+    NSArray *archiveEntries = [archiveContent componentsSeparatedByString:@"\n"];
+    NSMutableArray *mutableEntries = [[NSMutableArray alloc]init ];
+    for (int i=0; i<[archiveEntries count]; i++){
+        if ([[[archiveEntries objectAtIndex:i] componentsSeparatedByString:@"\t"] count] == 3){
+            [mutableEntries addObject:[archiveEntries objectAtIndex:i]];
+        }
+    }
+    rv.archiveContents = [NSArray arrayWithArray:mutableEntries];
     return rv;
 }
 
@@ -34,7 +41,8 @@
 
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [archiveContents count]; // exclude last row
+    NSInteger rv = [archiveContents count]; // exclude last row
+    return rv;
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
