@@ -113,6 +113,7 @@ using namespace cv;
 }
 
 +(int**) DeserializedBoard:(NSString*) board{
+    board = [board stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     int **a;
     a = new int*[9];
     for(int i=0; i<9; i++){

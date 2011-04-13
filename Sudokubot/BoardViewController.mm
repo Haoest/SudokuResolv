@@ -150,15 +150,18 @@
 -(void) saveToArchive{
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:[NSString stringWithCString:archiveDateFormat encoding:NSASCIIStringEncoding]];
+    NSString* serializedBoard = [cvutil SerializeBoard: self.solution];
     ArchiveEntry* archiveEntry = [ArchiveEntry archiveEntryWithValues:
                                   [formatter stringFromDate:[NSDate date]] :
-                                  [cvutil SerializeBoard:solution] :
-                                  commentTextField.text];
+                                  self.commentTextField.text:
+                                  serializedBoard];
     [formatter release];
     [archiveEntry save];
     ArchiveViewController* archieveViewController = [ArchiveViewController archiveViewControllerFromDefaultArchive];
-    [self.view addSubview:archieveViewController.view];
-    
+    UIView* superview = self.view.superview;
+    [self.view removeFromSuperview];
+    [superview addSubview:archieveViewController.view];
+    [self.commentTextField resignFirstResponder];
 }
 
 -(void) backToArchiveMenu{

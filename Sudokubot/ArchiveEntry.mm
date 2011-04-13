@@ -48,18 +48,19 @@
 -(NSString*) toArchiveString{
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:[NSString stringWithCString:archiveDateFormat encoding:NSASCIIStringEncoding]];
-    NSString *serializedBoard = [cvutil SerializeBoard:sudokuSolution];
+    NSString *serializedBoard = [cvutil SerializeBoard:self.sudokuSolution];
     NSString* rv = [NSString stringWithFormat:@"%@\t%@\t%@\n", 
-                    [dateFormatter stringFromDate:creationDate],
+                    [dateFormatter stringFromDate:self.creationDate],
                     serializedBoard,
-                    comments];
+                    self.comments];
     [dateFormatter release];
     return rv;
 }
 
 -(void) save{
     NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:[NSString stringWithCString:archiveFileName encoding:NSASCIIStringEncoding]];
-    NSData *data = [[self toArchiveString]dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *archiveString = [self toArchiveString];
+    NSData *data = [archiveString dataUsingEncoding:NSUTF8StringEncoding];
     if (fileHandle == Nil){
         NSFileManager* fileManager = [NSFileManager defaultManager];
         [fileManager createFileAtPath:[NSString stringWithCString:archiveFileName encoding:NSASCIIStringEncoding] 
@@ -74,7 +75,7 @@
      
 -(NSComparisonResult) compare:(id) otherEntry{
     ArchiveEntry* other = (ArchiveEntry*) otherEntry;
-    if ([creationDate earlierDate:other.creationDate]){
+    if ([self.creationDate earlierDate:other.creationDate]){
         return (NSComparisonResult) NSOrderedAscending;
     }
     return (NSComparisonResult) NSOrderedDescending;

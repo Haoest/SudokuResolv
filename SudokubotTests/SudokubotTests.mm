@@ -10,6 +10,7 @@
 
 #import "SudokubotTests.hpp"
 #import "BoardViewController.h"
+#import "AppConfig.h"
 
 //using namespace std;
 

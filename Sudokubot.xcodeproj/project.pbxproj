@@ -394,9 +394,9 @@
 				3A951C1D1352CE14006ACF0C /* ArchiveViewController.xib */,
 				3A9E6C5813295D120055628C /* SudokubotAppDelegate.h */,
 				3A9E6C5913295D120055628C /* SudokubotAppDelegate.mm */,
-				3A9E6C5B13295D120055628C /* MainWindow.xib */,
 				3A9FE1241354243700B4E21A /* ArchiveTableViewController.h */,
 				3A9FE1251354243700B4E21A /* ArchiveTableViewController.m */,
+				3A9E6C5B13295D120055628C /* MainWindow.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
