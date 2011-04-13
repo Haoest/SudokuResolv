@@ -19,8 +19,8 @@
 //load archive into strong-typed array of ArchiveEntry objects, sorted by date in desc order
 +(NSArray*) loadArchive;
 
-+(ArchiveEntry*) archiveEntryWithValues:(NSString*)creationDateString :(NSString*)comments :(NSString*) serializedSolutionString;
++(ArchiveEntry*) archiveEntryWithValues:(NSString*)creationDateString comments:(NSString*)comments solutionString:(NSString*) serializedSolutionString;
 -(void) save;
 -(NSString*) toArchiveString;
--(NSComparisonResult) compare:(id) otherEntry;
+
 @end

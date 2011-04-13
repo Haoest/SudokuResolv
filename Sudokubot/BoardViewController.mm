@@ -151,10 +151,9 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:[NSString stringWithCString:archiveDateFormat encoding:NSASCIIStringEncoding]];
     NSString* serializedBoard = [cvutil SerializeBoard: self.solution];
-    ArchiveEntry* archiveEntry = [ArchiveEntry archiveEntryWithValues:
-                                  [formatter stringFromDate:[NSDate date]] :
-                                  self.commentTextField.text:
-                                  serializedBoard];
+    ArchiveEntry* archiveEntry = [ArchiveEntry archiveEntryWithValues:[formatter stringFromDate:[NSDate date]] 
+                                                    comments : self.commentTextField.text
+                                                    solutionString : serializedBoard];
     [formatter release];
     [archiveEntry save];
     ArchiveViewController* archieveViewController = [ArchiveViewController archiveViewControllerFromDefaultArchive];

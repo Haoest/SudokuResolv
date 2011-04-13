@@ -48,7 +48,13 @@
 	NSString *label = [NSString stringWithFormat:@"%@ : %@", [dateFormatter stringFromDate:archiveEntry.creationDate], archiveEntry.comments ];
     [dateFormatter release];
 	cell.textLabel.text = label;
+    UIFont* font = cell.textLabel.font;
+    cell.textLabel.font = [font fontWithSize:archiveCellFontHeight];
 	return cell;
+}
+
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return archiveCellHeight;
 }
 
 -(void) tableview: (UITableView*) tableview didSelectRowAtIndexPath:(NSIndexPath*) indexPath{

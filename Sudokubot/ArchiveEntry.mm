@@ -14,8 +14,7 @@
 
 @synthesize creationDate, comments, sudokuSolution;
 
-+(ArchiveEntry*) archiveEntryWithValues:(NSString*)creationDateString :(NSString*)comments :(NSString*)serializedSolutionString
-{
++(ArchiveEntry*) archiveEntryWithValues:(NSString*)creationDateString comments:(NSString*)comments solutionString:(NSString*)serializedSolutionString {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:[NSString stringWithCString:archiveDateFormat encoding:NSASCIIStringEncoding]];
     ArchiveEntry* rv = [[ArchiveEntry alloc] init];
@@ -37,11 +36,10 @@
             NSString *creationDateString = [archiveSegments objectAtIndex:0];
             NSString *solution = [archiveSegments objectAtIndex:1];
             NSString *comments = [archiveSegments objectAtIndex:2];
-            ArchiveEntry *e = [ArchiveEntry archiveEntryWithValues:creationDateString :comments :solution];
-            [rv addObject:e];
+            ArchiveEntry *e = [ArchiveEntry archiveEntryWithValues:creationDateString comments:comments solutionString:solution];
+            [rv insertObject:e atIndex:0];// new ones at front
         }
     }
-//    [rv sortUsingSelector:@selector(compare)];
     return [NSArray arrayWithArray:rv];
 }
 
@@ -72,14 +70,7 @@
         [fileHandle closeFile];
     }
 }
-     
--(NSComparisonResult) compare:(id) otherEntry{
-    ArchiveEntry* other = (ArchiveEntry*) otherEntry;
-    if ([self.creationDate earlierDate:other.creationDate]){
-        return (NSComparisonResult) NSOrderedAscending;
-    }
-    return (NSComparisonResult) NSOrderedDescending;
-}
+
 
 @end
 
