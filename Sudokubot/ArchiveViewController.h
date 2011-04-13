@@ -12,9 +12,11 @@
 @interface ArchiveViewController : UIViewController {
     
 }
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *mainMenu;
 
 @property(nonatomic, retain) ArchiveTableViewController* archiveTableViewController;
 
 +(ArchiveViewController*) archiveViewControllerFromDefaultArchive;
 
+-(void) backToMainMenu;
 @end

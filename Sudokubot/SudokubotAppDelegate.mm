@@ -7,7 +7,6 @@
 //
 
 #import "SudokubotAppDelegate.h"
-
 #import "SudokubotViewController.h"
 
 @implementation SudokubotAppDelegate

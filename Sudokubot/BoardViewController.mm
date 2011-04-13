@@ -12,7 +12,8 @@
 #import "PuzzleParser.hpp"
 #import "BoardViewController.h"
 #import "ArchiveViewController.h"
-
+#import "AppConfig.h"
+#import "ArchiveEntry.h"
 
 @implementation BoardViewController
 
@@ -71,6 +72,8 @@
         [buttons removeObject:saveToArchiveButton];
         self.navigationBar.items = buttons;
     }
+    [self.mainMenuButton setTarget:self];
+    [self.mainMenuButton setAction:@selector(backToMainMenu)];
     self.commentTextField.delegate = self;
 }
 
@@ -145,31 +148,25 @@
 }
 
 -(void) saveToArchive{
-    NSString *serializedBoard = [cvutil SerializeBoard:solution];
-    NSString *archiveEntry;
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
-    archiveEntry = [NSString stringWithFormat:@"%@\t%@\t%@\n", [formatter stringFromDate:[NSDate date]], serializedBoard, commentTextField.text];
+    [formatter setDateFormat:[NSString stringWithCString:archiveDateFormat encoding:NSASCIIStringEncoding]];
+    ArchiveEntry* archiveEntry = [ArchiveEntry archiveEntryWithValues:
+                                  [formatter stringFromDate:[NSDate date]] :
+                                  [cvutil SerializeBoard:solution] :
+                                  commentTextField.text];
     [formatter release];
-    
-    NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:[NSString stringWithCString:archiveFileName encoding:NSASCIIStringEncoding]];
-    if (fileHandle == Nil){
-        NSFileManager* fileManager = [NSFileManager defaultManager];
-        [fileManager createFileAtPath:[NSString stringWithCString:archiveFileName encoding:NSASCIIStringEncoding] 
-                    contents:[archiveEntry dataUsingEncoding:NSUTF8StringEncoding] 
-                    attributes:Nil];
-    }else{
-        [fileHandle seekToEndOfFile];
-        [fileHandle writeData:[archiveEntry dataUsingEncoding:NSUTF8StringEncoding]];
-        [fileHandle closeFile];
-    }
+    [archiveEntry save];
     ArchiveViewController* archieveViewController = [ArchiveViewController archiveViewControllerFromDefaultArchive];
     [self.view addSubview:archieveViewController.view];
     
 }
 
--(void) backToAchive{
+-(void) backToArchiveMenu{
     
+}
+
+-(void) backToMainMenu{
+    [self.view removeFromSuperview];
 }
 
 -(void) textFieldDidBeginEditing:(UITextField *)textField{
@@ -199,6 +196,8 @@
     self.contentsView.frame = CGRectOffset(self.contentsView.frame, 0, movement);
     [UIView commitAnimations];
 }
+
+
 
 
 @end

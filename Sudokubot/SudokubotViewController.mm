@@ -24,6 +24,7 @@
 @synthesize btnArchive;
 @synthesize btnHelp;
 
+
 @synthesize imagePicker;
 
 
@@ -47,11 +48,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-
-                   
 }
-
 
 - (void)viewDidUnload
 {

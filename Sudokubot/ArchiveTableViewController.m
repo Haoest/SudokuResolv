@@ -7,7 +7,8 @@
 //
 
 #import "ArchiveTableViewController.h"
-#import "BoardViewController.h"
+#import "AppConfig.h"
+#import "ArchiveEntry.h"
 
 @implementation ArchiveTableViewController
 
@@ -21,17 +22,7 @@
 
 +(ArchiveTableViewController*) archiveTableViewControllerFromDefaultArchive{
     ArchiveTableViewController* rv = [[ArchiveTableViewController alloc] initWithStyle:UITableViewStylePlain];
-    NSString *archiveContent = [NSString stringWithContentsOfFile:
-                                [NSString stringWithCString:archiveFileName encoding:NSASCIIStringEncoding] 
-                                 encoding:NSUTF8StringEncoding error:Nil];
-    NSArray *archiveEntries = [archiveContent componentsSeparatedByString:@"\n"];
-    NSMutableArray *mutableEntries = [[NSMutableArray alloc]init ];
-    for (int i=0; i<[archiveEntries count]; i++){
-        if ([[[archiveEntries objectAtIndex:i] componentsSeparatedByString:@"\t"] count] == 3){
-            [mutableEntries addObject:[archiveEntries objectAtIndex:i]];
-        }
-    }
-    rv.archiveContents = [NSArray arrayWithArray:mutableEntries];
+    rv.archiveContents = [ArchiveEntry loadArchive];
     return rv;
 }
 
@@ -46,19 +37,22 @@
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-	static NSString *rowId = @"myRowId";
-	// Try to retrieve from the table view a now-unused cell with the given identifier.
+	NSString *rowId = [NSString stringWithFormat:@"myRowId_%d", indexPath.row];
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:rowId];
-	// If no cell is available, create a new one using the given identifier.
 	if (cell == nil) {
-		// Use the default cell style.
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rowId] autorelease];
 	}
-    NSString *archiveEntry = [archiveContents objectAtIndex:indexPath.row];
-    NSArray *entrySegments = [archiveEntry componentsSeparatedByString:@"\t"];
-	// Set up the cell.
-	NSString *label = [NSString stringWithFormat:@"%@\n%@", [entrySegments objectAtIndex:0], [entrySegments objectAtIndex:2]];
+    ArchiveEntry *archiveEntry = [archiveContents objectAtIndex:indexPath.row];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:[NSString stringWithCString:archiveDateFormat encoding:NSASCIIStringEncoding]];
+	NSString *label = [NSString stringWithFormat:@"%@ : %@", [dateFormatter stringFromDate:archiveEntry.creationDate], archiveEntry.comments ];
+    [dateFormatter release];
 	cell.textLabel.text = label;
 	return cell;
+}
+
+-(void) tableview: (UITableView*) tableview didSelectRowAtIndexPath:(NSIndexPath*) indexPath{
+//    BoardViewController* boardViewController = [[BoardViewController boardWithSolution:[]
+    return;
 }
 @end

@@ -108,13 +108,17 @@ using namespace cv;
 }
 
 +(int**) ReadBoardFromFile:(NSString*) fileName{
+    NSString *s = [NSString stringWithContentsOfFile:fileName encoding:NSASCIIStringEncoding error:nil];
+    return [cvutil DeserializedBoard:s];
+}
+
++(int**) DeserializedBoard:(NSString*) board{
     int **a;
     a = new int*[9];
     for(int i=0; i<9; i++){
         a[i] = new int[9];
     }
-    NSString *s = [NSString stringWithContentsOfFile:fileName encoding:NSASCIIStringEncoding error:nil];
-    NSArray *rawBoard = [s componentsSeparatedByString:@" "];
+    NSArray *rawBoard = [board componentsSeparatedByString:@" "];
     if ([rawBoard count] != 9){
         return nil;
     }
@@ -132,6 +136,7 @@ using namespace cv;
     }
     return a;
 }
+
 
 +(NSString*) SerializeBoard:(int**)board{
     NSMutableString *rv = [NSMutableString stringWithFormat:@""];

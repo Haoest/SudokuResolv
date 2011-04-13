@@ -21,12 +21,15 @@
 @property(nonatomic, retain) IBOutlet UIView *contentsView;
 @property(nonatomic, retain) IBOutlet UIToolbar *navigationBar;
 
+
+
 @property(nonatomic, assign) bool allowSaving;
 @property(nonatomic, assign) int** board;
 @property(nonatomic, assign) int** solution;
 
 -(void) saveToArchive;
--(void) backToArchive;
+-(void) backToArchiveMenu;
+-(void) backToMainMenu;
 
 +(BoardViewController*) boardWithImage:(UIImage*) board;
 +(BoardViewController*) boardWithSolution:(int**) solution;
@@ -41,4 +44,3 @@
 
 @end
 
-static char archiveFileName[] = "archive.txt";

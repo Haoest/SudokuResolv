@@ -11,7 +11,7 @@
 
 @implementation ArchiveViewController
 @synthesize archiveTableViewController;
-
+@synthesize mainMenu;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,6 +40,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.mainMenu setTarget:self];
+    [self.mainMenu setAction:@selector(backToMainMenu)];
 }
 
 - (void)viewDidUnload
@@ -61,6 +64,10 @@
     rv.archiveTableViewController.view.frame = CGRectMake(0, 44, 328, 416);
     [rv.view addSubview:rv.archiveTableViewController.view];
     return rv;
+}
+
+-(void) backToMainMenu{
+    [self.view removeFromSuperview];
 }
 
 @end

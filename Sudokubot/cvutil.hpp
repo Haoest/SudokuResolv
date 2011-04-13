@@ -20,5 +20,6 @@
 +(IplImage*) GetNormalizedImageFromBlackNWhite:(IplImage*) blackWhiteImage;
 +(int**) ReadBoardFromFile:(NSString*) fileName;
 +(NSString*) SerializeBoard:(int**)board;
++(int**) DeserializedBoard:(NSString*) board;
 
 @end
