@@ -9,16 +9,21 @@
 #import "ArchiveTableViewController.h"
 #import "AppConfig.h"
 #import "ArchiveEntry.h"
+#import "BoardViewController.h"
 
 @implementation ArchiveTableViewController
 
 @synthesize archiveContents;
+
 
 - (void)dealloc
 {
     [super dealloc];
 }
 
+-(void) viewDidLoad{
+    [super viewDidLoad];
+}
 
 +(ArchiveTableViewController*) archiveTableViewControllerFromDefaultArchive{
     ArchiveTableViewController* rv = [[ArchiveTableViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -29,7 +34,6 @@
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
-
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger rv = [archiveContents count]; // exclude last row
@@ -57,8 +61,15 @@
     return archiveCellHeight;
 }
 
--(void) tableview: (UITableView*) tableview didSelectRowAtIndexPath:(NSIndexPath*) indexPath{
-//    BoardViewController* boardViewController = [[BoardViewController boardWithSolution:[]
-    return;
+-(void) tableView: (UITableView*) tableView didSelectRowAtIndexPath:(NSIndexPath*) indexPath{
+    NSArray *archive = [ArchiveEntry loadArchive];
+    NSInteger index = indexPath.row;
+    ArchiveEntry* entry = [archive objectAtIndex:index];
+    BoardViewController *boardViewController = [BoardViewController boardWithArchiveEntry:entry];
+    boardViewController.comments = entry.comments;
+    boardViewController.superArchiveView = self.view.superview;
+    [tableView deselectRowAtIndexPath:indexPath animated:true];
+    [self.view.superview addSubview:boardViewController.view];
 }
+
 @end

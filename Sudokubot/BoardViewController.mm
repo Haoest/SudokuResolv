@@ -19,7 +19,8 @@
 
 @synthesize imageView, commentTextField, contentsView, navigationBar;
 @synthesize saveToArchiveButton, backToArchiveButton, mainMenuButton;
-@synthesize board, solution, allowSaving;
+@synthesize board, solution, allowSaving, comments;
+@synthesize superArchiveView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,8 +51,7 @@
     [super viewDidLoad];
     [self loadBoard];
     [self wireupControls];
-
-    // Do any additional setup after loading the view from its nib.
+    [self.commentTextField setText:self.comments];
 }
 
 -(void) loadBoard{
@@ -67,7 +67,7 @@
         self.navigationBar.items = buttons;
     }else{
         [self.backToArchiveButton setTarget:self];
-        [self.backToArchiveButton setAction:@selector(backToArchive)];
+        [self.backToArchiveButton setAction:@selector(backToArchiveMenu)];
         NSMutableArray *buttons = [[self.navigationBar.items mutableCopy] autorelease];
         [buttons removeObject:saveToArchiveButton];
         self.navigationBar.items = buttons;
@@ -103,7 +103,7 @@
             number[0] = (char) self.solution[i][j]+48;
             number[1] = 0;
             CvScalar color = Scalar(0,0,0);
-            if (self.board[i][j] != 0){
+            if (self.board && self.board[i][j] != 0){
                 color = Scalar(255,0,0);
             }
             cvPutText(img, number, cvPoint(j*32+10, i*31+25), &font, color);
@@ -117,6 +117,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    [self.commentTextField resignFirstResponder];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -133,16 +134,18 @@
     return rv;
 }
 
-+(BoardViewController*) boardWithSolution:(int**) solution{
++(BoardViewController*) boardWithArchiveEntry:(ArchiveEntry *)entry{
     BoardViewController *rv = [[BoardViewController alloc] initWithNibName:@"BoardViewController" bundle:nil];
     int** solutionCopy;
     solutionCopy = new int *[9];
     for (int i=0; i<9; i++){
+        solutionCopy[i] = new int[9];
         for (int j=0; j<9; j++){
-            solutionCopy[i][j] = solution[i][j];
+            solutionCopy[i][j] = entry.sudokuSolution[i][j];
         }
     }
     rv.solution = solutionCopy;
+    [rv.commentTextField setText:entry.comments];
     rv.allowSaving = false;
     return rv;
 }
@@ -160,18 +163,23 @@
     UIView* superview = self.view.superview;
     [self.view removeFromSuperview];
     [superview addSubview:archieveViewController.view];
-    [self.commentTextField resignFirstResponder];
 }
 
 -(void) backToArchiveMenu{
-    
+    [self.view removeFromSuperview];
 }
 
 -(void) backToMainMenu{
+    if (superArchiveView){
+        [superArchiveView removeFromSuperview];
+    }
     [self.view removeFromSuperview];
 }
 
 -(void) textFieldDidBeginEditing:(UITextField *)textField{
+    if (!self.allowSaving){
+        [self.commentTextField resignFirstResponder];
+    }
     [self animateTextField:textField up:YES];
     [self.view bringSubviewToFront:navigationBar];
 }
@@ -189,17 +197,12 @@
 {
     const int movementDistance = 200; // tweak as needed
     const float movementDuration = 0.3f; // tweak as needed
-    
     int movement = (up ? -movementDistance : movementDistance);
-    
     [UIView beginAnimations: @"anim" context: nil];
     [UIView setAnimationBeginsFromCurrentState: YES];
     [UIView setAnimationDuration: movementDuration];
     self.contentsView.frame = CGRectOffset(self.contentsView.frame, 0, movement);
     [UIView commitAnimations];
 }
-
-
-
 
 @end

@@ -14,6 +14,7 @@
 #import "solver.hpp"
 #import "BoardViewController.h"
 #import "ArchiveViewController.h"
+#import "AppConfig.h"
 
 @implementation SudokubotViewController
 
@@ -48,6 +49,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+        [btnCaptureFromCamera setEnabled:NO];
+        [btnCaptureFromCamera setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    }
 }
 
 - (void)viewDidUnload
@@ -72,12 +77,39 @@
     }
 }
 
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self reevaluateClipboardButton];
+}
+
+- (void) reevaluateClipboardButton{
+    UIPasteboard *pb = [UIPasteboard generalPasteboard];
+    UIImage *img = pb.image;
+    static UIColor* originalColor;
+    if (!img){
+        [btnOpenFromClipboard setEnabled:NO];
+        originalColor = btnOpenFromClipboard.currentTitleColor;
+        [btnOpenFromClipboard setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    }
+    else{
+        if (originalColor){
+            [btnOpenFromClipboard setTitleColor:originalColor forState:UIControlStateNormal];
+        }
+        [btnOpenFromClipboard setEnabled:YES];
+    }
+}
+
 -(IBAction) btnHelp_touchDown{
 
 }
 
 -(IBAction) btnOpenFromClipboard_touchDown{
-
+    UIPasteboard *pb = [UIPasteboard generalPasteboard];
+    UIImage *board = pb.image;
+    if (board){
+        BoardViewController *boardViewController = [BoardViewController boardWithImage:board];
+        [self.view addSubview:boardViewController.view];
+    }
 }
 
 -(IBAction) btnArchive_touchDown{

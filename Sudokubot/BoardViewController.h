@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ArchiveEntry.h"
 
 @interface BoardViewController : UIViewController<UITextFieldDelegate> {
 
@@ -21,18 +21,20 @@
 @property(nonatomic, retain) IBOutlet UIView *contentsView;
 @property(nonatomic, retain) IBOutlet UIToolbar *navigationBar;
 
-
+//superArchiveView points to the archive view object which creates this board view
+@property(nonatomic, retain) UIView* superArchiveView;
 
 @property(nonatomic, assign) bool allowSaving;
 @property(nonatomic, assign) int** board;
 @property(nonatomic, assign) int** solution;
+@property(nonatomic, retain) NSString *comments;
 
 -(void) saveToArchive;
 -(void) backToArchiveMenu;
 -(void) backToMainMenu;
 
 +(BoardViewController*) boardWithImage:(UIImage*) board;
-+(BoardViewController*) boardWithSolution:(int**) solution;
++(BoardViewController*) boardWithArchiveEntry:(ArchiveEntry*) entry;
 
 -(void) loadBoard;
 -(UIImage*) drawGrids;
@@ -41,6 +43,7 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField;
 //- (void) scrollContentForKeyboard:(UITextField*) textField up:(bool) up;
 - (void) animateTextField: (UITextField*) textField up: (BOOL) up;
+
 
 @end
 

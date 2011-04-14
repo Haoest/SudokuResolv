@@ -29,5 +29,6 @@
 -(IBAction) btnArchive_touchDown;
 -(IBAction) btnHelp_touchDown;
 
+- (void) reevaluateClipboardButton;
 
 @end
