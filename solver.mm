@@ -7,7 +7,7 @@
 //
 
 #import "solver.hpp"
-
+#import "cvutil.hpp"
 
 using namespace std;
 
@@ -30,8 +30,10 @@ using namespace std;
 }
 
 +(solver*) solverWithImage: (UIImage*) imageBoard{
+    IplImage *boardImg = [cvutil CreateIplImageFromUIImage:imageBoard];
     int** _board;
-    _board = ParseFromImage(imageBoard);
+    _board = recognizeBoardFromPhoto(boardImg);
+    cvReleaseImage(&boardImg);
     return [solver solverWithPartialBoard:_board];
 }
 

@@ -16,10 +16,12 @@
 }
 +(IplImage *) CreateIplImageFromUIImage: (UIImage*) image;
 +(UIImage*) CreateUIImageFromIplImage: (IplImage*) image;
-+(IplImage*) LoadPbmAsIplImage: (NSString*) fileName;
 +(IplImage*) GetNormalizedImageFromBlackNWhite:(IplImage*) blackWhiteImage;
 +(int**) ReadBoardFromFile:(NSString*) fileName;
 +(NSString*) SerializeBoard:(int**)board;
 +(int**) DeserializedBoard:(NSString*) board;
++(IplImage*) LoadUIImageAsIplImage: (NSString*) fileName asGrayscale:(BOOL) asGrayscale;
 
 @end
+
+

@@ -8,9 +8,9 @@
 
 #import <opencv2/core/core.hpp>
 #import "SudokubotViewController.h"
-#import "PuzzleParser.hpp"
+#import "boardRecognizer.h"
 #import "basicOCR.hpp"
-#import "preprocessing.hpp"
+#import "preprocessing.h"
 #import "solver.hpp"
 #import "BoardViewController.h"
 #import "ArchiveViewController.h"

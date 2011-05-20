@@ -9,7 +9,7 @@
 #import <opencv2/core/core.hpp>
 #import "cvutil.hpp"
 #import "solver.hpp"
-#import "PuzzleParser.hpp"
+#import "boardRecognizer.h"
 #import "BoardViewController.h"
 #import "ArchiveViewController.h"
 #import "AppConfig.h"
@@ -102,9 +102,9 @@
             char *number = new char[2];
             number[0] = (char) self.solution[i][j]+48;
             number[1] = 0;
-            CvScalar color = Scalar(0,0,0);
+            CvScalar color = cvScalar(0,0,0);
             if (self.board && self.board[i][j] != 0){
-                color = Scalar(255,0,0);
+                color = cvScalar(255,0,0);
             }
             cvPutText(img, number, cvPoint(j*32+10, i*31+25), &font, color);
         }
@@ -128,7 +128,9 @@
 
 +(BoardViewController*) boardWithImage:(UIImage*) boardAsImage{
     BoardViewController *rv = [[BoardViewController alloc] initWithNibName:@"BoardViewController" bundle:nil];
-    rv.board = ParseFromImage(boardAsImage);
+    IplImage *boardIpl = [cvutil CreateIplImageFromUIImage:boardAsImage];
+    rv.board = recognizeBoardFromPhoto(boardIpl);
+    cvReleaseImage(&boardIpl);
     rv.solution = [[solver solverWithPartialBoard:rv.board] trySolve];
     rv.allowSaving = true;
     return rv;

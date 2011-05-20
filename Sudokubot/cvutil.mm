@@ -69,6 +69,19 @@ using namespace cv;
     return ret;  
 }
 
++(IplImage*) LoadUIImageAsIplImage: (NSString*) fileName asGrayscale:(BOOL) asGrayscale{
+    UIImage *img = [UIImage imageNamed:fileName];
+    IplImage *rv = [cvutil CreateIplImageFromUIImage:img];
+    if (asGrayscale){
+        IplImage *gray = cvCreateImage(cvGetSize(rv), 8, 1);
+        cvCvtColor(rv, gray, CV_BGR2GRAY);
+        cvReleaseImage(&rv);
+        rv = gray;
+    }
+    [img release];
+    return rv;
+}
+
 +(IplImage*) LoadPbmAsIplImage: (NSString*) fileName{
     int firstLineOfImageData = 5;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"pbm"];

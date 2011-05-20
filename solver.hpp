@@ -6,7 +6,7 @@
 //  Copyright 2011 none. All rights reserved.
 //
 
-#import "PuzzleParser.hpp"
+#import "boardRecognizer.h"
 #import <set>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
