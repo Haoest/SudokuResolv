@@ -11,6 +11,8 @@
 #import "SudokubotTests.hpp"
 #import "BoardViewController.h"
 #import "AppConfig.h"
+#import "boardRecognizer.h"
+#import "cvutil.hpp"
 
 //using namespace std;
 
@@ -46,8 +48,9 @@
 }
 
 -(void) testReadBoard{
-    UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"puzzle1.png"]];
-    int** detectedBoard = ParseFromImage(img);
+//    UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"puzzle1.png"]];
+    IplImage *img = [cvutil LoadUIImageAsIplImage:@"puzzle1.png" asGrayscale:false];
+    int** detectedBoard = recognizeBoardFromPhoto(img);
     int ** actualBoard = getBoard();
     for(int i=0; i<9; i++){
         for(int j=0; j<9; j++){
@@ -88,7 +91,10 @@
     solver* s = [solver solverWithImage:[UIImage imageNamed:@"puzzle1.png"]];
     NSString *solution = [cvutil SerializeBoard:[s trySolve]];
     STAssertTrue([archiveContent rangeOfString:solution].length >0, @"archive file should contain serialized representation of the borad");
+}
 
+-(void) testRunAllBoardRecognizerTests{
+    runAllBoardRecognizerTests();
 }
 
 int** getBoard(){

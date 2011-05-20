@@ -6,12 +6,10 @@
 //  Copyright 2011 none. All rights reserved.
 //
 
-
-#import "PuzzleParser.hpp"
 #import <set>
 #import "solver.hpp"
 #import <SenTestingKit/SenTestingKit.h>
-
+#import "boardRecognizerTests.hpp"
 
 @interface SudokubotTests : SenTestCase {
 @private
