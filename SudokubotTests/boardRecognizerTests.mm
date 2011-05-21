@@ -426,10 +426,6 @@ void checkResult(int **solution, recognizerResultPack recog){
 		}
 	}
 	checkResult(solution2, recog);
-	for(int i=0; i<9; i++){
-		delete solution[i];
-	}
-	delete solution;
 }
 
 void checkResult(int solution[][9], recognizerResultPack recog){
@@ -471,9 +467,6 @@ void checkResult(int solution[][9], recognizerResultPack recog){
 		}
 	}
 	printf("\ttotal mistakes: %d\tAccuracy: %0.1f%%\n", totalWrong, ((double)totalRight)/(totalWrong+totalRight)*100);
-	for(int i=0; i<9; i++) delete ocrGuesses[i];
-	delete ocrGuesses;
-    cvReleaseImage(&recog.boardGray); 
 }
 
 int** loadStringAsBoard(char boardAsString[89]){
@@ -497,3 +490,47 @@ IplImage *cvLoadImage(char fileName[255]){
     NSString* fn = [NSString stringWithCString:fileName encoding:NSASCIIStringEncoding];
     return [cvutil LoadUIImageAsIplImage:fn asGrayscale:false];
 }
+
+testPack::testPack(char InputFile[255], int**Hints, int**GameSolution){
+    for(int i=0; i<255; i++){
+        inputFile[i] = InputFile[i];
+    }
+    hints = Hints;
+    gameSolution = GameSolution;
+}
+
+testPack::~testPack(){
+    for(int i=0; i<9; i++){
+        if (hints) delete hints[i];
+        if (gameSolution) delete gameSolution[i];
+    }
+    if (hints){
+        delete hints;
+        hints = 0;
+    }
+    if (gameSolution) {
+        delete gameSolution;
+        gameSolution = 0;
+    }
+}
+
+boardRecognizerTests::boardRecognizerTests(){
+    tests.push_back(new testPack("camera_book2_1.jpg", loadStringAsBoard("050609030 210000065 400000007 003941600 000000000 004728500 300000006 160000078 080305020")));
+    tests.push_back(new testPack("iphone_ss3.png", loadStringAsBoard("000000700 150408900 640090815 070900008 000184000 800006090 724030081 009607032 001000000")));
+}
+
+boardRecognizerTests::~boardRecognizerTests(){
+    
+}
+
+void boardRecognizerTests::runAll(){
+    list<testPack*>::iterator it;
+    for(it = tests.begin(); it!= tests.end(); it++){
+        IplImage *img = cvLoadImage( (*it)->inputFile );
+        recognizerResultPack res = recognizeBoardFromPhoto(img);
+        checkResult((*it)->hints, res);
+        cvReleaseImage(&img);
+    }
+}
+
+
