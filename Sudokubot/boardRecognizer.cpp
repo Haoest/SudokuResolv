@@ -1,6 +1,5 @@
 
 
-#include <vector>
 #include <algorithm>
 #include "BoardRecognizer.h"
 //#include "highgui\highgui_c.h"
@@ -74,26 +73,29 @@ const double InputImageNormalizeLength = 800;
 static int BoardThresholdCandidateSize  = 12;
 static int BoardThresholdCandidates[] = {1,5, 10,20, 30,40, 50,60, 70,80, 90,100};
 
-int** recognizeBoardFromPhoto(IplImage *imageInput){
+recognizerResultPack recognizeBoardFromPhoto(IplImage *imageInput){
+    recognizerResultPack rv;
+    rv.boardGray = 0;
+    rv.boardArr = 0;
 	int backgroundThresholdMark;
 	IplImage *board = findSudokuBoard(imageInput, backgroundThresholdMark);
 	if (!board){
-		return 0;
+		return rv;
 	}
-	int **rv = 0;
 	rv = recognizeFromBoard(board, backgroundThresholdMark);
-	cvReleaseImage(&board);
 	return rv;
 }
 
-int ** recognizeFromBoard(IplImage *boardGray, int initialBoardThreshold){
+recognizerResultPack recognizeFromBoard(IplImage *boardGray, int initialBoardThreshold){
+    recognizerResultPack rv;
 	vector<CvRect> grids;
 	grids = findGridsByThreshold(boardGray, initialBoardThreshold);
-	int ** rv= 0;
 	if (grids.size() == 81){
 		grids = getSortedGridsByCoord(grids);
-		rv = extractNumbersFromBoard(boardGray, grids);
+		rv.boardArr = extractNumbersFromBoard(boardGray, grids);
 	}
+    rv.boardGray = boardGray;
+    rv.grids = grids;
 	return rv;
 }
 

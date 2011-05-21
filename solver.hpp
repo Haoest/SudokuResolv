@@ -24,7 +24,7 @@ using namespace std;
 //return null if no solution
 -(int**) trySolve;
 bool trySolveRecursively(int** currentBoard, set<int> boxSpace[9][9], int boxIndex);
-bool isUniqueInRowAndColumn(int ** currentBoard, int boxValue, int boxIndex);
+bool isUniqueInRowColumnUnit(int ** currentBoard, int boxValue, int boxIndex);
 set<int> getBoxSampleSpace(int** currentBoard, int i, int j);
 set<int> getBagOfNine();
 bool verifySolution(int** currentBoard);

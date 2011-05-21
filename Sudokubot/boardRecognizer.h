@@ -5,14 +5,20 @@
 //#include "opencv2/highgui/highgui.hpp"
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/core/core.hpp>
+#include <vector>
 
-#include <map>
 
 #ifndef BOARDRECOGNIZER_H
 #define BOARDRECOGNIZER_H
 
-int** recognizeBoardFromPhoto(IplImage *imageInput);
-int ** recognizeFromBoard(IplImage *boardGray, int initialBoardThreshold);
+struct recognizerResultPack{
+    IplImage *boardGray;
+    int ** boardArr;
+    std::vector<CvRect> grids;
+};
+
+recognizerResultPack recognizeBoardFromPhoto(IplImage *imageInput);
+recognizerResultPack recognizeFromBoard(IplImage *boardGray, int initialBoardThreshold);
 
 // given original image as input, find the image containing just the board as gray scale image
 IplImage* findSudokuBoard(IplImage *fullSrc, int &backgroundThresholdUsed);

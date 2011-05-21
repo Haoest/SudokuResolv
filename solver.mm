@@ -15,6 +15,22 @@ using namespace std;
 
 @synthesize board;
 
+int boardUnitIndexes[9][9] = {
+    {0,1,2, 9, 10, 11, 18, 19, 20},
+    {3,4,5, 12,13, 14, 21, 22, 23},
+    {6,7,8, 15,16, 17, 24, 25, 26},
+    
+    {27,28,29, 36,37,38, 45,46,47},
+    {30,31,32, 39,40,41, 48,49,50},
+    {33,34,35, 42,43,44, 51,52,53},
+    
+    {54,55,56, 63,64,65, 72,73,74},
+    {57,58,59, 66,67,68, 75,76,77},
+    {60,61,62, 69,70,71, 78,79,80}};
+
+int * getUnitSequence(int row, int column);
+
+
 +(solver*) solverWithPartialBoard: (int**) partialBoard{
     solver *rv = [[solver alloc] init];
     rv.board = new int*[9];
@@ -31,10 +47,9 @@ using namespace std;
 
 +(solver*) solverWithImage: (UIImage*) imageBoard{
     IplImage *boardImg = [cvutil CreateIplImageFromUIImage:imageBoard];
-    int** _board;
-    _board = recognizeBoardFromPhoto(boardImg);
+    recognizerResultPack recog = recognizeBoardFromPhoto(boardImg);
     cvReleaseImage(&boardImg);
-    return [solver solverWithPartialBoard:_board];
+    return [solver solverWithPartialBoard:recog.boardArr];
 }
 
 //return null if no solution
@@ -60,7 +75,7 @@ bool trySolveRecursively(int** currentBoard, set<int> boxSpace[9][9], int boxInd
         return trySolveRecursively(currentBoard, boxSpace, boxIndex+1);
     }
     for(set<int>::iterator it = curBox.begin(); it != curBox.end(); it++){
-        if (isUniqueInRowAndColumn(currentBoard, *it, boxIndex)){
+        if (isUniqueInRowColumnUnit(currentBoard, *it, boxIndex)){
             currentBoard[boxIndex/9][boxIndex%9] = *it;
             if (trySolveRecursively(currentBoard, boxSpace, boxIndex+1)){
                 return true;
@@ -71,12 +86,22 @@ bool trySolveRecursively(int** currentBoard, set<int> boxSpace[9][9], int boxInd
     return false;
 }
 
-bool isUniqueInRowAndColumn(int** currentBoard, int boxValue, int boxIndex){
+bool isUniqueInRowColumnUnit(int** currentBoard, int boxValue, int boxIndex){
+    int row = boxIndex /9;
+    int column = boxIndex %9;
+    int *unitSequence = getUnitSequence(row, column);
     for (int i=0; i<9; i++){
-        if (currentBoard[boxIndex/9][i] == boxValue){
+        //row
+        if (currentBoard[row][i] == boxValue){
             return false;
         }
-        if (currentBoard[i][boxIndex%9] == boxValue){
+        //column
+        if (currentBoard[i][column] == boxValue){
+            return false;
+        }
+        //unit
+        int ordinalIndex = unitSequence[i];
+        if (currentBoard[ordinalIndex/9][ordinalIndex%9] == boxValue){
             return false;
         }
     }
@@ -98,19 +123,31 @@ set<int> getBoxSampleSpace(int **currentBoard, int rowPosition, int columnPositi
             rv.erase( it );
         }
     }
+    int *unitSequence = getUnitSequence(rowPosition, columnPosition);
+    for(int i=0; i<9; i++){
+        int ordinalIndex = unitSequence[i];
+        rv.erase(currentBoard[ordinalIndex/9][ordinalIndex%9]);
+    }
     return rv;
 }
 
 bool verifySolution(int** currentBoard){
     for (int i=0; i<9; i++){
-        for(int j=0; j<9; j++){
-            for (int k=0; k<9; k++){
+        for(int j=0; j<8; j++){
+            int *unitSequence = boardUnitIndexes[i];
+            for (int k=j+1; k<9; k++){
                 // horizontal check
-                if (k != j && currentBoard[i][k] == currentBoard[i][j]){
+                if (currentBoard[i][k] == currentBoard[i][j]){
                     return false;
                 }
                 // vertical
-                if (k != i && currentBoard[k][j] == currentBoard[i][j]){
+                if (currentBoard[k][i] == currentBoard[j][i]){
+                    return false;
+                }
+                // unit
+                int ordinalIndex_j = unitSequence[j];
+                int ordinalIndex_k = unitSequence[k];
+                if (currentBoard[ordinalIndex_j/9][ordinalIndex_j%9] == currentBoard[ordinalIndex_k/9][ordinalIndex_k%9]){
                     return false;
                 }
             }
@@ -144,6 +181,12 @@ set<int> getBagOfNine(){
         delete board[i];
     }
     delete board;
+}
+
+int* getUnitSequence(int row, int column){
+    int r = row/3;
+    int c = column/3;
+    return boardUnitIndexes[r*3+c];
 }
 
 @end
