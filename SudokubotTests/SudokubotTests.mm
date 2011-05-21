@@ -32,6 +32,10 @@
     [super tearDown];
 }
 
+-(void) testUploadPhotoToPhone{
+ 
+}
+
 - (void)testSet
 {
     set<int> a;
@@ -50,11 +54,12 @@
 -(void) testReadBoard{
 //    UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"puzzle1.png"]];
     IplImage *img = [cvutil LoadUIImageAsIplImage:@"puzzle1.png" asGrayscale:false];
-    int** detectedBoard = recognizeBoardFromPhoto(img);
+    recognizerResultPack recog;
+    recog = recognizeBoardFromPhoto(img);
     int ** actualBoard = getBoard();
     for(int i=0; i<9; i++){
         for(int j=0; j<9; j++){
-            STAssertTrue(detectedBoard[i][j] == actualBoard[i][j], @"%d %d", i, j);
+            STAssertTrue(recog.boardArr[i][j] == actualBoard[i][j], @"%d %d", i, j);
         }
     }
 }
@@ -62,13 +67,13 @@
 -(void) testGetBoxSampleSpace{
     int** board = getBoard();
     solver *s = [solver solverWithPartialBoard:board];
-    STAssertTrue(isUniqueInRowAndColumn(board, 1, 2), @"0 2");
-    STAssertFalse(isUniqueInRowAndColumn(board, 1, 4), @"0 3");
-    STAssertTrue(isUniqueInRowAndColumn(board, 1, 18), @"");
-    STAssertFalse(isUniqueInRowAndColumn(board, 6, 28), @"");
-    STAssertFalse(isUniqueInRowAndColumn(board, 9, 28),@"");
-    STAssertFalse(isUniqueInRowAndColumn(board, 8, 28),@"");
-    STAssertFalse(isUniqueInRowAndColumn(board, 3, 28), @"");
+    STAssertTrue(isUniqueInRowColumnUnit(board, 1, 2), @"0 2");
+    STAssertFalse(isUniqueInRowColumnUnit(board, 1, 4), @"0 3");
+    STAssertTrue(isUniqueInRowColumnUnit(board, 1, 18), @"");
+    STAssertFalse(isUniqueInRowColumnUnit(board, 6, 28), @"");
+    STAssertFalse(isUniqueInRowColumnUnit(board, 9, 28),@"");
+    STAssertFalse(isUniqueInRowColumnUnit(board, 8, 28),@"");
+    STAssertFalse(isUniqueInRowColumnUnit(board, 3, 28), @"");
 }
 
 -(void) testSaveBoardToArchive{
