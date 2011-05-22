@@ -18,8 +18,9 @@ using namespace std;
 }
 @property (nonatomic) int** board;
            
-+(solver*) solverWithPartialBoard: (int**) partialBoard;
++(solver*) solverWithHints: (int**) hints;
 +(solver*) solverWithImage: (UIImage*) imageBoard;
++(bool) verifySolution: (int**) completedBoard;
 
 //return null if no solution
 -(int**) trySolve;
@@ -27,5 +28,4 @@ bool trySolveRecursively(int** currentBoard, set<int> boxSpace[9][9], int boxInd
 bool isUniqueInRowColumnUnit(int ** currentBoard, int boxValue, int boxIndex);
 set<int> getBoxSampleSpace(int** currentBoard, int i, int j);
 set<int> getBagOfNine();
-bool verifySolution(int** currentBoard);
 @end

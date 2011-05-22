@@ -31,7 +31,7 @@ int boardUnitIndexes[9][9] = {
 int * getUnitSequence(int row, int column);
 
 
-+(solver*) solverWithPartialBoard: (int**) partialBoard{
++(solver*) solverWithHints: (int**) hints{
     solver *rv = [[solver alloc] init];
     rv.board = new int*[9];
     for (int i=0; i<9; i++){
@@ -39,7 +39,7 @@ int * getUnitSequence(int row, int column);
     }
     for (int i=0; i<9; i++){
         for(int j=0; j<9; j++){
-            rv.board[i][j] = partialBoard[i][j];
+            rv.board[i][j] = hints[i][j];
         }
     }
     return rv;
@@ -49,7 +49,7 @@ int * getUnitSequence(int row, int column);
     IplImage *boardImg = [cvutil CreateIplImageFromUIImage:imageBoard];
     recognizerResultPack recog = recognizeBoardFromPhoto(boardImg);
     cvReleaseImage(&boardImg);
-    return [solver solverWithPartialBoard:recog.boardArr];
+    return [solver solverWithHints:recog.boardArr];
 }
 
 //return null if no solution
@@ -131,27 +131,36 @@ set<int> getBoxSampleSpace(int **currentBoard, int rowPosition, int columnPositi
     return rv;
 }
 
-bool verifySolution(int** currentBoard){
++(bool) verifySolution: (int**) completedBoard{
     for (int i=0; i<9; i++){
         for(int j=0; j<8; j++){
             int *unitSequence = boardUnitIndexes[i];
             for (int k=j+1; k<9; k++){
                 // horizontal check
-                if (currentBoard[i][k] == currentBoard[i][j]){
+                if (completedBoard[i][k] == completedBoard[i][j]){
                     return false;
                 }
                 // vertical
-                if (currentBoard[k][i] == currentBoard[j][i]){
+                if (completedBoard[k][i] == completedBoard[j][i]){
                     return false;
                 }
                 // unit
                 int ordinalIndex_j = unitSequence[j];
                 int ordinalIndex_k = unitSequence[k];
-                if (currentBoard[ordinalIndex_j/9][ordinalIndex_j%9] == currentBoard[ordinalIndex_k/9][ordinalIndex_k%9]){
+                if (completedBoard[ordinalIndex_j/9][ordinalIndex_j%9] == completedBoard[ordinalIndex_k/9][ordinalIndex_k%9]){
                     return false;
                 }
             }
         }
+    }
+    for(int i=0; i<9; i++){
+        for(int j=0; j<9; j++){
+            int gridValue = completedBoard[i][j];
+            if (gridValue <= 0 || gridValue > 9){
+                return false;
+            }
+        }
+    
     }
     return true;
 }
@@ -177,10 +186,14 @@ set<int> getBagOfNine(){
 - (void)dealloc
 {
     [super dealloc];
-    for (int i=0; i<9; i++){
-        delete board[i];
+    if (board){
+        for (int i=0; i<9; i++){
+            delete board[i];
+        }
+        delete board; 
+        board = 0;
     }
-    delete board;
+
 }
 
 int* getUnitSequence(int row, int column){

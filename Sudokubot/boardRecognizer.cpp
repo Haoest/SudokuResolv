@@ -217,9 +217,9 @@ vector<CvRect> getAllGrids(IplImage *boardBinary){
 	cvReleaseImage(&gameBoardScrap);
 	CvSeq * cur = contour;
 	int gridIndex = 0;
-	int widthLB = boardBinary->width / 9 /2;
+	int widthLB = MAX(boardBinary->width / 9 /2, 10);
 	int widthUB = boardBinary->width / 7;
-	int heightLB = boardBinary->height / 9 /2;
+	int heightLB = MAX(boardBinary->height / 9 /2, 10);
 	int heightUB = boardBinary->height /7;
 	while(cur){
 		if (cur->total >=4){
