@@ -2,17 +2,16 @@
 
 using namespace std;
 
-void runAllBoardRecognizerTests();
+int** loadStringAsBoard(char boardAsString[89]);
 
 struct testPack{
-    testPack(char InputFile[255], int**Hints, int**GameSolution=0);
-    ~testPack();
-    char inputFile[255];
-    int **hints;
-    int **gameSolution;
+    testPack(char InputFile[50], char boardHintAsString[89]);
+    char inputFile[50];
+    char hints[89];
 };
 
-struct boardRecognizerTests{
+class boardRecognizerTests{
+public:
     boardRecognizerTests();
     ~boardRecognizerTests();
     void runAll();

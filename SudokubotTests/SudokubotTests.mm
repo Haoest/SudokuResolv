@@ -66,7 +66,7 @@
 
 -(void) testGetBoxSampleSpace{
     int** board = getBoard();
-    solver *s = [solver solverWithPartialBoard:board];
+    solver *s = [solver solverWithHints:board];
     STAssertTrue(isUniqueInRowColumnUnit(board, 1, 2), @"0 2");
     STAssertFalse(isUniqueInRowColumnUnit(board, 1, 4), @"0 3");
     STAssertTrue(isUniqueInRowColumnUnit(board, 1, 18), @"");
@@ -98,8 +98,35 @@
     STAssertTrue([archiveContent rangeOfString:solution].length >0, @"archive file should contain serialized representation of the borad");
 }
 
+-(void) testSolver{
+    boardRecognizerTests t;
+    int verificaitonCount = 0;
+    for(list<testPack*>::iterator it = t.tests.begin(); it!=t.tests.end(); it++){
+        int** hints = loadStringAsBoard((*it)->hints);
+        solver *s = [solver solverWithHints:hints];
+        int ** solution = [s trySolve];
+        if (solution){
+            bool isSolved = [solver verifySolution:solution];
+            STAssertTrue(isSolved, [NSString stringWithFormat:@"testSolver: solver made a mistake for test %s", (*it)->inputFile]);    
+            if (isSolved){
+                verificaitonCount ++;
+            }
+        }else{
+            NSLog([NSString stringWithFormat:@"testSolver: %s has no solution", (*it)->inputFile]);
+        }
+        
+        for(int i=0; i<9; i++){
+            delete hints[i];
+        }
+        delete hints;        
+        [s release];
+    }
+    NSLog([NSString stringWithFormat:@"testSolver: %d solutions tested, %d verified", t.tests.size(), verificaitonCount]);
+}
+
 -(void) testRunAllBoardRecognizerTests{
-    runAllBoardRecognizerTests();
+    boardRecognizerTests t;
+    t.runAll();
 }
 
 int** getBoard(){
