@@ -129,9 +129,10 @@
 +(BoardViewController*) boardWithImage:(UIImage*) boardAsImage{
     BoardViewController *rv = [[BoardViewController alloc] initWithNibName:@"BoardViewController" bundle:nil];
     IplImage *boardIpl = [cvutil CreateIplImageFromUIImage:boardAsImage];
-    rv.board = recognizeBoardFromPhoto(boardIpl);
+    recognizerResultPack recog = recognizeBoardFromPhoto(boardIpl);
+    rv.board = recog.boardArr;
     cvReleaseImage(&boardIpl);
-    rv.solution = [[solver solverWithPartialBoard:rv.board] trySolve];
+    rv.solution = [[solver solverWithHints:rv.board] trySolve];
     rv.allowSaving = true;
     return rv;
 }
