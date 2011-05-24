@@ -13,11 +13,13 @@
     NSMutableDictionary* allEntries;
 }
 -(id) initDefaultArchive;
--(ArchiveEntry*) getEntryById:(NSString*) entryId;
--(void) addEntry:(ArchiveEntry*) entry;
--(void) removeEntry:(NSString*) entryId;
+-(ArchiveEntry*) getEntryById:(int) entryId;
+-(int) addEntry:(ArchiveEntry*) entry;
+-(void) updateEntry:(ArchiveEntry*) entry;
+-(void) removeEntry:(int) entryId;
 -(bool) saveArchive;
 -(NSArray*) getAllEntries;
+-(int) getNextEntryId;
 
-NSInteger sortArchiveEntryByCreationDate(id entryId1, id entryId2, void *reverse);
+//NSInteger sortArchiveEntryByCreationDate(id entry1, id entry2, void *reverse);
 @end

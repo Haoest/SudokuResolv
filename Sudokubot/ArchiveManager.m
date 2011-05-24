@@ -6,6 +6,8 @@
 //  Copyright 2011 none. All rights reserved.
 //
 
+//first entry id is 1
+
 #import "ArchiveManager.h"
 #import "ArchiveEntry.h"
 #import "AppConfig.h"
@@ -20,17 +22,41 @@
     return self;
 }
 
--(ArchiveEntry*) getEntryById:(NSString*) entryId{
-    return [ArchiveEntry archiveEntryWithArchiveString: [allEntries objectForKey:entryId]];
+-(ArchiveEntry*) getEntryById:(int) entryId{
+    NSString *key = [NSString stringWithFormat:@"%d", entryId];
+    NSString *rv = [allEntries objectForKey:key];
+    if (!rv){
+        return nil;
+    }
+    return [ArchiveEntry archiveEntryWithArchiveString: rv];
 }
 
--(void) addEntry:(ArchiveEntry*) entry{
-    id key = entry.entryId;
-    [allEntries setObject:[entry toArchiveString] forKey:key];
+-(int) addEntry:(ArchiveEntry*) entry{
+    int entryId = entry.entryId;
+    if (entryId == -1){
+        entryId = [self getNextEntryId];
+    }else{
+        return -1;
+    }
+    entry.entryId = entryId;
+    NSString *key = [NSString stringWithFormat:@"%d", entryId];
+    NSString *value = [entry toArchiveString];
+    [allEntries setObject:value forKey:key];
+    return entryId;
 }
 
--(void) removeEntry:(NSString*) entryId{
-    [allEntries removeObjectForKey:entryId];
+-(void) updateEntry:(ArchiveEntry*) entry{
+    if (entry.entryId <0){
+        return;
+    }
+    NSString *value = [entry toArchiveString];
+    NSString *key = [NSString stringWithFormat:@"%d", [entry entryId]];
+    [allEntries setValue:value forKey:key];
+}
+
+-(void) removeEntry:(int) entryId{
+    NSString *key = [NSString stringWithFormat:@"%d", entryId];
+    [allEntries removeObjectForKey:key];
 }
 
 -(bool) saveArchive{
@@ -43,14 +69,19 @@
     for(NSString* entry in [allEntries allValues]){
         [rv addObject:[ArchiveEntry archiveEntryWithArchiveString:entry]];
     }
-    return [rv sortedArrayUsingFunction:sortArchiveEntryByCreationDate context:false];
+    NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"secondsSince1970" ascending:NO] autorelease];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    return [rv sortedArrayUsingDescriptors:sortDescriptors];
 }
 
-NSInteger sortArchiveEntryByCreationDate(id entryId1, id entryId2, void *reverse){
-    if (*(BOOL *)reverse){
-        return [entryId2 doubleValue] > [entryId1 doubleValue];
+-(int) getNextEntryId{
+    int rv = 0;
+    for(NSNumber* key in [allEntries allKeys]){
+        if ([key intValue] > rv){
+            rv = [key intValue];
+        }
     }
-    return [entryId1 doubleValue] > [entryId2 doubleValue];
+    return rv+1;
 }
 
 @end
