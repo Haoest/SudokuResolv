@@ -139,15 +139,7 @@
 
 +(BoardViewController*) boardWithArchiveEntry:(ArchiveEntry *)entry{
     BoardViewController *rv = [[BoardViewController alloc] initWithNibName:@"BoardViewController" bundle:nil];
-    int** solutionCopy;
-    solutionCopy = new int *[9];
-    for (int i=0; i<9; i++){
-        solutionCopy[i] = new int[9];
-        for (int j=0; j<9; j++){
-            solutionCopy[i][j] = entry.sudokuSolution[i][j];
-        }
-    }
-    rv.solution = solutionCopy;
+    rv.solution = [cvutil DeserializedBoard: [entry sudokuSolution] ];
     [rv.commentTextField setText:entry.comments];
     rv.allowSaving = false;
     return rv;

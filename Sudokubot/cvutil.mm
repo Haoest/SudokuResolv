@@ -163,4 +163,21 @@ using namespace cv;
     return [NSString stringWithString:rv];
 }
 
++(int**) loadStringAsBoard: (char[89]) boardAsString{
+	int **rv = new int*[9];
+	for(int i=0; i<9; i++){
+		rv[i] = new int[9];
+	}
+	int index = 0;
+	int stringIndexOffset = 0;
+	while(index<81){
+		rv[index/9][index%9] = boardAsString[index + stringIndexOffset] - 48;
+		index ++;
+		if (index%9==0){
+			stringIndexOffset ++;
+		}
+	}
+	return rv;
+}
+
 @end

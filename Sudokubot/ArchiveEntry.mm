@@ -8,70 +8,47 @@
 
 #import "cvutil.hpp"
 #import "AppConfig.h"
-#import "ArchiveEntry.h"
+#import "archiveEntry.h"
 
 @implementation ArchiveEntry
 
-@synthesize creationDate, comments, sudokuSolution;
+@synthesize comments, sudokuSolution, sudokuHints, entryId;
 
-+(ArchiveEntry*) archiveEntryWithValues:(NSString*)creationDateString comments:(NSString*)comments solutionString:(NSString*)serializedSolutionString {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:[NSString stringWithCString:archiveDateFormat encoding:NSASCIIStringEncoding]];
++(ArchiveEntry*) archiveEntryWithValues:(NSString*)entryId
+                         solutionString:(NSString*) solutionAsString 
+                             hintString: (NSString*) hintsAsString
+                               comments:(NSString*)comments{
     ArchiveEntry* rv = [[ArchiveEntry alloc] init];
-    rv.creationDate = [dateFormatter dateFromString:creationDateString];
+    rv.entryId = entryId;
     rv.comments = comments;
-    rv.sudokuSolution = [cvutil DeserializedBoard:serializedSolutionString];
+    rv.sudokuSolution = solutionAsString;
+    rv.sudokuHints = hintsAsString;
     return rv;
 }
 
-+(NSArray*) loadArchive{
-    NSMutableArray* rv = [NSMutableArray arrayWithCapacity:0];
-    NSString *archiveContent = [NSString stringWithContentsOfFile:
-                                [NSString stringWithCString:archiveFileName encoding:NSASCIIStringEncoding] 
-                                encoding:NSUTF8StringEncoding error:Nil];
-    NSArray *archiveEntries = [archiveContent componentsSeparatedByString:@"\n"];
-    for (int i=0; i<[archiveEntries count]; i++){
-        NSArray *archiveSegments = [[archiveEntries objectAtIndex:i] componentsSeparatedByString:@"\t"];
-        if ([archiveSegments count] == 3){
-            NSString *creationDateString = [archiveSegments objectAtIndex:0];
-            NSString *solution = [archiveSegments objectAtIndex:1];
-            NSString *comments = [archiveSegments objectAtIndex:2];
-            ArchiveEntry *e = [ArchiveEntry archiveEntryWithValues:creationDateString comments:comments solutionString:solution];
-            [rv insertObject:e atIndex:0];// new ones at front
-        }
-    }
-    return [NSArray arrayWithArray:rv];
+
++(ArchiveEntry*) archiveEntryWithArchiveString: (NSString*) archiveString{
+    NSArray *segments = [archiveString componentsSeparatedByString:@"\t"];
+    NSString *entryid = [segments objectAtIndex:0];
+    NSString *solution = [segments objectAtIndex:1];
+    NSString *hints = [segments objectAtIndex:2];
+    NSString *comments = [segments objectAtIndex:3];
+    return [ArchiveEntry archiveEntryWithValues:entryid solutionString:solution hintString:hints comments:comments];
 }
 
 -(NSString*) toArchiveString{
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:[NSString stringWithCString:archiveDateFormat encoding:NSASCIIStringEncoding]];
-    NSString *serializedBoard = [cvutil SerializeBoard:self.sudokuSolution];
-    NSString* rv = [NSString stringWithFormat:@"%@\t%@\t%@\n", 
-                    [dateFormatter stringFromDate:self.creationDate],
-                    serializedBoard,
+    NSString* rv = [NSString stringWithFormat:@"%@\t%@\t%@\t%@\n", 
+                    self.entryId,
+                    self.sudokuSolution,
+                    self.sudokuHints,
                     self.comments];
-    [dateFormatter release];
     return rv;
 }
 
--(void) save{
-    NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:[NSString stringWithCString:archiveFileName encoding:NSASCIIStringEncoding]];
-    NSString *archiveString = [self toArchiveString];
-    NSData *data = [archiveString dataUsingEncoding:NSUTF8StringEncoding];
-    if (fileHandle == Nil){
-        NSFileManager* fileManager = [NSFileManager defaultManager];
-        [fileManager createFileAtPath:[NSString stringWithCString:archiveFileName encoding:NSASCIIStringEncoding] 
-                             contents:data
-                           attributes:Nil];
-    }else{
-        [fileHandle seekToEndOfFile];
-        [fileHandle writeData:data];
-        [fileHandle closeFile];
-    }
+
+-(NSDate*) getCreationDateGMT{
+    return [NSDate dateWithTimeIntervalSince1970:[entryId doubleValue]];
 }
-
-
 @end
 
 

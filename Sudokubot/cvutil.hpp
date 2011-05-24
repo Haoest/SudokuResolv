@@ -22,6 +22,7 @@
 +(int**) DeserializedBoard:(NSString*) board;
 +(IplImage*) LoadUIImageAsIplImage: (NSString*) fileName asGrayscale:(BOOL) asGrayscale;
 
++(int**) loadStringAsBoard: (char[89]) boardAsString;
 @end
 
 

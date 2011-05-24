@@ -12,15 +12,23 @@
 @interface ArchiveEntry : NSObject {
     
 }
-@property(nonatomic, retain) NSDate* creationDate;
+@property(nonatomic, assign) NSString* entryId; // use date time in milliseconds
 @property(nonatomic, retain) NSString* comments;
-@property(nonatomic, assign) int** sudokuSolution;
+@property(nonatomic, retain) NSString* sudokuSolution;
+@property(nonatomic, retain) NSString* sudokuHints;
 
 //load archive into strong-typed array of ArchiveEntry objects, sorted by date in desc order
-+(NSArray*) loadArchive;
+//+(NSArray*) loadArchive;
 
-+(ArchiveEntry*) archiveEntryWithValues:(NSString*)creationDateString comments:(NSString*)comments solutionString:(NSString*) serializedSolutionString;
--(void) save;
++(ArchiveEntry*) archiveEntryWithValues:(NSString*)entryId
+                         solutionString:(NSString*) solutionAsString 
+                             hintString: (NSString*) hintsAsString
+                               comments:(NSString*)comments;
++(ArchiveEntry*) archiveEntryWithArchiveString: (NSString*) archiveString;
+//-(void) save;
 -(NSString*) toArchiveString;
 
+-(NSDate*) getCreationDateGMT;
 @end
+
+

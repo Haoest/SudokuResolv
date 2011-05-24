@@ -49,7 +49,7 @@
     ArchiveEntry *archiveEntry = [archiveContents objectAtIndex:indexPath.row];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:[NSString stringWithCString:archiveDateFormat encoding:NSASCIIStringEncoding]];
-	NSString *label = [NSString stringWithFormat:@"%@ : %@", [dateFormatter stringFromDate:archiveEntry.creationDate], archiveEntry.comments ];
+	NSString *label = [NSString stringWithFormat:@"%@ : %@", [dateFormatter stringFromDate:[archiveEntry getCreationDate]], archiveEntry.comments ];
     [dateFormatter release];
 	cell.textLabel.text = label;
     UIFont* font = cell.textLabel.font;
