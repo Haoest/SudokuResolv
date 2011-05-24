@@ -11,4 +11,11 @@
 
 @implementation AppConfig
 
++(NSString*) getArchiveFileName{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *rv = [paths objectAtIndex:0];
+    rv = [rv stringByAppendingPathComponent:@"archive"];
+    return rv;
+}
+
 @end

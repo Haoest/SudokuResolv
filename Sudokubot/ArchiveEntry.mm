@@ -20,7 +20,7 @@
                                comments:(NSString*)comments{
     ArchiveEntry* rv = [[ArchiveEntry alloc] init];
     rv.entryId = entryId;
-    rv.comments = comments;
+    rv.comments = [comments stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     rv.sudokuSolution = solutionAsString;
     rv.sudokuHints = hintsAsString;
     return rv;
@@ -45,10 +45,10 @@
     return rv;
 }
 
-
 -(NSDate*) getCreationDateGMT{
     return [NSDate dateWithTimeIntervalSince1970:[entryId doubleValue]];
 }
+
 @end
 
 

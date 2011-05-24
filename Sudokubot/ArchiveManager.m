@@ -13,7 +13,7 @@
 @implementation ArchiveManager
 
 -(id) initDefaultArchive{
-    allEntries = [NSMutableDictionary dictionaryWithContentsOfFile:ArchiveFileName];
+    allEntries = [NSMutableDictionary dictionaryWithContentsOfFile:[AppConfig getArchiveFileName]];
     if (!allEntries){
         allEntries = [[NSMutableDictionary alloc] init];
     }
@@ -21,21 +21,21 @@
 }
 
 -(ArchiveEntry*) getEntryById:(NSString*) entryId{
-    return [allEntries objectForKey:entryId];
+    return [ArchiveEntry archiveEntryWithArchiveString: [allEntries objectForKey:entryId]];
 }
 
 -(void) addEntry:(ArchiveEntry*) entry{
     id key = entry.entryId;
-    id value = entry;
-    [allEntries setObject:value forKey:key];
+    [allEntries setObject:[entry toArchiveString] forKey:key];
 }
 
 -(void) removeEntry:(NSString*) entryId{
     [allEntries removeObjectForKey:entryId];
 }
 
--(void) saveArchive{
-    [allEntries writeToFile:ArchiveFileName atomically:true];
+-(bool) saveArchive{
+    NSString* fileName = [AppConfig getArchiveFileName];
+    return [allEntries writeToFile:fileName atomically:false];
 }
 
 -(NSArray*) getAllEntries{

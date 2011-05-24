@@ -12,10 +12,10 @@
     
 }
 
++(NSString*) getArchiveFileName;
+
 @end
 
-static NSString* ArchiveFileName = @"archive.dict";
-static NSString* ArchiveTempFileName = @"archive_temp.dict"; // used as temp file to help saving archive file
 static char archiveDateFormat[] = "yyyy-MM-dd HH:mm";
 static float archiveCellFontHeight = 16;
 static float archiveCellHeight = 50;

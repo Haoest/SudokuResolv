@@ -16,7 +16,7 @@
 -(ArchiveEntry*) getEntryById:(NSString*) entryId;
 -(void) addEntry:(ArchiveEntry*) entry;
 -(void) removeEntry:(NSString*) entryId;
--(void) saveArchive;
+-(bool) saveArchive;
 -(NSArray*) getAllEntries;
 
 NSInteger sortArchiveEntryByCreationDate(id entryId1, id entryId2, void *reverse);
