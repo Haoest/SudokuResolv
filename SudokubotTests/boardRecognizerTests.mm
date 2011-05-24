@@ -6,44 +6,56 @@
 //
 // opencvContour.cpp : Defines the entry point for the console application.
 //
-
+//
+//
+#include <opencv2/imgproc/imgproc_c.h>
 #include "boardRecognizerTests.hpp"
 #include "BoardRecognizer.h"
-#include <opencv2/imgproc/imgproc_c.h>
 #include "cvutil.hpp"
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-//#include <highgui/highgui.hpp>
+@implementation BoardRecognizerTests
+
+- (void)setUp
+{
+    [super setUp];
+    
+    // Set-up code here.
+}
+
+- (void)tearDown
+{
+    // Tear-down code here.
+    
+    [super tearDown];
+}
+
+
+-(void) testRunAllBoardRecognizerTests{
+    //boardRecognizerTests t; t.runAll();
+}
+
+-(void) testReadBoard{
+    IplImage *img = [cvutil LoadUIImageAsIplImage:@"puzzle1.png" asGrayscale:false];
+    recognizerResultPack recog;
+    recog = recognizeBoardFromPhoto(img);
+    int** actualBoard = [cvutil loadStringAsBoard:"530070000 600195000 098000060 800060003 400803001 700020006 060000280 000419005 000080079"];
+    for(int i=0; i<9; i++){
+        for(int j=0; j<9; j++){
+            STAssertTrue(recog.boardArr[i][j] == actualBoard[i][j], @"%d %d", i, j);
+        }
+    }
+}
+
+@end
+
 
 IplImage *cvLoadImage(char fileName[255]);
 void checkResult(int board[][9], recognizerResultPack recog);
 void checkResult(int **solution, recognizerResultPack recog);
 
 const int doShowSolution = 0;
-
-void runAllBoardRecognizerTests(){
-	//displayImage = cvLoadImage("blackwhite.png");
-	//cvSmooth(displayImage, displayImage, CV_BLUR, 9);
-	//CvRect roi = cvRect(0, 25, 200, 25);
-	//showImage(displayImage);
-	//IplImage *roi = cvCreateImageHeader(cvSize(displayImage->width * 0.5, displayImage->height*0.5), 8, 3);
-	//roi->widthStep = displayImage->widthStep;
-	//roi->imageData = displayImage->imageData;
-	//cvSmooth(roi, roi, CV_GAUSSIAN, 9);
-	//showImage(displayImage);
-    
-	//most of these test are OKAY
-    
-	////////
-	////////if these don't work, it's because it's bad sample; perhaps the board is too small, or boardlines too thin
-	//testCamera_shadow(); // this doesn't work because the whole puzzle is not captured. Right-most bord lines are missing
-	//testNoisyRotated();
-	//testRotated5();
-	//testIphone_ss3();
-    
-	getchar();
-}
 
 void checkResult(int **solution, recognizerResultPack recog){
 	int solution2[9][9];
@@ -96,22 +108,6 @@ void checkResult(int solution[][9], recognizerResultPack recog){
 	printf("\ttotal mistakes: %d\tAccuracy: %0.1f%%\n\n", totalWrong, ((double)totalRight)/(totalWrong+totalRight)*100);
 }
 
-int** loadStringAsBoard(char boardAsString[89]){
-	int **rv = new int*[9];
-	for(int i=0; i<9; i++){
-		rv[i] = new int[9];
-	}
-	int index = 0;
-	int stringIndexOffset = 0;
-	while(index<81){
-		rv[index/9][index%9] = boardAsString[index + stringIndexOffset] - 48;
-		index ++;
-		if (index%9==0){
-			stringIndexOffset ++;
-		}
-	}
-	return rv;
-}
 
 IplImage *cvLoadImage(char fileName[255]){
     NSString* fn = [NSString stringWithCString:fileName encoding:NSASCIIStringEncoding];
@@ -173,7 +169,6 @@ boardRecognizerTests::~boardRecognizerTests(){
     for(list<testPack*>::iterator it = tests.begin(); it != tests.end(); it++){
         delete (*it);
     }
-
 }
 
 void boardRecognizerTests::runAll(){
@@ -181,7 +176,7 @@ void boardRecognizerTests::runAll(){
     for(it = tests.begin(); it!= tests.end(); it++){
         IplImage *img = cvLoadImage( (*it)->inputFile );
         recognizerResultPack res = recognizeBoardFromPhoto(img);
-        int** hints = loadStringAsBoard((*it)->hints);
+        int** hints = [cvutil loadStringAsBoard:(*it)->hints];
         printf("testing %s...", (*it)->inputFile);
         checkResult(hints, res);
         cvReleaseImage(&img);

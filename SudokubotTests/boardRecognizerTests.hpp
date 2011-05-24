@@ -1,14 +1,17 @@
 #import <list>
-
 using namespace std;
 
-int** loadStringAsBoard(char boardAsString[89]);
+#import <SenTestingKit/SenTestingKit.h>
 
 struct testPack{
     testPack(char InputFile[50], char boardHintAsString[89]);
     char inputFile[50];
     char hints[89];
 };
+
+@interface BoardRecognizerTests : SenTestCase {
+    
+}
 
 class boardRecognizerTests{
 public:
@@ -17,4 +20,5 @@ public:
     void runAll();
     list<testPack*> tests;
 };
-	
+
+@end
