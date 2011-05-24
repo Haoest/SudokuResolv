@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A0FB73E138620920050361A /* boardRecognizerTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FB73C138620920050361A /* boardRecognizerTests.mm */; };
+		3A30FF98138AF437002B7489 /* ArchiveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ABFB6CD138AECD100912353 /* ArchiveTests.m */; };
 		3A582759132CF031003F8ACC /* puzzle1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A582757132CF031003F8ACC /* puzzle1.png */; };
 		3A7E57D1134EB0B7003CCF9D /* BoardViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E57CF134EB0B7003CCF9D /* BoardViewController.mm */; };
 		3A7E57D2134EB0B7003CCF9D /* BoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E57D0134EB0B7003CCF9D /* BoardViewController.xib */; };
@@ -20,8 +20,6 @@
 		3A94CC941331B5F700B380B2 /* preprocessing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A94CC8D1331B5F700B380B2 /* preprocessing.cpp */; };
 		3A951C1E1352CE17006ACF0C /* ArchiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A951C1C1352CE13006ACF0C /* ArchiveViewController.m */; };
 		3A951C1F1352CE17006ACF0C /* ArchiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A951C1D1352CE14006ACF0C /* ArchiveViewController.xib */; };
-		3A97A3C113877735005B30CE /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A97A3C013877735005B30CE /* AssetsLibrary.framework */; };
-		3A97A3C31387779E005B30CE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A97A3C21387779E005B30CE /* AVFoundation.framework */; };
 		3A996BE2132FF9700061CCFD /* simpleLines.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A996BE0132FF9700061CCFD /* simpleLines.png */; };
 		3A99BAE11386F61000FF570D /* blackwhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB21386F61000FF570D /* blackwhite.png */; };
 		3A99BAE21386F61000FF570D /* camera_blurry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB31386F61000FF570D /* camera_blurry.jpg */; };
@@ -83,13 +81,16 @@
 		3A9E6C6B13295D120055628C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9E6C4B13295D120055628C /* Foundation.framework */; };
 		3A9E6C6C13295D120055628C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9E6C4D13295D120055628C /* CoreGraphics.framework */; };
 		3A9E6C7413295D130055628C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E6C7213295D120055628C /* InfoPlist.strings */; };
-		3A9E6C7713295D130055628C /* SudokubotTests.hpp in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E6C7613295D130055628C /* SudokubotTests.hpp */; };
-		3A9E6C7913295D130055628C /* SudokubotTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E6C7813295D130055628C /* SudokubotTests.mm */; };
+		3A9E6C7713295D130055628C /* solverTests.hpp in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E6C7613295D130055628C /* solverTests.hpp */; };
+		3A9E6C7913295D130055628C /* solverTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E6C7813295D130055628C /* solverTests.mm */; };
 		3A9F132A13860C9100B01591 /* OCRTemplateSet3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9F132913860C9100B01591 /* OCRTemplateSet3.png */; };
 		3A9FE1261354243700B4E21A /* ArchiveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FE1251354243700B4E21A /* ArchiveTableViewController.m */; };
 		3AA37E471355228E009521E2 /* ArchiveEntry.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3AA37E461355228D009521E2 /* ArchiveEntry.mm */; };
 		3AA37E4A135524BC009521E2 /* AppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA37E49135524BC009521E2 /* AppConfig.m */; };
+		3AB7AFE7138A3C7600F7EB36 /* ArchiveManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB7AFE6138A3C7600F7EB36 /* ArchiveManager.m */; };
+		3ABFB6D3138AF2CC00912353 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABFB6D2138AF2CC00912353 /* SenTestingKit.framework */; };
 		3AC35C74133466FA0099F669 /* boardRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC35C73133466F90099F669 /* boardRecognizer.cpp */; };
+		3AC89657138AF881007F54D9 /* boardRecognizerTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FB73C138620920050361A /* boardRecognizerTests.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,8 +128,6 @@
 		3A951C1B1352CE12006ACF0C /* ArchiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveViewController.h; sourceTree = "<group>"; };
 		3A951C1C1352CE13006ACF0C /* ArchiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveViewController.m; sourceTree = "<group>"; };
 		3A951C1D1352CE14006ACF0C /* ArchiveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArchiveViewController.xib; sourceTree = "<group>"; };
-		3A97A3C013877735005B30CE /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
-		3A97A3C21387779E005B30CE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3A996BE1132FF9700061CCFD /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/simpleLines.png; sourceTree = "<group>"; };
 		3A99BAB21386F61000FF570D /* blackwhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackwhite.png; sourceTree = "<group>"; };
 		3A99BAB31386F61000FF570D /* camera_blurry.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = camera_blurry.jpg; sourceTree = "<group>"; };
@@ -195,8 +194,8 @@
 		3A9E6C7113295D120055628C /* SudokubotTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SudokubotTests-Info.plist"; sourceTree = "<group>"; };
 		3A9E6C7313295D120055628C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A9E6C7513295D130055628C /* SudokubotTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SudokubotTests-Prefix.pch"; sourceTree = "<group>"; };
-		3A9E6C7613295D130055628C /* SudokubotTests.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SudokubotTests.hpp; sourceTree = "<group>"; };
-		3A9E6C7813295D130055628C /* SudokubotTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SudokubotTests.mm; sourceTree = "<group>"; };
+		3A9E6C7613295D130055628C /* solverTests.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = solverTests.hpp; sourceTree = "<group>"; };
+		3A9E6C7813295D130055628C /* solverTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = solverTests.mm; sourceTree = "<group>"; };
 		3A9F132913860C9100B01591 /* OCRTemplateSet3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OCRTemplateSet3.png; path = Sudokubot/OCRTemplateSet3.png; sourceTree = "<group>"; };
 		3A9FE1241354243700B4E21A /* ArchiveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveTableViewController.h; sourceTree = "<group>"; };
 		3A9FE1251354243700B4E21A /* ArchiveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveTableViewController.m; sourceTree = "<group>"; };
@@ -204,6 +203,11 @@
 		3AA37E461355228D009521E2 /* ArchiveEntry.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ArchiveEntry.mm; sourceTree = "<group>"; };
 		3AA37E48135524BB009521E2 /* AppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 		3AA37E49135524BC009521E2 /* AppConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppConfig.m; sourceTree = "<group>"; };
+		3AB7AFE5138A3C7600F7EB36 /* ArchiveManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveManager.h; sourceTree = "<group>"; };
+		3AB7AFE6138A3C7600F7EB36 /* ArchiveManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveManager.m; sourceTree = "<group>"; };
+		3ABFB6CC138AECD100912353 /* ArchiveTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveTests.h; sourceTree = "<group>"; };
+		3ABFB6CD138AECD100912353 /* ArchiveTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveTests.m; sourceTree = "<group>"; };
+		3ABFB6D2138AF2CC00912353 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3AC35C72133466F80099F669 /* boardRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = boardRecognizer.h; sourceTree = "<group>"; };
 		3AC35C73133466F90099F669 /* boardRecognizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = boardRecognizer.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -223,8 +227,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A97A3C31387779E005B30CE /* AVFoundation.framework in Frameworks */,
-				3A97A3C113877735005B30CE /* AssetsLibrary.framework in Frameworks */,
+				3ABFB6D3138AF2CC00912353 /* SenTestingKit.framework in Frameworks */,
 				3A9E6C6A13295D120055628C /* UIKit.framework in Frameworks */,
 				3A9E6C6B13295D120055628C /* Foundation.framework in Frameworks */,
 				3A9E6C6C13295D120055628C /* CoreGraphics.framework in Frameworks */,
@@ -331,8 +334,7 @@
 		3A9E6C4813295D120055628C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3A97A3C21387779E005B30CE /* AVFoundation.framework */,
-				3A97A3C013877735005B30CE /* AssetsLibrary.framework */,
+				3ABFB6D2138AF2CC00912353 /* SenTestingKit.framework */,
 				3A9E6C4913295D120055628C /* UIKit.framework */,
 				3A9E6C4B13295D120055628C /* Foundation.framework */,
 				3A9E6C4D13295D120055628C /* CoreGraphics.framework */,
@@ -344,15 +346,15 @@
 		3A9E6C4F13295D120055628C /* Sudokubot */ = {
 			isa = PBXGroup;
 			children = (
+				3AA37E48135524BB009521E2 /* AppConfig.h */,
+				3AA37E49135524BC009521E2 /* AppConfig.m */,
 				3A9F132813860C5B00B01591 /* resources */,
 				3AA37E4C13554550009521E2 /* UI */,
 				3AA37E4B135544FF009521E2 /* solver and utilities */,
-				3AA37E441355226D009521E2 /* models */,
+				3AA37E441355226D009521E2 /* models and managers */,
 				3A94CC861331B5F700B380B2 /* basicOCR */,
 				3A9E6C8213296AFB0055628C /* Development Resources */,
 				3A9E6C5013295D120055628C /* Supporting Files */,
-				3AA37E48135524BB009521E2 /* AppConfig.h */,
-				3AA37E49135524BC009521E2 /* AppConfig.m */,
 			);
 			path = Sudokubot;
 			sourceTree = "<group>";
@@ -373,10 +375,12 @@
 			children = (
 				3A9E6C7013295D120055628C /* Supporting Files */,
 				3A99BAB11386F61000FF570D /* testData */,
-				3A9E6C7613295D130055628C /* SudokubotTests.hpp */,
-				3A9E6C7813295D130055628C /* SudokubotTests.mm */,
+				3A9E6C7613295D130055628C /* solverTests.hpp */,
+				3A9E6C7813295D130055628C /* solverTests.mm */,
 				3A0FB73C138620920050361A /* boardRecognizerTests.mm */,
 				3A0FB73D138620920050361A /* boardRecognizerTests.hpp */,
+				3ABFB6CC138AECD100912353 /* ArchiveTests.h */,
+				3ABFB6CD138AECD100912353 /* ArchiveTests.m */,
 			);
 			path = SudokubotTests;
 			sourceTree = "<group>";
@@ -410,13 +414,15 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		3AA37E441355226D009521E2 /* models */ = {
+		3AA37E441355226D009521E2 /* models and managers */ = {
 			isa = PBXGroup;
 			children = (
 				3AA37E451355228D009521E2 /* ArchiveEntry.h */,
 				3AA37E461355228D009521E2 /* ArchiveEntry.mm */,
+				3AB7AFE5138A3C7600F7EB36 /* ArchiveManager.h */,
+				3AB7AFE6138A3C7600F7EB36 /* ArchiveManager.m */,
 			);
-			name = models;
+			name = "models and managers";
 			sourceTree = "<group>";
 		};
 		3AA37E4B135544FF009521E2 /* solver and utilities */ = {
@@ -444,11 +450,11 @@
 				3A7E57D3134EB3D3003CCF9D /* HelpViewController.h */,
 				3A7E57D4134EB3D3003CCF9D /* HelpViewController.m */,
 				3A7E57D5134EB3D4003CCF9D /* HelpViewController.xib */,
+				3A9E6C5813295D120055628C /* SudokubotAppDelegate.h */,
+				3A9E6C5913295D120055628C /* SudokubotAppDelegate.mm */,
 				3A951C1B1352CE12006ACF0C /* ArchiveViewController.h */,
 				3A951C1C1352CE13006ACF0C /* ArchiveViewController.m */,
 				3A951C1D1352CE14006ACF0C /* ArchiveViewController.xib */,
-				3A9E6C5813295D120055628C /* SudokubotAppDelegate.h */,
-				3A9E6C5913295D120055628C /* SudokubotAppDelegate.mm */,
 				3A9FE1241354243700B4E21A /* ArchiveTableViewController.h */,
 				3A9FE1251354243700B4E21A /* ArchiveTableViewController.m */,
 				3A9E6C5B13295D120055628C /* MainWindow.xib */,
@@ -591,7 +597,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A9E6C7413295D130055628C /* InfoPlist.strings in Resources */,
-				3A9E6C7713295D130055628C /* SudokubotTests.hpp in Resources */,
+				3A9E6C7713295D130055628C /* solverTests.hpp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,7 +638,7 @@
 				3A9FE1261354243700B4E21A /* ArchiveTableViewController.m in Sources */,
 				3AA37E471355228E009521E2 /* ArchiveEntry.mm in Sources */,
 				3AA37E4A135524BC009521E2 /* AppConfig.m in Sources */,
-				3A0FB73E138620920050361A /* boardRecognizerTests.mm in Sources */,
+				3AB7AFE7138A3C7600F7EB36 /* ArchiveManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -640,7 +646,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A9E6C7913295D130055628C /* SudokubotTests.mm in Sources */,
+				3A9E6C7913295D130055628C /* solverTests.mm in Sources */,
+				3A30FF98138AF437002B7489 /* ArchiveTests.m in Sources */,
+				3AC89657138AF881007F54D9 /* boardRecognizerTests.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
