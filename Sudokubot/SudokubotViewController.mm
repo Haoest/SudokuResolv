@@ -149,11 +149,21 @@
 }
 
 -(void) refreshArchiveView{
-
+    if (self.archiveViewController){
+        [self.archiveViewController refreshArchiveList];
+    }
 }
 
 -(void) showBoardViewWithEntry:(ArchiveEntry *)entry{
-    
+    if (self.boardViewController){
+        [self.boardViewController refreshBoardWithArchiveEntry:entry];
+        [self removeSubviews];
+    }else{
+        BoardViewController *c = [BoardViewController boardWithArchiveEntry:entry];
+        self.boardViewController = c;
+        c.rootViewDelegate = self;
+    }
+    [self.view addSubview: self.boardViewController.view];
 }
 
 -(void) showRootView{
