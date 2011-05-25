@@ -14,8 +14,7 @@
 @implementation ArchiveTableViewController
 
 @synthesize archiveContents;
-
-
+@synthesize rootViewDelegate;
 
 - (void)dealloc
 {
@@ -29,12 +28,17 @@
     [super viewDidLoad];
 }
 
+
 +(ArchiveTableViewController*) archiveTableViewControllerFromDefaultArchive{
     ArchiveTableViewController* rv = [[ArchiveTableViewController alloc] initWithStyle:UITableViewStylePlain];
-    ArchiveManager* archiveManager = [[ArchiveManager alloc]initDefaultArchive];
-    rv.archiveContents = [archiveManager getAllEntries];
-    [archiveManager release];
+    [rv reloadDataSource];
     return rv;
+}
+
+-(void) reloadDataSource{
+    ArchiveManager* archiveManager = [[ArchiveManager alloc]initDefaultArchive];
+    self.archiveContents = [archiveManager getAllEntries];
+    [archiveManager release];
 }
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
@@ -71,10 +75,8 @@
     NSArray *archive = self.archiveContents;
     NSInteger index = indexPath.row;
     ArchiveEntry* entry = [archive objectAtIndex:index];
-    BoardViewController *boardViewController = [BoardViewController boardWithArchiveEntry:entry];
-    boardViewController.comments = entry.comments;
     [tableView deselectRowAtIndexPath:indexPath animated:true];
-    [self.view.superview addSubview:boardViewController.view];
+    [self.rootViewDelegate showBoardViewWithEntry:entry];
 }
 
 @end

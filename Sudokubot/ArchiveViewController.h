@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ArchiveTableViewController.h"
-#import "ViewDelegates.h"
-//#import "SudokubotViewController.h"
+#import "rootViewDelegate.h"
 
 @interface ArchiveViewController : UIViewController {
-    
+    id<RootViewDelegate> rootViewDelegate;
 }
 
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *mainMenu;
@@ -22,6 +21,5 @@
 
 +(ArchiveViewController*) archiveViewControllerFromDefaultArchive;
 
--(void) backToMainMenu;
-
+-(void) refreshArchiveList;
 @end

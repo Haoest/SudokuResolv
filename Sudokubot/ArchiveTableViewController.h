@@ -8,13 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "ArchiveManager.h"
+#import "rootViewDelegate.h"
 
 @interface ArchiveTableViewController : UITableViewController {
-    ArchiveManager* archiveManager;
+    
 }
 
 @property (nonatomic, retain) NSArray* archiveContents;
 
 +(ArchiveTableViewController*) archiveTableViewControllerFromDefaultArchive;
+
+@property (nonatomic, retain) id<RootViewDelegate> rootViewDelegate;
+
+-(void) reloadDataSource;
 
 @end

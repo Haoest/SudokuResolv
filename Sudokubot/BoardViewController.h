@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ArchiveEntry.h"
-#import "ViewDelegates.h"
+#import "rootViewDelegate.h"
 
 @interface BoardViewController : UIViewController<UITextFieldDelegate> {
-
+    NSString* comments;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* imageView;

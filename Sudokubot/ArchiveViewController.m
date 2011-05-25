@@ -12,7 +12,16 @@
 @implementation ArchiveViewController
 @synthesize archiveTableViewController;
 @synthesize mainMenu;
-@synthesize rootViewDelegate;
+@dynamic rootViewDelegate;
+
+-(void) setRootViewDelegate:(id<RootViewDelegate>)rootView{
+    rootViewDelegate = rootView;
+    archiveTableViewController.rootViewDelegate = rootView;
+}
+
+-(id<RootViewDelegate>) rootViewDelegate{
+    return rootViewDelegate;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,7 +50,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self.mainMenu setTarget:self];
     [self.mainMenu setAction:@selector(backToMainMenu)];
 }
@@ -51,6 +59,12 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+-(void) refreshArchiveList{
+    [self.archiveTableViewController.archiveContents release];
+    [self.archiveTableViewController reloadDataSource];
+    [self.archiveTableViewController.tableView reloadData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -68,7 +82,7 @@
 }
 
 -(void) backToMainMenu{
-    [self.view removeFromSuperview];
+    [self.rootViewDelegate showRootView];
 }
 
 @end

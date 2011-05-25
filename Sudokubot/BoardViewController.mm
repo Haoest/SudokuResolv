@@ -19,8 +19,18 @@
 
 @synthesize imageView, commentTextField, contentsView, navigationBar;
 @synthesize backToArchiveButton, mainMenuButton;
-@synthesize board, solution, comments, archiveEntryId;
+@synthesize board, solution, archiveEntryId;
 @synthesize rootViewDelegate;
+@dynamic comments;
+
+-(void) setComments:(NSString *)_comments{
+    comments = _comments;
+    [self.commentTextField setText:comments];
+}
+
+-(NSString*) comments{
+    return comments;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -132,7 +142,7 @@
     rv.archiveEntryId = entry.entryId;
     rv.solution = [cvutil DeserializedBoard: [entry sudokuSolution] ];
     rv.board = [cvutil DeserializedBoard:[entry sudokuHints]];
-    [rv.commentTextField setText:entry.comments];
+    rv.comments = entry.comments;
     return rv;
 }
 
@@ -144,22 +154,18 @@
                                                        solutionString:serializedBoard
                                                            hintString:[cvutil SerializeBoard:board]
                                                      secondsSince1970:[[NSDate date] timeIntervalSince1970]
-                                                                 comments:commentTextField.text];
+                                                                 comments:self.comments];
         [arman addEntry:archiveEntry];
         [arman saveArchive];  
     }else{
         ArchiveEntry* e = [arman getEntryById:self.archiveEntryId];
         if (!e){
-            e.comments = commentTextField.text;
+            e.comments = self.comments;
             [arman updateEntry:e];
             [arman saveArchive];
         }
     }
     [arman release];
-    ArchiveViewController* archieveViewController = [ArchiveViewController archiveViewControllerFromDefaultArchive];
-    UIView* superview = self.view.superview;
-    [self.view removeFromSuperview];
-    [superview addSubview:archieveViewController.view];
 }
 
 -(void) backToArchiveMenu{
@@ -177,6 +183,7 @@
 
 -(void) textFieldDidEndEditing:(UITextField *)textField{
     [self animateTextField:textField up:NO];
+    self.comments = commentTextField.text;
     [self saveToArchive];
 }
 
@@ -205,12 +212,16 @@
     cvReleaseImage(&boardIpl);
     self.solution = [[solver solverWithHints:self.board] trySolve];
     self.archiveEntryId = -1;
-    self.commentTextField.text = @"";
+    self.comments = @"";
     [imageView setImage:[self drawGrids]];
 }
 
 -(void) refreshBoardWithArchiveEntry:(ArchiveEntry*) entry{
-    
+    self.archiveEntryId = entry.entryId;
+    self.solution = [cvutil DeserializedBoard: [entry sudokuSolution] ];
+    self.board = [cvutil DeserializedBoard:[entry sudokuHints]];
+    self.comments = entry.comments;
+    [self.imageView setImage:[self drawGrids]];
 }
 
 @end
