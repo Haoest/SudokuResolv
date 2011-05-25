@@ -12,9 +12,8 @@
 #import "basicOCR.hpp"
 #import "preprocessing.h"
 #import "solver.hpp"
-#import "BoardViewController.h"
-#import "ArchiveViewController.h"
 #import "AppConfig.h"
+
 
 @implementation SudokubotViewController
 
@@ -24,10 +23,10 @@
 @synthesize btnOpenFromClipboard;
 @synthesize btnArchive;
 @synthesize btnHelp;
-
-
 @synthesize imagePicker;
 
+@synthesize rootView;
+@synthesize boardViewController, archiveViewController;
 
 - (void)dealloc
 {
@@ -53,6 +52,7 @@
         [btnCaptureFromCamera setEnabled:NO];
         [btnCaptureFromCamera setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     }
+    rootView = self.view;
 }
 
 - (void)viewDidUnload
@@ -113,26 +113,67 @@
 }
 
 -(IBAction) btnArchive_touchDown{
-    ArchiveViewController* archive = [ArchiveViewController archiveViewControllerFromDefaultArchive];
-    [self.view addSubview:archive.view];
+    [self showArchiveView];
 }
 
 -(IBAction) btnCaptureFromCamera_touchDown{
     
 }
          
-         
- - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissModalViewControllerAnimated:YES];
     UIImage* img = [info valueForKey:UIImagePickerControllerOriginalImage];
-    BoardViewController* boardViewController = [BoardViewController boardWithImage:img];
-    [self.view addSubview: boardViewController.view];
-    
+    [self showBoardViewWithImageAsBoard:img];
 }
  
  - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissModalViewControllerAnimated:YES];
-}         
+}
+
+-(void) showBoardView{
+    
+}
+
+-(void) showArchiveView{
+    if (self.archiveViewController){
+        [self removeSubviews];
+    }else{
+        ArchiveViewController* c = [ArchiveViewController archiveViewControllerFromDefaultArchive];
+        c.rootViewDelegate = self;
+        self.archiveViewController = c;
+        
+    }
+    [self.view addSubview:self.archiveViewController.view];
+}
+
+-(void) refreshArchiveView{
+
+}
+
+-(void) showBoardViewWithEntry:(ArchiveEntry *)entry{
+    
+}
+
+-(void) showRootView{
+    [self removeSubviews];
+}
+
+-(void) showBoardViewWithImageAsBoard:(UIImage *)board{
+    if (self.boardViewController){
+        [self.boardViewController refreshBoardWithPuzzle:board];
+        [self removeSubviews];
+    }else{
+        BoardViewController *c = [BoardViewController boardWithImage:board];
+        self.boardViewController = c;
+        c.rootViewDelegate = self;
+    }
+    [self.view addSubview: self.boardViewController.view];
+}
+
+-(void) removeSubviews{
+    [self.boardViewController.view removeFromSuperview];
+    [self.archiveViewController.view removeFromSuperview];
+}
 @end

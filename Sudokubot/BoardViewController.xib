@@ -66,6 +66,7 @@
 								<string key="NSFrame">{{20, 350}, {288, 31}}</string>
 								<reference key="NSSuperview" ref="458678611"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -83,7 +84,6 @@
 								<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 								<float key="IBUIMinimumFontSize">17</float>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
-									<int key="IBUIReturnKeyType">9</int>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
 							</object>
@@ -122,13 +122,7 @@
 								<int key="IBUISystemItemIdentifier">5</int>
 							</object>
 							<object class="IBUIBarButtonItem" id="255880372">
-								<string key="IBUITitle">Back to Archive</string>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIStyle">1</int>
-								<reference key="IBUIToolbar" ref="815074334"/>
-							</object>
-							<object class="IBUIBarButtonItem" id="830081863">
-								<string key="IBUITitle">Save to Archive</string>
+								<string key="IBUITitle">Archive</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="815074334"/>
@@ -166,14 +160,6 @@
 						<reference key="destination" ref="1000023489"/>
 					</object>
 					<int key="connectionID">15</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">saveToArchiveButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="830081863"/>
-					</object>
-					<int key="connectionID">26</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -272,7 +258,6 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="953260314"/>
-							<reference ref="830081863"/>
 							<reference ref="869890359"/>
 							<reference ref="255880372"/>
 						</object>
@@ -281,11 +266,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">9</int>
 						<reference key="object" ref="953260314"/>
-						<reference key="parent" ref="815074334"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">10</int>
-						<reference key="object" ref="830081863"/>
 						<reference key="parent" ref="815074334"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -308,7 +288,6 @@
 					<string>-2.CustomClassName</string>
 					<string>1.IBEditorWindowLastContentRect</string>
 					<string>1.IBPluginDependency</string>
-					<string>10.IBPluginDependency</string>
 					<string>11.IBPluginDependency</string>
 					<string>14.IBPluginDependency</string>
 					<string>38.IBPluginDependency</string>
@@ -321,7 +300,6 @@
 					<string>BoardViewController</string>
 					<string>UIResponder</string>
 					<string>{{556, 412}, {320, 480}}</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

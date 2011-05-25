@@ -12,6 +12,7 @@
 @implementation ArchiveViewController
 @synthesize archiveTableViewController;
 @synthesize mainMenu;
+@synthesize rootViewDelegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

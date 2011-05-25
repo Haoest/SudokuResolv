@@ -18,19 +18,20 @@
 @implementation BoardViewController
 
 @synthesize imageView, commentTextField, contentsView, navigationBar;
-@synthesize saveToArchiveButton, backToArchiveButton, mainMenuButton;
-@synthesize board, solution, allowSaving, comments;
-@synthesize superArchiveView;
+@synthesize backToArchiveButton, mainMenuButton;
+@synthesize board, solution, comments, archiveEntryId;
+@synthesize rootViewDelegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self.archiveEntryId = -1;
     if (self) {
         // Custom initialization
     }
     return self;
 }
-
+ 
 - (void)dealloc
 {
     [super dealloc];
@@ -59,19 +60,9 @@
 }
 
 -(void) wireupControls{
-    if (self.allowSaving){
-        [self.saveToArchiveButton setTarget:self];
-        [self.saveToArchiveButton setAction:@selector(saveToArchive)];
-        NSMutableArray *buttons = [[self.navigationBar.items mutableCopy] autorelease];
-        [buttons removeObject:backToArchiveButton];
-        self.navigationBar.items = buttons;
-    }else{
-        [self.backToArchiveButton setTarget:self];
-        [self.backToArchiveButton setAction:@selector(backToArchiveMenu)];
-        NSMutableArray *buttons = [[self.navigationBar.items mutableCopy] autorelease];
-        [buttons removeObject:saveToArchiveButton];
-        self.navigationBar.items = buttons;
-    }
+
+    [self.backToArchiveButton setTarget:self];
+    [self.backToArchiveButton setAction:@selector(backToArchiveMenu)];
     [self.mainMenuButton setTarget:self];
     [self.mainMenuButton setAction:@selector(backToMainMenu)];
     self.commentTextField.delegate = self;
@@ -133,27 +124,38 @@
     rv.board = recog.boardArr;
     cvReleaseImage(&boardIpl);
     rv.solution = [[solver solverWithHints:rv.board] trySolve];
-    rv.allowSaving = true;
     return rv;
 }
 
 +(BoardViewController*) boardWithArchiveEntry:(ArchiveEntry *)entry{
     BoardViewController *rv = [[BoardViewController alloc] initWithNibName:@"BoardViewController" bundle:nil];
+    rv.archiveEntryId = entry.entryId;
     rv.solution = [cvutil DeserializedBoard: [entry sudokuSolution] ];
+    rv.board = [cvutil DeserializedBoard:[entry sudokuHints]];
     [rv.commentTextField setText:entry.comments];
-    rv.allowSaving = false;
     return rv;
 }
 
 -(void) saveToArchive{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:[NSString stringWithCString:archiveDateFormat encoding:NSASCIIStringEncoding]];
     NSString* serializedBoard = [cvutil SerializeBoard: self.solution];
-    ArchiveEntry* archiveEntry = [ArchiveEntry archiveEntryWithValues:[formatter stringFromDate:[NSDate date]] 
-                                                    comments : self.commentTextField.text
-                                                    solutionString : serializedBoard];
-    [formatter release];
-    [archiveEntry save];
+    ArchiveManager *arman = [[ArchiveManager alloc] initDefaultArchive];
+    if(self.archiveEntryId == -1){
+        ArchiveEntry* archiveEntry = [ArchiveEntry archiveEntryWithValues:-1
+                                                       solutionString:serializedBoard
+                                                           hintString:[cvutil SerializeBoard:board]
+                                                     secondsSince1970:[[NSDate date] timeIntervalSince1970]
+                                                                 comments:commentTextField.text];
+        [arman addEntry:archiveEntry];
+        [arman saveArchive];  
+    }else{
+        ArchiveEntry* e = [arman getEntryById:self.archiveEntryId];
+        if (!e){
+            e.comments = commentTextField.text;
+            [arman updateEntry:e];
+            [arman saveArchive];
+        }
+    }
+    [arman release];
     ArchiveViewController* archieveViewController = [ArchiveViewController archiveViewControllerFromDefaultArchive];
     UIView* superview = self.view.superview;
     [self.view removeFromSuperview];
@@ -161,26 +163,21 @@
 }
 
 -(void) backToArchiveMenu{
-    [self.view removeFromSuperview];
+    [self.rootViewDelegate showArchiveView];
 }
 
 -(void) backToMainMenu{
-    if (superArchiveView){
-        [superArchiveView removeFromSuperview];
-    }
-    [self.view removeFromSuperview];
+    [self.rootViewDelegate showRootView];
 }
 
 -(void) textFieldDidBeginEditing:(UITextField *)textField{
-    if (!self.allowSaving){
-        [self.commentTextField resignFirstResponder];
-    }
     [self animateTextField:textField up:YES];
     [self.view bringSubviewToFront:navigationBar];
 }
 
 -(void) textFieldDidEndEditing:(UITextField *)textField{
     [self animateTextField:textField up:NO];
+    [self saveToArchive];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *) textField{
@@ -198,6 +195,22 @@
     [UIView setAnimationDuration: movementDuration];
     self.contentsView.frame = CGRectOffset(self.contentsView.frame, 0, movement);
     [UIView commitAnimations];
+}
+
+
+-(void) refreshBoardWithPuzzle:(UIImage*) imageBoard{
+    IplImage *boardIpl = [cvutil CreateIplImageFromUIImage:imageBoard];
+    recognizerResultPack recog = recognizeBoardFromPhoto(boardIpl);
+    self.board = recog.boardArr;
+    cvReleaseImage(&boardIpl);
+    self.solution = [[solver solverWithHints:self.board] trySolve];
+    self.archiveEntryId = -1;
+    self.commentTextField.text = @"";
+    [imageView setImage:[self drawGrids]];
+}
+
+-(void) refreshBoardWithArchiveEntry:(ArchiveEntry*) entry{
+    
 }
 
 @end

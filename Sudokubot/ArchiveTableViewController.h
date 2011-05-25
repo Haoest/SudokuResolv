@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ArchiveManager.h"
 
 @interface ArchiveTableViewController : UITableViewController {
-    
+    ArchiveManager* archiveManager;
 }
 
 @property (nonatomic, retain) NSArray* archiveContents;

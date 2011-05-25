@@ -8,10 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "ViewDelegates.h"
+#import "BoardViewController.h"
+#import "ArchiveViewController.h"
+
 
 @interface SudokubotViewController : UIViewController <
     UIImagePickerControllerDelegate, 
-    UINavigationControllerDelegate> {
+UINavigationControllerDelegate, 
+RootViewDelegate> {
+
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView *MainImageView;
@@ -31,4 +37,8 @@
 
 - (void) reevaluateClipboardButton;
 
+@property(nonatomic, retain) BoardViewController* boardViewController;
+@property(nonatomic, retain) ArchiveViewController* archiveViewController;
+
+-(void) removeSubviews;
 @end

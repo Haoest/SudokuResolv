@@ -125,6 +125,7 @@ using namespace cv;
     return [cvutil DeserializedBoard:s];
 }
 
+//board must contain a valid solution or nil is returned
 +(int**) DeserializedBoard:(NSString*) board{
     board = [board stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     int **a;
@@ -143,7 +144,7 @@ using namespace cv;
         }
         for(int j=0; j<9; j++){
             a[i][j] = ((int) [line characterAtIndex:j]) - 48;
-            if (a[i][j] <1 || a[i][j] >9){
+            if (a[i][j] <0 || a[i][j] >9){
                 return nil;
             }
         }
@@ -163,6 +164,7 @@ using namespace cv;
     return [NSString stringWithString:rv];
 }
 
+//load complete solution or incomplete board as a 2D array
 +(int**) loadStringAsBoard: (char[89]) boardAsString{
 	int **rv = new int*[9];
 	for(int i=0; i<9; i++){

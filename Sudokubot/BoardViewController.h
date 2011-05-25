@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "ArchiveEntry.h"
+#import "ViewDelegates.h"
 
 @interface BoardViewController : UIViewController<UITextFieldDelegate> {
 
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* imageView;
-@property(nonatomic, retain) IBOutlet UIBarButtonItem* saveToArchiveButton;
+//@property(nonatomic, retain) IBOutlet UIBarButtonItem* saveToArchiveButton;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem* backToArchiveButton;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem* mainMenuButton;
 @property(nonatomic, retain) IBOutlet UITextField *commentTextField;
@@ -22,9 +23,9 @@
 @property(nonatomic, retain) IBOutlet UIToolbar *navigationBar;
 
 //superArchiveView points to the archive view object which creates this board view
-@property(nonatomic, retain) UIView* superArchiveView;
+@property(nonatomic, retain) id <RootViewDelegate> rootViewDelegate;
 
-@property(nonatomic, assign) bool allowSaving;
+@property(nonatomic, assign) int archiveEntryId;
 @property(nonatomic, assign) int** board;
 @property(nonatomic, assign) int** solution;
 @property(nonatomic, retain) NSString *comments;
@@ -35,6 +36,9 @@
 
 +(BoardViewController*) boardWithImage:(UIImage*) board;
 +(BoardViewController*) boardWithArchiveEntry:(ArchiveEntry*) entry;
+
+-(void) refreshBoardWithPuzzle:(UIImage*) imageBoard;
+-(void) refreshBoardWithArchiveEntry:(ArchiveEntry*) entry;
 
 -(void) loadBoard;
 -(UIImage*) drawGrids;

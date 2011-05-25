@@ -7,16 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface AppConfig : NSObject {
     
 }
 
 +(NSString*) getArchiveFileName;
++(NSString*) archiveDateFormat;
++(CGFloat) archiveCellFontHeight;
++(CGFloat) archiveCellHeight;
 
 @end
-
-static char archiveDateFormat[] = "yyyy-MM-dd HH:mm";
-static float archiveCellFontHeight = 16;
-static float archiveCellHeight = 50;
 

@@ -16,9 +16,13 @@
 @synthesize archiveContents;
 
 
+
 - (void)dealloc
 {
     [super dealloc];
+    if (archiveContents){
+        [archiveContents release];
+    }
 }
 
 -(void) viewDidLoad{
@@ -27,7 +31,9 @@
 
 +(ArchiveTableViewController*) archiveTableViewControllerFromDefaultArchive{
     ArchiveTableViewController* rv = [[ArchiveTableViewController alloc] initWithStyle:UITableViewStylePlain];
-    rv.archiveContents = [ArchiveEntry loadArchive];
+    ArchiveManager* archiveManager = [[ArchiveManager alloc]initDefaultArchive];
+    rv.archiveContents = [archiveManager getAllEntries];
+    [archiveManager release];
     return rv;
 }
 
@@ -48,26 +54,25 @@
 	}
     ArchiveEntry *archiveEntry = [archiveContents objectAtIndex:indexPath.row];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:[NSString stringWithCString:archiveDateFormat encoding:NSASCIIStringEncoding]];
-	NSString *label = [NSString stringWithFormat:@"%@ : %@", [dateFormatter stringFromDate:[archiveEntry getCreationDate]], archiveEntry.comments ];
+    [dateFormatter setDateFormat:[AppConfig archiveDateFormat]];
+	NSString *label = [NSString stringWithFormat:@"%@ : %@", [dateFormatter stringFromDate:[archiveEntry getCreationDateGMT]], archiveEntry.comments ];
     [dateFormatter release];
 	cell.textLabel.text = label;
     UIFont* font = cell.textLabel.font;
-    cell.textLabel.font = [font fontWithSize:archiveCellFontHeight];
+    cell.textLabel.font = [font fontWithSize:[AppConfig archiveCellFontHeight]];  
 	return cell;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return archiveCellHeight;
+    return [AppConfig archiveCellHeight];
 }
 
 -(void) tableView: (UITableView*) tableView didSelectRowAtIndexPath:(NSIndexPath*) indexPath{
-    NSArray *archive = [ArchiveEntry loadArchive];
+    NSArray *archive = self.archiveContents;
     NSInteger index = indexPath.row;
     ArchiveEntry* entry = [archive objectAtIndex:index];
     BoardViewController *boardViewController = [BoardViewController boardWithArchiveEntry:entry];
     boardViewController.comments = entry.comments;
-    boardViewController.superArchiveView = self.view.superview;
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     [self.view.superview addSubview:boardViewController.view];
 }
