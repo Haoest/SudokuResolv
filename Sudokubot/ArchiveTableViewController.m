@@ -19,15 +19,14 @@
 - (void)dealloc
 {
     [super dealloc];
-    if (archiveContents){
-        [archiveContents release];
+    if (self.archiveContents){
+        [self.archiveContents release];
     }
 }
 
 -(void) viewDidLoad{
     [super viewDidLoad];
 }
-
 
 +(ArchiveTableViewController*) archiveTableViewControllerFromDefaultArchive{
     ArchiveTableViewController* rv = [[ArchiveTableViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -37,7 +36,8 @@
 
 -(void) reloadDataSource{
     ArchiveManager* archiveManager = [[ArchiveManager alloc]initDefaultArchive];
-    self.archiveContents = [archiveManager getAllEntries];
+    NSArray* contents = [archiveManager getAllEntries];
+    self.archiveContents = contents;
     [archiveManager release];
 }
 
@@ -46,7 +46,7 @@
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    NSInteger rv = [archiveContents count]; // exclude last row
+    NSInteger rv = [self.archiveContents count]; // exclude last row
     return rv;
 }
 
@@ -56,7 +56,7 @@
 	if (cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:rowId] autorelease];
 	}
-    ArchiveEntry *archiveEntry = [archiveContents objectAtIndex:indexPath.row];
+    ArchiveEntry *archiveEntry = [self.archiveContents objectAtIndex:indexPath.row];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:[AppConfig archiveDateFormat]];
 	NSString *label = [NSString stringWithFormat:@"%@ : %@", [dateFormatter stringFromDate:[archiveEntry getCreationDateGMT]], archiveEntry.comments ];
@@ -76,6 +76,7 @@
     NSInteger index = indexPath.row;
     ArchiveEntry* entry = [archive objectAtIndex:index];
     [tableView deselectRowAtIndexPath:indexPath animated:true];
+    int entryId = entry.entryId;
     [self.rootViewDelegate showBoardViewWithEntry:entry];
 }
 

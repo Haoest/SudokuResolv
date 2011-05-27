@@ -17,7 +17,7 @@
     UIImagePickerControllerDelegate, 
 UINavigationControllerDelegate, 
 RootViewDelegate> {
-
+    
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView *MainImageView;

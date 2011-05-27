@@ -176,6 +176,7 @@
 		3A99BADE1386F61000FF570D /* shaded_colorfg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shaded_colorfg.png; sourceTree = "<group>"; };
 		3A99BADF1386F61000FF570D /* shaded_colorfg_noisy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shaded_colorfg_noisy.png; sourceTree = "<group>"; };
 		3A99BAE01386F61000FF570D /* simple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = simple.png; sourceTree = "<group>"; };
+		3A9BAA42138D765800D57AE2 /* rootViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rootViewDelegate.h; sourceTree = "<group>"; };
 		3A9E6C4513295D120055628C /* Sudokubot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sudokubot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9E6C4913295D120055628C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3A9E6C4B13295D120055628C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -441,6 +442,7 @@
 		3AA37E4C13554550009521E2 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				3A9BAA42138D765800D57AE2 /* rootViewDelegate.h */,
 				3A9E6C5E13295D120055628C /* SudokubotViewController.h */,
 				3A9E6C5F13295D120055628C /* SudokubotViewController.mm */,
 				3A9E6C6113295D120055628C /* SudokubotViewController.xib */,

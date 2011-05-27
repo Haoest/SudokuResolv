@@ -62,7 +62,6 @@
 }
 
 -(void) refreshArchiveList{
-    [self.archiveTableViewController.archiveContents release];
     [self.archiveTableViewController reloadDataSource];
     [self.archiveTableViewController.tableView reloadData];
 }

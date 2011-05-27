@@ -11,7 +11,7 @@
 #import "rootViewDelegate.h"
 
 @interface ArchiveTableViewController : UITableViewController {
-    
+
 }
 
 @property (nonatomic, retain) NSArray* archiveContents;

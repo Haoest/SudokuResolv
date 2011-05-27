@@ -227,16 +227,19 @@ NSString *testComment;
     
     ArchiveManager *arman2 = [[ArchiveManager alloc]initDefaultArchive];
     ArchiveEntry* retrieved1 = [arman2 getEntryById:entryId1];
-    retrieved1.comments = @"your comment";
+    NSString *newComment = @"your comment";
+    retrieved1.comments = newComment;
     [arman2 updateEntry:retrieved1];
     ArchiveEntry *retrieved2 = [arman2 getEntryById:entryId1];
     STAssertTrue([retrieved1.comments isEqualToString: retrieved2.comments], @"comments should equal after update");
+    STAssertTrue([retrieved1.comments isEqualToString: newComment], @"comments should equal after update");    
     [arman2 saveArchive];
     [arman2 release];
     
     ArchiveManager *arman3 = [[ArchiveManager alloc]initDefaultArchive];
     ArchiveEntry *retrieved3 = [arman3 getEntryById:entryId1];
     STAssertTrue([retrieved1.comments isEqualToString:retrieved3.comments], [NSString stringWithFormat:@"comment should be updated: %@ vs %@", retrieved1.comments, retrieved3.comments]);
+    STAssertTrue([retrieved3.comments isEqualToString: newComment], @"comments should equal after update");    
     [arman3 release];
 }
 

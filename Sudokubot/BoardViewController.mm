@@ -158,13 +158,15 @@
         [arman addEntry:archiveEntry];
         [arman saveArchive];  
     }else{
-        ArchiveEntry* e = [arman getEntryById:self.archiveEntryId];
-        if (!e){
+        int entryId = self.archiveEntryId;
+        ArchiveEntry* e = [arman getEntryById:entryId];
+        if (e){
             e.comments = self.comments;
             [arman updateEntry:e];
-            [arman saveArchive];
+            bool saved = [arman saveArchive];
         }
     }
+    [self.rootViewDelegate refreshArchiveView];
     [arman release];
 }
 

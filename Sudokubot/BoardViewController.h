@@ -15,7 +15,6 @@
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* imageView;
-//@property(nonatomic, retain) IBOutlet UIBarButtonItem* saveToArchiveButton;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem* backToArchiveButton;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem* mainMenuButton;
 @property(nonatomic, retain) IBOutlet UITextField *commentTextField;

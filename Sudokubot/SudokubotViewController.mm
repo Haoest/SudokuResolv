@@ -144,14 +144,12 @@
         c.rootViewDelegate = self;
         self.archiveViewController = c;
         
-    }
+    } 
     [self.view addSubview:self.archiveViewController.view];
 }
 
 -(void) refreshArchiveView{
-    if (self.archiveViewController){
-        [self.archiveViewController refreshArchiveList];
-    }
+    [self.archiveViewController refreshArchiveList];
 }
 
 -(void) showBoardViewWithEntry:(ArchiveEntry *)entry{
