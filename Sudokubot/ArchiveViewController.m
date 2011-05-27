@@ -11,7 +11,7 @@
 
 @implementation ArchiveViewController
 @synthesize archiveTableViewController;
-@synthesize mainMenu;
+@synthesize mainMenu, doneButton, editButton, topToolBar, flexibleSpace;
 @dynamic rootViewDelegate;
 
 -(void) setRootViewDelegate:(id<RootViewDelegate>)rootView{
@@ -52,6 +52,12 @@
     [super viewDidLoad];
     [self.mainMenu setTarget:self];
     [self.mainMenu setAction:@selector(backToMainMenu)];
+    [self.doneButton setAction:@selector(doneButton_touchdown)];
+    [doneButton setTarget:self];
+    [self.editButton setAction:@selector(editButton_touchdone)];
+    [editButton setTarget:self];
+    NSArray* items = [NSArray arrayWithObjects:mainMenu, flexibleSpace, editButton, nil];
+    [topToolBar setItems:items];
 }
 
 - (void)viewDidUnload
@@ -82,6 +88,19 @@
 
 -(void) backToMainMenu{
     [self.rootViewDelegate showRootView];
+}
+
+-(void) doneButton_touchdown{
+    NSArray* items = [NSArray arrayWithObjects:mainMenu, flexibleSpace, editButton, nil];
+    [topToolBar setItems:items];
+    [archiveTableViewController setEditing:false animated:true];
+    [archiveTableViewController saveArchive];
+}
+
+-(void) editButton_touchdone{
+    NSArray* items = [NSArray arrayWithObjects:mainMenu, flexibleSpace, doneButton, nil];
+    [topToolBar setItems:items];   
+    [archiveTableViewController setEditing:true animated:true];    
 }
 
 @end

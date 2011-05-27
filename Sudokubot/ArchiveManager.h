@@ -10,15 +10,18 @@
 #import "ArchiveEntry.h"
 
 @interface ArchiveManager : NSObject {
-    NSMutableDictionary* allEntries;
+
 }
+
+@property(nonatomic, retain) NSMutableDictionary *allEntries;
+
 -(id) initDefaultArchive;
 -(ArchiveEntry*) getEntryById:(int) entryId;
 -(int) addEntry:(ArchiveEntry*) entry;
 -(void) updateEntry:(ArchiveEntry*) entry;
 -(void) removeEntry:(int) entryId;
 -(bool) saveArchive;
--(NSArray*) getAllEntries;
+-(NSMutableArray*) getAllEntries;
 -(int) getNextEntryId;
 
 //NSInteger sortArchiveEntryByCreationDate(id entry1, id entry2, void *reverse);

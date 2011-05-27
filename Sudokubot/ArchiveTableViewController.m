@@ -13,7 +13,7 @@
 
 @implementation ArchiveTableViewController
 
-@synthesize archiveContents;
+@synthesize archiveContents, archiveManager;
 @synthesize rootViewDelegate;
 
 - (void)dealloc
@@ -35,10 +35,8 @@
 }
 
 -(void) reloadDataSource{
-    ArchiveManager* archiveManager = [[ArchiveManager alloc]initDefaultArchive];
-    NSArray* contents = [archiveManager getAllEntries];
-    self.archiveContents = contents;
-    [archiveManager release];
+    self.archiveManager = [[ArchiveManager alloc]initDefaultArchive];
+    self.archiveContents = [self.archiveManager getAllEntries];
 }
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
@@ -78,6 +76,21 @@
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     int entryId = entry.entryId;
     [self.rootViewDelegate showBoardViewWithEntry:entry];
+}
+
+-(void) tableView:(UITableView*) tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete){
+        ArchiveEntry *entry = [archiveContents objectAtIndex:indexPath.row];
+        [archiveContents removeObjectAtIndex:indexPath.row]; 
+        [self.archiveManager removeEntry:entry.entryId];
+        NSArray *deletions = [NSArray arrayWithObjects:indexPath, nil];
+        [self.tableView deleteRowsAtIndexPaths:deletions withRowAnimation:YES];
+
+    }
+}
+
+-(void) saveArchive{
+    [self.archiveManager saveArchive];
 }
 
 @end
