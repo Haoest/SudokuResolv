@@ -75,27 +75,28 @@ static int BoardThresholdCandidates[] = {1,5, 10,20, 30,40, 50,60, 70,80, 90,100
 
 recognizerResultPack recognizeBoardFromPhoto(IplImage *imageInput){
     recognizerResultPack rv;
-    rv.boardGray = 0;
-    rv.boardArr = 0;
+    rv.success = false;
 	int backgroundThresholdMark;
 	IplImage *board = findSudokuBoard(imageInput, backgroundThresholdMark);
 	if (!board){
 		return rv;
 	}
-	rv = recognizeFromBoard(board, backgroundThresholdMark);
-	return rv;
+	return recognizeFromBoard(board, backgroundThresholdMark);
 }
 
 recognizerResultPack recognizeFromBoard(IplImage *boardGray, int initialBoardThreshold){
     recognizerResultPack rv;
+    rv.success = false;
 	vector<CvRect> grids;
 	grids = findGridsByThreshold(boardGray, initialBoardThreshold);
 	if (grids.size() == 81){
 		grids = getSortedGridsByCoord(grids);
 		rv.boardArr = extractNumbersFromBoard(boardGray, grids);
+        rv.boardGray = boardGray;
+        cvResetImageROI(rv.boardGray);
+        rv.grids = grids;
+        rv.success = true;
 	}
-    rv.boardGray = boardGray;
-    rv.grids = grids;
 	return rv;
 }
 

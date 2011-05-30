@@ -49,6 +49,13 @@ using namespace cv;
 
 // NOTE You should convert color mode as RGB before passing to this function
 +(UIImage*) CreateUIImageFromIplImage: (IplImage*) image{
+    bool colorRequiresConversion = false;
+    if (image->nChannels == 1){
+        colorRequiresConversion = true;
+        IplImage *temp = cvCreateImage(cvGetSize(image), 8, 3);
+        cvCvtColor(image, temp, CV_GRAY2BGR);
+        image = temp;
+    }
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     // Allocating the buffer for CGImage
     NSData *data = [NSData dataWithBytes:image->imageData length:image->imageSize];
@@ -66,6 +73,9 @@ using namespace cv;
     CGImageRelease(imageRef);
     CGDataProviderRelease(provider);
     CGColorSpaceRelease(colorSpace);
+    if (colorRequiresConversion){
+        cvReleaseImage(&image);
+    }
     return ret;  
 }
 

@@ -11,7 +11,7 @@
 #import "rootViewDelegate.h"
 #import "BoardViewController.h"
 #import "ArchiveViewController.h"
-
+#import "PreviewViewController.hpp"
 
 @interface SudokubotViewController : UIViewController <
     UIImagePickerControllerDelegate, 
@@ -39,6 +39,9 @@ RootViewDelegate> {
 
 @property(nonatomic, retain) BoardViewController* boardViewController;
 @property(nonatomic, retain) ArchiveViewController* archiveViewController;
+@property(nonatomic, retain) PreviewViewController* previewViewController;
 
 -(void) removeSubviews;
+-(void) showPreview: (UIImage*) imageWithSudokuBoard;
+
 @end

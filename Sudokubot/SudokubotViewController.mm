@@ -26,7 +26,7 @@
 @synthesize imagePicker;
 
 @synthesize rootView;
-@synthesize boardViewController, archiveViewController;
+@synthesize boardViewController, archiveViewController, previewViewController;
 
 - (void)dealloc
 {
@@ -77,6 +77,13 @@
     }
 }
 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [self dismissModalViewControllerAnimated:YES];
+    UIImage* img = [info valueForKey:UIImagePickerControllerOriginalImage];
+    [self showPreview:img];
+}
+
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self reevaluateClipboardButton];
@@ -119,21 +126,19 @@
 -(IBAction) btnCaptureFromCamera_touchDown{
     
 }
-         
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    [self dismissModalViewControllerAnimated:YES];
-    UIImage* img = [info valueForKey:UIImagePickerControllerOriginalImage];
-    [self showBoardViewWithImageAsBoard:img];
-}
  
  - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissModalViewControllerAnimated:YES];
 }
 
--(void) showBoardView{
-    
+-(void) showPreview: (UIImage*) imageWithSudokuBoard{
+    if (!previewViewController){
+        previewViewController = [[PreviewViewController alloc] initWithNibName:@"PreviewViewController" bundle:nil];
+        previewViewController.rootViewDelegate = self;
+    }
+    [self.view addSubview: previewViewController.view];
+    [previewViewController loadImageWithSudokuBoard:imageWithSudokuBoard];
 }
 
 -(void) showArchiveView{
@@ -183,5 +188,7 @@
 -(void) removeSubviews{
     [self.boardViewController.view removeFromSuperview];
     [self.archiveViewController.view removeFromSuperview];
+    [self.previewViewController.view removeFromSuperview];
 }
+
 @end

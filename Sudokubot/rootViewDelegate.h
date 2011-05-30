@@ -9,10 +9,12 @@
 
 #import <Foundation/Foundation.h>
 #import "ArchiveEntry.h"
+#import <UIKit/UIKit.h>
 
 @protocol RootViewDelegate <NSObject>
 
 @property(nonatomic, retain) UIView* rootView;
+
 -(void) showBoardView;
 -(void) showBoardViewWithImageAsBoard:(UIImage*) board;
 -(void) showBoardViewWithEntry: (ArchiveEntry*) entry;
