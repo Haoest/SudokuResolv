@@ -93,6 +93,17 @@
     NSLog([NSString stringWithFormat:@"testSolver: %d solutions tested, %d verified", t.tests.size(), verificaitonCount]);
 }
 
+-(void) testVerifyHint{
+    boardRecognizerTests t;
+    int verificationCount = 0;
+    for(list<testPack*>::iterator it = t.tests.begin(); it!=t.tests.end(); it++){
+        int** hints = [cvutil loadStringAsBoard:(*it)->hints];
+        bool verified = [solver verifyHints:hints];
+        verificationCount += verified ? 0 : 1;
+        STAssertTrue(verified, @"hints should be valid");
+    }
+    printf("%d hints were unverifiable", verificationCount);
+}
 
 @end
 

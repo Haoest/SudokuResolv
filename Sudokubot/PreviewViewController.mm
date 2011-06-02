@@ -10,6 +10,7 @@
 #import "cvutil.hpp"
 #import "PreviewViewController.hpp"
 #import "AppConfig.h"
+#import "solver.hpp"
 
 @implementation PreviewViewController
 
@@ -325,7 +326,13 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
 }
 
 -(IBAction) solveButton_touchdown{
-//    [previewImage setAlpha:0.5];
+    if ([solver verifyHints:hints]){
+        
+    }else{
+        UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Error" message:@"The given hints appear to be invalid, please check each row, column, and unit for duplicative entries." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] autorelease];
+        [alert show];
+        NSLog([cvutil SerializeBoard:hints]);
+    }
 }
 
 -(IBAction) cancelButton_touchdown{
