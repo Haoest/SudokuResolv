@@ -9,12 +9,14 @@
 #import "rootViewDelegate.h"
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "PreviewViewControllerDelegate.h"
 
-@interface PreviewViewController : UIViewController<PreviewViewControllerDelegate> {
+@interface PreviewViewController : UIViewController {
     NSMutableArray* gridViews;
     NSMutableArray* gridNumberLabels;
-    UIView* lastActiveGridView;
+    int selectedGridId;
+    UIView* numpadContainer;
+    NSMutableArray *numpadImages;
+    NSArray *numpadHotRegions;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* previewImage;
@@ -29,3 +31,4 @@
 -(void) loadImageWithSudokuBoard:(UIImage*) img;
 
 @end
+
