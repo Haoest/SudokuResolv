@@ -20,7 +20,9 @@ using namespace std;
            
 +(solver*) solverWithHints: (int**) hints;
 +(solver*) solverWithImage: (UIImage*) imageBoard;
+
 +(bool) verifySolution: (int**) completedBoard;
++(bool) verifyHints:(int**) hints;
 
 //return null if no solution
 -(int**) trySolve;

@@ -15,6 +15,8 @@ using namespace std;
 
 @synthesize board;
 
+bool verifyBoard(int** board, bool ignoreBlanks=false);
+
 int boardUnitIndexes[9][9] = {
     {0,1,2, 9, 10, 11, 18, 19, 20},
     {3,4,5, 12,13, 14, 21, 22, 23},
@@ -131,23 +133,26 @@ set<int> getBoxSampleSpace(int **currentBoard, int rowPosition, int columnPositi
     return rv;
 }
 
-+(bool) verifySolution: (int**) completedBoard{
+bool verifyBoard(int** board, bool ignoreBlanks){
     for (int i=0; i<9; i++){
         for(int j=0; j<8; j++){
+            if (ignoreBlanks && board[i][j] ==0){
+                continue;
+            }
             int *unitSequence = boardUnitIndexes[i];
             for (int k=j+1; k<9; k++){
                 // horizontal check
-                if (completedBoard[i][k] == completedBoard[i][j]){
+                if (board[i][k] == board[i][j]){
                     return false;
                 }
                 // vertical
-                if (completedBoard[k][i] == completedBoard[j][i]){
+                if (board[k][i] == board[j][i]){
                     return false;
                 }
                 // unit
                 int ordinalIndex_j = unitSequence[j];
                 int ordinalIndex_k = unitSequence[k];
-                if (completedBoard[ordinalIndex_j/9][ordinalIndex_j%9] == completedBoard[ordinalIndex_k/9][ordinalIndex_k%9]){
+                if (board[ordinalIndex_j/9][ordinalIndex_j%9] == board[ordinalIndex_k/9][ordinalIndex_k%9]){
                     return false;
                 }
             }
@@ -155,14 +160,22 @@ set<int> getBoxSampleSpace(int **currentBoard, int rowPosition, int columnPositi
     }
     for(int i=0; i<9; i++){
         for(int j=0; j<9; j++){
-            int gridValue = completedBoard[i][j];
+            int gridValue = board[i][j];
             if (gridValue <= 0 || gridValue > 9){
                 return false;
             }
         }
-    
+        
     }
     return true;
+}
+
++(bool) verifySolution: (int**) completedBoard{
+    return verifyBoard(completedBoard, false);
+}
+
++(bool) verifyHints:(int**) hints{
+    return verifyBoard(hints, true);
 }
 
 set<int> getBagOfNine(){

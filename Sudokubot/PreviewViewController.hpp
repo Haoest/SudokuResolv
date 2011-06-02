@@ -14,9 +14,11 @@
     NSMutableArray* gridViews;
     NSMutableArray* gridNumberLabels;
     int selectedGridId;
+    int selectedNumpadId;
     UIView* numpadContainer;
     NSMutableArray *numpadImages;
-    NSArray *numpadHotRegions;
+    NSMutableArray *numpadHotRegions;
+    int** hints;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView* previewImage;

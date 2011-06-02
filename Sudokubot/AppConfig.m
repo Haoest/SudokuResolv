@@ -29,6 +29,17 @@
     return 35;
 }
 
++(CGFloat) numpad_normal_alpha{
+    return 0.75;
+}
++(CGFloat) numpad_highlight_alpha{
+    return 1.0;
+}
+
++(CGFloat) previewImage_faded_alpha{
+    return 0.75;
+}
+
 @end
 
 

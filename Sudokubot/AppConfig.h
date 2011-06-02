@@ -17,6 +17,8 @@
 +(NSString*) archiveDateFormat;
 +(CGFloat) archiveCellFontHeight;
 +(CGFloat) archiveCellHeight;
-
++(CGFloat) numpad_normal_alpha;
++(CGFloat) numpad_highlight_alpha;
++(CGFloat) previewImage_faded_alpha;
 @end
 
