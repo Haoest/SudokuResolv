@@ -69,6 +69,26 @@
     [imageView setImage:[self drawGrids]];
 }
 
+-(void) resetFields{
+    archiveEntryId = -1;
+    if(self.board){
+        for(int i=0; i<9; i++){
+            delete self.board[i];
+        }
+        delete self.board;
+        self.board = 0;
+    }
+    if(self.solution){
+        for(int i=0; i<9; i++){
+            delete self.solution[i];
+        }
+        delete self.solution;
+        self.solution = 0;
+    }
+    comments = @"";
+    [commentTextField setText:@""];
+}
+
 -(void) wireupControls{
 
     [self.backToArchiveButton setTarget:self];
@@ -125,25 +145,6 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-+(BoardViewController*) boardWithImage:(UIImage*) boardAsImage{
-    BoardViewController *rv = [[BoardViewController alloc] initWithNibName:@"BoardViewController" bundle:nil];
-    IplImage *boardIpl = [cvutil CreateIplImageFromUIImage:boardAsImage];
-    recognizerResultPack recog = recognizeBoardFromPhoto(boardIpl);
-    rv.board = recog.boardArr;
-    cvReleaseImage(&boardIpl);
-    rv.solution = [[solver solverWithHints:rv.board] trySolve];
-    return rv;
-}
-
-+(BoardViewController*) boardWithArchiveEntry:(ArchiveEntry *)entry{
-    BoardViewController *rv = [[BoardViewController alloc] initWithNibName:@"BoardViewController" bundle:nil];
-    rv.archiveEntryId = entry.entryId;
-    rv.solution = [cvutil DeserializedBoard: [entry sudokuSolution] ];
-    rv.board = [cvutil DeserializedBoard:[entry sudokuHints]];
-    rv.comments = entry.comments;
-    return rv;
 }
 
 -(void) saveToArchive{
@@ -207,22 +208,29 @@
 }
 
 
--(void) refreshBoardWithPuzzle:(UIImage*) imageBoard{
-    IplImage *boardIpl = [cvutil CreateIplImageFromUIImage:imageBoard];
-    recognizerResultPack recog = recognizeBoardFromPhoto(boardIpl);
-    self.board = recog.boardArr;
-    cvReleaseImage(&boardIpl);
-    self.solution = [[solver solverWithHints:self.board] trySolve];
-    self.archiveEntryId = -1;
-    self.comments = @"";
+-(void) refreshBoardWithHints:(int**) hints{
+    [self resetFields];
+    self.board = new int*[9];
+    for(int i=0; i<9; i++){
+        self.board[i] = new int[9];
+    }
+    for(int i=0; i<9; i++){
+        for(int j=0; j<9; j++){
+            self.board[i][j] = hints[i][j];
+        }
+    }
+    solver* sol = [solver solverWithHints:self.board];
+    self.solution = [sol trySolve];
     [imageView setImage:[self drawGrids]];
 }
 
 -(void) refreshBoardWithArchiveEntry:(ArchiveEntry*) entry{
+    [self resetFields];
     self.archiveEntryId = entry.entryId;
     self.solution = [cvutil DeserializedBoard: [entry sudokuSolution] ];
     self.board = [cvutil DeserializedBoard:[entry sudokuHints]];
     self.comments = entry.comments;
+    [commentTextField setText:entry.comments];
     [self.imageView setImage:[self drawGrids]];
 }
 

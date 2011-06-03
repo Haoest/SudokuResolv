@@ -43,17 +43,17 @@
     STAssertTrue(b.size()==2, @"b size");
 }
 
--(void) testGetBoxSampleSpace{
-    int** board = [cvutil loadStringAsBoard:"530070000 600195000 098000060 800060003 400803001 700020006 060000280 000419005 000080079"];
-    solver *s = [solver solverWithHints:board];
-    STAssertTrue(isUniqueInRowColumnUnit(board, 1, 2), @"0 2");
-    STAssertFalse(isUniqueInRowColumnUnit(board, 1, 4), @"0 3");
-    STAssertTrue(isUniqueInRowColumnUnit(board, 1, 18), @"");
-    STAssertFalse(isUniqueInRowColumnUnit(board, 6, 28), @"");
-    STAssertFalse(isUniqueInRowColumnUnit(board, 9, 28),@"");
-    STAssertFalse(isUniqueInRowColumnUnit(board, 8, 28),@"");
-    STAssertFalse(isUniqueInRowColumnUnit(board, 3, 28), @"");
-}
+//-(void) testGetBoxSampleSpace{
+//    int** board = [cvutil loadStringAsBoard:"530070000 600195000 098000060 800060003 400803001 700020006 060000280 000419005 000080079"];
+//    solver *s = [solver solverWithHints:board];
+//    STAssertTrue(isUniqueInRowColumnUnit(board, 1, 2), @"0 2");
+//    STAssertFalse(isUniqueInRowColumnUnit(board, 1, 4), @"0 3");
+//    STAssertTrue(isUniqueInRowColumnUnit(board, 1, 18), @"");
+//    STAssertFalse(isUniqueInRowColumnUnit(board, 6, 28), @"");
+//    STAssertFalse(isUniqueInRowColumnUnit(board, 9, 28),@"");
+//    STAssertFalse(isUniqueInRowColumnUnit(board, 8, 28),@"");
+//    STAssertFalse(isUniqueInRowColumnUnit(board, 3, 28), @"");
+//}
 
 -(void) testSolveOneBoard{
     int** hints = [cvutil loadStringAsBoard:"530070000 600195000 098000060 800060003 400803001 700020006 060000280 000419005 000080079"];

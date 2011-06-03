@@ -52,38 +52,42 @@ int * getUnitSequence(int row, int column);
     return [solver solverWithHints:recog.boardArr];
 }
 
-//return null if no solution
--(int**) trySolve{
-    set<int> boxSpace[9][9];
-    for (int i=0; i<9; i++){
-        for (int j=0; j<9; j++){
-            boxSpace[i][j] = getBoxSampleSpace(board, i,j);
-        }
+
+set<int> getBagOfNine(){
+    set<int> rv;
+    for(int i=1; i<10; i++){
+        rv.insert(i);
     }
-    if( trySolveRecursively(board, boxSpace, 0)){
-        return board;
-    }
-    return nil;
+    return rv;
 }
 
-bool trySolveRecursively(int** currentBoard, set<int> boxSpace[9][9], int boxIndex){
-    if (boxIndex == 9*9){
-        return true;
+int* getUnitSequence(int row, int column){
+    int r = row/3;
+    int c = column/3;
+    return boardUnitIndexes[r*3+c];
+}
+
+set<int> getBoxSampleSpace(int **currentBoard, int rowPosition, int columnPosition){
+    if (currentBoard[rowPosition][columnPosition]>0){
+        set<int> empty;
+        return empty;
     }
-    set<int> &curBox = boxSpace[boxIndex/9][boxIndex%9];
-    if (curBox.size() ==0){ // is prefilled box value
-        return trySolveRecursively(currentBoard, boxSpace, boxIndex+1);
-    }
-    for(set<int>::iterator it = curBox.begin(); it != curBox.end(); it++){
-        if (isUniqueInRowColumnUnit(currentBoard, *it, boxIndex)){
-            currentBoard[boxIndex/9][boxIndex%9] = *it;
-            if (trySolveRecursively(currentBoard, boxSpace, boxIndex+1)){
-                return true;
-            }
+    set<int> rv = getBagOfNine();
+    for(int i=0; i<9; i++){
+        set<int>::iterator it;
+        if ((it = rv.find(currentBoard[rowPosition][i])) != rv.end()){
+            rv.erase( it );
+        }
+        if ((it = rv.find(currentBoard[i][columnPosition])) != rv.end()){
+            rv.erase( it );
         }
     }
-    currentBoard[boxIndex/9][boxIndex%9] = 0;
-    return false;
+    int *unitSequence = getUnitSequence(rowPosition, columnPosition);
+    for(int i=0; i<9; i++){
+        int ordinalIndex = unitSequence[i];
+        rv.erase(currentBoard[ordinalIndex/9][ordinalIndex%9]);
+    }
+    return rv;
 }
 
 bool isUniqueInRowColumnUnit(int** currentBoard, int boxValue, int boxIndex){
@@ -108,27 +112,38 @@ bool isUniqueInRowColumnUnit(int** currentBoard, int boxValue, int boxIndex){
     return true;
 }
 
-set<int> getBoxSampleSpace(int **currentBoard, int rowPosition, int columnPosition){
-    if (currentBoard[rowPosition][columnPosition]>0){
-        set<int> empty;
-        return empty;
+bool trySolveRecursively(int** currentBoard, set<int> boxSpace[9][9], int boxIndex){
+    if (boxIndex == 9*9){
+        return true;
     }
-    set<int> rv = getBagOfNine();
-    for(int i=0; i<9; i++){
-        set<int>::iterator it;
-        if ((it = rv.find(currentBoard[rowPosition][i])) != rv.end()){
-            rv.erase( it );
+    set<int> &curBox = boxSpace[boxIndex/9][boxIndex%9];
+    if (curBox.size() ==0){ // is prefilled box value
+        return trySolveRecursively(currentBoard, boxSpace, boxIndex+1);
+    }
+    for(set<int>::iterator it = curBox.begin(); it != curBox.end(); it++){
+        if (isUniqueInRowColumnUnit(currentBoard, *it, boxIndex)){
+            currentBoard[boxIndex/9][boxIndex%9] = *it;
+            if (trySolveRecursively(currentBoard, boxSpace, boxIndex+1)){
+                return true;
+            }
         }
-        if ((it = rv.find(currentBoard[i][columnPosition])) != rv.end()){
-            rv.erase( it );
+    }
+    currentBoard[boxIndex/9][boxIndex%9] = 0;
+    return false;
+}
+
+//return null if no solution
+-(int**) trySolve{
+    set<int> boxSpace[9][9];
+    for (int i=0; i<9; i++){
+        for (int j=0; j<9; j++){
+            boxSpace[i][j] = getBoxSampleSpace(board, i,j);
         }
     }
-    int *unitSequence = getUnitSequence(rowPosition, columnPosition);
-    for(int i=0; i<9; i++){
-        int ordinalIndex = unitSequence[i];
-        rv.erase(currentBoard[ordinalIndex/9][ordinalIndex%9]);
+    if( trySolveRecursively(board, boxSpace, 0)){
+        return board;
     }
-    return rv;
+    return nil;
 }
 
 +(bool) verifySolution: (int**) completedBoard{
@@ -201,13 +216,6 @@ set<int> getBoxSampleSpace(int **currentBoard, int rowPosition, int columnPositi
     return true;
 }
 
-set<int> getBagOfNine(){
-    set<int> rv;
-    for(int i=1; i<10; i++){
-        rv.insert(i);
-    }
-    return rv;
-}
 
 - (id)init
 {
@@ -232,10 +240,5 @@ set<int> getBagOfNine(){
 
 }
 
-int* getUnitSequence(int row, int column){
-    int r = row/3;
-    int c = column/3;
-    return boardUnitIndexes[r*3+c];
-}
 
 @end

@@ -16,7 +16,7 @@
 @property(nonatomic, retain) UIView* rootView;
 
 -(void) showBoardView;
--(void) showBoardViewWithImageAsBoard:(UIImage*) board;
+-(void) showBoardViewWithHints:(int**) hints;
 -(void) showBoardViewWithEntry: (ArchiveEntry*) entry;
 -(void) showArchiveView;
 -(void) refreshArchiveView;

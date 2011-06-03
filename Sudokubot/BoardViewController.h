@@ -33,10 +33,10 @@
 -(void) backToArchiveMenu;
 -(void) backToMainMenu;
 
-+(BoardViewController*) boardWithImage:(UIImage*) board;
-+(BoardViewController*) boardWithArchiveEntry:(ArchiveEntry*) entry;
+//+(BoardViewController*) boardWithHints:(int**) hints;
+//+(BoardViewController*) boardWithArchiveEntry:(ArchiveEntry*) entry;
 
--(void) refreshBoardWithPuzzle:(UIImage*) imageBoard;
+-(void) refreshBoardWithHints:(int**) hints;
 -(void) refreshBoardWithArchiveEntry:(ArchiveEntry*) entry;
 
 -(void) loadBoard;

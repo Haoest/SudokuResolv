@@ -20,8 +20,14 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
 @synthesize previewImage, solveButton, cancelButton;
 @synthesize rootViewDelegate;
 
--(void) createUIBoardGrids:(int**) hints{
-    UIFont *labelFont = [UIFont fontWithName:@"Courier New" size:16];
+-(void) resetFields{
+    [numpadContainer setHidden:true];
+    if (selectedNumpadId > -1){
+        [[numpadImages objectAtIndex:selectedNumpadId] setAlpha:[AppConfig numpad_normal_alpha]];
+    }
+    selectedGridId = -1;
+    selectedNumpadId = -1;
+    [previewImage setAlpha:1];
     if (gridNumberLabels){
         for(UILabel *lbl in gridNumberLabels){
             [lbl removeFromSuperview];
@@ -29,6 +35,27 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
         }
         [gridNumberLabels release];
     }
+    gridNumberLabels = nil;
+    if (gridViews){
+        for(UIView* v in gridViews){
+            [v removeFromSuperview];
+            [v release];
+        }
+        //            [gridViews release];
+    }
+    gridViews = nil;
+    if (hints){
+        for(int i=0; i<9; i++){
+            delete hints[i];
+        }
+        delete hints;
+    }
+    hints = nil;
+    [solveButton setEnabled:true];
+}
+
+-(void) createUIBoardGrids{
+    UIFont *labelFont = [UIFont fontWithName:@"Courier New" size:16];
     gridNumberLabels = [[NSMutableArray alloc]initWithCapacity:81];
     for(int i=0; i<81; i++){
         UIView * gv = [gridViews objectAtIndex:i];
@@ -60,33 +87,18 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
     IplImage* ipl = [cvutil CreateIplImageFromUIImage:img];
     recognizerResultPack result = recognizeBoardFromPhoto(ipl);
     cvReleaseImage(&ipl);
+    [self resetFields];
     if (result.success){
-        selectedGridId = -1;
-        selectedNumpadId = -1;
         UIImage* board = [cvutil CreateUIImageFromIplImage:result.boardGray];
         [previewImage setImage:board];
         [solveButton setEnabled:true];
         CGFloat HRatio = previewImage.frame.size.width / result.boardGray->width;
         CGFloat VRatio = previewImage.frame.size.height / result.boardGray->height;
-        if (gridViews){
-            for(UIView* v in gridViews){
-                [v removeFromSuperview];
-                [v release];
-            }
-//            [gridViews release];
-        }
         gridViews = [[NSMutableArray alloc] initWithCapacity:81];
         for(int i=0; i<81; i++){
             CvRect r = result.grids[i];
             CGRect grid = CGRectMake(r.x *HRatio + boardGridOffset.x , r.y*VRatio+boardGridOffset.y, r.width*HRatio, r.height*VRatio);
             [gridViews addObject: [[UIView alloc] initWithFrame:grid]];
-        }
-        [self createUIBoardGrids:result.boardArr];
-        if (hints){
-            for(int i=0; i<9; i++){
-                delete hints[i];
-            }
-            delete hints;
         }
         hints = new int*[9];
         for(int i=0; i<9; i++){
@@ -95,9 +107,11 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
                 hints[i][j] = result.boardArr[i][j];
             }
         }
+        [self createUIBoardGrids];
+
     }else{
         [previewImage setImage:img];
-        UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"" message:@"Sorry, can not find a Sudoku board from the given photo" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        UIAlertView *alert =[[[UIAlertView alloc] initWithTitle:@"" message:@"Sorry, can not find a Sudoku board from this photo. See Help for tips on how to take pictures for better recognition." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil] autorelease];
         [alert show];
         [solveButton setEnabled:false];
     }
@@ -327,11 +341,10 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
 
 -(IBAction) solveButton_touchdown{
     if ([solver verifyHints:hints]){
-        
+        [rootViewDelegate showBoardViewWithHints:hints];
     }else{
-        UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Error" message:@"The given hints appear to be invalid, please check each row, column, and unit for duplicative entries." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] autorelease];
+        UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Error" message:@"The given hints appear to be invalid, please check each row, column, and unit for duplicative numbers." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] autorelease];
         [alert show];
-        NSLog([cvutil SerializeBoard:hints]);
     }
 }
 

@@ -37,7 +37,7 @@
 }
 
 +(CGFloat) previewImage_faded_alpha{
-    return 0.75;
+    return 0.65;
 }
 
 @end

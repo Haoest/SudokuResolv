@@ -114,8 +114,10 @@
     UIPasteboard *pb = [UIPasteboard generalPasteboard];
     UIImage *board = pb.image;
     if (board){
-        BoardViewController *boardViewController = [BoardViewController boardWithImage:board];
-        [self.view addSubview:boardViewController.view];
+        [self showPreview:board];
+    }else{
+        UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Clipboard doesn't appear to have image data" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil] autorelease];
+        [alert show];
     }
 }
 
@@ -159,29 +161,30 @@
 
 -(void) showBoardViewWithEntry:(ArchiveEntry *)entry{
     if (self.boardViewController){
-        [self.boardViewController refreshBoardWithArchiveEntry:entry];
         [self removeSubviews];
     }else{
-        BoardViewController *c = [BoardViewController boardWithArchiveEntry:entry];
+        BoardViewController *c = [[BoardViewController alloc] initWithNibName:nil bundle:nil];
         self.boardViewController = c;
         c.rootViewDelegate = self;
     }
+    [self.boardViewController refreshBoardWithArchiveEntry:entry];
     [self.view addSubview: self.boardViewController.view];
 }
 
 -(void) showRootView{
     [self removeSubviews];
+    [self reevaluateClipboardButton];
 }
 
--(void) showBoardViewWithImageAsBoard:(UIImage *)board{
+-(void) showBoardViewWithHints:(int**) hints{
     if (self.boardViewController){
-        [self.boardViewController refreshBoardWithPuzzle:board];
         [self removeSubviews];
     }else{
-        BoardViewController *c = [BoardViewController boardWithImage:board];
+        BoardViewController *c = [[BoardViewController alloc] initWithNibName:nil bundle:nil];
         self.boardViewController = c;
         c.rootViewDelegate = self;
     }
+    [self.boardViewController refreshBoardWithHints:hints];    
     [self.view addSubview: self.boardViewController.view];
 }
 
