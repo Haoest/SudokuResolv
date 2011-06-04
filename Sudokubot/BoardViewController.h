@@ -12,9 +12,10 @@
 
 @interface BoardViewController : UIViewController<UITextFieldDelegate> {
     NSString* comments;
+    NSMutableArray* gridLabels;
+    UIView* gridView;
 }
 
-@property(nonatomic, retain) IBOutlet UIImageView* imageView;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem* backToArchiveButton;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem* mainMenuButton;
 @property(nonatomic, retain) IBOutlet UITextField *commentTextField;
@@ -25,7 +26,7 @@
 @property(nonatomic, retain) id <RootViewDelegate> rootViewDelegate;
 
 @property(nonatomic, assign) int archiveEntryId;
-@property(nonatomic, assign) int** board;
+@property(nonatomic, assign) int** hints;
 @property(nonatomic, assign) int** solution;
 @property(nonatomic, retain) NSString *comments;
 
@@ -39,8 +40,6 @@
 -(void) refreshBoardWithHints:(int**) hints;
 -(void) refreshBoardWithArchiveEntry:(ArchiveEntry*) entry;
 
--(void) loadBoard;
--(UIImage*) drawGrids;
 -(void) wireupControls;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField;

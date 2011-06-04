@@ -6,20 +6,19 @@
 //  Copyright 2011 none. All rights reserved.
 //
 
-#import <opencv2/core/core.hpp>
 #import "cvutil.hpp"
 #import "solver.hpp"
-#import "boardRecognizer.h"
 #import "BoardViewController.h"
 #import "ArchiveViewController.h"
 #import "AppConfig.h"
 #import "ArchiveEntry.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation BoardViewController
 
-@synthesize imageView, commentTextField, contentsView, navigationBar;
+@synthesize commentTextField, contentsView, navigationBar;
 @synthesize backToArchiveButton, mainMenuButton;
-@synthesize board, solution, archiveEntryId;
+@synthesize hints, solution, archiveEntryId;
 @synthesize rootViewDelegate;
 @dynamic comments;
 
@@ -60,23 +59,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self loadBoard];
     [self wireupControls];
     [self.commentTextField setText:self.comments];
 }
 
--(void) loadBoard{
-    [imageView setImage:[self drawGrids]];
-}
-
 -(void) resetFields{
     archiveEntryId = -1;
-    if(self.board){
+    if(self.hints){
         for(int i=0; i<9; i++){
-            delete self.board[i];
+            delete self.hints[i];
         }
-        delete self.board;
-        self.board = 0;
+        delete self.hints;
+        self.hints = 0;
     }
     if(self.solution){
         for(int i=0; i<9; i++){
@@ -98,41 +92,43 @@
     self.commentTextField.delegate = self;
 }
 
--(UIImage*) drawGrids{
-    IplImage* img = cvCreateImage(cvSize(288, 288), IPL_DEPTH_8U, 3);
-    cvSet(img, CV_RGB(255, 255, 255));
-    int max=287, size = 30;
-    int index = 0;
-    for (int i=0; i<=9; i++){
-        cvLine(img, cvPoint(0, index+1), cvPoint(max, index+1), cvScalar(0,0,0));
-        cvLine(img, cvPoint(index+1, 0), cvPoint(index+1, max), cvScalar(0,0,0));
-        if (i%3 == 0){
-            cvLine(img, cvPoint(0, index), cvPoint(max, index), cvScalar(0,0,0));            
-            cvLine(img, cvPoint(0, index+2), cvPoint(max, index+2), cvScalar(0,0,0));     
-            cvLine(img, cvPoint(index, 0), cvPoint(index, max), cvScalar(0,0,0));
-            cvLine(img, cvPoint(index+2, 0), cvPoint(index+2, max), cvScalar(0,0,0));
-            index+=2;
-        }
-        index += size+1;
-        
-    }
-    CvFont font;
-    cvInitFont(&font, CV_FONT_VECTOR0, 0.7, 0.7);
-    for(int i=0; i<9; i++){
-        for(int j=0; j<9; j++){
-            char *number = new char[2];
-            number[0] = (char) self.solution[i][j]+48;
-            number[1] = 0;
-            CvScalar color = cvScalar(0,0,0);
-            if (self.board && self.board[i][j] != 0){
-                color = cvScalar(255,0,0);
+-(void) drawGridsView{
+    if(gridView==nil){
+        gridLabels = [[NSMutableArray alloc] initWithCapacity:81];
+        int unitSize = 96;
+        int gridSize = 32;
+        UIView* main = [[UIView alloc] initWithFrame:CGRectMake(20, 70, 288, 288)];
+        [main.layer setBorderWidth:1];
+        [main.layer setBorderColor:[[UIColor blackColor] CGColor]];
+        for(int i=0; i<9; i++){
+            for(int j=0; j<9; j++){
+                UILabel *grid = [[UILabel alloc]initWithFrame:CGRectMake(i*gridSize+1, j*gridSize+1, gridSize+1, gridSize+1)];
+                [grid.layer setBorderWidth:1];
+                [grid.layer setBorderColor:[[UIColor grayColor] CGColor]];
+                [main addSubview:grid];
+                [gridLabels addObject:grid];
+                [grid setTextAlignment:UITextAlignmentCenter];
             }
-            cvPutText(img, number, cvPoint(j*32+10, i*31+25), &font, color);
+        }
+        for(int i=0; i<3; i++){
+            for(int j=0; j<3; j++){
+                UIView* unit = [[UIView alloc]initWithFrame:CGRectMake(i*unitSize+1, j*unitSize+1, unitSize, unitSize)];
+                [unit.layer setBorderColor:[[UIColor blackColor] CGColor]];
+                [unit.layer setBorderWidth:1];
+                [main addSubview:unit];
+            }
+        }
+        [self.view addSubview:main];
+    }
+    for(int i=0; i<81; i++){
+        UILabel *grid = [gridLabels objectAtIndex:i];
+        [grid setText:[NSString stringWithFormat:@"%d", self.solution[i/9][i%9]]];
+        if (self.hints[i/9][i%9] ==0){
+            [grid setTextColor:[UIColor blueColor]];
+        }else{
+            [grid setTextColor:[UIColor blackColor]];            
         }
     }
-    UIImage* rv = [cvutil CreateUIImageFromIplImage:img];
-    cvReleaseImage(&img);
-    return rv;
 }
 
 - (void)viewDidUnload
@@ -153,7 +149,7 @@
     if(self.archiveEntryId == -1){
         ArchiveEntry* archiveEntry = [ArchiveEntry archiveEntryWithValues:-1
                                                        solutionString:serializedBoard
-                                                           hintString:[cvutil SerializeBoard:board]
+                                                           hintString:[cvutil SerializeBoard:hints]
                                                      secondsSince1970:[[NSDate date] timeIntervalSince1970]
                                                                  comments:self.comments];
         [arman addEntry:archiveEntry];
@@ -208,30 +204,30 @@
 }
 
 
--(void) refreshBoardWithHints:(int**) hints{
+-(void) refreshBoardWithHints:(int**) _hints{
     [self resetFields];
-    self.board = new int*[9];
+    self.hints = new int*[9];
     for(int i=0; i<9; i++){
-        self.board[i] = new int[9];
+        self.hints[i] = new int[9];
     }
     for(int i=0; i<9; i++){
         for(int j=0; j<9; j++){
-            self.board[i][j] = hints[i][j];
+            self.hints[i][j] = _hints[i][j];
         }
     }
-    solver* sol = [solver solverWithHints:self.board];
+    solver* sol = [solver solverWithHints:self.hints];
     self.solution = [sol trySolve];
-    [imageView setImage:[self drawGrids]];
+    [self drawGridsView];
 }
 
 -(void) refreshBoardWithArchiveEntry:(ArchiveEntry*) entry{
     [self resetFields];
     self.archiveEntryId = entry.entryId;
     self.solution = [cvutil DeserializedBoard: [entry sudokuSolution] ];
-    self.board = [cvutil DeserializedBoard:[entry sudokuHints]];
+    self.hints = [cvutil DeserializedBoard:[entry sudokuHints]];
     self.comments = entry.comments;
     [commentTextField setText:entry.comments];
-    [self.imageView setImage:[self drawGrids]];
+    [self drawGridsView];
 }
 
 @end

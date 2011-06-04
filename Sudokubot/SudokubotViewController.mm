@@ -126,7 +126,12 @@
 }
 
 -(IBAction) btnCaptureFromCamera_touchDown{
-    
+    imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentModalViewController:imagePicker animated:NO];
+    }
 }
  
  - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
