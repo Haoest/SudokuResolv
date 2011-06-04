@@ -19,7 +19,6 @@
 @property(nonatomic, retain) IBOutlet UIBarButtonItem* backToArchiveButton;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem* mainMenuButton;
 @property(nonatomic, retain) IBOutlet UITextField *commentTextField;
-@property(nonatomic, retain) IBOutlet UIView *contentsView;
 @property(nonatomic, retain) IBOutlet UIToolbar *navigationBar;
 
 //superArchiveView points to the archive view object which creates this board view

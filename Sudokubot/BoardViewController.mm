@@ -16,7 +16,7 @@
 
 @implementation BoardViewController
 
-@synthesize commentTextField, contentsView, navigationBar;
+@synthesize commentTextField, navigationBar;
 @synthesize backToArchiveButton, mainMenuButton;
 @synthesize hints, solution, archiveEntryId;
 @synthesize rootViewDelegate;
@@ -102,7 +102,7 @@
         [main.layer setBorderColor:[[UIColor blackColor] CGColor]];
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){
-                UILabel *grid = [[UILabel alloc]initWithFrame:CGRectMake(i*gridSize+1, j*gridSize+1, gridSize+1, gridSize+1)];
+                UILabel *grid = [[UILabel alloc]initWithFrame:CGRectMake(j*gridSize+1, i*gridSize+1, gridSize+1, gridSize+1)];
                 [grid.layer setBorderWidth:1];
                 [grid.layer setBorderColor:[[UIColor grayColor] CGColor]];
                 [main addSubview:grid];
@@ -199,7 +199,7 @@
     [UIView beginAnimations: @"anim" context: nil];
     [UIView setAnimationBeginsFromCurrentState: YES];
     [UIView setAnimationDuration: movementDuration];
-    self.contentsView.frame = CGRectOffset(self.contentsView.frame, 0, movement);
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
     [UIView commitAnimations];
 }
 
