@@ -13,9 +13,6 @@
 
 @protocol RootViewDelegate <NSObject>
 
-@property(nonatomic, retain) UIView* rootView;
-
--(void) showBoardView;
 -(void) showBoardViewWithHints:(int**) hints;
 -(void) showBoardViewWithEntry: (ArchiveEntry*) entry;
 -(void) showArchiveView;

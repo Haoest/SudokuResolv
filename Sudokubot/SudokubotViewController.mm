@@ -25,11 +25,14 @@
 @synthesize btnHelp;
 @synthesize imagePicker;
 
-@synthesize rootView;
 @synthesize boardViewController, archiveViewController, previewViewController;
 
 - (void)dealloc
 {
+    self.boardViewController = nil;
+    self.archiveViewController = nil;
+    self.previewViewController = nil;
+    self.imagePicker = nil;
     [super dealloc];
 }
 
@@ -37,7 +40,6 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -52,12 +54,17 @@
         [btnCaptureFromCamera setEnabled:NO];
         [btnCaptureFromCamera setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     }
-    rootView = self.view;
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    self.MainImageView = nil;
+    self.btnHelp = nil;
+    self.btnCaptureFromCamera = nil;
+    self.btnOpenFromClipboard = nil;
+    self.btnOpenFromPhotoLibrary = nil;
+    self.btnArchive = nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -69,8 +76,8 @@
 }
 
 - (IBAction) btnOpenFromPhotoLibrary_touchDown{
-    imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.delegate = self;
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    self.imagePicker.delegate = self;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [self presentModalViewController:imagePicker animated:NO];
@@ -126,8 +133,8 @@
 }
 
 -(IBAction) btnCaptureFromCamera_touchDown{
-    imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.delegate = self;
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    self.imagePicker.delegate = self;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         [self presentModalViewController:imagePicker animated:NO];
@@ -140,12 +147,12 @@
 }
 
 -(void) showPreview: (UIImage*) imageWithSudokuBoard{
-    if (!previewViewController){
-        previewViewController = [[PreviewViewController alloc] initWithNibName:@"PreviewViewController" bundle:nil];
-        previewViewController.rootViewDelegate = self;
+    if (!self.previewViewController){
+        self.previewViewController = [[PreviewViewController alloc] initWithNibName:@"PreviewViewController" bundle:nil];
+        self.previewViewController.rootViewDelegate = self;
     }
     [self.view addSubview: previewViewController.view];
-    [previewViewController loadImageWithSudokuBoard:imageWithSudokuBoard];
+    [self.previewViewController loadImageWithSudokuBoard:imageWithSudokuBoard];
 }
 
 -(void) showArchiveView{

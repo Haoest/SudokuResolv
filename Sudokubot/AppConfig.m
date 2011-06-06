@@ -19,7 +19,7 @@
 }
 
 +(NSString*) archiveDateFormat{
-    return @"yyyy-MM-dd HH:mm";
+    return  [NSString stringWithString:@"yyyy-MM-dd HH:mm"];
 }
 +(CGFloat) archiveCellFontHeight{
     return 14;
