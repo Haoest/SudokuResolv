@@ -11,17 +11,14 @@
 #import "rootViewDelegate.h"
 
 @interface ArchiveTableViewController : UITableViewController {
-}
 
-@property (nonatomic, retain) NSMutableArray* archiveContents;
-@property (nonatomic, retain) ArchiveManager *archiveManager;
+}
 
 +(ArchiveTableViewController*) archiveTableViewControllerFromDefaultArchive;
 
-@property (nonatomic, retain) id<RootViewDelegate> rootViewDelegate;
+@property (nonatomic, assign) id<RootViewDelegate> rootViewDelegate;
 
 -(void) reloadDataSource;
--(void) saveArchive;
 
 @end
 

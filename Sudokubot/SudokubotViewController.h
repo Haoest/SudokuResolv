@@ -20,5 +20,6 @@ RootViewDelegate> {
     
 }
 
+- (void) reevaluateClipboardButton;
 
 @end

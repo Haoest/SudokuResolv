@@ -16,7 +16,6 @@
 
 @interface SudokubotViewController ()
 
-- (void) reevaluateClipboardButton;
 - (void) removeSubviews;
 
 @property (nonatomic, retain) IBOutlet UIButton *btnCaptureFromCamera;

@@ -14,14 +14,8 @@
     id<RootViewDelegate> rootViewDelegate;
 }
 
-@property(nonatomic, retain) IBOutlet UIBarButtonItem *mainMenu;
-@property(nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
-@property(nonatomic, retain) IBOutlet UIBarButtonItem *editButton;
-@property(nonatomic, retain) IBOutlet UIToolbar *topToolBar;
-@property(nonatomic, retain) IBOutlet UIBarButtonItem *flexibleSpace;
-
 @property(nonatomic, retain) ArchiveTableViewController* archiveTableViewController;
-@property(nonatomic, retain) id<RootViewDelegate> rootViewDelegate;
+@property(nonatomic, assign) id<RootViewDelegate> rootViewDelegate;
 
 +(ArchiveViewController*) archiveViewControllerFromDefaultArchive;
 

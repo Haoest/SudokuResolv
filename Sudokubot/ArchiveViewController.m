@@ -9,13 +9,25 @@
 #import "ArchiveViewController.h"
 #import "BoardViewController.h"
 
+@interface ArchiveViewController()
+
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *mainMenu;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *editButton;
+@property(nonatomic, retain) IBOutlet UIToolbar *topToolBar;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *flexibleSpace;
+
+@end
+
+
 @implementation ArchiveViewController
+
 @synthesize archiveTableViewController;
 @synthesize mainMenu, doneButton, editButton, topToolBar, flexibleSpace;
 @dynamic rootViewDelegate;
 
 -(void) setRootViewDelegate:(id<RootViewDelegate>)rootView{
-    rootViewDelegate = rootView;
+    self.rootViewDelegate = rootView;
     archiveTableViewController.rootViewDelegate = rootView;
 }
 
@@ -34,11 +46,19 @@
 
 - (void)dealloc
 {
+    archiveTableViewController = nil;
     [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning
 {
+    self.mainMenu = nil;
+    self.doneButton = nil;
+    self.editButton = nil;
+    self.topToolBar = nil;
+    self.flexibleSpace = nil;
+    self.view = nil;
+    self.archiveTableViewController.view = nil;
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -62,6 +82,13 @@
 
 - (void)viewDidUnload
 {
+    self.mainMenu = nil;
+    self.doneButton = nil;
+    self.editButton = nil;
+    self.topToolBar = nil;
+    self.flexibleSpace = nil;
+    self.view = nil;
+    self.archiveTableViewController.view = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

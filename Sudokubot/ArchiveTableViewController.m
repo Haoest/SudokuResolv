@@ -11,6 +11,15 @@
 #import "ArchiveEntry.h"
 #import "BoardViewController.h"
 
+@interface ArchiveTableViewController()
+
+-(void) saveArchive;
+
+@property (nonatomic, retain) NSMutableArray* archiveContents;
+@property (nonatomic, retain) ArchiveManager *archiveManager;
+
+@end
+
 @implementation ArchiveTableViewController
 
 @synthesize archiveContents, archiveManager;
@@ -18,10 +27,15 @@
 
 - (void)dealloc
 {
+    self.archiveContents = nil;
+    self.archiveManager = nil;
     [super dealloc];
-    if (self.archiveContents){
-        [self.archiveContents release];
-    }
+    
+}
+
+-(void) viewDidUnload{
+    
+    [super viewDidUnload];
 }
 
 -(void) viewDidLoad{
@@ -74,18 +88,16 @@
     NSInteger index = indexPath.row;
     ArchiveEntry* entry = [archive objectAtIndex:index];
     [tableView deselectRowAtIndexPath:indexPath animated:true];
-    int entryId = entry.entryId;
     [self.rootViewDelegate showBoardViewWithEntry:entry];
 }
 
 -(void) tableView:(UITableView*) tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete){
         ArchiveEntry *entry = [archiveContents objectAtIndex:indexPath.row];
-        [archiveContents removeObjectAtIndex:indexPath.row]; 
         [self.archiveManager removeEntry:entry.entryId];
+        [archiveContents removeObjectAtIndex:indexPath.row]; 
         NSArray *deletions = [NSArray arrayWithObjects:indexPath, nil];
         [self.tableView deleteRowsAtIndexPaths:deletions withRowAnimation:YES];
-
     }
 }
 
