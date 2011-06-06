@@ -14,6 +14,9 @@ using namespace cv;
 static bool debug_showImage = 0;
 static bool showOcrResult = 0;
 
+//dummy method declaration to avoid compilation error, this method is used in Windows port for debugging
+void showImage(IplImage*, char *title="no name", bool forceDisplay=0);
+
 IplImage* findBoardFromContour(CvSeq* contours, IplImage*fullSrcGray, IplImage *fullSrcBinary );
 IplImage* doesResembleBoard(CvSeq* contours, IplImage*fullSrc, IplImage *fullSrcBinary);
 void findExtremas(CvSeq* contour, int &left, int &right, int &top, int &bottom);
@@ -81,7 +84,11 @@ recognizerResultPack recognizeBoardFromPhoto(IplImage *imageInput){
 	if (!board){
 		return rv;
 	}
-	return recognizeFromBoard(board, backgroundThresholdMark);
+	rv = recognizeFromBoard(board, backgroundThresholdMark);
+    if (!rv.success){
+        cvReleaseImage(&board);
+    }
+    return rv;
 }
 
 recognizerResultPack recognizeFromBoard(IplImage *boardGray, int initialBoardThreshold){
@@ -165,6 +172,7 @@ int ** extractNumbersFromBoard(IplImage *boardGray, vector<CvRect> &grids){
 		}
 		index++;
 		cvReleaseImage(&noiselessGrid);
+        cvReleaseImage(&grid);
 	}
 	return rv;
 }
@@ -182,7 +190,7 @@ IplImage* findSudokuBoard(IplImage *fullSrc, int &backgroundThresholdUsed){
 		cvReleaseImage(&fullSrcGray);
 		fullSrcGray = resized;
 	}
-	showImage(fullSrcGray, "findSudokuBoard original gray");
+//	showImage(fullSrcGray, "findSudokuBoard original gray");
 	IplImage *fullSrcGrayBlurred = cvCloneImage(fullSrcGray);
 	IplImage *rv = 0;
 	cvSmooth(fullSrcGray, fullSrcGrayBlurred, CV_GAUSSIAN);
@@ -195,14 +203,14 @@ IplImage* findSudokuBoard(IplImage *fullSrc, int &backgroundThresholdUsed){
 		CvSeq* contours = 0;
 		cvAdaptiveThreshold(fullSrcGrayBlurred, fullSrcInverted, 255, CV_ADAPTIVE_THRESH_MEAN_C, CV_THRESH_BINARY_INV, blockSize, backgroundThresholdUsed);
 		cvAdaptiveThreshold(fullSrcGrayBlurred, fullSrcBinary, 255, CV_ADAPTIVE_THRESH_MEAN_C, CV_THRESH_BINARY, blockSize, backgroundThresholdUsed);
-		showImage(fullSrcInverted, "findSudokuBoard inverted");
+//		showImage(fullSrcInverted, "findSudokuBoard inverted");
 		cvFindContours(fullSrcInverted, storage, &contours, sizeof(CvContour), CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE);
 		rv = findBoardFromContour(contours, fullSrcGray, fullSrcBinary);
 		cvReleaseImage(&fullSrcInverted);
 		cvReleaseImage(&fullSrcBinary);
 		cvReleaseMemStorage(&storage);
 	} 
-	showImage(rv, "found board");
+//	showImage(rv, "found board");
 	cvReleaseImage(&fullSrcGray);
 	cvReleaseImage(&fullSrcGrayBlurred);
 	return rv;
@@ -346,14 +354,6 @@ IplImage* doesResembleBoard(CvSeq* contours, IplImage* fullSrcGray, IplImage *fu
     CvSeq *boardLines = 0;
     IplImage* roiEdges = cvCreateImage(cvGetSize(potentialBoardRoi), 8, 1);
 	cvCanny(potentialBoardRoi, roiEdges, 50, 200);
-	//showImage(roiEdges, "doesResembleBoard cannied edges");
-	// consider the case where the board inscribed by the square (formed by the outer contour) is tilted 45 degrees,
-	// the length of the board would equal to the hypotenuse of the right triangle formed by one side of the board, and 
-	// 2 half-sides of the outer square, thus sqrt(2*halfLength*halfLength) would be the approximated length of the board
-	// now also taking into account the possible l oss of information from canny and cvThreshold, where a diagonal line
-	// doesn't have enough pixels to stand more solid, hough threshold can be set to half of the length of the board
-	// to confidently find a thin diagonal lines. 
-	int halfLength = MIN(cvGetSize(potentialBoardRoi).width, cvGetSize(potentialBoardRoi).height) /2;
 	int houghThreshold = MIN(cvGetSize(potentialBoardRoi).width, cvGetSize(potentialBoardRoi).height) /3;
 	boardLines = cvHoughLines2(roiEdges, storage, CV_HOUGH_STANDARD, 1, CV_PI/180, houghThreshold, 0, 0);
 	cvReleaseImage(&roiEdges);
@@ -517,7 +517,6 @@ IplImage* extractAndSetBoardUpRight(CvSeq* contours, const CvPoint& contourOffse
 	IplImage *rv = cvCreateImage(cvSize(boardRoi.width, boardRoi.height), 8, 1);
 	cvZero(rv);
 	cvCopy(upRight, rv);
-	cvReleaseImage(&mask_dst);
 	cvReleaseImage(&upRight);
 	return rv;
 }

@@ -92,44 +92,6 @@ using namespace cv;
     return rv;
 }
 
-+(IplImage*) LoadPbmAsIplImage: (NSString*) fileName{
-    int firstLineOfImageData = 5;
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"pbm"];
-    NSData *data = [NSData dataWithContentsOfFile:filePath];
-    NSString *content = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-    NSArray *lines = [content componentsSeparatedByString:@"\n"];
-    NSString *first = [lines objectAtIndex:firstLineOfImageData]; //because first line (index 0) contains meta data
-    int width = [first length];
-    int height = [lines count]-firstLineOfImageData-1;
-    IplImage *img = cvCreateImage(cvSize(width, height), IPL_DEPTH_8U, 1);
-    for (int i=firstLineOfImageData; i<[lines count]; i++){
-        for (int j=0; j<[[lines objectAtIndex:i] length]; j++){
-            int pixelValue = 255;
-            unichar c = [[lines objectAtIndex:i] characterAtIndex:j];
-            if (c == '1'){
-                pixelValue = 0;
-            }
-            *(img->imageData + (i-firstLineOfImageData) * img->widthStep + j) = pixelValue;
-        }
-    }
-    return img;
-}
-
-+(IplImage*) GetNormalizedImageFromBlackNWhite:(IplImage*) blackWhiteImage{
-    IplImage* rv = cvCreateImage(cvGetSize(blackWhiteImage), IPL_DEPTH_8U, 3);
-    for(int y=0; y<rv->height; y++){
-        uchar *dstx0 = (uchar*)(rv->imageData + y*rv->widthStep);
-        uchar *srcx0 = (uchar*)(blackWhiteImage->imageData + y*blackWhiteImage->widthStep);
-        for(int x=0; x<rv->width; x++){
-            uchar pixelValue = (*(srcx0+x)) * 255;
-            dstx0[3*x+0] = pixelValue;
-            dstx0[3*x+1] = pixelValue;
-            dstx0[3*x+2] = pixelValue;
-        }
-    }
-    return rv;
-}
-
 +(int**) ReadBoardFromFile:(NSString*) fileName{
     NSString *s = [NSString stringWithContentsOfFile:fileName encoding:NSASCIIStringEncoding error:nil];
     return [cvutil DeserializedBoard:s];
@@ -138,23 +100,31 @@ using namespace cv;
 //board must contain a valid solution or nil is returned
 +(int**) DeserializedBoard:(NSString*) board{
     board = [board stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSArray *rawBoard = [board componentsSeparatedByString:@" "];
+    if ([rawBoard count] != 9){
+        return nil;
+    }
     int **a;
     a = new int*[9];
     for(int i=0; i<9; i++){
         a[i] = new int[9];
     }
-    NSArray *rawBoard = [board componentsSeparatedByString:@" "];
-    if ([rawBoard count] != 9){
-        return nil;
-    }
     for(int i=0; i<9; i++){
         NSString *line = [rawBoard objectAtIndex:i];
         if ([line length] != 9){
+            for(int i=0; i<9; i++){
+                delete a[i];
+            }
+            delete a;
             return nil;
         }
         for(int j=0; j<9; j++){
             a[i][j] = ((int) [line characterAtIndex:j]) - 48;
             if (a[i][j] <0 || a[i][j] >9){
+                for(int i=0; i<9; i++){
+                    delete a[i];
+                }
+                delete a;
                 return nil;
             }
         }

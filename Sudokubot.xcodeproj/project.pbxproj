@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A105783139C39DF00089373 /* acknowledgement.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A105782139C39DF00089373 /* acknowledgement.txt */; };
 		3A582759132CF031003F8ACC /* puzzle1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A582757132CF031003F8ACC /* puzzle1.png */; };
 		3A7E57D1134EB0B7003CCF9D /* BoardViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E57CF134EB0B7003CCF9D /* BoardViewController.mm */; };
 		3A7E57D2134EB0B7003CCF9D /* BoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E57D0134EB0B7003CCF9D /* BoardViewController.xib */; };
@@ -119,6 +120,7 @@
 /* Begin PBXFileReference section */
 		3A0FB73C138620920050361A /* boardRecognizerTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = boardRecognizerTests.mm; sourceTree = "<group>"; };
 		3A0FB73D138620920050361A /* boardRecognizerTests.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = boardRecognizerTests.hpp; sourceTree = "<group>"; };
+		3A105782139C39DF00089373 /* acknowledgement.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = acknowledgement.txt; path = devres/acknowledgement.txt; sourceTree = "<group>"; };
 		3A582758132CF031003F8ACC /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/puzzle1.png; sourceTree = "<group>"; };
 		3A7E57CE134EB0B7003CCF9D /* BoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardViewController.h; sourceTree = "<group>"; };
 		3A7E57CF134EB0B7003CCF9D /* BoardViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BoardViewController.mm; sourceTree = "<group>"; };
@@ -446,6 +448,7 @@
 				3A94CC6E1331B46000B380B2 /* numerics0to9.png */,
 				3A996BE0132FF9700061CCFD /* simpleLines.png */,
 				3A582757132CF031003F8ACC /* puzzle1.png */,
+				3A105782139C39DF00089373 /* acknowledgement.txt */,
 			);
 			name = "Development Resources";
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				3A967F5413969A1100A52AD4 /* numpad_8.png in Resources */,
 				3A967F5513969A1100A52AD4 /* numpad_9.png in Resources */,
 				3A967F5613969A1100A52AD4 /* numpad_0.png in Resources */,
+				3A105783139C39DF00089373 /* acknowledgement.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

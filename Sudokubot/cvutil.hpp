@@ -14,9 +14,9 @@
 @interface cvutil :NSObject {
 
 }
+
 +(IplImage *) CreateIplImageFromUIImage: (UIImage*) image;
 +(UIImage*) CreateUIImageFromIplImage: (IplImage*) image;
-+(IplImage*) GetNormalizedImageFromBlackNWhite:(IplImage*) blackWhiteImage;
 +(int**) ReadBoardFromFile:(NSString*) fileName;
 +(NSString*) SerializeBoard:(int**)board;
 +(int**) DeserializedBoard:(NSString*) board;

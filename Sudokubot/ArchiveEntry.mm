@@ -21,7 +21,7 @@
                              hintString: (NSString*) hintsAsString
                            secondsSince1970:(double)secondsSince1970 
                                comments:(NSString*)comments{
-    ArchiveEntry* rv = [[ArchiveEntry alloc] init];
+    ArchiveEntry* rv = [[[ArchiveEntry alloc] init] autorelease];
     rv.entryId = entryId;
     rv.comments = [comments stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     rv.sudokuSolution = [solutionAsString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];

@@ -12,21 +12,23 @@
 #import "ArchiveEntry.h"
 #import "AppConfig.h"
 
+@interface ArchiveManager ()
+-(int) getNextEntryId;
+@end
+
 @implementation ArchiveManager
 
-@synthesize allEntries;
-
 -(id) initDefaultArchive{
-    self.allEntries = [NSMutableDictionary dictionaryWithContentsOfFile:[AppConfig getArchiveFileName]];
-    if (!self.allEntries){
-        self.allEntries = [[NSMutableDictionary alloc] init];
+    allEntries = [NSMutableDictionary dictionaryWithContentsOfFile:[AppConfig getArchiveFileName]];
+    if (!allEntries){
+        allEntries = [[[NSMutableDictionary alloc] init] autorelease];
     }
     return self;
 }
 
 -(ArchiveEntry*) getEntryById:(int) entryId{
     NSString *key = [NSString stringWithFormat:@"%d", entryId];
-    NSString *rv = [self.allEntries objectForKey:key];
+    NSString *rv = [allEntries objectForKey:key];
     if (!rv){
         return nil;
     }
@@ -43,7 +45,7 @@
     entry.entryId = entryId;
     NSString *key = [NSString stringWithFormat:@"%d", entryId];
     NSString *value = [entry toArchiveString];
-    [self.allEntries setObject:value forKey:key];
+    [allEntries setObject:value forKey:key];
     return entryId;
 }
 
@@ -53,35 +55,35 @@
     }
     NSString *value = [entry toArchiveString];
     NSString *key = [NSString stringWithFormat:@"%d", [entry entryId]];
-    [self.allEntries setValue:value forKey:key];
+    [allEntries setValue:value forKey:key];
 }
 
 -(void) removeEntry:(int) entryId{
     NSString *key = [NSString stringWithFormat:@"%d", entryId];
-    if ([self.allEntries objectForKey:key]){
-        
-    }
-    [self.allEntries removeObjectForKey:key];
+    [allEntries removeObjectForKey:key];
 }
 
 -(bool) saveArchive{
     NSString* fileName = [AppConfig getArchiveFileName];
-    return [self.allEntries writeToFile:fileName atomically:false];
+    return [allEntries writeToFile:fileName atomically:false];
 }
 
 -(NSMutableArray*) getAllEntries{
-    NSMutableArray* rv = [[NSMutableArray alloc] initWithCapacity:[self.allEntries count]];
-    for(NSString* entry in [self.allEntries allValues]){
-        [rv addObject:[ArchiveEntry archiveEntryWithArchiveString:entry]];
+    NSMutableArray* arr = [[NSMutableArray alloc] initWithCapacity:[allEntries count]];
+    for(NSString* entry in [allEntries allValues]){
+        [arr addObject:[ArchiveEntry archiveEntryWithArchiveString:entry]];
     }
-    NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"secondsSince1970" ascending:NO] autorelease];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"secondsSince1970" ascending:NO];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    return [NSMutableArray arrayWithArray:[rv sortedArrayUsingDescriptors:sortDescriptors]];
+    NSMutableArray* rv = [NSMutableArray arrayWithArray:[arr sortedArrayUsingDescriptors:sortDescriptors]];
+    [arr release];
+    [sortDescriptor release];
+    return rv;
 }
 
 -(int) getNextEntryId{
     int rv = 0;
-    for(NSNumber* key in [self.allEntries allKeys]){
+    for(NSNumber* key in [allEntries allKeys]){
         if ([key intValue] > rv){
             rv = [key intValue];
         }

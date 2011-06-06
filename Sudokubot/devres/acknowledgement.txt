@@ -1,0 +1,5 @@
+Using OpenCV on iPhone (yoshimasa niwa) http://niw.at/articles/2009/03/14/using-opencv-on-iphone/en
+
+
+Basic OCR in OpenCV (damiles) http://blog.damiles.com/?p=93
+

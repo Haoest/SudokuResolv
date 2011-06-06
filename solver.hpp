@@ -6,7 +6,6 @@
 //  Copyright 2011 none. All rights reserved.
 //
 
-#import "boardRecognizer.h"
 #import <set>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -19,7 +18,7 @@ using namespace std;
 @property (nonatomic) int** board;
            
 +(solver*) solverWithHints: (int**) hints;
-+(solver*) solverWithImage: (UIImage*) imageBoard;
+
 
 +(bool) verifySolution: (int**) completedBoard;
 +(bool) verifyHints:(int**) hints;

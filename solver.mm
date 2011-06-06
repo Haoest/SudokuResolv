@@ -6,8 +6,8 @@
 //  Copyright 2011 none. All rights reserved.
 //
 
-#import "solver.hpp"
 #import "cvutil.hpp"
+#import "solver.hpp"
 
 using namespace std;
 
@@ -44,14 +44,6 @@ int * getUnitSequence(int row, int column);
     }
     return rv;
 }
-
-+(solver*) solverWithImage: (UIImage*) imageBoard{
-    IplImage *boardImg = [cvutil CreateIplImageFromUIImage:imageBoard];
-    recognizerResultPack recog = recognizeBoardFromPhoto(boardImg);
-    cvReleaseImage(&boardImg);
-    return [solver solverWithHints:recog.boardArr];
-}
-
 
 set<int> getBagOfNine(){
     set<int> rv;
@@ -117,7 +109,7 @@ bool trySolveRecursively(int** currentBoard, set<int> boxSpace[9][9], int boxInd
         return true;
     }
     set<int> &curBox = boxSpace[boxIndex/9][boxIndex%9];
-    if (curBox.size() ==0){ // is prefilled box value
+    if (curBox.size() ==0){ // is hint
         return trySolveRecursively(currentBoard, boxSpace, boxIndex+1);
     }
     for(set<int>::iterator it = curBox.begin(); it != curBox.end(); it++){
@@ -230,13 +222,6 @@ bool trySolveRecursively(int** currentBoard, set<int> boxSpace[9][9], int boxInd
 - (void)dealloc
 {
     [super dealloc];
-    if (board){
-        for (int i=0; i<9; i++){
-            delete board[i];
-        }
-        delete board; 
-        board = 0;
-    }
 
 }
 

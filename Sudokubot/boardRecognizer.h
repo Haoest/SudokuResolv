@@ -24,8 +24,5 @@ recognizerResultPack recognizeFromBoard(IplImage *boardGray, int initialBoardThr
 // given original image as input, find the image containing just the board as gray scale image
 IplImage* findSudokuBoard(IplImage *fullSrc, int &backgroundThresholdUsed);
 
-void showImage(IplImage*, char *title="no name", bool forceDisplay=0);
-
-
 #endif
 
