@@ -16,6 +16,7 @@ struct recognizerResultPack{
     int ** boardArr;
     std::vector<CvRect> grids;
     bool success;
+    void destroy();
 };
 
 recognizerResultPack recognizeBoardFromPhoto(IplImage *imageInput);

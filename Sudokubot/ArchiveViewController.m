@@ -27,7 +27,7 @@
 @dynamic rootViewDelegate;
 
 -(void) setRootViewDelegate:(id<RootViewDelegate>)rootView{
-    self.rootViewDelegate = rootView;
+    rootViewDelegate = rootView;
     archiveTableViewController.rootViewDelegate = rootView;
 }
 
@@ -110,7 +110,7 @@
     rv.archiveTableViewController = [ArchiveTableViewController archiveTableViewControllerFromDefaultArchive];
     rv.archiveTableViewController.view.frame = CGRectMake(0, 44, 328, 416);
     [rv.view addSubview:rv.archiveTableViewController.view];
-    return rv;
+    return [rv autorelease];
 }
 
 -(void) backToMainMenu{

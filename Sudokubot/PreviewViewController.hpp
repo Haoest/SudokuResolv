@@ -21,14 +21,7 @@
     int** hints;
 }
 
-@property(nonatomic, retain) IBOutlet UIImageView* previewImage;
-@property(nonatomic, retain) IBOutlet UIButton* solveButton;
-@property(nonatomic, retain) IBOutlet UIButton* cancelButton;
-
-@property(nonatomic, retain) id<RootViewDelegate> rootViewDelegate;
-
--(IBAction) solveButton_touchdown;
--(IBAction) cancelButton_touchdown;
+@property(nonatomic, assign) id<RootViewDelegate> rootViewDelegate;
 
 -(void) loadImageWithSudokuBoard:(UIImage*) img;
 

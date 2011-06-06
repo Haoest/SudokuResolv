@@ -12,6 +12,20 @@
 #import "AppConfig.h"
 #import "solver.hpp"
 
+@interface PreviewViewController()
+
+@property(nonatomic, retain) IBOutlet UIImageView* previewImage;
+@property(nonatomic, retain) IBOutlet UIButton* solveButton;
+@property(nonatomic, retain) IBOutlet UIButton* cancelButton;
+
+-(IBAction) solveButton_touchdown;
+-(IBAction) cancelButton_touchdown;
+-(void) resetFields;
+
+@end
+
+
+
 @implementation PreviewViewController
 
 CGPoint const boardGridOffset = CGPointMake(20, 20);
@@ -19,6 +33,56 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
 
 @synthesize previewImage, solveButton, cancelButton;
 @synthesize rootViewDelegate;
+
+- (void)dealloc
+{
+    [super dealloc];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [self resetFields];
+    [numpadImages release];
+    numpadImages = nil;
+    [numpadContainer release];
+    numpadContainer = nil;
+    [numpadHotRegions release];
+    numpadHotRegions = nil;
+    previewImage = nil;
+    solveButton = nil;
+    cancelButton = nil;
+    self.view = nil;
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
+}
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewDidUnload
+{
+    [self resetFields];
+    [numpadImages release];
+    numpadImages = nil;
+    [numpadContainer release];
+    numpadContainer = nil;
+    [numpadHotRegions release];
+    numpadHotRegions = nil;
+    previewImage = nil;
+    solveButton = nil;
+    cancelButton = nil;  
+    self.view = nil;
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
 
 -(void) resetFields{
     [numpadContainer setHidden:true];
@@ -31,7 +95,6 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
     if (gridNumberLabels){
         for(UILabel *lbl in gridNumberLabels){
             [lbl removeFromSuperview];
-            [lbl release];
         }
         [gridNumberLabels release];
     }
@@ -39,9 +102,7 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
     if (gridViews){
         for(UIView* v in gridViews){
             [v removeFromSuperview];
-            [v release];
         }
-        //            [gridViews release];
     }
     gridViews = nil;
     if (hints){
@@ -73,12 +134,12 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
         [lbl setTextAlignment:UITextAlignmentRight];
         [lbl setBackgroundColor:[UIColor clearColor]];
         [lbl setFont:labelFont];
-        [gridViews addObject:gv];
         [self.view addSubview:lbl];
         if (gridNumber>0){
             [lbl setText:[NSString stringWithFormat:@"%d", gridNumber]];
         }
         [gridNumberLabels addObject:lbl];
+        [lbl release];
     }
     
 }
@@ -98,7 +159,9 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
         for(int i=0; i<81; i++){
             CvRect r = result.grids[i];
             CGRect grid = CGRectMake(r.x *HRatio + boardGridOffset.x , r.y*VRatio+boardGridOffset.y, r.width*HRatio, r.height*VRatio);
-            [gridViews addObject: [[UIView alloc] initWithFrame:grid]];
+            UIView* v = [[UIView alloc] initWithFrame:grid];
+            [gridViews addObject: v];
+            [v release];
         }
         hints = new int*[9];
         for(int i=0; i<9; i++){
@@ -108,7 +171,7 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
             }
         }
         [self createUIBoardGrids];
-
+        result.destroy();
     }else{
         [previewImage setImage:img];
         UIAlertView *alert =[[[UIAlertView alloc] initWithTitle:@"" message:@"Sorry, can not find a Sudoku board from this photo. See Help for tips on how to take pictures for better recognition." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil] autorelease];
@@ -166,34 +229,6 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
         [self initNumpad];
     }
     return self;
-}
-
-- (void)dealloc
-{
-    [super dealloc];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

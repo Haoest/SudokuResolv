@@ -76,6 +76,19 @@ const double InputImageNormalizeLength = 800;
 static int BoardThresholdCandidateSize  = 12;
 static int BoardThresholdCandidates[] = {1,5, 10,20, 30,40, 50,60, 70,80, 90,100};
 
+void recognizerResultPack::destroy(){
+    if (boardGray){
+        cvReleaseImage(&boardGray);
+    }
+    if(boardArr){
+        for(int i=0; i<9; i++){
+            delete boardArr[i];
+        }
+        delete boardArr;
+        boardArr = 0;
+    }
+}
+
 recognizerResultPack recognizeBoardFromPhoto(IplImage *imageInput){
     recognizerResultPack rv;
     rv.success = false;
@@ -225,7 +238,6 @@ vector<CvRect> getAllGrids(IplImage *boardBinary){
 	drawContour(boardBinary, contour, 3);
 	cvReleaseImage(&gameBoardScrap);
 	CvSeq * cur = contour;
-	int gridIndex = 0;
 	int widthLB = MAX(boardBinary->width / 9 /2, 10);
 	int widthUB = boardBinary->width / 7;
 	int heightLB = MAX(boardBinary->height / 9 /2, 10);

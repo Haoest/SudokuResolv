@@ -19,6 +19,7 @@
 @property (nonatomic, assign) id<RootViewDelegate> rootViewDelegate;
 
 -(void) reloadDataSource;
+-(void) saveArchive;
 
 @end
 

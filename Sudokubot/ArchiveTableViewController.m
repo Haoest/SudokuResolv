@@ -13,8 +13,6 @@
 
 @interface ArchiveTableViewController()
 
--(void) saveArchive;
-
 @property (nonatomic, retain) NSMutableArray* archiveContents;
 @property (nonatomic, retain) ArchiveManager *archiveManager;
 
@@ -45,7 +43,7 @@
 +(ArchiveTableViewController*) archiveTableViewControllerFromDefaultArchive{
     ArchiveTableViewController* rv = [[ArchiveTableViewController alloc] initWithStyle:UITableViewStylePlain];
     [rv reloadDataSource];
-    return rv;
+    return [rv autorelease];
 }
 
 -(void) reloadDataSource{
