@@ -14,10 +14,36 @@
 #import "solver.hpp"
 #import "AppConfig.h"
 
+@interface SudokubotViewController ()
+
+- (void) reevaluateClipboardButton;
+- (void) removeSubviews;
+
+@property (nonatomic, retain) IBOutlet UIButton *btnCaptureFromCamera;
+@property (nonatomic, retain) IBOutlet UIButton *btnOpenFromPhotoLibrary;
+@property (nonatomic, retain) IBOutlet UIButton *btnOpenFromClipboard;
+@property (nonatomic, retain) IBOutlet UIButton *btnArchive;
+@property (nonatomic, retain) IBOutlet UIButton *btnHelp;
+@property (nonatomic, retain) UIImagePickerController *imagePicker;
+
+-(IBAction) btnCaptureFromCamera_touchDown;
+-(IBAction) btnOpenFromPhotoLibrary_touchDown;
+-(IBAction) btnOpenFromClipboard_touchDown;
+-(IBAction) btnArchive_touchDown;
+-(IBAction) btnHelp_touchDown;
+
+@property(nonatomic, retain) BoardViewController* boardViewController;
+@property(nonatomic, retain) ArchiveViewController* archiveViewController;
+@property(nonatomic, retain) PreviewViewController* previewViewController;
+
+-(void) showPreview: (UIImage*) imageWithSudokuBoard;
+
+@end
+
+
 
 @implementation SudokubotViewController
 
-@synthesize MainImageView;
 @synthesize btnCaptureFromCamera;
 @synthesize btnOpenFromPhotoLibrary;
 @synthesize btnOpenFromClipboard;
@@ -39,6 +65,11 @@
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
+    [self removeSubviews];
+    self.boardViewController = nil;
+    self.archiveViewController = nil;
+    self.previewViewController = nil;
+    self.imagePicker = nil;
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
@@ -49,22 +80,22 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         [btnCaptureFromCamera setEnabled:NO];
         [btnCaptureFromCamera setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     }
+    [super viewDidLoad];
 }
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
-    self.MainImageView = nil;
     self.btnHelp = nil;
     self.btnCaptureFromCamera = nil;
     self.btnOpenFromClipboard = nil;
     self.btnOpenFromPhotoLibrary = nil;
     self.btnArchive = nil;
+    [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }

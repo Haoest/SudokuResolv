@@ -9,22 +9,74 @@
 #import "cvutil.hpp"
 #import "solver.hpp"
 #import "BoardViewController.h"
-#import "ArchiveViewController.h"
+#import "ArchiveManager.h"
 #import "AppConfig.h"
 #import "ArchiveEntry.h"
 #import <QuartzCore/QuartzCore.h>
 
+@interface BoardViewController()
+
+@property(nonatomic, retain) IBOutlet UIBarButtonItem* backToArchiveButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem* mainMenuButton;
+@property(nonatomic, retain) IBOutlet UITextField *commentTextField;
+@property(nonatomic, retain) IBOutlet UIToolbar *navigationBar;
+
+@property(nonatomic, assign) int archiveEntryId;
+@property(nonatomic, assign) int** hints;
+@property(nonatomic, assign) int** solution;
+@property(nonatomic, retain) NSString *comments;
+@property(nonatomic, retain) UIView* boardViewContainer;
+
+-(void) saveToArchive;
+-(void) backToArchiveMenu;
+-(void) backToMainMenu;
+-(void) wireupControls;
+-(void) resetData;
+
+@end
+
+
+
 @implementation BoardViewController
 
-@synthesize commentTextField, navigationBar;
+@synthesize commentTextField, navigationBar, boardViewContainer;
 @synthesize backToArchiveButton, mainMenuButton;
 @synthesize hints, solution, archiveEntryId;
 @synthesize rootViewDelegate;
 @dynamic comments;
+ 
+- (void)dealloc
+{
+    [comments release];
+    [gridLabels release];
+    [self resetData];
+    [super dealloc];
+}
+
+- (void)viewDidUnload
+{
+    for(UILabel* lbl in gridLabels){
+        [lbl removeFromSuperview];
+    }
+    [gridView removeFromSuperview];
+    [boardViewContainer removeFromSuperview];
+    gridView = nil;
+    boardViewContainer = nil;
+    [self.commentTextField resignFirstResponder];
+    self.commentTextField = nil;
+    self.backToArchiveButton = nil;
+    self.mainMenuButton = nil;
+    self.navigationBar = nil;
+
+    [super viewDidUnload];
+}
 
 -(void) setComments:(NSString *)_comments{
-    comments = _comments;
-    [self.commentTextField setText:comments];
+    if (_comments != comments){
+        [comments release];
+        comments = [_comments retain];
+        [self.commentTextField setText:comments];
+    }
 }
 
 -(NSString*) comments{
@@ -40,11 +92,7 @@
     }
     return self;
 }
- 
-- (void)dealloc
-{
-    [super dealloc];
-}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -63,7 +111,7 @@
     [self.commentTextField setText:self.comments];
 }
 
--(void) resetFields{
+-(void) resetData{
     archiveEntryId = -1;
     if(self.hints){
         for(int i=0; i<9; i++){
@@ -79,8 +127,6 @@
         delete self.solution;
         self.solution = 0;
     }
-    comments = @"";
-    [commentTextField setText:@""];
 }
 
 -(void) wireupControls{
@@ -97,15 +143,15 @@
         gridLabels = [[NSMutableArray alloc] initWithCapacity:81];
         int unitSize = 96;
         int gridSize = 32;
-        UIView* main = [[UIView alloc] initWithFrame:CGRectMake(20, 70, 288, 288)];
-        [main.layer setBorderWidth:1];
-        [main.layer setBorderColor:[[UIColor blackColor] CGColor]];
+        self.boardViewContainer = [[UIView alloc] initWithFrame:CGRectMake(20, 70, 288, 288)];
+        [self.boardViewContainer.layer setBorderWidth:1];
+        [self.boardViewContainer.layer setBorderColor:[[UIColor blackColor] CGColor]];
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){
                 UILabel *grid = [[UILabel alloc]initWithFrame:CGRectMake(j*gridSize+1, i*gridSize+1, gridSize+1, gridSize+1)];
                 [grid.layer setBorderWidth:1];
                 [grid.layer setBorderColor:[[UIColor grayColor] CGColor]];
-                [main addSubview:grid];
+                [self.boardViewContainer addSubview:grid];
                 [gridLabels addObject:grid];
                 [grid setTextAlignment:UITextAlignmentCenter];
             }
@@ -115,10 +161,10 @@
                 UIView* unit = [[UIView alloc]initWithFrame:CGRectMake(i*unitSize+1, j*unitSize+1, unitSize, unitSize)];
                 [unit.layer setBorderColor:[[UIColor blackColor] CGColor]];
                 [unit.layer setBorderWidth:1];
-                [main addSubview:unit];
+                [self.boardViewContainer addSubview:unit];
             }
         }
-        [self.view addSubview:main];
+        [self.view addSubview:self.boardViewContainer];
     }
     for(int i=0; i<81; i++){
         UILabel *grid = [gridLabels objectAtIndex:i];
@@ -129,12 +175,6 @@
             [grid setTextColor:[UIColor blackColor]];            
         }
     }
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    [self.commentTextField resignFirstResponder];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -203,9 +243,9 @@
     [UIView commitAnimations];
 }
 
-
 -(void) refreshBoardWithHints:(int**) _hints{
-    [self resetFields];
+    [self resetData];
+    self.comments = @"";
     self.hints = new int*[9];
     for(int i=0; i<9; i++){
         self.hints[i] = new int[9];
@@ -221,12 +261,11 @@
 }
 
 -(void) refreshBoardWithArchiveEntry:(ArchiveEntry*) entry{
-    [self resetFields];
+    [self resetData];
     self.archiveEntryId = entry.entryId;
     self.solution = [cvutil DeserializedBoard: [entry sudokuSolution] ];
     self.hints = [cvutil DeserializedBoard:[entry sudokuHints]];
     self.comments = entry.comments;
-    [commentTextField setText:entry.comments];
     [self drawGridsView];
 }
 

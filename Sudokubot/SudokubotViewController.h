@@ -20,28 +20,5 @@ RootViewDelegate> {
     
 }
 
-@property (nonatomic, retain) IBOutlet UIImageView *MainImageView;
-
-@property (nonatomic, retain) IBOutlet UIButton *btnCaptureFromCamera;
-@property (nonatomic, retain) IBOutlet UIButton *btnOpenFromPhotoLibrary;
-@property (nonatomic, retain) IBOutlet UIButton *btnOpenFromClipboard;
-@property (nonatomic, retain) IBOutlet UIButton *btnArchive;
-@property (nonatomic, retain) IBOutlet UIButton *btnHelp;
-@property (nonatomic, retain) UIImagePickerController *imagePicker;
-
--(IBAction) btnCaptureFromCamera_touchDown;
--(IBAction) btnOpenFromPhotoLibrary_touchDown;
--(IBAction) btnOpenFromClipboard_touchDown;
--(IBAction) btnArchive_touchDown;
--(IBAction) btnHelp_touchDown;
-
-- (void) reevaluateClipboardButton;
-
-@property(nonatomic, retain) BoardViewController* boardViewController;
-@property(nonatomic, retain) ArchiveViewController* archiveViewController;
-@property(nonatomic, retain) PreviewViewController* previewViewController;
-
--(void) removeSubviews;
--(void) showPreview: (UIImage*) imageWithSudokuBoard;
 
 @end
