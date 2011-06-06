@@ -14,7 +14,12 @@
 
 @synthesize comments, sudokuSolution, sudokuHints, entryId, secondsSince1970;
 
-
+-(void) dealloc{
+    comments = nil;
+    sudokuHints = nil;
+    sudokuSolution = nil;
+    [super dealloc];
+}
 
 +(ArchiveEntry*) archiveEntryWithValues:(int)entryId
                          solutionString:(NSString*) solutionAsString 
@@ -43,7 +48,7 @@
                                      hintString:hints 
                                secondsSince1970:[secondsSince1970 doubleValue]
                                        comments:comments];
-    return rv;
+    return [rv retain];
 }
 
 -(NSString*) toArchiveString{

@@ -18,10 +18,15 @@
 
 @implementation ArchiveManager
 
+-(void) dealloc{
+    [allEntries release];
+    [super dealloc];
+}
+
 -(id) initDefaultArchive{
-    allEntries = [NSMutableDictionary dictionaryWithContentsOfFile:[AppConfig getArchiveFileName]];
+    allEntries = [[NSMutableDictionary alloc] initWithContentsOfFile:[AppConfig getArchiveFileName]];
     if (!allEntries){
-        allEntries = [[[NSMutableDictionary alloc] init] autorelease];
+        allEntries = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -71,6 +76,7 @@
 -(NSMutableArray*) getAllEntries{
     NSMutableArray* arr = [[NSMutableArray alloc] initWithCapacity:[allEntries count]];
     for(NSString* entry in [allEntries allValues]){
+        [entry retain];
         [arr addObject:[ArchiveEntry archiveEntryWithArchiveString:entry]];
     }
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"secondsSince1970" ascending:NO];
