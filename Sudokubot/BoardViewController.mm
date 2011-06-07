@@ -202,8 +202,10 @@
                                                            hintString:[cvutil SerializeBoard:hints]
                                                      secondsSince1970:[[NSDate date] timeIntervalSince1970]
                                                                  comments:self.comments];
-        [arman addEntry:archiveEntry];
-        [arman saveArchive];  
+        int newId = [arman addEntry:archiveEntry];
+        if([arman saveArchive]){
+            self.archiveEntryId = newId;
+        }
     }else{
         int entryId = self.archiveEntryId;
         ArchiveEntry* e = [arman getEntryById:entryId];

@@ -6,10 +6,10 @@
 //  Copyright 2011 none. All rights reserved.
 //
 
+#import "boardRecognizer.h"
 #import "solverTests.hpp"
 #import "BoardViewController.h"
 #import "AppConfig.h"
-#import "boardRecognizer.h"
 #import "cvutil.hpp"
 
 //using namespace std;

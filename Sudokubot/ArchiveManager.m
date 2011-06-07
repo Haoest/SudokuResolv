@@ -89,6 +89,7 @@
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"secondsSince1970" ascending:NO];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     NSMutableArray* rv = [NSMutableArray arrayWithArray:[arr sortedArrayUsingDescriptors:sortDescriptors]];
+    [arr removeAllObjects];
     [arr release];
     [sortDescriptor release];
     return rv;

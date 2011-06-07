@@ -33,7 +33,7 @@
 
 
 -(void) testRunAllBoardRecognizerTests{
-    boardRecognizerTests t; t.runAll();
+//    boardRecognizerTests t; t.runAll();
 }
 
 -(void) testReadBoard{

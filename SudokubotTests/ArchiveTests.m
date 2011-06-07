@@ -32,6 +32,7 @@ NSString *testComment;
 - (void)tearDown
 {
     // Tear-down code here.
+    [self deleteArchiveFile];
     [super tearDown];
 }
 
@@ -45,7 +46,6 @@ NSString *testComment;
                                                       comments:@"you noob"];
         NSTimeInterval dateAfter = [[e getCreationDateGMT] timeIntervalSince1970];
         STAssertTrue(now == dateAfter, [NSString stringWithFormat:@"Archive entry dates must be equal after serialization. start:%.0f after:%.0f ", now, dateAfter]);
-        [e release];
     }
 }
 
@@ -64,11 +64,11 @@ NSString *testComment;
 }
 
 -(void) testRetrieveEntryBeforeSaving{
-    ArchiveEntry *entry = [[ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry = [ArchiveEntry archiveEntryWithValues:-1
                                                 solutionString:testSolution 
                                                     hintString:testHints
                                               secondsSince1970:0
-                                                      comments:testComment] autorelease];
+                                                      comments:testComment] ;
     [self deleteArchiveFile];
     ArchiveManager *arman = [[ArchiveManager alloc] initDefaultArchive];
     int newId = [arman addEntry:entry];
@@ -108,22 +108,22 @@ NSString *testComment;
 }
 
 -(void) testSaveMultipleEntries{
-    ArchiveEntry *entry1 = [[ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry1 = [ArchiveEntry archiveEntryWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:now 
-                                                       comments:@"entry1"] autorelease];
-    ArchiveEntry *entry2 = [[ArchiveEntry archiveEntryWithValues:-1
+                                                       comments:@"entry1"] ;
+    ArchiveEntry *entry2 = [ArchiveEntry archiveEntryWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:oneMinuteLater 
-                                                       comments:@"entry2"] autorelease];
+                                                       comments:@"entry2"] ;
     
-    ArchiveEntry *entry3 = [[ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry3 = [ArchiveEntry archiveEntryWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:twoMinutesLater 
-                                                       comments:@"entry3"] autorelease];
+                                                       comments:@"entry3"] ;
     [self deleteArchiveFile];
     ArchiveManager *arman = [[ArchiveManager alloc] initDefaultArchive];
     int entryId2 = [arman addEntry:entry2];
@@ -150,22 +150,22 @@ NSString *testComment;
 }
 
 -(void) testRemoveEntry{
-    ArchiveEntry *entry1 = [[ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry1 = [ArchiveEntry archiveEntryWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:now 
-                                                       comments:@"entry1"] autorelease];
-    ArchiveEntry *entry2 = [[ArchiveEntry archiveEntryWithValues:-1
+                                                       comments:@"entry1"] ;
+    ArchiveEntry *entry2 = [ArchiveEntry archiveEntryWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:oneMinuteLater 
-                                                       comments:@"entry2"] autorelease];
+                                                       comments:@"entry2"] ;
     
-    ArchiveEntry *entry3 = [[ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry3 = [ArchiveEntry archiveEntryWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:twoMinutesLater 
-                                                       comments:@"entry3"] autorelease];
+                                                       comments:@"entry3"] ;
     [self deleteArchiveFile];
     ArchiveManager *arman = [[ArchiveManager alloc] initDefaultArchive];
     int entryId2 = [arman addEntry:entry2];
@@ -199,22 +199,22 @@ NSString *testComment;
 }
 
 -(void) testUpdateEntry{
-    ArchiveEntry *entry1 = [[ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry1 = [ArchiveEntry archiveEntryWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:now 
-                                                       comments:@"entry1"] autorelease];
-    ArchiveEntry *entry2 = [[ArchiveEntry archiveEntryWithValues:-1
+                                                       comments:@"entry1"] ;
+    ArchiveEntry *entry2 = [ArchiveEntry archiveEntryWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:oneMinuteLater 
-                                                       comments:@"entry2"] autorelease];
+                                                       comments:@"entry2"] ;
     
-    ArchiveEntry *entry3 = [[ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry3 = [ArchiveEntry archiveEntryWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:twoMinutesLater 
-                                                       comments:@"entry3"] autorelease];
+                                                       comments:@"entry3"] ;
     [self deleteArchiveFile];
     ArchiveManager *arman = [[ArchiveManager alloc] initDefaultArchive];
     int entryId2 = [arman addEntry:entry2];

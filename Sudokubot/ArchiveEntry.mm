@@ -28,9 +28,9 @@
                                comments:(NSString*)comments{
     ArchiveEntry* rv = [[ArchiveEntry alloc] init];
     rv.entryId = entryId;
-    rv.comments = [comments stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    rv.sudokuSolution = [solutionAsString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    rv.sudokuHints = [hintsAsString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    rv.comments = comments;
+    rv.sudokuSolution = solutionAsString;
+    rv.sudokuHints = hintsAsString;
     rv.secondsSince1970 = secondsSince1970;
     return [rv autorelease];
 }
@@ -52,9 +52,9 @@
 }
 
 -(NSString*) toArchiveString{
-    NSString* rv = [NSString stringWithFormat:@"%d\t%@\t%@\t%.0f\t%@\n", 
+    NSString* rv = [NSString stringWithFormat:@"%d\t%@\t%@\t%.0f\t%@", 
                     self.entryId,
-                    [self.sudokuSolution stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]],
+                    self.sudokuSolution,
                     self.sudokuHints,
                     self.secondsSince1970,
                     self.comments];
