@@ -13,27 +13,34 @@
 #import "AppConfig.h"
 
 @interface ArchiveManager ()
+
+@property(nonatomic, retain) NSMutableDictionary *allEntries;
+
 -(int) getNextEntryId;
+
 @end
 
 @implementation ArchiveManager
 
+@synthesize allEntries;
+
 -(void) dealloc{
-    [allEntries release];
+    [self.allEntries removeAllObjects];
+    self.allEntries = nil;
     [super dealloc];
 }
 
 -(id) initDefaultArchive{
-    allEntries = [[NSMutableDictionary alloc] initWithContentsOfFile:[AppConfig getArchiveFileName]];
-    if (!allEntries){
-        allEntries = [[NSMutableDictionary alloc] init];
+    self.allEntries = [[NSMutableDictionary alloc] initWithContentsOfFile:[AppConfig getArchiveFileName]];
+    if (!self.allEntries){
+        self.allEntries = [[[NSMutableDictionary alloc] init] autorelease];
     }
     return self;
 }
 
 -(ArchiveEntry*) getEntryById:(int) entryId{
     NSString *key = [NSString stringWithFormat:@"%d", entryId];
-    NSString *rv = [allEntries objectForKey:key];
+    NSString *rv = [self.allEntries objectForKey:key];
     if (!rv){
         return nil;
     }
@@ -75,9 +82,9 @@
 
 -(NSMutableArray*) getAllEntries{
     NSMutableArray* arr = [[NSMutableArray alloc] initWithCapacity:[allEntries count]];
-    for(NSString* entry in [allEntries allValues]){
-        [entry retain];
-        [arr addObject:[ArchiveEntry archiveEntryWithArchiveString:entry]];
+    for(NSString* entry in [self.allEntries allValues]){
+        ArchiveEntry*e = [ArchiveEntry archiveEntryWithArchiveString:entry];
+        [arr addObject:e];
     }
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"secondsSince1970" ascending:NO];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];

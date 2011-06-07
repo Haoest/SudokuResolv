@@ -26,13 +26,13 @@
                              hintString: (NSString*) hintsAsString
                            secondsSince1970:(double)secondsSince1970 
                                comments:(NSString*)comments{
-    ArchiveEntry* rv = [[[ArchiveEntry alloc] init] autorelease];
+    ArchiveEntry* rv = [[ArchiveEntry alloc] init];
     rv.entryId = entryId;
     rv.comments = [comments stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     rv.sudokuSolution = [solutionAsString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    rv.sudokuHints = [hintsAsString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] ;
+    rv.sudokuHints = [hintsAsString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     rv.secondsSince1970 = secondsSince1970;
-    return rv;
+    return [rv autorelease];
 }
 
 
@@ -48,7 +48,7 @@
                                      hintString:hints 
                                secondsSince1970:[secondsSince1970 doubleValue]
                                        comments:comments];
-    return [rv retain];
+    return rv;
 }
 
 -(NSString*) toArchiveString{

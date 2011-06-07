@@ -27,6 +27,10 @@
 @property(nonatomic, retain) NSString *comments;
 @property(nonatomic, retain) UIView* boardViewContainer;
 
+@property(nonatomic, retain) NSMutableArray* gridLabels;
+@property(nonatomic, retain) UIView* gridView;
+@property(nonatomic, retain) NSMutableArray* unitFrames;
+
 -(void) saveToArchive;
 -(void) backToArchiveMenu;
 -(void) backToMainMenu;
@@ -43,31 +47,34 @@
 @synthesize backToArchiveButton, mainMenuButton;
 @synthesize hints, solution, archiveEntryId;
 @synthesize rootViewDelegate;
+@synthesize gridView, gridLabels, unitFrames;
 @dynamic comments;
  
 - (void)dealloc
 {
     [comments release];
-    [gridLabels release];
     [self resetData];
     [super dealloc];
 }
 
 - (void)viewDidUnload
 {
-    for(UILabel* lbl in gridLabels){
-        [lbl removeFromSuperview];
+    for(UILabel* lbl in self.gridLabels){
+        [lbl release];
     }
-    [gridView removeFromSuperview];
-    [boardViewContainer removeFromSuperview];
-    gridView = nil;
-    boardViewContainer = nil;
-    [self.commentTextField resignFirstResponder];
+    for(UIView* v in self.unitFrames){
+        [v release];
+    }
+    self.unitFrames = nil;
+    self.gridLabels = nil;
+    self.gridView = nil;
+    self.boardViewContainer = nil;
     self.commentTextField = nil;
     self.backToArchiveButton = nil;
     self.mainMenuButton = nil;
     self.navigationBar = nil;
-
+    self.unitFrames = nil;
+    self.view = nil;
     [super viewDidUnload];
 }
 
@@ -93,12 +100,11 @@
     return self;
 }
 
-
 - (void)didReceiveMemoryWarning
 {
+    self.view = nil;
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -108,7 +114,7 @@
 {
     [super viewDidLoad];
     [self wireupControls];
-    [self.commentTextField setText:self.comments];
+    [self.commentTextField setText:comments];
 }
 
 -(void) resetData{
@@ -139,11 +145,12 @@
 }
 
 -(void) drawGridsView{
-    if(gridView==nil){
-        gridLabels = [[NSMutableArray alloc] initWithCapacity:81];
+    if(self.gridView==nil){
+        self.gridLabels = [[[NSMutableArray alloc] initWithCapacity:81] autorelease];
+        self.unitFrames = [[[NSMutableArray alloc]initWithCapacity:9]autorelease];
         int unitSize = 96;
         int gridSize = 32;
-        self.boardViewContainer = [[UIView alloc] initWithFrame:CGRectMake(20, 70, 288, 288)];
+        self.boardViewContainer = [[[UIView alloc] initWithFrame:CGRectMake(20, 70, 288, 288)] autorelease];
         [self.boardViewContainer.layer setBorderWidth:1];
         [self.boardViewContainer.layer setBorderColor:[[UIColor blackColor] CGColor]];
         for(int i=0; i<9; i++){
@@ -154,6 +161,7 @@
                 [self.boardViewContainer addSubview:grid];
                 [gridLabels addObject:grid];
                 [grid setTextAlignment:UITextAlignmentCenter];
+                [grid release];
             }
         }
         for(int i=0; i<3; i++){
@@ -162,6 +170,8 @@
                 [unit.layer setBorderColor:[[UIColor blackColor] CGColor]];
                 [unit.layer setBorderWidth:1];
                 [self.boardViewContainer addSubview:unit];
+                [self.unitFrames addObject:unit];
+                [unit release];
             }
         }
         [self.view addSubview:self.boardViewContainer];

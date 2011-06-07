@@ -12,8 +12,7 @@
 
 @interface BoardViewController : UIViewController<UITextFieldDelegate> {
     NSString* comments;
-    NSMutableArray* gridLabels;
-    UIView* gridView;
+
 }
 
 -(void) refreshBoardWithHints:(int**) hints;

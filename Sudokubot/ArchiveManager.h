@@ -10,7 +10,7 @@
 #import "ArchiveEntry.h"
 
 @interface ArchiveManager : NSObject {
-    NSMutableDictionary *allEntries;
+
 }
 
 -(id) initDefaultArchive;

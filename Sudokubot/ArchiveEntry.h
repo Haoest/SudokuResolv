@@ -28,7 +28,7 @@
                                comments:(NSString*)comments;
 
 +(ArchiveEntry*) archiveEntryWithArchiveString: (NSString*) archiveString;
-//-(void) save;
+
 -(NSString*) toArchiveString;
 
 -(NSDate*) getCreationDateGMT;
