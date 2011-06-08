@@ -247,6 +247,7 @@
     solver* sol = [solver solverWithHints:self.hints];
     self.solution = [sol trySolve];
     [self drawGridsView];
+    [sol release];
 }
 
 -(void) refreshBoardWithArchiveEntry:(ArchiveEntry*) entry{

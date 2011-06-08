@@ -41,17 +41,6 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
 
 - (void)didReceiveMemoryWarning
 {
-    [self resetFields];
-    [numpadImages release];
-    numpadImages = nil;
-    [numpadContainer release];
-    numpadContainer = nil;
-    [numpadHotRegions release];
-    numpadHotRegions = nil;
-    previewImage = nil;
-    solveButton = nil;
-    cancelButton = nil;
-    self.view = nil;
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     

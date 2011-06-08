@@ -14,8 +14,10 @@ using namespace cv;
 static bool debug_showImage = 0;
 static bool showOcrResult = 0;
 
+static basicOCR *OCREngine = 0;
+
 //dummy method declaration to avoid compilation error, this method is used in Windows port for debugging
-void showImage(IplImage*, char *title="no name", bool forceDisplay=0);
+//void showImage(IplImage*, char *title="no name", bool forceDisplay=0);
 
 IplImage* findBoardFromContour(CvSeq* contours, IplImage*fullSrcGray, IplImage *fullSrcBinary );
 IplImage* doesResembleBoard(CvSeq* contours, IplImage*fullSrc, IplImage *fullSrcBinary);
@@ -111,11 +113,18 @@ recognizerResultPack recognizeFromBoard(IplImage *boardGray, int initialBoardThr
 	grids = findGridsByThreshold(boardGray, initialBoardThreshold);
 	if (grids.size() == 81){
 		grids = getSortedGridsByCoord(grids);
+        if(!OCREngine){
+            OCREngine = new basicOCR();
+        }
 		rv.boardArr = extractNumbersFromBoard(boardGray, grids);
         rv.boardGray = boardGray;
         cvResetImageROI(rv.boardGray);
         rv.grids = grids;
         rv.success = true;
+//        if (OCREngine){
+//            delete OCREngine;
+//            OCREngine = 0;
+//        }
 	}
 	return rv;
 }
@@ -155,7 +164,6 @@ vector<CvRect> findGridsByThreshold(IplImage *board, int initialThreshold){
 }
 
 int ** extractNumbersFromBoard(IplImage *boardGray, vector<CvRect> &grids){
-	static basicOCR ocr;
 	int index = 0;
 	int** rv = new int*[9];
 	for(int i=0; i<9; i++){
@@ -180,7 +188,7 @@ int ** extractNumbersFromBoard(IplImage *boardGray, vector<CvRect> &grids){
 		if ( sum > 0.97 * allWhiteSum || sum < allWhiteSum * 0.03){
 			rv[index/9][index%9] = 0;
 		}else{
-			int guess = (int) ocr.classify(noiselessGrid, showOcrResult);
+			int guess = (int) OCREngine->classify(noiselessGrid, showOcrResult);
 			rv[index/9][index%9] = guess;
 		}
 		index++;
@@ -411,16 +419,20 @@ IplImage* doesResembleBoard(CvSeq* contours, IplImage* fullSrcGray, IplImage *fu
 				int roiRight = MIN(right+padding, fullSrcGray->width);
 				int roiTop = MAX(top-padding, 0);
 				int roiBottom = MIN(bottom+padding, fullSrcGray->height);
-				rv = extractAndSetBoardUpRight(contours,cvPoint(roiLeft, roiTop), getROIAsImageRef(fullSrcGray,roiLeft, roiRight, roiTop, roiBottom), degreeOfHighestCount);
+                IplImage* potentialBoardNoBorder = getROIAsImageRef(fullSrcGray,roiLeft, roiRight, roiTop, roiBottom);
+				rv = extractAndSetBoardUpRight(contours,cvPoint(roiLeft, roiTop), potentialBoardNoBorder, degreeOfHighestCount);
+                cvReleaseImageHeader(&potentialBoardNoBorder);
 			}
 		}
 		delete lineSlopeFreq;
 	}
-	showImage(color_dst, "potential board with line overlay");
+//	showImage(color_dst, "potential board with line overlay");
 	if (color_dst){
 		cvReleaseImage(&color_dst);
 	}
 	cvReleaseMemStorage(&storage);
+    cvReleaseImageHeader(&potentialBoardRoi);
+    
 	return rv;
 }
 
@@ -671,7 +683,7 @@ void drawGrids(IplImage* background, vector<CvRect> grids){
 		cvRectangle(bg, cvPoint(it->x, it->y), cvPoint(it->x + it->width, it->y + it->height), color);
 		index++;
 	}
-	showImage(bg, "draw grids", 0);
+//	showImage(bg, "draw grids", 0);
 }
 
 void findXExtramas(IplImage* mask,int* min, int* max){
@@ -721,4 +733,5 @@ CvRect findRectFromMask(IplImage* mask){
 	aux=cvRect(xmin, ymin, xmax-xmin, ymax-ymin);
 	return aux;
 }
+
 

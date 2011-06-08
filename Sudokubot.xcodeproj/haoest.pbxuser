@@ -1,0 +1,163 @@
+// !$*UTF8*$!
+{
+	3A4E3A931329997900508B40 /* cvutil.mm */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1127, 1183}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 2202}";
+			sepNavWindowFrame = "{{15, 168}, {1186, 885}}";
+		};
+	};
+	3A9E6C3C13295D110055628C /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 3AF3BAF3132AA755003C6735 /* Sudokubot */;
+		activeTarget = 3A9E6C4413295D120055628C /* Sudokubot */;
+		codeSenseManager = 3AF3BAF8132AA775003C6735 /* Code sense */;
+		executables = (
+			3AF3BAF3132AA755003C6735 /* Sudokubot */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					1078,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 321579723;
+			PBXWorkspaceStateSaveDate = 321579723;
+		};
+		perUserProjectItems = {
+			3AA42022132AEAD400A5B166 /* PBXTextBookmark */ = 3AA42022132AEAD400A5B166 /* PBXTextBookmark */;
+			3AA42023132AEAD400A5B166 /* PBXTextBookmark */ = 3AA42023132AEAD400A5B166 /* PBXTextBookmark */;
+			3AF3BAFE132AB39A003C6735 /* PBXTextBookmark */ = 3AF3BAFE132AB39A003C6735 /* PBXTextBookmark */;
+			3AF3BB00132AB39A003C6735 /* PBXTextBookmark */ = 3AF3BB00132AB39A003C6735 /* PBXTextBookmark */;
+			3AF3BB05132AB39A003C6735 /* PBXTextBookmark */ = 3AF3BB05132AB39A003C6735 /* PBXTextBookmark */;
+		};
+		sourceControlManager = 3AF3BAF7132AA775003C6735 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	3A9E6C4413295D120055628C /* Sudokubot */ = {
+		activeExec = 0;
+		executables = (
+			3AF3BAF3132AA755003C6735 /* Sudokubot */,
+		);
+	};
+	3A9E6C5813295D120055628C /* SudokubotAppDelegate.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1256, 500}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 406}";
+		};
+	};
+	3A9E6C6813295D120055628C /* SudokubotTests */ = {
+		activeExec = 0;
+	};
+	3AA42022132AEAD400A5B166 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3A4E3A931329997900508B40 /* cvutil.mm */;
+		name = "cvutil.mm: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1450;
+		vrLoc = 0;
+	};
+	3AA42023132AEAD400A5B166 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3A4E3A931329997900508B40 /* cvutil.mm */;
+		name = "cvutil.mm: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 2202;
+		vrLoc = 0;
+	};
+	3AF3BAF3132AA755003C6735 /* Sudokubot */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = Sudokubot;
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	3AF3BAF7132AA775003C6735 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	3AF3BAF8132AA775003C6735 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	3AF3BAFE132AB39A003C6735 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3A9E6C5813295D120055628C /* SudokubotAppDelegate.h */;
+		name = "SudokubotAppDelegate.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 406;
+		vrLoc = 0;
+	};
+	3AF3BB00132AB39A003C6735 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3A4E3A931329997900508B40 /* cvutil.mm */;
+		name = "cvutil.mm: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1482;
+		vrLoc = 0;
+	};
+	3AF3BB05132AB39A003C6735 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3A4E3A931329997900508B40 /* cvutil.mm */;
+		name = "cvutil.mm: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 2202;
+		vrLoc = 0;
+	};
+}
