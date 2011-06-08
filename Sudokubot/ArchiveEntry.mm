@@ -21,34 +21,33 @@
     [super dealloc];
 }
 
-+(ArchiveEntry*) archiveEntryWithValues:(int)entryId
-                         solutionString:(NSString*) solutionAsString 
-                             hintString: (NSString*) hintsAsString
-                           secondsSince1970:(double)secondsSince1970 
-                               comments:(NSString*)comments{
-    ArchiveEntry* rv = [[ArchiveEntry alloc] init];
-    rv.entryId = entryId;
-    rv.comments = comments;
-    rv.sudokuSolution = solutionAsString;
-    rv.sudokuHints = hintsAsString;
-    rv.secondsSince1970 = secondsSince1970;
-    return [rv autorelease];
+-(id) initWithValues:(int)_entryId
+                         solutionString:(NSString*) _solutionAsString 
+                             hintString: (NSString*) _hintsAsString
+                           secondsSince1970:(double)_secondsSince1970 
+                               comments:(NSString*)_comments{
+    self.entryId = _entryId;
+    self.comments = _comments;
+    self.sudokuSolution = _solutionAsString;
+    self.sudokuHints = _hintsAsString;
+    self.secondsSince1970 = _secondsSince1970;
+    return self;
 }
 
 
-+(ArchiveEntry*) archiveEntryWithArchiveString: (NSString*) archiveString{
-    NSArray *segments = [archiveString componentsSeparatedByString:@"\t"];
-    NSString *entryId = [segments objectAtIndex:0];
-    NSString *solution = [segments objectAtIndex:1];
-    NSString *hints = [segments objectAtIndex:2];
-    NSString *secondsSince1970 = [segments objectAtIndex:3];
-    NSString *comments = [segments objectAtIndex:4];
-    ArchiveEntry *rv = [ArchiveEntry archiveEntryWithValues:[entryId intValue]
-                                 solutionString:solution 
-                                     hintString:hints 
-                               secondsSince1970:[secondsSince1970 doubleValue]
-                                       comments:comments];
-    return rv;
+-(id) initWithArchiveString: (NSString*) archiveString{
+    NSString *separator = [NSString stringWithFormat:@"\t"];
+    NSArray *segments = [archiveString componentsSeparatedByString:separator];
+    NSString *_entryId = [segments objectAtIndex:0];
+    NSString *_solution = [segments objectAtIndex:1];
+    NSString *_hints = [segments objectAtIndex:2];
+    NSString *_secondsSince1970 = [segments objectAtIndex:3];
+    NSString *_comments = [segments objectAtIndex:4];
+    return [self initWithValues:[_entryId intValue]
+                                 solutionString:_solution 
+                                     hintString:_hints 
+                               secondsSince1970:[_secondsSince1970 doubleValue]
+                                       comments:_comments];
 }
 
 -(NSString*) toArchiveString{

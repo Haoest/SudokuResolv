@@ -21,13 +21,13 @@
 
 //load archive into strong-typed array of ArchiveEntry objects, sorted by date in desc order
 
-+(ArchiveEntry*) archiveEntryWithValues:(int)entryId
-                         solutionString:(NSString*) solutionAsString 
-                             hintString: (NSString*) hintsAsString
-                           secondsSince1970:(double) secondsSince1970
-                               comments:(NSString*)comments;
+-(id) initWithValues:(int)_entryId
+                         solutionString:(NSString*) _solutionAsString 
+                             hintString: (NSString*) _hintsAsString
+                           secondsSince1970:(double) _secondsSince1970
+                               comments:(NSString*)_comments;
 
-+(ArchiveEntry*) archiveEntryWithArchiveString: (NSString*) archiveString;
+-(id) initWithArchiveString: (NSString*) archiveString;
 
 -(NSString*) toArchiveString;
 
