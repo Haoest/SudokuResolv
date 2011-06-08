@@ -52,13 +52,6 @@
 
 - (void)didReceiveMemoryWarning
 {
-    self.mainMenu = nil;
-    self.doneButton = nil;
-    self.editButton = nil;
-    self.topToolBar = nil;
-    self.flexibleSpace = nil;
-    self.view = nil;
-    self.archiveTableViewController.view = nil;
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -69,7 +62,6 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
     [self.mainMenu setTarget:self];
     [self.mainMenu setAction:@selector(backToMainMenu)];
     [self.doneButton setAction:@selector(doneButton_touchdown)];
@@ -78,6 +70,7 @@
     [editButton setTarget:self];
     NSArray* items = [NSArray arrayWithObjects:mainMenu, flexibleSpace, editButton, nil];
     [topToolBar setItems:items];
+    [super viewDidLoad];
 }
 
 - (void)viewDidUnload
@@ -88,7 +81,7 @@
     self.topToolBar = nil;
     self.flexibleSpace = nil;
     self.view = nil;
-    self.archiveTableViewController.view = nil;
+    self.archiveTableViewController = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

@@ -25,6 +25,7 @@
 
 - (void)dealloc
 {
+    [self.archiveContents removeAllObjects];
     self.archiveContents = nil;
     self.archiveManager = nil;
     [super dealloc];
@@ -48,6 +49,8 @@
 
 -(void) reloadDataSource{
     self.archiveManager = [[ArchiveManager alloc]initDefaultArchive];
+    [self.archiveManager release];
+    [self.archiveContents removeAllObjects];
     self.archiveContents = [self.archiveManager getAllEntries];
 }
 

@@ -33,8 +33,9 @@
 -(id) initDefaultArchive{
     self.allEntries = [[NSMutableDictionary alloc] initWithContentsOfFile:[AppConfig getArchiveFileName]];
     if (!self.allEntries){
-        self.allEntries = [[[NSMutableDictionary alloc] init] autorelease];
+        self.allEntries = [[NSMutableDictionary alloc] init];
     }
+    [self.allEntries release];
     return self;
 }
 
@@ -44,7 +45,7 @@
     if (!rv){
         return nil;
     }
-    return [ArchiveEntry archiveEntryWithArchiveString: rv];
+    return [[[ArchiveEntry alloc] initWithArchiveString: rv] autorelease];
 }
 
 -(int) addEntry:(ArchiveEntry*) entry{
@@ -83,8 +84,9 @@
 -(NSMutableArray*) getAllEntries{
     NSMutableArray* arr = [[NSMutableArray alloc] initWithCapacity:[allEntries count]];
     for(NSString* entry in [self.allEntries allValues]){
-        ArchiveEntry*e = [ArchiveEntry archiveEntryWithArchiveString:entry];
+        ArchiveEntry*e = [[ArchiveEntry alloc] initWithArchiveString:entry];
         [arr addObject:e];
+        [e release];
     }
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"secondsSince1970" ascending:NO];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
