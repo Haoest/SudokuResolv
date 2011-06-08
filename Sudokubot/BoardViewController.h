@@ -11,7 +11,6 @@
 #import "rootViewDelegate.h"
 
 @interface BoardViewController : UIViewController<UITextFieldDelegate> {
-    NSString* comments;
 
 }
 

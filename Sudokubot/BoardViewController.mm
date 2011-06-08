@@ -24,11 +24,9 @@
 @property(nonatomic, assign) int archiveEntryId;
 @property(nonatomic, assign) int** hints;
 @property(nonatomic, assign) int** solution;
-@property(nonatomic, retain) NSString *comments;
 @property(nonatomic, retain) UIView* boardViewContainer;
 
 @property(nonatomic, retain) NSMutableArray* gridLabels;
-@property(nonatomic, retain) UIView* gridView;
 @property(nonatomic, retain) NSMutableArray* unitFrames;
 
 -(void) saveToArchive;
@@ -47,27 +45,20 @@
 @synthesize backToArchiveButton, mainMenuButton;
 @synthesize hints, solution, archiveEntryId;
 @synthesize rootViewDelegate;
-@synthesize gridView, gridLabels, unitFrames;
-@dynamic comments;
+@synthesize gridLabels, unitFrames;
  
 - (void)dealloc
 {
-    [comments release];
     [self resetData];
     [super dealloc];
 }
 
 - (void)viewDidUnload
 {
-    for(UILabel* lbl in self.gridLabels){
-        [lbl release];
-    }
-    for(UIView* v in self.unitFrames){
-        [v release];
-    }
-    self.unitFrames = nil;
+    [gridLabels removeAllObjects];
     self.gridLabels = nil;
-    self.gridView = nil;
+    [unitFrames removeAllObjects];
+    self.unitFrames = nil;
     self.boardViewContainer = nil;
     self.commentTextField = nil;
     self.backToArchiveButton = nil;
@@ -78,31 +69,18 @@
     [super viewDidUnload];
 }
 
--(void) setComments:(NSString *)_comments{
-    if (_comments != comments){
-        [comments release];
-        comments = [_comments retain];
-        [self.commentTextField setText:comments];
-    }
-}
-
--(NSString*) comments{
-    return comments;
-}
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    self.archiveEntryId = -1;
+
     if (self) {
-        // Custom initialization
+        self.archiveEntryId = -1;
     }
     return self;
 }
 
 - (void)didReceiveMemoryWarning
 {
-    self.view = nil;
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
@@ -114,7 +92,6 @@
 {
     [super viewDidLoad];
     [self wireupControls];
-    [self.commentTextField setText:comments];
 }
 
 -(void) resetData{
@@ -145,12 +122,12 @@
 }
 
 -(void) drawGridsView{
-    if(self.gridView==nil){
-        self.gridLabels = [[[NSMutableArray alloc] initWithCapacity:81] autorelease];
-        self.unitFrames = [[[NSMutableArray alloc]initWithCapacity:9]autorelease];
+    if(boardViewContainer==nil){
+        gridLabels = [[NSMutableArray alloc] initWithCapacity:81];
+        unitFrames = [[NSMutableArray alloc]initWithCapacity:9];
         int unitSize = 96;
         int gridSize = 32;
-        self.boardViewContainer = [[[UIView alloc] initWithFrame:CGRectMake(20, 70, 288, 288)] autorelease];
+        boardViewContainer = [[UIView alloc] initWithFrame:CGRectMake(20, 70, 288, 288)];
         [self.boardViewContainer.layer setBorderWidth:1];
         [self.boardViewContainer.layer setBorderColor:[[UIColor blackColor] CGColor]];
         for(int i=0; i<9; i++){
@@ -197,12 +174,13 @@
     NSString* serializedBoard = [cvutil SerializeBoard: self.solution];
     ArchiveManager *arman = [[ArchiveManager alloc] initDefaultArchive];
     if(self.archiveEntryId == -1){
-        ArchiveEntry* archiveEntry = [ArchiveEntry archiveEntryWithValues:-1
+        ArchiveEntry* archiveEntry = [[ArchiveEntry alloc] initWithValues:-1
                                                        solutionString:serializedBoard
                                                            hintString:[cvutil SerializeBoard:hints]
                                                      secondsSince1970:[[NSDate date] timeIntervalSince1970]
-                                                                 comments:self.comments];
+                                                                 comments:self.commentTextField.text];
         int newId = [arman addEntry:archiveEntry];
+        [archiveEntry release];
         if([arman saveArchive]){
             self.archiveEntryId = newId;
         }
@@ -210,9 +188,9 @@
         int entryId = self.archiveEntryId;
         ArchiveEntry* e = [arman getEntryById:entryId];
         if (e){
-            e.comments = self.comments;
+            e.comments = self.commentTextField.text;
             [arman updateEntry:e];
-            bool saved = [arman saveArchive];
+            [arman saveArchive];
         }
     }
     [self.rootViewDelegate refreshArchiveView];
@@ -234,7 +212,6 @@
 
 -(void) textFieldDidEndEditing:(UITextField *)textField{
     [self animateTextField:textField up:NO];
-    self.comments = commentTextField.text;
     [self saveToArchive];
 }
 
@@ -257,7 +234,7 @@
 
 -(void) refreshBoardWithHints:(int**) _hints{
     [self resetData];
-    self.comments = @"";
+    self.commentTextField.text = @"";
     self.hints = new int*[9];
     for(int i=0; i<9; i++){
         self.hints[i] = new int[9];
@@ -277,7 +254,7 @@
     self.archiveEntryId = entry.entryId;
     self.solution = [cvutil DeserializedBoard: [entry sudokuSolution] ];
     self.hints = [cvutil DeserializedBoard:[entry sudokuHints]];
-    self.comments = entry.comments;
+    self.commentTextField.text = entry.comments;
     [self drawGridsView];
 }
 
