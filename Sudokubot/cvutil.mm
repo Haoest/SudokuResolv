@@ -134,14 +134,17 @@ using namespace cv;
 
 
 +(NSString*) SerializeBoard:(int**)board{
-    NSMutableString *rv = [NSMutableString stringWithFormat:@""];
+    NSMutableString *rv = [[NSMutableString alloc] initWithString:@""];
     for(int i=0; i<9; i++){
         for(int j=0; j<9; j++){
             [rv appendFormat:@"%d", board[i][j]];
         }
         [rv appendString:@" "];
     }
-    return [NSString stringWithString:rv];
+    
+    NSString *s = [[NSString alloc] initWithString: rv];
+    [rv release];
+    return [s autorelease];
 }
 
 //load complete solution or incomplete board as a 2D array

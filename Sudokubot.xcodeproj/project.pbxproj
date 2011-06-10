@@ -8,14 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		3A105783139C39DF00089373 /* acknowledgement.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A105782139C39DF00089373 /* acknowledgement.txt */; };
-		3A582759132CF031003F8ACC /* puzzle1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A582757132CF031003F8ACC /* puzzle1.png */; };
 		3A7E57D1134EB0B7003CCF9D /* BoardViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E57CF134EB0B7003CCF9D /* BoardViewController.mm */; };
 		3A7E57D2134EB0B7003CCF9D /* BoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E57D0134EB0B7003CCF9D /* BoardViewController.xib */; };
 		3A7E57D6134EB3D4003CCF9D /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E57D4134EB3D3003CCF9D /* HelpViewController.m */; };
 		3A7E57D7134EB3D4003CCF9D /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E57D5134EB3D4003CCF9D /* HelpViewController.xib */; };
 		3A8F9E6D134BADC000E43520 /* solver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8F9E6C134BADC000E43520 /* solver.mm */; };
 		3A90FFF71390D6A900027FB5 /* PreviewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A90FFF61390D6A900027FB5 /* PreviewViewController.mm */; };
-		3A94CC701331B46000B380B2 /* numerics0to9.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A94CC6E1331B46000B380B2 /* numerics0to9.png */; };
 		3A94CC911331B5F700B380B2 /* basicOCR.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A94CC891331B5F700B380B2 /* basicOCR.mm */; };
 		3A94CC941331B5F700B380B2 /* preprocessing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A94CC8D1331B5F700B380B2 /* preprocessing.cpp */; };
 		3A951C1E1352CE17006ACF0C /* ArchiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A951C1C1352CE13006ACF0C /* ArchiveViewController.m */; };
@@ -31,7 +29,6 @@
 		3A967F5513969A1100A52AD4 /* numpad_9.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A967F4B13969A1100A52AD4 /* numpad_9.png */; };
 		3A967F5613969A1100A52AD4 /* numpad_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A967F4C13969A1100A52AD4 /* numpad_0.png */; };
 		3A9925AB13916F3D0085CA6C /* PreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A9925AA13916F3C0085CA6C /* PreviewViewController.xib */; };
-		3A996BE2132FF9700061CCFD /* simpleLines.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A996BE0132FF9700061CCFD /* simpleLines.png */; };
 		3A9A7FAA1393899600FCB191 /* NumPadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A9A7FA91393899500FCB191 /* NumPadView.xib */; };
 		3A9AC49C139F5FA00014847C /* blackwhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB21386F61000FF570D /* blackwhite.png */; };
 		3A9AC49D139F5FA00014847C /* camera_blurry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB31386F61000FF570D /* camera_blurry.jpg */; };
@@ -116,9 +113,6 @@
 		3A9EDCF4139F589300D7C521 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E6C5213295D120055628C /* InfoPlist.strings */; };
 		3A9EDCF5139F589300D7C521 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E6C5B13295D120055628C /* MainWindow.xib */; };
 		3A9EDCF6139F589300D7C521 /* SudokubotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E6C6113295D120055628C /* SudokubotViewController.xib */; };
-		3A9EDCF7139F589300D7C521 /* puzzle1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A582757132CF031003F8ACC /* puzzle1.png */; };
-		3A9EDCF8139F589300D7C521 /* simpleLines.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A996BE0132FF9700061CCFD /* simpleLines.png */; };
-		3A9EDCF9139F589300D7C521 /* numerics0to9.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A94CC6E1331B46000B380B2 /* numerics0to9.png */; };
 		3A9EDCFA139F589300D7C521 /* BoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E57D0134EB0B7003CCF9D /* BoardViewController.xib */; };
 		3A9EDCFB139F589300D7C521 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E57D5134EB3D4003CCF9D /* HelpViewController.xib */; };
 		3A9EDCFC139F589300D7C521 /* ArchiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A951C1D1352CE14006ACF0C /* ArchiveViewController.xib */; };
@@ -147,7 +141,19 @@
 		3AB7AFE7138A3C7600F7EB36 /* ArchiveManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB7AFE6138A3C7600F7EB36 /* ArchiveManager.m */; };
 		3ABFB6D3138AF2CC00912353 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABFB6D2138AF2CC00912353 /* SenTestingKit.framework */; };
 		3AC35C74133466FA0099F669 /* boardRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC35C73133466F90099F669 /* boardRecognizer.cpp */; };
+		3ACE518113A1F8BD00CC8717 /* OCRTemplateSet1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ACE518013A1F8BD00CC8717 /* OCRTemplateSet1.png */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		3AC42BC313A1DF5F0003ECEF /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		3A9E6C6D13295D120055628C /* PBXContainerItemProxy */ = {
@@ -163,7 +169,6 @@
 		3A0FB73C138620920050361A /* boardRecognizerTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = boardRecognizerTests.mm; sourceTree = "<group>"; };
 		3A0FB73D138620920050361A /* boardRecognizerTests.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = boardRecognizerTests.hpp; sourceTree = "<group>"; };
 		3A105782139C39DF00089373 /* acknowledgement.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = acknowledgement.txt; path = devres/acknowledgement.txt; sourceTree = "<group>"; };
-		3A582758132CF031003F8ACC /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/puzzle1.png; sourceTree = "<group>"; };
 		3A7E57CE134EB0B7003CCF9D /* BoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardViewController.h; sourceTree = "<group>"; };
 		3A7E57CF134EB0B7003CCF9D /* BoardViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BoardViewController.mm; sourceTree = "<group>"; };
 		3A7E57D0134EB0B7003CCF9D /* BoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BoardViewController.xib; sourceTree = "<group>"; };
@@ -179,7 +184,6 @@
 		3A91390613463DC80058CB15 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		3A91390713463DC80058CB15 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3A91390813463DC80058CB15 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		3A94CC6F1331B46000B380B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/numerics0to9.png; sourceTree = "<group>"; };
 		3A94CC891331B5F700B380B2 /* basicOCR.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = basicOCR.mm; sourceTree = "<group>"; };
 		3A94CC8A1331B5F700B380B2 /* basicOCR.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = basicOCR.hpp; sourceTree = "<group>"; };
 		3A94CC8D1331B5F700B380B2 /* preprocessing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = preprocessing.cpp; sourceTree = "<group>"; };
@@ -198,7 +202,6 @@
 		3A967F4B13969A1100A52AD4 /* numpad_9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = numpad_9.png; path = Sudokubot/numpadImages/numpad_9.png; sourceTree = "<group>"; };
 		3A967F4C13969A1100A52AD4 /* numpad_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = numpad_0.png; path = Sudokubot/numpadImages/numpad_0.png; sourceTree = "<group>"; };
 		3A9925AA13916F3C0085CA6C /* PreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewViewController.xib; sourceTree = "<group>"; };
-		3A996BE1132FF9700061CCFD /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/simpleLines.png; sourceTree = "<group>"; };
 		3A99BAB21386F61000FF570D /* blackwhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackwhite.png; sourceTree = "<group>"; };
 		3A99BAB31386F61000FF570D /* camera_blurry.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = camera_blurry.jpg; sourceTree = "<group>"; };
 		3A99BAB41386F61000FF570D /* camera_book1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = camera_book1.jpg; sourceTree = "<group>"; };
@@ -332,7 +335,7 @@
 		3A9EDC93139F545400D7C521 /* ts_gtest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ts_gtest.h; sourceTree = "<group>"; };
 		3A9EDC95139F545400D7C521 /* background_segm.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = background_segm.hpp; sourceTree = "<group>"; };
 		3A9EDC96139F545400D7C521 /* tracking.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tracking.hpp; sourceTree = "<group>"; };
-		3A9EDD3D139F589300D7C521 /* Sudokubot copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sudokubot copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A9EDD3D139F589300D7C521 /* Sudoku Solver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sudoku Solver.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9F132913860C9100B01591 /* OCRTemplateSet3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OCRTemplateSet3.png; path = Sudokubot/OCRTemplateSet3.png; sourceTree = "<group>"; };
 		3A9FE1241354243700B4E21A /* ArchiveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveTableViewController.h; sourceTree = "<group>"; };
 		3A9FE1251354243700B4E21A /* ArchiveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveTableViewController.m; sourceTree = "<group>"; };
@@ -347,6 +350,7 @@
 		3ABFB6D2138AF2CC00912353 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3AC35C72133466F80099F669 /* boardRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = boardRecognizer.h; sourceTree = "<group>"; };
 		3AC35C73133466F90099F669 /* boardRecognizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = boardRecognizer.cpp; sourceTree = "<group>"; };
+		3ACE518013A1F8BD00CC8717 /* OCRTemplateSet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OCRTemplateSet1.png; path = Sudokubot/OCRTemplateSet1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -491,7 +495,7 @@
 			children = (
 				3A9E6C4513295D120055628C /* Sudokubot sim.app */,
 				3A9E6C6913295D120055628C /* SudokubotTests.octest */,
-				3A9EDD3D139F589300D7C521 /* Sudokubot copy.app */,
+				3A9EDD3D139F589300D7C521 /* Sudoku Solver.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -564,9 +568,6 @@
 		3A9E6C8213296AFB0055628C /* Development Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3A94CC6E1331B46000B380B2 /* numerics0to9.png */,
-				3A996BE0132FF9700061CCFD /* simpleLines.png */,
-				3A582757132CF031003F8ACC /* puzzle1.png */,
 				3A105782139C39DF00089373 /* acknowledgement.txt */,
 			);
 			name = "Development Resources";
@@ -767,6 +768,7 @@
 		3A9F132813860C5B00B01591 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				3ACE518013A1F8BD00CC8717 /* OCRTemplateSet1.png */,
 				3A967F42139699F500A52AD4 /* numpad */,
 				3A9F132913860C9100B01591 /* OCRTemplateSet3.png */,
 			);
@@ -839,6 +841,7 @@
 				3A9E6C4313295D120055628C /* Resources */,
 			);
 			buildRules = (
+				3AC42BC313A1DF5F0003ECEF /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -880,7 +883,7 @@
 			);
 			name = "Sudokubot device";
 			productName = Sudokubot;
-			productReference = 3A9EDD3D139F589300D7C521 /* Sudokubot copy.app */;
+			productReference = 3A9EDD3D139F589300D7C521 /* Sudoku Solver.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -918,9 +921,6 @@
 				3A9E6C5413295D120055628C /* InfoPlist.strings in Resources */,
 				3A9E6C5D13295D120055628C /* MainWindow.xib in Resources */,
 				3A9E6C6313295D120055628C /* SudokubotViewController.xib in Resources */,
-				3A582759132CF031003F8ACC /* puzzle1.png in Resources */,
-				3A996BE2132FF9700061CCFD /* simpleLines.png in Resources */,
-				3A94CC701331B46000B380B2 /* numerics0to9.png in Resources */,
 				3A7E57D2134EB0B7003CCF9D /* BoardViewController.xib in Resources */,
 				3A7E57D7134EB3D4003CCF9D /* HelpViewController.xib in Resources */,
 				3A951C1F1352CE17006ACF0C /* ArchiveViewController.xib in Resources */,
@@ -938,6 +938,7 @@
 				3A967F5513969A1100A52AD4 /* numpad_9.png in Resources */,
 				3A967F5613969A1100A52AD4 /* numpad_0.png in Resources */,
 				3A105783139C39DF00089373 /* acknowledgement.txt in Resources */,
+				3ACE518113A1F8BD00CC8717 /* OCRTemplateSet1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1004,9 +1005,6 @@
 				3A9EDCF4139F589300D7C521 /* InfoPlist.strings in Resources */,
 				3A9EDCF5139F589300D7C521 /* MainWindow.xib in Resources */,
 				3A9EDCF6139F589300D7C521 /* SudokubotViewController.xib in Resources */,
-				3A9EDCF7139F589300D7C521 /* puzzle1.png in Resources */,
-				3A9EDCF8139F589300D7C521 /* simpleLines.png in Resources */,
-				3A9EDCF9139F589300D7C521 /* numerics0to9.png in Resources */,
 				3A9EDCFA139F589300D7C521 /* BoardViewController.xib in Resources */,
 				3A9EDCFB139F589300D7C521 /* HelpViewController.xib in Resources */,
 				3A9EDCFC139F589300D7C521 /* ArchiveViewController.xib in Resources */,
@@ -1113,30 +1111,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3A582757132CF031003F8ACC /* puzzle1.png */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A582758132CF031003F8ACC /* en */,
-			);
-			name = puzzle1.png;
-			sourceTree = "<group>";
-		};
-		3A94CC6E1331B46000B380B2 /* numerics0to9.png */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A94CC6F1331B46000B380B2 /* en */,
-			);
-			name = numerics0to9.png;
-			sourceTree = "<group>";
-		};
-		3A996BE0132FF9700061CCFD /* simpleLines.png */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A996BE1132FF9700061CCFD /* en */,
-			);
-			name = simpleLines.png;
-			sourceTree = "<group>";
-		};
 		3A9E6C5213295D120055628C /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1295,18 +1269,16 @@
 				HEADER_SEARCH_PATHS = "/Users/haoest/Development/Sudokubot/Sudokubot/opencv/include/**";
 				INFOPLIST_FILE = "SudokubotTests/SudokubotTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
-					"/Users/haoest/Development/Sudokubot/Sudokubot/opencv/lib/debug-iphonesimulator/",
-					"\"$(SRCROOT)/Sudokubot/opencv/lib/debug-iphoneos\"",
-					"\"$(SRCROOT)/Sudokubot/opencv/lib/debug-universal\"",
-					"\"$(SRCROOT)/Sudokubot/opencv/lib/release-iphoneos\"",
-					"\"$(SRCROOT)/Sudokubot/opencv/lib/Release-iphonesimulator\"",
-					"\"$(SRCROOT)/Sudokubot/opencv/lib/release-universal\"",
+					"/Users/haoest/Development/Sudokubot/Sudokubot/opencv/lib/debug-iphonesimulator/**",
+					"\"$(SRCROOT)/Sudokubot/opencv/lib/debug-iphoneos\"/**",
+					"\"$(SRCROOT)/Sudokubot/opencv/lib/debug-universal\"/**",
 				);
 				OTHER_LDFLAGS = (
 					"-framework",
 					SenTestingKit,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_AFTER_BUILD = NO;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -1326,18 +1298,16 @@
 				HEADER_SEARCH_PATHS = "/Users/haoest/Development/Sudokubot/Sudokubot/opencv/include/**";
 				INFOPLIST_FILE = "SudokubotTests/SudokubotTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
-					"/Users/haoest/Development/Sudokubot/Sudokubot/opencv/lib/debug-iphonesimulator/",
-					"\"$(SRCROOT)/Sudokubot/opencv/lib/debug-iphoneos\"",
-					"\"$(SRCROOT)/Sudokubot/opencv/lib/debug-universal\"",
-					"\"$(SRCROOT)/Sudokubot/opencv/lib/release-iphoneos\"",
-					"\"$(SRCROOT)/Sudokubot/opencv/lib/Release-iphonesimulator\"",
-					"\"$(SRCROOT)/Sudokubot/opencv/lib/release-universal\"",
+					"\"$(SRCROOT)/Sudokubot/opencv/lib/release-iphoneos\"/**",
+					"\"$(SRCROOT)/Sudokubot/opencv/lib/Release-iphonesimulator\"/**",
+					"\"$(SRCROOT)/Sudokubot/opencv/lib/release-universal\"/**",
 				);
 				OTHER_LDFLAGS = (
 					"-framework",
 					SenTestingKit,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_AFTER_BUILD = NO;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -1370,7 +1340,7 @@
 					"-lopencv_imgproc",
 					"-lopencv_ml",
 				);
-				PRODUCT_NAME = "Sudokubot copy";
+				PRODUCT_NAME = "Sudoku Solver";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -1404,7 +1374,7 @@
 					"-lopencv_imgproc",
 					"-lopencv_ml",
 				);
-				PRODUCT_NAME = "Sudokubot copy";
+				PRODUCT_NAME = "Sudoku Solver";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;

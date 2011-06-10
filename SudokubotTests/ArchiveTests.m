@@ -39,7 +39,7 @@ NSString *testComment;
 -(void) testArchiveEntryDate{
     for(int i=0; i<1000; i++){ //time differences are sometimes a few milliseconds off, need to run this repeatedly to ensure serialization doesn't lose precision
         NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
-        ArchiveEntry *e = [ArchiveEntry archiveEntryWithValues:-1
+        ArchiveEntry *e = [[ArchiveEntry alloc] initWithValues:-1
                                                 solutionString: testSolution
                                                     hintString: testHints
                                               secondsSince1970:now
@@ -64,7 +64,7 @@ NSString *testComment;
 }
 
 -(void) testRetrieveEntryBeforeSaving{
-    ArchiveEntry *entry = [ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry = [[ArchiveEntry alloc] initWithValues:-1
                                                 solutionString:testSolution 
                                                     hintString:testHints
                                               secondsSince1970:0
@@ -79,7 +79,7 @@ NSString *testComment;
 
 -(void) testSaveArchive{
     int entryId = 1;
-    ArchiveEntry *entry = [ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry = [[ArchiveEntry alloc] initWithValues:-1
                                                 solutionString:testSolution 
                                                     hintString:testHints
                                               secondsSince1970:0
@@ -108,18 +108,18 @@ NSString *testComment;
 }
 
 -(void) testSaveMultipleEntries{
-    ArchiveEntry *entry1 = [ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry1 = [[ArchiveEntry alloc] initWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:now 
                                                        comments:@"entry1"] ;
-    ArchiveEntry *entry2 = [ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry2 = [[ArchiveEntry alloc] initWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:oneMinuteLater 
                                                        comments:@"entry2"] ;
     
-    ArchiveEntry *entry3 = [ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry3 = [[ArchiveEntry alloc] initWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:twoMinutesLater 
@@ -150,18 +150,18 @@ NSString *testComment;
 }
 
 -(void) testRemoveEntry{
-    ArchiveEntry *entry1 = [ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry1 = [[ArchiveEntry alloc] initWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:now 
                                                        comments:@"entry1"] ;
-    ArchiveEntry *entry2 = [ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry2 = [[ArchiveEntry alloc] initWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:oneMinuteLater 
                                                        comments:@"entry2"] ;
     
-    ArchiveEntry *entry3 = [ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry3 = [[ArchiveEntry alloc] initWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:twoMinutesLater 
@@ -199,18 +199,18 @@ NSString *testComment;
 }
 
 -(void) testUpdateEntry{
-    ArchiveEntry *entry1 = [ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry1 = [[ArchiveEntry alloc] initWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:now 
                                                        comments:@"entry1"] ;
-    ArchiveEntry *entry2 = [ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry2 = [[ArchiveEntry alloc] initWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:oneMinuteLater 
                                                        comments:@"entry2"] ;
     
-    ArchiveEntry *entry3 = [ArchiveEntry archiveEntryWithValues:-1
+    ArchiveEntry *entry3 = [[ArchiveEntry alloc] initWithValues:-1
                                                  solutionString:testSolution 
                                                      hintString:testHints
                                                secondsSince1970:twoMinutesLater 

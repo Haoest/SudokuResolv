@@ -36,6 +36,16 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
 
 - (void)dealloc
 {
+    [self resetFields];
+    [numpadImages removeAllObjects];
+    [numpadImages release];
+    [numpadContainer release];
+    [numpadHotRegions removeAllObjects];
+    [numpadHotRegions release];
+    previewImage = nil;
+    solveButton = nil;
+    cancelButton = nil;  
+    self.view = nil;
     [super dealloc];
 }
 
@@ -57,17 +67,7 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
 
 - (void)viewDidUnload
 {
-    [self resetFields];
-    [numpadImages release];
-    numpadImages = nil;
-    [numpadContainer release];
-    numpadContainer = nil;
-    [numpadHotRegions release];
-    numpadHotRegions = nil;
-    previewImage = nil;
-    solveButton = nil;
-    cancelButton = nil;  
-    self.view = nil;
+
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -85,6 +85,7 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
         for(UILabel *lbl in gridNumberLabels){
             [lbl removeFromSuperview];
         }
+        [gridNumberLabels removeAllObjects];
         [gridNumberLabels release];
     }
     gridNumberLabels = nil;
@@ -92,6 +93,8 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
         for(UIView* v in gridViews){
             [v removeFromSuperview];
         }
+        [gridViews removeAllObjects];
+        [gridViews release];
     }
     gridViews = nil;
     if (hints){

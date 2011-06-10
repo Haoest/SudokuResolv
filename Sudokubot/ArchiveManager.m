@@ -99,7 +99,7 @@
 
 -(int) getNextEntryId{
     int rv = 0;
-    for(NSNumber* key in [allEntries allKeys]){
+    for(NSString* key in [allEntries allKeys]){
         if ([key intValue] > rv){
             rv = [key intValue];
         }

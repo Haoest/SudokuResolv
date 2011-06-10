@@ -36,6 +36,7 @@
 @property(nonatomic, retain) PreviewViewController* previewViewController;
 
 -(void) showPreview: (UIImage*) imageWithSudokuBoard;
+-(UIImage*) getUpRightImage:(UIImage*) img;
 
 @end
 
@@ -177,12 +178,14 @@
 }
 
 -(void) showPreview: (UIImage*) imageWithSudokuBoard{
+    UIImage* uprightBoard = [[self getUpRightImage:imageWithSudokuBoard] retain];
     if (!self.previewViewController){
         self.previewViewController = [[PreviewViewController alloc] initWithNibName:@"PreviewViewController" bundle:nil];
         self.previewViewController.rootViewDelegate = self;
     }
     [self.view addSubview: previewViewController.view];
     [self.previewViewController loadImageWithSudokuBoard:imageWithSudokuBoard];
+    [uprightBoard release];
 }
 
 -(void) showArchiveView{
@@ -234,6 +237,24 @@
     [self.boardViewController.view removeFromSuperview];
     [self.archiveViewController.view removeFromSuperview];
     [self.previewViewController.view removeFromSuperview];
+}
+
+-(UIImage*) getUpRightImage:(UIImage*) img{
+    CGFloat degreeInRadian = 0;
+    if (img.imageOrientation == UIImageOrientationLeft){
+        degreeInRadian = M_PI /2;
+    }
+    if (img.imageOrientation == UIImageOrientationRight){
+        degreeInRadian = -M_PI/2;
+    }
+    if (img.imageOrientation == UIImageOrientationDown){
+        degreeInRadian = M_PI;
+    }
+    UIGraphicsBeginImageContext(img.size);
+    CGContextRef context(UIGraphicsGetCurrentContext());
+    CGContextRotateCTM(context, degreeInRadian);
+    [img drawAtPoint:CGPointMake(0, 0)];
+    return UIGraphicsGetImageFromCurrentImageContext();
 }
 
 @end
