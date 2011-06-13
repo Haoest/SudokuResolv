@@ -359,7 +359,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">31</int>
+			<int key="maxID">40</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -367,116 +367,49 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SudokubotViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>btnArchive_touchDown</string>
-							<string>btnCaptureFromCamera_touchDown</string>
-							<string>btnHelp_touchDown</string>
-							<string>btnOpenFromClipboard_touchDown</string>
-							<string>btnOpenFromPhotoLibrary_touchDown</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>btnArchive_touchDown</string>
-							<string>btnCaptureFromCamera_touchDown</string>
-							<string>btnHelp_touchDown</string>
-							<string>btnOpenFromClipboard_touchDown</string>
-							<string>btnOpenFromPhotoLibrary_touchDown</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">btnArchive_touchDown</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">btnCaptureFromCamera_touchDown</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">btnHelp_touchDown</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">btnOpenFromClipboard_touchDown</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">btnOpenFromPhotoLibrary_touchDown</string>
-								<string key="candidateClassName">id</string>
-							</object>
-						</object>
-					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>MainImageView</string>
-							<string>btnArchive</string>
-							<string>btnCaptureFromCamera</string>
-							<string>btnHelp</string>
-							<string>btnOpenFromClipboard</string>
-							<string>btnOpenFromPhotoLibrary</string>
+							<string>testview1</string>
+							<string>testview2</string>
+							<string>testview3</string>
+							<string>testview4</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIImageView</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
+							<string>UIImageView</string>
+							<string>UIImageView</string>
+							<string>UIImageView</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>MainImageView</string>
-							<string>btnArchive</string>
-							<string>btnCaptureFromCamera</string>
-							<string>btnHelp</string>
-							<string>btnOpenFromClipboard</string>
-							<string>btnOpenFromPhotoLibrary</string>
+							<string>testview1</string>
+							<string>testview2</string>
+							<string>testview3</string>
+							<string>testview4</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
-								<string key="name">MainImageView</string>
+								<string key="name">testview1</string>
 								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">btnArchive</string>
-								<string key="candidateClassName">UIButton</string>
+								<string key="name">testview2</string>
+								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">btnCaptureFromCamera</string>
-								<string key="candidateClassName">UIButton</string>
+								<string key="name">testview3</string>
+								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">btnHelp</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">btnOpenFromClipboard</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">btnOpenFromPhotoLibrary</string>
-								<string key="candidateClassName">UIButton</string>
+								<string key="name">testview4</string>
+								<string key="candidateClassName">UIImageView</string>
 							</object>
 						</object>
 					</object>

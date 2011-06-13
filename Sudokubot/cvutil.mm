@@ -9,6 +9,7 @@
 #import "cvutil.hpp"
 #import <opencv2/imgproc/imgproc.hpp>
 #import <opencv2/imgproc/imgproc_c.h>
+#import "AppConfig.h"
 
 using namespace cv;
 
@@ -44,6 +45,43 @@ using namespace cv;
     IplImage *ret = cvCreateImage(cvGetSize(iplimage), IPL_DEPTH_8U, 3);
     cvCvtColor(iplimage, ret, CV_RGBA2BGR);
     cvReleaseImage(&iplimage);
+    CGFloat imageOrientationInDegree = [cvutil getImageOrientationInDegrees:image];
+    UIImageOrientation orientation = image.imageOrientation;
+    IplImage *resized = [cvutil normalizeSourceImageSize:ret];
+    if (resized){
+        cvReleaseImage(&ret);
+        ret = resized;
+    }
+    int originalWidth = ret->width;
+    int originalHeight = ret->height;
+    if (orientation == UIImageOrientationDown){
+        IplImage* srcImg = ret;
+        ret = cvCreateImage(cvSize(originalWidth, originalHeight), 8, 3);
+        Mat src = srcImg;
+        Point2f center(src.cols/2.0F, src.rows/2.0F);
+        Mat rotMat = getRotationMatrix2D(center, imageOrientationInDegree, 1.0);
+        Mat dst = ret;
+        warpAffine(src, dst, rotMat, src.size());
+        cvReleaseImage(&srcImg);
+    }
+    else if(orientation == UIImageOrientationLeft || orientation == UIImageOrientationRight){
+        IplImage* srcImg = cvCreateImage(cvSize(originalHeight, originalHeight), 8, 3);
+        IplImage* dstImg = cvCreateImage(cvGetSize(srcImg), 8, 3);
+        int offset = abs(ret->height - ret->width)/2;
+		cvCopyMakeBorder(ret, srcImg, cvPoint(offset,0), IPL_BORDER_CONSTANT, cvScalar(0));
+        cvReleaseImage(&ret);
+        Mat src = srcImg;
+        Mat dst = dstImg;
+        Point2f center(src.cols/2.0F, src.rows/2.0F);
+        Mat rotMat = getRotationMatrix2D(center, imageOrientationInDegree, 1.0);
+        warpAffine(src, dst, rotMat, src.size());
+        cvReleaseImage(&srcImg);
+        ret = cvCreateImage(cvSize(originalHeight, originalWidth), 8, 3);
+        CvRect roi = cvRect(0, abs(originalWidth - originalHeight)/2, originalHeight, originalWidth);
+        cvSetImageROI(dstImg, roi);
+        cvCopy(dstImg, ret);
+        cvReleaseImage(&dstImg);
+    }
     return ret;
 }
 
@@ -56,6 +94,10 @@ using namespace cv;
         cvCvtColor(image, temp, CV_GRAY2BGR);
         image = temp;
     }
+    IplImage* rgbImage = cvCreateImage(cvGetSize(image), 8, 4);
+    cvCvtColor(image, rgbImage, CV_BGR2RGBA);
+    cvReleaseImage(&image);
+    image = rgbImage;
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     // Allocating the buffer for CGImage
     NSData *data = [NSData dataWithBytes:image->imageData length:image->imageSize];
@@ -165,5 +207,36 @@ using namespace cv;
 	return rv;
 }
 
++(CGFloat) getImageOrientationInDegrees:(UIImage*) img{
+    CGFloat rv = 0;
+    if (img.imageOrientation == UIImageOrientationLeft){
+        rv = 90;
+    }
+    if (img.imageOrientation == UIImageOrientationRight){
+        rv = -90;
+    }
+    if (img.imageOrientation == UIImageOrientationDown){
+        rv = 180;
+    }
+    return rv;
+}
+
++(IplImage*) normalizeSourceImageSize:(IplImage *)sourceImage{
+	IplImage *rv = 0;
+    float InputImageNormalizeLength = [AppConfig normalizedBoardImageSize];
+	if (MAX(sourceImage->width, sourceImage->height) > InputImageNormalizeLength){
+		int normalizedWidth, normalizedHeight;
+		if(sourceImage->width > sourceImage->height){
+			normalizedWidth = InputImageNormalizeLength;
+			normalizedHeight = (float)InputImageNormalizeLength / sourceImage->width * sourceImage->height;
+		}else{
+			normalizedHeight = InputImageNormalizeLength;
+			normalizedWidth = (float)InputImageNormalizeLength / sourceImage->height * sourceImage->width;
+		}
+		rv = cvCreateImage(cvSize(normalizedWidth, normalizedHeight), sourceImage->depth, sourceImage->nChannels);
+        cvResize(sourceImage, rv);
+	}
+	return rv;
+}
 
 @end

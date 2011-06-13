@@ -13,6 +13,7 @@
 #import "preprocessing.h"
 #import "solver.hpp"
 #import "AppConfig.h"
+#import "cvutil.hpp"
 
 @interface SudokubotViewController ()
 
@@ -36,7 +37,6 @@
 @property(nonatomic, retain) PreviewViewController* previewViewController;
 
 -(void) showPreview: (UIImage*) imageWithSudokuBoard;
--(UIImage*) getUpRightImage:(UIImage*) img;
 
 @end
 
@@ -80,7 +80,6 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         [btnCaptureFromCamera setEnabled:NO];
         [btnCaptureFromCamera setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
@@ -113,13 +112,6 @@
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [self presentModalViewController:imagePicker animated:NO];
     }
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    [self dismissModalViewControllerAnimated:YES];
-    UIImage* img = [info valueForKey:UIImagePickerControllerOriginalImage];
-    [self showPreview:img];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -171,6 +163,16 @@
         [self presentModalViewController:imagePicker animated:NO];
     }
 }
+
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [self dismissModalViewControllerAnimated:YES];
+    UIImage* img = [info valueForKey:UIImagePickerControllerOriginalImage];
+    int width = img.size.width;
+    int height = img.size.height;
+    [self showPreview:img];
+}
  
  - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
@@ -178,14 +180,12 @@
 }
 
 -(void) showPreview: (UIImage*) imageWithSudokuBoard{
-    UIImage* uprightBoard = [[self getUpRightImage:imageWithSudokuBoard] retain];
     if (!self.previewViewController){
         self.previewViewController = [[PreviewViewController alloc] initWithNibName:@"PreviewViewController" bundle:nil];
         self.previewViewController.rootViewDelegate = self;
     }
     [self.view addSubview: previewViewController.view];
     [self.previewViewController loadImageWithSudokuBoard:imageWithSudokuBoard];
-    [uprightBoard release];
 }
 
 -(void) showArchiveView{
@@ -237,24 +237,6 @@
     [self.boardViewController.view removeFromSuperview];
     [self.archiveViewController.view removeFromSuperview];
     [self.previewViewController.view removeFromSuperview];
-}
-
--(UIImage*) getUpRightImage:(UIImage*) img{
-    CGFloat degreeInRadian = 0;
-    if (img.imageOrientation == UIImageOrientationLeft){
-        degreeInRadian = M_PI /2;
-    }
-    if (img.imageOrientation == UIImageOrientationRight){
-        degreeInRadian = -M_PI/2;
-    }
-    if (img.imageOrientation == UIImageOrientationDown){
-        degreeInRadian = M_PI;
-    }
-    UIGraphicsBeginImageContext(img.size);
-    CGContextRef context(UIGraphicsGetCurrentContext());
-    CGContextRotateCTM(context, degreeInRadian);
-    [img drawAtPoint:CGPointMake(0, 0)];
-    return UIGraphicsGetImageFromCurrentImageContext();
 }
 
 @end

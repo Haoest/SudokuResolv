@@ -657,10 +657,10 @@ IplImage *normalizeSourceImageSize(IplImage *sourceImage){
 		int normalizedWidth, normalizedHeight;
 		if(sourceImage->width > sourceImage->height){
 			normalizedWidth = InputImageNormalizeLength;
-			normalizedHeight = InputImageNormalizeLength / sourceImage->width * sourceImage->height;
+			normalizedHeight = (float)InputImageNormalizeLength / sourceImage->width * sourceImage->height;
 		}else{
 			normalizedHeight = InputImageNormalizeLength;
-			normalizedWidth = InputImageNormalizeLength / sourceImage->height * sourceImage->width;
+			normalizedWidth = (float)InputImageNormalizeLength / sourceImage->height * sourceImage->width;
 		}
 		rv = cvCreateImage(cvSize(normalizedWidth, normalizedHeight), sourceImage->depth, sourceImage->nChannels);
 		cvResize(sourceImage, rv);

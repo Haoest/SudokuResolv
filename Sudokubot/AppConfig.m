@@ -40,6 +40,10 @@
     return 0.65;
 }
 
++(float) normalizedBoardImageSize{
+    return 800.0F;
+}
+
 @end
 
 

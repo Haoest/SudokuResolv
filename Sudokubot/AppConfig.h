@@ -20,5 +20,7 @@
 +(CGFloat) numpad_normal_alpha;
 +(CGFloat) numpad_highlight_alpha;
 +(CGFloat) previewImage_faded_alpha;
+
++(float) normalizedBoardImageSize;
 @end
 

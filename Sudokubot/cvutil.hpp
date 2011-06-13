@@ -23,6 +23,9 @@
 +(IplImage*) LoadUIImageAsIplImage: (NSString*) fileName asGrayscale:(BOOL) asGrayscale;
 
 +(int**) loadStringAsBoard: (char[89]) boardAsString;
+
++(CGFloat) getImageOrientationInDegrees:(UIImage*) img;
++(IplImage*) normalizeSourceImageSize:(IplImage *)sourceImage;
 @end
 
 
