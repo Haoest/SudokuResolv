@@ -17,10 +17,16 @@
 @property(nonatomic, retain) IBOutlet UIImageView* previewImage;
 @property(nonatomic, retain) IBOutlet UIButton* solveButton;
 @property(nonatomic, retain) IBOutlet UIButton* cancelButton;
+@property(nonatomic, retain) IBOutlet UIView* busyViewTop;
+@property(nonatomic, retain) IBOutlet UIView* busyViewBottom;
+@property(nonatomic, retain) IBOutlet UIActivityIndicatorView* busyIndicator;
 
 -(IBAction) solveButton_touchdown;
 -(IBAction) cancelButton_touchdown;
 -(void) resetFields;
+
+-(void) boardRecognizingThread:(UIImage*) img;
+
 
 @end
 
@@ -33,6 +39,7 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
 
 @synthesize previewImage, solveButton, cancelButton;
 @synthesize rootViewDelegate;
+@synthesize busyViewTop, busyIndicator, busyViewBottom;
 
 - (void)dealloc
 {
@@ -45,6 +52,9 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
     previewImage = nil;
     solveButton = nil;
     cancelButton = nil;  
+    busyViewBottom = nil;
+    busyViewTop = nil;
+    busyIndicator = nil;
     self.view = nil;
     [super dealloc];
 }
@@ -133,10 +143,36 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
         [gridNumberLabels addObject:lbl];
         [lbl release];
     }
-    
 }
 
 -(void) loadImageWithSudokuBoard:(UIImage*) img{
+    [previewImage setImage:img];
+    if (!busyViewTop){
+        busyViewTop = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 320)];
+        [busyViewTop setBackgroundColor:[UIColor blackColor]];
+        [busyViewTop setAlpha:0.5];
+        [self.view addSubview:busyViewTop];
+        busyViewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 320, 320, 140)];
+        [busyViewBottom setBackgroundColor:[UIColor blackColor]];
+        busyIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        [busyIndicator startAnimating];
+        [busyIndicator setCenter:CGPointMake(busyViewBottom.frame.size.width/2, busyViewBottom.frame.size.height/2)];
+        [busyViewBottom addSubview:busyIndicator];
+        [self.view addSubview:busyViewBottom];
+    }else{
+        [self.view bringSubviewToFront:busyViewTop];
+        [self.view bringSubviewToFront:busyViewBottom];
+        [busyViewTop setHidden:false];
+        [busyIndicator startAnimating];
+        [busyViewBottom setHidden:false];
+    }
+
+    NSThread* recognizerThread = [[[NSThread alloc] initWithTarget:self selector:@selector(boardRecognizingThread:) object:img] autorelease];
+    [recognizerThread start];
+}
+
+-(void) boardRecognizingThread:(UIImage*) img{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     IplImage* ipl = [cvutil CreateIplImageFromUIImage:img];
     recognizerResultPack result = recognizeBoardFromPhoto(ipl);
     cvReleaseImage(&ipl);
@@ -170,6 +206,10 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
         [alert show];
         [solveButton setEnabled:false];
     }
+    [busyViewBottom setHidden:true];
+    [busyViewTop setHidden:true];
+    [busyIndicator stopAnimating];
+    [pool release];
 }
 
 -(void) initNumpad{

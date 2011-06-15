@@ -158,6 +158,7 @@
 -(IBAction) btnCaptureFromCamera_touchDown{
     self.imagePicker = [[UIImagePickerController alloc] init];
     self.imagePicker.delegate = self;
+    self.imagePicker.allowsEditing = true;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         [self presentModalViewController:imagePicker animated:NO];
@@ -168,9 +169,10 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissModalViewControllerAnimated:YES];
-    UIImage* img = [info valueForKey:UIImagePickerControllerOriginalImage];
+    UIImage* img = [info valueForKey:UIImagePickerControllerEditedImage];
     int width = img.size.width;
     int height = img.size.height;
+    self.imagePicker = nil;
     [self showPreview:img];
 }
  
