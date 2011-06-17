@@ -15,7 +15,7 @@
 
 }
 
-+(IplImage *) CreateIplImageFromUIImage: (UIImage*) image;
++(IplImage *) CreateIplImageFromUIImage: (UIImage*) image ignoreUIOrientation:(bool) ignoreUIOrientation;
 +(UIImage*) CreateUIImageFromIplImage: (IplImage*) image;
 +(int**) ReadBoardFromFile:(NSString*) fileName;
 +(NSString*) SerializeBoard:(int**)board;

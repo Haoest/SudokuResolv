@@ -173,7 +173,7 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
 
 -(void) boardRecognizingThread:(UIImage*) img{
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    IplImage* ipl = [cvutil CreateIplImageFromUIImage:img];
+    IplImage* ipl = [cvutil CreateIplImageFromUIImage:img ignoreUIOrientation:false];
     recognizerResultPack result = recognizeBoardFromPhoto(ipl);
     cvReleaseImage(&ipl);
     [self resetFields];

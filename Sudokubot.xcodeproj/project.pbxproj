@@ -931,7 +931,10 @@
 					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/**",
 				);
 				INFOPLIST_FILE = "Sudokubot/Sudokubot-Info.plist";
-				LIBRARY_SEARCH_PATHS = "/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-iphonesimulator/**";
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-iphonesimulator/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-universal/**",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-lz",
@@ -999,7 +1002,10 @@
 					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/**",
 				);
 				INFOPLIST_FILE = "SudokubotTests/SudokubotTests-Info.plist";
-				LIBRARY_SEARCH_PATHS = "/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-iphonesimulator/**";
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-iphonesimulator/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-universal/**",
+				);
 				OTHER_LDFLAGS = (
 					"-framework",
 					SenTestingKit,
