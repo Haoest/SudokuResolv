@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		3A105783139C39DF00089373 /* acknowledgement.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A105782139C39DF00089373 /* acknowledgement.txt */; };
+		3A5416DF13AB047A0082676B /* solver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A5416DE13AB047A0082676B /* solver.mm */; };
+		3A5416E013AB04B00082676B /* solver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A5416DE13AB047A0082676B /* solver.mm */; };
 		3A7E57D1134EB0B7003CCF9D /* BoardViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E57CF134EB0B7003CCF9D /* BoardViewController.mm */; };
 		3A7E57D2134EB0B7003CCF9D /* BoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E57D0134EB0B7003CCF9D /* BoardViewController.xib */; };
 		3A7E57D6134EB3D4003CCF9D /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E57D4134EB3D3003CCF9D /* HelpViewController.m */; };
 		3A7E57D7134EB3D4003CCF9D /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E57D5134EB3D4003CCF9D /* HelpViewController.xib */; };
-		3A8F9E6D134BADC000E43520 /* solver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8F9E6C134BADC000E43520 /* solver.mm */; };
 		3A90FFF71390D6A900027FB5 /* PreviewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A90FFF61390D6A900027FB5 /* PreviewViewController.mm */; };
 		3A94CC911331B5F700B380B2 /* basicOCR.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A94CC891331B5F700B380B2 /* basicOCR.mm */; };
 		3A94CC941331B5F700B380B2 /* preprocessing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A94CC8D1331B5F700B380B2 /* preprocessing.cpp */; };
@@ -29,7 +30,6 @@
 		3A967F5513969A1100A52AD4 /* numpad_9.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A967F4B13969A1100A52AD4 /* numpad_9.png */; };
 		3A967F5613969A1100A52AD4 /* numpad_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A967F4C13969A1100A52AD4 /* numpad_0.png */; };
 		3A9925AB13916F3D0085CA6C /* PreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A9925AA13916F3C0085CA6C /* PreviewViewController.xib */; };
-		3A9A7FAA1393899600FCB191 /* NumPadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A9A7FA91393899500FCB191 /* NumPadView.xib */; };
 		3A9AC49C139F5FA00014847C /* blackwhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB21386F61000FF570D /* blackwhite.png */; };
 		3A9AC49D139F5FA00014847C /* camera_blurry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB31386F61000FF570D /* camera_blurry.jpg */; };
 		3A9AC49E139F5FA00014847C /* camera_book1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB41386F61000FF570D /* camera_book1.jpg */; };
@@ -97,7 +97,6 @@
 		3A9EDCE2139F589300D7C521 /* basicOCR.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A94CC891331B5F700B380B2 /* basicOCR.mm */; };
 		3A9EDCE3139F589300D7C521 /* preprocessing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A94CC8D1331B5F700B380B2 /* preprocessing.cpp */; };
 		3A9EDCE4139F589300D7C521 /* boardRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC35C73133466F90099F669 /* boardRecognizer.cpp */; };
-		3A9EDCE5139F589300D7C521 /* solver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8F9E6C134BADC000E43520 /* solver.mm */; };
 		3A9EDCE6139F589300D7C521 /* BoardViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E57CF134EB0B7003CCF9D /* BoardViewController.mm */; };
 		3A9EDCE7139F589300D7C521 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E57D4134EB3D3003CCF9D /* HelpViewController.m */; };
 		3A9EDCE8139F589300D7C521 /* ArchiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A951C1C1352CE13006ACF0C /* ArchiveViewController.m */; };
@@ -118,7 +117,6 @@
 		3A9EDCFC139F589300D7C521 /* ArchiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A951C1D1352CE14006ACF0C /* ArchiveViewController.xib */; };
 		3A9EDCFD139F589300D7C521 /* OCRTemplateSet3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9F132913860C9100B01591 /* OCRTemplateSet3.png */; };
 		3A9EDD2D139F589300D7C521 /* PreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A9925AA13916F3C0085CA6C /* PreviewViewController.xib */; };
-		3A9EDD2E139F589300D7C521 /* NumPadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A9A7FA91393899500FCB191 /* NumPadView.xib */; };
 		3A9EDD2F139F589300D7C521 /* numpad_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A967F4313969A1100A52AD4 /* numpad_1.png */; };
 		3A9EDD30139F589300D7C521 /* numpad_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A967F4413969A1100A52AD4 /* numpad_2.png */; };
 		3A9EDD31139F589300D7C521 /* numpad_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A967F4513969A1100A52AD4 /* numpad_3.png */; };
@@ -170,14 +168,14 @@
 		3A0FB73C138620920050361A /* boardRecognizerTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = boardRecognizerTests.mm; sourceTree = "<group>"; };
 		3A0FB73D138620920050361A /* boardRecognizerTests.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = boardRecognizerTests.hpp; sourceTree = "<group>"; };
 		3A105782139C39DF00089373 /* acknowledgement.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = acknowledgement.txt; path = devres/acknowledgement.txt; sourceTree = "<group>"; };
+		3A5416DD13AB047A0082676B /* solver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = solver.hpp; sourceTree = "<group>"; };
+		3A5416DE13AB047A0082676B /* solver.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = solver.mm; sourceTree = "<group>"; };
 		3A7E57CE134EB0B7003CCF9D /* BoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardViewController.h; sourceTree = "<group>"; };
 		3A7E57CF134EB0B7003CCF9D /* BoardViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BoardViewController.mm; sourceTree = "<group>"; };
 		3A7E57D0134EB0B7003CCF9D /* BoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BoardViewController.xib; sourceTree = "<group>"; };
 		3A7E57D3134EB3D3003CCF9D /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		3A7E57D4134EB3D3003CCF9D /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		3A7E57D5134EB3D4003CCF9D /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
-		3A8F9E6B134BADC000E43520 /* solver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = solver.hpp; path = ../solver.hpp; sourceTree = "<group>"; };
-		3A8F9E6C134BADC000E43520 /* solver.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = solver.mm; path = ../solver.mm; sourceTree = "<group>"; };
 		3A8FEDCD132CD99F00654072 /* cvutil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cvutil.hpp; sourceTree = "<group>"; };
 		3A8FEDCE132CD99F00654072 /* cvutil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cvutil.mm; sourceTree = "<group>"; };
 		3A90FFF51390D6A900027FB5 /* PreviewViewController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PreviewViewController.hpp; sourceTree = "<group>"; };
@@ -250,7 +248,6 @@
 		3A99BADE1386F61000FF570D /* shaded_colorfg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shaded_colorfg.png; sourceTree = "<group>"; };
 		3A99BADF1386F61000FF570D /* shaded_colorfg_noisy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shaded_colorfg_noisy.png; sourceTree = "<group>"; };
 		3A99BAE01386F61000FF570D /* simple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = simple.png; sourceTree = "<group>"; };
-		3A9A7FA91393899500FCB191 /* NumPadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NumPadView.xib; sourceTree = "<group>"; };
 		3A9BAA42138D765800D57AE2 /* rootViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rootViewDelegate.h; sourceTree = "<group>"; };
 		3A9E6C4513295D120055628C /* Sudokubot sim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sudokubot sim.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9E6C4913295D120055628C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -288,74 +285,6 @@
 		3AC35C72133466F80099F669 /* boardRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = boardRecognizer.h; sourceTree = "<group>"; };
 		3AC35C73133466F90099F669 /* boardRecognizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = boardRecognizer.cpp; sourceTree = "<group>"; };
 		3ACE518013A1F8BD00CC8717 /* OCRTemplateSet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OCRTemplateSet1.png; path = Sudokubot/OCRTemplateSet1.png; sourceTree = "<group>"; };
-		3ACE518413A1FAB200CC8717 /* cv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cv.h; sourceTree = "<group>"; };
-		3ACE518513A1FAB200CC8717 /* cv.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cv.hpp; sourceTree = "<group>"; };
-		3ACE518613A1FAB200CC8717 /* cvaux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvaux.h; sourceTree = "<group>"; };
-		3ACE518713A1FAB200CC8717 /* cvaux.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cvaux.hpp; sourceTree = "<group>"; };
-		3ACE518813A1FAB200CC8717 /* cvwimage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cvwimage.h; sourceTree = "<group>"; };
-		3ACE518913A1FAB200CC8717 /* cxcore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cxcore.h; sourceTree = "<group>"; };
-		3ACE518A13A1FAB200CC8717 /* cxcore.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cxcore.hpp; sourceTree = "<group>"; };
-		3ACE518B13A1FAB200CC8717 /* cxeigen.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cxeigen.hpp; sourceTree = "<group>"; };
-		3ACE518C13A1FAB200CC8717 /* cxmisc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cxmisc.h; sourceTree = "<group>"; };
-		3ACE518D13A1FAB200CC8717 /* highgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = highgui.h; sourceTree = "<group>"; };
-		3ACE518E13A1FAB200CC8717 /* ml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ml.h; sourceTree = "<group>"; };
-		3ACE519113A1FAB200CC8717 /* calib3d.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = calib3d.hpp; sourceTree = "<group>"; };
-		3ACE519313A1FAB200CC8717 /* contrib.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = contrib.hpp; sourceTree = "<group>"; };
-		3ACE519513A1FAB200CC8717 /* core.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = core.hpp; sourceTree = "<group>"; };
-		3ACE519613A1FAB200CC8717 /* core_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = core_c.h; sourceTree = "<group>"; };
-		3ACE519713A1FAB200CC8717 /* eigen.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = eigen.hpp; sourceTree = "<group>"; };
-		3ACE519813A1FAB200CC8717 /* internal.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = internal.hpp; sourceTree = "<group>"; };
-		3ACE519913A1FAB200CC8717 /* mat.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mat.hpp; sourceTree = "<group>"; };
-		3ACE519A13A1FAB200CC8717 /* operations.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = operations.hpp; sourceTree = "<group>"; };
-		3ACE519B13A1FAB200CC8717 /* types_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types_c.h; sourceTree = "<group>"; };
-		3ACE519C13A1FAB200CC8717 /* version.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = version.hpp; sourceTree = "<group>"; };
-		3ACE519D13A1FAB200CC8717 /* wimage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = wimage.hpp; sourceTree = "<group>"; };
-		3ACE519F13A1FAB200CC8717 /* features2d.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = features2d.hpp; sourceTree = "<group>"; };
-		3ACE51A113A1FAB200CC8717 /* all_indices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = all_indices.h; sourceTree = "<group>"; };
-		3ACE51A213A1FAB200CC8717 /* allocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = allocator.h; sourceTree = "<group>"; };
-		3ACE51A313A1FAB200CC8717 /* autotuned_index.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autotuned_index.h; sourceTree = "<group>"; };
-		3ACE51A413A1FAB200CC8717 /* composite_index.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = composite_index.h; sourceTree = "<group>"; };
-		3ACE51A513A1FAB200CC8717 /* dist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dist.h; sourceTree = "<group>"; };
-		3ACE51A613A1FAB200CC8717 /* flann.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = flann.hpp; sourceTree = "<group>"; };
-		3ACE51A713A1FAB200CC8717 /* flann_base.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = flann_base.hpp; sourceTree = "<group>"; };
-		3ACE51A813A1FAB200CC8717 /* general.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = general.h; sourceTree = "<group>"; };
-		3ACE51A913A1FAB200CC8717 /* ground_truth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ground_truth.h; sourceTree = "<group>"; };
-		3ACE51AA13A1FAB200CC8717 /* hdf5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hdf5.h; sourceTree = "<group>"; };
-		3ACE51AB13A1FAB200CC8717 /* heap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = heap.h; sourceTree = "<group>"; };
-		3ACE51AC13A1FAB200CC8717 /* index_testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = index_testing.h; sourceTree = "<group>"; };
-		3ACE51AD13A1FAB200CC8717 /* kdtree_index.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kdtree_index.h; sourceTree = "<group>"; };
-		3ACE51AE13A1FAB200CC8717 /* kmeans_index.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kmeans_index.h; sourceTree = "<group>"; };
-		3ACE51AF13A1FAB200CC8717 /* linear_index.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = linear_index.h; sourceTree = "<group>"; };
-		3ACE51B013A1FAB200CC8717 /* logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = logger.h; sourceTree = "<group>"; };
-		3ACE51B113A1FAB200CC8717 /* matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
-		3ACE51B213A1FAB200CC8717 /* nn_index.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nn_index.h; sourceTree = "<group>"; };
-		3ACE51B313A1FAB200CC8717 /* object_factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = object_factory.h; sourceTree = "<group>"; };
-		3ACE51B413A1FAB200CC8717 /* random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = random.h; sourceTree = "<group>"; };
-		3ACE51B513A1FAB200CC8717 /* result_set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = result_set.h; sourceTree = "<group>"; };
-		3ACE51B613A1FAB200CC8717 /* sampling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sampling.h; sourceTree = "<group>"; };
-		3ACE51B713A1FAB200CC8717 /* saving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = saving.h; sourceTree = "<group>"; };
-		3ACE51B813A1FAB200CC8717 /* simplex_downhill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = simplex_downhill.h; sourceTree = "<group>"; };
-		3ACE51B913A1FAB200CC8717 /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
-		3ACE51BB13A1FAB200CC8717 /* devmem2d.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = devmem2d.hpp; sourceTree = "<group>"; };
-		3ACE51BC13A1FAB200CC8717 /* gpu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gpu.hpp; sourceTree = "<group>"; };
-		3ACE51BD13A1FAB200CC8717 /* matrix_operations.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = matrix_operations.hpp; sourceTree = "<group>"; };
-		3ACE51BE13A1FAB200CC8717 /* NCV.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NCV.hpp; sourceTree = "<group>"; };
-		3ACE51BF13A1FAB200CC8717 /* NPP_staging.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NPP_staging.hpp; sourceTree = "<group>"; };
-		3ACE51C013A1FAB200CC8717 /* stream_accessor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = stream_accessor.hpp; sourceTree = "<group>"; };
-		3ACE51C213A1FAB200CC8717 /* highgui.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = highgui.hpp; sourceTree = "<group>"; };
-		3ACE51C313A1FAB200CC8717 /* highgui_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = highgui_c.h; sourceTree = "<group>"; };
-		3ACE51C513A1FAB200CC8717 /* imgproc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = imgproc.hpp; sourceTree = "<group>"; };
-		3ACE51C613A1FAB200CC8717 /* imgproc_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgproc_c.h; sourceTree = "<group>"; };
-		3ACE51C713A1FAB200CC8717 /* types_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types_c.h; sourceTree = "<group>"; };
-		3ACE51C913A1FAB200CC8717 /* blobtrack.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = blobtrack.hpp; sourceTree = "<group>"; };
-		3ACE51CA13A1FAB200CC8717 /* compat.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = compat.hpp; sourceTree = "<group>"; };
-		3ACE51CB13A1FAB200CC8717 /* legacy.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = legacy.hpp; sourceTree = "<group>"; };
-		3ACE51CC13A1FAB200CC8717 /* streams.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = streams.hpp; sourceTree = "<group>"; };
-		3ACE51CE13A1FAB200CC8717 /* ml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ml.hpp; sourceTree = "<group>"; };
-		3ACE51D013A1FAB200CC8717 /* objdetect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = objdetect.hpp; sourceTree = "<group>"; };
-		3ACE51D113A1FAB200CC8717 /* opencv.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = opencv.hpp; sourceTree = "<group>"; };
-		3ACE51D313A1FAB200CC8717 /* background_segm.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = background_segm.hpp; sourceTree = "<group>"; };
-		3ACE51D413A1FAB200CC8717 /* tracking.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tracking.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -520,7 +449,6 @@
 		3A9E6C4F13295D120055628C /* Sudokubot */ = {
 			isa = PBXGroup;
 			children = (
-				3A9EDC47139F541800D7C521 /* OpenCV */,
 				3AA37E48135524BB009521E2 /* AppConfig.h */,
 				3AA37E49135524BC009521E2 /* AppConfig.m */,
 				3A9F132813860C5B00B01591 /* resources */,
@@ -578,14 +506,6 @@
 			name = "Development Resources";
 			sourceTree = "<group>";
 		};
-		3A9EDC47139F541800D7C521 /* OpenCV */ = {
-			isa = PBXGroup;
-			children = (
-				3ACE518213A1FAB200CC8717 /* include */,
-			);
-			name = OpenCV;
-			sourceTree = "<group>";
-		};
 		3A9F132813860C5B00B01591 /* resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -611,12 +531,12 @@
 		3AA37E4B135544FF009521E2 /* solver and utilities */ = {
 			isa = PBXGroup;
 			children = (
+				3A5416DD13AB047A0082676B /* solver.hpp */,
+				3A5416DE13AB047A0082676B /* solver.mm */,
 				3A8FEDCD132CD99F00654072 /* cvutil.hpp */,
 				3A8FEDCE132CD99F00654072 /* cvutil.mm */,
 				3AC35C72133466F80099F669 /* boardRecognizer.h */,
 				3AC35C73133466F90099F669 /* boardRecognizer.cpp */,
-				3A8F9E6B134BADC000E43520 /* solver.hpp */,
-				3A8F9E6C134BADC000E43520 /* solver.mm */,
 			);
 			name = "solver and utilities";
 			sourceTree = "<group>";
@@ -645,196 +565,8 @@
 				3A90FFF51390D6A900027FB5 /* PreviewViewController.hpp */,
 				3A90FFF61390D6A900027FB5 /* PreviewViewController.mm */,
 				3A9925AA13916F3C0085CA6C /* PreviewViewController.xib */,
-				3A9A7FA91393899500FCB191 /* NumPadView.xib */,
 			);
 			name = UI;
-			sourceTree = "<group>";
-		};
-		3ACE518213A1FAB200CC8717 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				3ACE518313A1FAB200CC8717 /* opencv */,
-				3ACE518F13A1FAB200CC8717 /* opencv2 */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		3ACE518313A1FAB200CC8717 /* opencv */ = {
-			isa = PBXGroup;
-			children = (
-				3ACE518413A1FAB200CC8717 /* cv.h */,
-				3ACE518513A1FAB200CC8717 /* cv.hpp */,
-				3ACE518613A1FAB200CC8717 /* cvaux.h */,
-				3ACE518713A1FAB200CC8717 /* cvaux.hpp */,
-				3ACE518813A1FAB200CC8717 /* cvwimage.h */,
-				3ACE518913A1FAB200CC8717 /* cxcore.h */,
-				3ACE518A13A1FAB200CC8717 /* cxcore.hpp */,
-				3ACE518B13A1FAB200CC8717 /* cxeigen.hpp */,
-				3ACE518C13A1FAB200CC8717 /* cxmisc.h */,
-				3ACE518D13A1FAB200CC8717 /* highgui.h */,
-				3ACE518E13A1FAB200CC8717 /* ml.h */,
-			);
-			path = opencv;
-			sourceTree = "<group>";
-		};
-		3ACE518F13A1FAB200CC8717 /* opencv2 */ = {
-			isa = PBXGroup;
-			children = (
-				3ACE519013A1FAB200CC8717 /* calib3d */,
-				3ACE519213A1FAB200CC8717 /* contrib */,
-				3ACE519413A1FAB200CC8717 /* core */,
-				3ACE519E13A1FAB200CC8717 /* features2d */,
-				3ACE51A013A1FAB200CC8717 /* flann */,
-				3ACE51BA13A1FAB200CC8717 /* gpu */,
-				3ACE51C113A1FAB200CC8717 /* highgui */,
-				3ACE51C413A1FAB200CC8717 /* imgproc */,
-				3ACE51C813A1FAB200CC8717 /* legacy */,
-				3ACE51CD13A1FAB200CC8717 /* ml */,
-				3ACE51CF13A1FAB200CC8717 /* objdetect */,
-				3ACE51D113A1FAB200CC8717 /* opencv.hpp */,
-				3ACE51D213A1FAB200CC8717 /* video */,
-			);
-			path = opencv2;
-			sourceTree = "<group>";
-		};
-		3ACE519013A1FAB200CC8717 /* calib3d */ = {
-			isa = PBXGroup;
-			children = (
-				3ACE519113A1FAB200CC8717 /* calib3d.hpp */,
-			);
-			path = calib3d;
-			sourceTree = "<group>";
-		};
-		3ACE519213A1FAB200CC8717 /* contrib */ = {
-			isa = PBXGroup;
-			children = (
-				3ACE519313A1FAB200CC8717 /* contrib.hpp */,
-			);
-			path = contrib;
-			sourceTree = "<group>";
-		};
-		3ACE519413A1FAB200CC8717 /* core */ = {
-			isa = PBXGroup;
-			children = (
-				3ACE519513A1FAB200CC8717 /* core.hpp */,
-				3ACE519613A1FAB200CC8717 /* core_c.h */,
-				3ACE519713A1FAB200CC8717 /* eigen.hpp */,
-				3ACE519813A1FAB200CC8717 /* internal.hpp */,
-				3ACE519913A1FAB200CC8717 /* mat.hpp */,
-				3ACE519A13A1FAB200CC8717 /* operations.hpp */,
-				3ACE519B13A1FAB200CC8717 /* types_c.h */,
-				3ACE519C13A1FAB200CC8717 /* version.hpp */,
-				3ACE519D13A1FAB200CC8717 /* wimage.hpp */,
-			);
-			path = core;
-			sourceTree = "<group>";
-		};
-		3ACE519E13A1FAB200CC8717 /* features2d */ = {
-			isa = PBXGroup;
-			children = (
-				3ACE519F13A1FAB200CC8717 /* features2d.hpp */,
-			);
-			path = features2d;
-			sourceTree = "<group>";
-		};
-		3ACE51A013A1FAB200CC8717 /* flann */ = {
-			isa = PBXGroup;
-			children = (
-				3ACE51A113A1FAB200CC8717 /* all_indices.h */,
-				3ACE51A213A1FAB200CC8717 /* allocator.h */,
-				3ACE51A313A1FAB200CC8717 /* autotuned_index.h */,
-				3ACE51A413A1FAB200CC8717 /* composite_index.h */,
-				3ACE51A513A1FAB200CC8717 /* dist.h */,
-				3ACE51A613A1FAB200CC8717 /* flann.hpp */,
-				3ACE51A713A1FAB200CC8717 /* flann_base.hpp */,
-				3ACE51A813A1FAB200CC8717 /* general.h */,
-				3ACE51A913A1FAB200CC8717 /* ground_truth.h */,
-				3ACE51AA13A1FAB200CC8717 /* hdf5.h */,
-				3ACE51AB13A1FAB200CC8717 /* heap.h */,
-				3ACE51AC13A1FAB200CC8717 /* index_testing.h */,
-				3ACE51AD13A1FAB200CC8717 /* kdtree_index.h */,
-				3ACE51AE13A1FAB200CC8717 /* kmeans_index.h */,
-				3ACE51AF13A1FAB200CC8717 /* linear_index.h */,
-				3ACE51B013A1FAB200CC8717 /* logger.h */,
-				3ACE51B113A1FAB200CC8717 /* matrix.h */,
-				3ACE51B213A1FAB200CC8717 /* nn_index.h */,
-				3ACE51B313A1FAB200CC8717 /* object_factory.h */,
-				3ACE51B413A1FAB200CC8717 /* random.h */,
-				3ACE51B513A1FAB200CC8717 /* result_set.h */,
-				3ACE51B613A1FAB200CC8717 /* sampling.h */,
-				3ACE51B713A1FAB200CC8717 /* saving.h */,
-				3ACE51B813A1FAB200CC8717 /* simplex_downhill.h */,
-				3ACE51B913A1FAB200CC8717 /* timer.h */,
-			);
-			path = flann;
-			sourceTree = "<group>";
-		};
-		3ACE51BA13A1FAB200CC8717 /* gpu */ = {
-			isa = PBXGroup;
-			children = (
-				3ACE51BB13A1FAB200CC8717 /* devmem2d.hpp */,
-				3ACE51BC13A1FAB200CC8717 /* gpu.hpp */,
-				3ACE51BD13A1FAB200CC8717 /* matrix_operations.hpp */,
-				3ACE51BE13A1FAB200CC8717 /* NCV.hpp */,
-				3ACE51BF13A1FAB200CC8717 /* NPP_staging.hpp */,
-				3ACE51C013A1FAB200CC8717 /* stream_accessor.hpp */,
-			);
-			path = gpu;
-			sourceTree = "<group>";
-		};
-		3ACE51C113A1FAB200CC8717 /* highgui */ = {
-			isa = PBXGroup;
-			children = (
-				3ACE51C213A1FAB200CC8717 /* highgui.hpp */,
-				3ACE51C313A1FAB200CC8717 /* highgui_c.h */,
-			);
-			path = highgui;
-			sourceTree = "<group>";
-		};
-		3ACE51C413A1FAB200CC8717 /* imgproc */ = {
-			isa = PBXGroup;
-			children = (
-				3ACE51C513A1FAB200CC8717 /* imgproc.hpp */,
-				3ACE51C613A1FAB200CC8717 /* imgproc_c.h */,
-				3ACE51C713A1FAB200CC8717 /* types_c.h */,
-			);
-			path = imgproc;
-			sourceTree = "<group>";
-		};
-		3ACE51C813A1FAB200CC8717 /* legacy */ = {
-			isa = PBXGroup;
-			children = (
-				3ACE51C913A1FAB200CC8717 /* blobtrack.hpp */,
-				3ACE51CA13A1FAB200CC8717 /* compat.hpp */,
-				3ACE51CB13A1FAB200CC8717 /* legacy.hpp */,
-				3ACE51CC13A1FAB200CC8717 /* streams.hpp */,
-			);
-			path = legacy;
-			sourceTree = "<group>";
-		};
-		3ACE51CD13A1FAB200CC8717 /* ml */ = {
-			isa = PBXGroup;
-			children = (
-				3ACE51CE13A1FAB200CC8717 /* ml.hpp */,
-			);
-			path = ml;
-			sourceTree = "<group>";
-		};
-		3ACE51CF13A1FAB200CC8717 /* objdetect */ = {
-			isa = PBXGroup;
-			children = (
-				3ACE51D013A1FAB200CC8717 /* objdetect.hpp */,
-			);
-			path = objdetect;
-			sourceTree = "<group>";
-		};
-		3ACE51D213A1FAB200CC8717 /* video */ = {
-			isa = PBXGroup;
-			children = (
-				3ACE51D313A1FAB200CC8717 /* background_segm.hpp */,
-				3ACE51D413A1FAB200CC8717 /* tracking.hpp */,
-			);
-			path = video;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -934,7 +666,6 @@
 				3A951C1F1352CE17006ACF0C /* ArchiveViewController.xib in Resources */,
 				3A9F132A13860C9100B01591 /* OCRTemplateSet3.png in Resources */,
 				3A9925AB13916F3D0085CA6C /* PreviewViewController.xib in Resources */,
-				3A9A7FAA1393899600FCB191 /* NumPadView.xib in Resources */,
 				3A967F4D13969A1100A52AD4 /* numpad_1.png in Resources */,
 				3A967F4E13969A1100A52AD4 /* numpad_2.png in Resources */,
 				3A967F4F13969A1100A52AD4 /* numpad_3.png in Resources */,
@@ -1018,7 +749,6 @@
 				3A9EDCFC139F589300D7C521 /* ArchiveViewController.xib in Resources */,
 				3A9EDCFD139F589300D7C521 /* OCRTemplateSet3.png in Resources */,
 				3A9EDD2D139F589300D7C521 /* PreviewViewController.xib in Resources */,
-				3A9EDD2E139F589300D7C521 /* NumPadView.xib in Resources */,
 				3A9EDD2F139F589300D7C521 /* numpad_1.png in Resources */,
 				3A9EDD30139F589300D7C521 /* numpad_2.png in Resources */,
 				3A9EDD31139F589300D7C521 /* numpad_3.png in Resources */,
@@ -1063,7 +793,6 @@
 				3A94CC911331B5F700B380B2 /* basicOCR.mm in Sources */,
 				3A94CC941331B5F700B380B2 /* preprocessing.cpp in Sources */,
 				3AC35C74133466FA0099F669 /* boardRecognizer.cpp in Sources */,
-				3A8F9E6D134BADC000E43520 /* solver.mm in Sources */,
 				3A7E57D1134EB0B7003CCF9D /* BoardViewController.mm in Sources */,
 				3A7E57D6134EB3D4003CCF9D /* HelpViewController.m in Sources */,
 				3A951C1E1352CE17006ACF0C /* ArchiveViewController.m in Sources */,
@@ -1073,6 +802,7 @@
 				3AB7AFE7138A3C7600F7EB36 /* ArchiveManager.m in Sources */,
 				3A90FFF71390D6A900027FB5 /* PreviewViewController.mm in Sources */,
 				3AB77E341398BAD900657E89 /* cvutil.mm in Sources */,
+				3A5416DF13AB047A0082676B /* solver.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1096,7 +826,6 @@
 				3A9EDCE2139F589300D7C521 /* basicOCR.mm in Sources */,
 				3A9EDCE3139F589300D7C521 /* preprocessing.cpp in Sources */,
 				3A9EDCE4139F589300D7C521 /* boardRecognizer.cpp in Sources */,
-				3A9EDCE5139F589300D7C521 /* solver.mm in Sources */,
 				3A9EDCE6139F589300D7C521 /* BoardViewController.mm in Sources */,
 				3A9EDCE7139F589300D7C521 /* HelpViewController.m in Sources */,
 				3A9EDCE8139F589300D7C521 /* ArchiveViewController.m in Sources */,
@@ -1106,6 +835,7 @@
 				3A9EDCEC139F589300D7C521 /* ArchiveManager.m in Sources */,
 				3A9EDCED139F589300D7C521 /* PreviewViewController.mm in Sources */,
 				3A9EDCEE139F589300D7C521 /* cvutil.mm in Sources */,
+				3A5416E013AB04B00082676B /* solver.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1196,14 +926,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sudokubot/Sudokubot-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/Sudokubot/include/**",
-					"$(SRCROOt)/Sudokubot/include/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv2/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/**",
 				);
 				INFOPLIST_FILE = "Sudokubot/Sudokubot-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/Sudokubot/lib/debug-iphonesimulator/",
-					"$(SRCROOT)/Sudokubot/lib/Release-iphonesimulator",
-				);
+				LIBRARY_SEARCH_PATHS = "/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-iphonesimulator/**";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-lz",
@@ -1230,14 +958,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sudokubot/Sudokubot-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/Sudokubot/include/**",
-					"$(SRCROOt)/Sudokubot/include/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv2/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/**",
 				);
 				INFOPLIST_FILE = "Sudokubot/Sudokubot-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/Sudokubot/lib/debug-iphonesimulator/",
-					"$(SRCROOT)/Sudokubot/lib/Release-iphonesimulator",
-				);
+				LIBRARY_SEARCH_PATHS = "/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/release-iphonesimulator/**";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-lz",
@@ -1267,12 +993,13 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SudokubotTests/SudokubotTests-Prefix.pch";
-				HEADER_SEARCH_PATHS = "/Users/haoest/Development/Sudokubot/Sudokubot/include/**";
-				INFOPLIST_FILE = "SudokubotTests/SudokubotTests-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/Sudokubot/lib/debug-iphonesimulator/**",
-					"$(SRCROOT)/Sudokubot/lib/debug-universal/**",
+				HEADER_SEARCH_PATHS = (
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv2/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/**",
 				);
+				INFOPLIST_FILE = "SudokubotTests/SudokubotTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = "/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-iphonesimulator/**";
 				OTHER_LDFLAGS = (
 					"-framework",
 					SenTestingKit,
@@ -1295,12 +1022,13 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SudokubotTests/SudokubotTests-Prefix.pch";
-				HEADER_SEARCH_PATHS = "/Users/haoest/Development/Sudokubot/Sudokubot/include/**";
-				INFOPLIST_FILE = "SudokubotTests/SudokubotTests-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/Sudokubot/lib/release-iphonesimulator\"/**",
-					"\"$(SRCROOT)/Sudokubot/lib/release-universal\"/**",
+				HEADER_SEARCH_PATHS = (
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv2/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/**",
 				);
+				INFOPLIST_FILE = "SudokubotTests/SudokubotTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
 					SenTestingKit,
@@ -1316,18 +1044,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sudokubot/Sudokubot-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"/Users/haoest/Development/Sudokubot/Sudokubot/include/**",
-					"/Users/haoest/Development/Sudokubot/Sudokubot/include/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv2/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/**",
 				);
 				INFOPLIST_FILE = "Sudokubot/Sudokubot-Info.plist";
-				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/Sudokubot/lib/release-universal\"/**";
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-iphoneos-armv7/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-iphoneos-armv6/**",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-lz",
@@ -1350,17 +1082,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sudokubot/Sudokubot-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"/Users/haoest/Development/Sudokubot/Sudokubot/include/**",
-					"/Users/haoest/Development/Sudokubot/Sudokubot/include/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv2/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/**",
 				);
 				INFOPLIST_FILE = "Sudokubot/Sudokubot-Info.plist";
-				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/Sudokubot/lib/release-universal\"/**";
+				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-lz",

@@ -15,9 +15,9 @@
 @synthesize comments, sudokuSolution, sudokuHints, entryId, secondsSince1970;
 
 -(void) dealloc{
-    comments = nil;
-    sudokuHints = nil;
-    sudokuSolution = nil;
+    self.comments = nil;
+    self.sudokuHints = nil;
+    self.sudokuSolution = nil;
     [super dealloc];
 }
 
@@ -52,11 +52,11 @@
 
 -(NSString*) toArchiveString{
     NSString* rv = [NSString stringWithFormat:@"%d\t%@\t%@\t%.0f\t%@", 
-                    self.entryId,
-                    self.sudokuSolution,
-                    self.sudokuHints,
-                    self.secondsSince1970,
-                    self.comments];
+                    entryId,
+                    sudokuSolution,
+                    sudokuHints,
+                    secondsSince1970,
+                    comments];
     return rv;
 }
 
