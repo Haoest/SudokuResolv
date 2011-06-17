@@ -169,9 +169,12 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissModalViewControllerAnimated:YES];
-    UIImage* img = [info valueForKey:UIImagePickerControllerEditedImage];
-    int width = img.size.width;
-    int height = img.size.height;
+    UIImage* img;
+    if (imagePicker.sourceType == UIImagePickerControllerSourceTypeCamera){
+        img = [info valueForKey:UIImagePickerControllerEditedImage];
+    }else{
+        img = [info valueForKey:UIImagePickerControllerOriginalImage];
+    }
     self.imagePicker = nil;
     [self showPreview:img];
 }
