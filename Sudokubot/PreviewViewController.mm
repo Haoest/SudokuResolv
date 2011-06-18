@@ -213,10 +213,11 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
 }
 
 -(void) initNumpad{
-    numpadContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 149)];
+    numpadContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 250, 250)];
     numpadImages = [[NSMutableArray alloc] initWithCapacity:10];
     for(int i=0; i<10; i++){
         UIImageView* iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"numpad_%d", i]]];
+        [iv setFrame:CGRectMake(0, 0, 250, 250)];
         [numpadContainer addSubview:iv];
         [numpadImages addObject:iv];
     }
@@ -236,14 +237,17 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
         {{115, 95, 25, 25},{100, 87, 15, 15},{90, 83, 10, 10}}
     };
     numpadHotRegions = [[NSMutableArray alloc] initWithCapacity:10];
+    float hotRegionCoordModifier = 1.0F / 150 * 250; // numPadImages had original size of 150x150, now they have been 
+                                                // blown up to 250x250, the hot regions coordinates have to be 
+                                                // multiplied by the same modifier
     for(int i=0; i<10; i++){
         NSMutableArray *regionsForOneNumber = [[NSMutableArray alloc] initWithCapacity:3];
         [numpadHotRegions addObject:regionsForOneNumber];
         for(int j=0; j<3; j++){
-            int x = regions[i][j][0];
-            int y = regions[i][j][1];
-            int width = regions[i][j][2];
-            int height = regions[i][j][3];
+            int x = regions[i][j][0] * hotRegionCoordModifier;
+            int y = regions[i][j][1] * hotRegionCoordModifier;
+            int width = regions[i][j][2] * hotRegionCoordModifier;
+            int height = regions[i][j][3] * hotRegionCoordModifier;
             UIView* v = [[UIView alloc] initWithFrame:CGRectMake(x,y,width, height)];
             [regionsForOneNumber addObject:v];
             [numpadContainer addSubview:v];

@@ -269,7 +269,7 @@
 		3A9E6C7513295D130055628C /* SudokubotTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SudokubotTests-Prefix.pch"; sourceTree = "<group>"; };
 		3A9E6C7613295D130055628C /* solverTests.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = solverTests.hpp; sourceTree = "<group>"; };
 		3A9E6C7813295D130055628C /* solverTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = solverTests.mm; sourceTree = "<group>"; };
-		3A9EDD3D139F589300D7C521 /* SudokuSolver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SudokuSolver.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A9EDD3D139F589300D7C521 /* SudokuResolve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SudokuResolve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9F132913860C9100B01591 /* OCRTemplateSet3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OCRTemplateSet3.png; path = Sudokubot/OCRTemplateSet3.png; sourceTree = "<group>"; };
 		3A9FE1241354243700B4E21A /* ArchiveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveTableViewController.h; sourceTree = "<group>"; };
 		3A9FE1251354243700B4E21A /* ArchiveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveTableViewController.m; sourceTree = "<group>"; };
@@ -429,7 +429,7 @@
 			children = (
 				3A9E6C4513295D120055628C /* Sudokubot sim.app */,
 				3A9E6C6913295D120055628C /* SudokubotTests.octest */,
-				3A9EDD3D139F589300D7C521 /* SudokuSolver.app */,
+				3A9EDD3D139F589300D7C521 /* SudokuResolve.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -623,7 +623,7 @@
 			);
 			name = "Sudokubot device";
 			productName = Sudokubot;
-			productReference = 3A9EDD3D139F589300D7C521 /* SudokuSolver.app */;
+			productReference = 3A9EDD3D139F589300D7C521 /* SudokuResolve.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1050,7 +1050,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1063,9 +1063,11 @@
 				);
 				INFOPLIST_FILE = "Sudokubot/Sudokubot-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-iphoneos-armv7/**",
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-iphoneos-armv6/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/release-iphoneos-armv6/**",
+					"/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/release-iphoneos-armv7/**",
 				);
+				"LIBRARY_SEARCH_PATHS[arch=armv6]" = "/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-iphoneos-armv6/**";
+				"LIBRARY_SEARCH_PATHS[arch=armv7]" = "/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-iphoneos-armv7/**";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-lz",
@@ -1076,7 +1078,7 @@
 					"-lopencv_imgproc",
 					"-lopencv_ml",
 				);
-				PRODUCT_NAME = SudokuSolver;
+				PRODUCT_NAME = SudokuResolve;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -1088,7 +1090,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1110,7 +1112,7 @@
 					"-lopencv_imgproc",
 					"-lopencv_ml",
 				);
-				PRODUCT_NAME = SudokuSolver;
+				PRODUCT_NAME = SudokuResolve;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;

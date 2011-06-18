@@ -65,11 +65,15 @@
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
-    [self removeSubviews];
+    [self.boardViewController.view removeFromSuperview];
+    [self.archiveViewController.view removeFromSuperview];
     self.boardViewController = nil;
     self.archiveViewController = nil;
-    self.previewViewController = nil;
     self.imagePicker = nil;
+    if (previewViewController.view.window == nil){
+        [previewViewController.view removeFromSuperview];
+        previewViewController = nil;
+    }
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
