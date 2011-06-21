@@ -21,6 +21,7 @@
 @property(nonatomic, retain) IBOutlet UITextField *commentTextField;
 @property(nonatomic, retain) IBOutlet UIToolbar *navigationBar;
 
+
 @property(nonatomic, assign) int archiveEntryId;
 @property(nonatomic, assign) int** hints;
 @property(nonatomic, assign) int** solution;
@@ -41,7 +42,7 @@
 
 @implementation BoardViewController
 
-@synthesize commentTextField, navigationBar, boardViewContainer;
+@synthesize commentTextField, navigationBar, boardViewContainer, contentsView;
 @synthesize backToArchiveButton, mainMenuButton;
 @synthesize hints, solution, archiveEntryId;
 @synthesize rootViewDelegate;
@@ -90,6 +91,13 @@
 
 - (void)viewDidLoad
 {
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.contentsView.bounds;
+    gradient.colors = [NSArray arrayWithObjects: 
+                       (id)[[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1] CGColor],
+                       (id)[[UIColor colorWithRed:0.0 green:0.0 blue:0.7 alpha:1] CGColor], nil];
+    [self.contentsView.layer insertSublayer:gradient atIndex:0];
+    
     [super viewDidLoad];
     [self wireupControls];
 }
@@ -157,9 +165,9 @@
         UILabel *grid = [gridLabels objectAtIndex:i];
         [grid setText:[NSString stringWithFormat:@"%d", self.solution[i/9][i%9]]];
         if (self.hints[i/9][i%9] ==0){
-            [grid setTextColor:[UIColor blueColor]];
+            [grid setTextColor:[UIColor blackColor]];
         }else{
-            [grid setTextColor:[UIColor blackColor]];            
+            [grid setTextColor:[UIColor redColor]];            
         }
     }
 }

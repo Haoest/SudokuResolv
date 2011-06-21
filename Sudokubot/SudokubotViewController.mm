@@ -14,6 +14,8 @@
 #import "solver.hpp"
 #import "AppConfig.h"
 #import "cvutil.hpp"
+#import <QuartzCore/QuartzCore.h>
+#import "HelpViewController.h"
 
 @interface SudokubotViewController ()
 
@@ -35,6 +37,7 @@
 @property(nonatomic, retain) BoardViewController* boardViewController;
 @property(nonatomic, retain) ArchiveViewController* archiveViewController;
 @property(nonatomic, retain) PreviewViewController* previewViewController;
+@property(nonatomic, retain) HelpViewController* helpViewController;
 
 -(void) showPreview: (UIImage*) imageWithSudokuBoard;
 
@@ -51,7 +54,7 @@
 @synthesize btnHelp;
 @synthesize imagePicker;
 
-@synthesize boardViewController, archiveViewController, previewViewController;
+@synthesize boardViewController, archiveViewController, previewViewController, helpViewController;
 
 - (void)dealloc
 {
@@ -59,6 +62,7 @@
     self.archiveViewController = nil;
     self.previewViewController = nil;
     self.imagePicker = nil;
+    self.helpViewController = nil;
     [super dealloc];
 }
 
@@ -70,6 +74,7 @@
     self.boardViewController = nil;
     self.archiveViewController = nil;
     self.imagePicker = nil;
+    self.helpViewController = nil;
     if (previewViewController.view.window == nil){
         [previewViewController.view removeFromSuperview];
         previewViewController = nil;
@@ -84,6 +89,13 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.view.bounds;
+    gradient.colors = [NSArray arrayWithObjects: 
+                       (id)[[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1] CGColor],
+                       (id)[[UIColor colorWithRed:0.0 green:0.0 blue:0.7 alpha:1] CGColor], nil];
+    [self.view.layer insertSublayer:gradient atIndex:0];
+    
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         [btnCaptureFromCamera setEnabled:NO];
         [btnCaptureFromCamera setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
@@ -141,7 +153,16 @@
 }
 
 -(IBAction) btnHelp_touchDown{
+    [self showHelpView];
+}
 
+-(void) showHelpView{
+    if (helpViewController == nil){
+        helpViewController = [[HelpViewController alloc] initWithNibName:nil bundle:nil];
+        helpViewController.rootViewDelegate = self;
+    }
+    [self removeSubviews];
+    [self.view addSubview:helpViewController.view]; 
 }
 
 -(IBAction) btnOpenFromClipboard_touchDown{
@@ -246,6 +267,7 @@
     [self.boardViewController.view removeFromSuperview];
     [self.archiveViewController.view removeFromSuperview];
     [self.previewViewController.view removeFromSuperview];
+    [self.helpViewController.view removeFromSuperview];
 }
 
 @end

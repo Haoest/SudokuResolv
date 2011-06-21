@@ -18,6 +18,7 @@
 -(void) showArchiveView;
 -(void) refreshArchiveView;
 -(void) showRootView;
+-(void) showHelpView;
 
 @end
 

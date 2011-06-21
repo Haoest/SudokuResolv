@@ -13,6 +13,7 @@
 @interface BoardViewController : UIViewController<UITextFieldDelegate> {
 
 }
+@property(nonatomic, retain) IBOutlet UIView* contentsView;
 
 -(void) refreshBoardWithHints:(int**) hints;
 -(void) refreshBoardWithArchiveEntry:(ArchiveEntry*) entry;

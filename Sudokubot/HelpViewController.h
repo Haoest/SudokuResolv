@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "rootViewDelegate.h"
 
 
 @interface HelpViewController : UIViewController {
     
 }
+@property(nonatomic, retain) IBOutlet UISegmentedControl* pagingTabs;
+@property(nonatomic, assign) id<RootViewDelegate> rootViewDelegate;
 
 @end

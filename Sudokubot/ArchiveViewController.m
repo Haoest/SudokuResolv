@@ -8,6 +8,7 @@
 
 #import "ArchiveViewController.h"
 #import "BoardViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ArchiveViewController()
 
@@ -62,6 +63,13 @@
 
 - (void)viewDidLoad
 {
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.view.bounds;
+    gradient.colors = [NSArray arrayWithObjects: 
+                       (id)[[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1] CGColor],
+                       (id)[[UIColor colorWithRed:0.0 green:0.0 blue:0.7 alpha:1] CGColor], nil];
+    [self.view.layer insertSublayer:gradient atIndex:0];
+    
     [self.mainMenu setTarget:self];
     [self.mainMenu setAction:@selector(backToMainMenu)];
     [self.doneButton setAction:@selector(doneButton_touchdown)];

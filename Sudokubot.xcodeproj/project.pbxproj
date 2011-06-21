@@ -85,8 +85,8 @@
 		3A9B939913B03107002FAE05 /* icon-launch-highres.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B939613B03107002FAE05 /* icon-launch-highres.png */; };
 		3A9B939A13B03107002FAE05 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B939713B03107002FAE05 /* Default.png */; };
 		3A9B939B13B03107002FAE05 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B939713B03107002FAE05 /* Default.png */; };
-		3A9B939D13B04AEF002FAE05 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9B939C13B04AEF002FAE05 /* QuartzCore.framework */; };
 		3A9B939F13B04AF8002FAE05 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9B939E13B04AF8002FAE05 /* QuartzCore.framework */; };
+		3A9B93A013B05302002FAE05 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9B939E13B04AF8002FAE05 /* QuartzCore.framework */; };
 		3A9E6C4A13295D120055628C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9E6C4913295D120055628C /* UIKit.framework */; };
 		3A9E6C4C13295D120055628C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9E6C4B13295D120055628C /* Foundation.framework */; };
 		3A9E6C4E13295D120055628C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9E6C4D13295D120055628C /* CoreGraphics.framework */; };
@@ -263,7 +263,6 @@
 		3A9B938F13B02919002FAE05 /* icon-appstore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-appstore.png"; path = "../icon-appstore.png"; sourceTree = "<group>"; };
 		3A9B939613B03107002FAE05 /* icon-launch-highres.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-launch-highres.png"; sourceTree = "<group>"; };
 		3A9B939713B03107002FAE05 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		3A9B939C13B04AEF002FAE05 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3A9B939E13B04AF8002FAE05 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3A9BAA42138D765800D57AE2 /* rootViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rootViewDelegate.h; sourceTree = "<group>"; };
 		3A9E6C4513295D120055628C /* Sudokubot sim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sudokubot sim.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -309,10 +308,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A9B939D13B04AEF002FAE05 /* QuartzCore.framework in Frameworks */,
 				3A9E6C4A13295D120055628C /* UIKit.framework in Frameworks */,
 				3A9E6C4C13295D120055628C /* Foundation.framework in Frameworks */,
 				3A9E6C4E13295D120055628C /* CoreGraphics.framework in Frameworks */,
+				3A9B93A013B05302002FAE05 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,8 +435,6 @@
 		3A9E6C3A13295D110055628C = {
 			isa = PBXGroup;
 			children = (
-				3A9B939E13B04AF8002FAE05 /* QuartzCore.framework */,
-				3A9B939C13B04AEF002FAE05 /* QuartzCore.framework */,
 				3A9E6C4F13295D120055628C /* Sudokubot */,
 				3A9E6C6F13295D120055628C /* SudokubotTests */,
 				3A9E6C4813295D120055628C /* Frameworks */,
@@ -458,6 +455,7 @@
 		3A9E6C4813295D120055628C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A9B939E13B04AF8002FAE05 /* QuartzCore.framework */,
 				3ABFB6D2138AF2CC00912353 /* SenTestingKit.framework */,
 				3A9E6C4913295D120055628C /* UIKit.framework */,
 				3A9E6C4B13295D120055628C /* Foundation.framework */,
