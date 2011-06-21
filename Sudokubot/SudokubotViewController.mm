@@ -126,7 +126,7 @@
     self.imagePicker.delegate = self;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        [self presentModalViewController:imagePicker animated:NO];
+        [self presentModalViewController:imagePicker animated:true];
     }
 }
 
@@ -186,10 +186,9 @@
     self.imagePicker.allowsEditing = true;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        [self presentModalViewController:imagePicker animated:NO];
+        [self presentModalViewController:imagePicker animated:true];
     }
 }
-
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {

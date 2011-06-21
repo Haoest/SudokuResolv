@@ -81,10 +81,10 @@
 		3A9B939113B02919002FAE05 /* icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B938D13B02919002FAE05 /* icon-57.png */; };
 		3A9B939213B02919002FAE05 /* icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B938E13B02919002FAE05 /* icon-114.png */; };
 		3A9B939313B02919002FAE05 /* icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B938E13B02919002FAE05 /* icon-114.png */; };
-		3A9B939813B03107002FAE05 /* icon-launch-highres.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B939613B03107002FAE05 /* icon-launch-highres.png */; };
-		3A9B939913B03107002FAE05 /* icon-launch-highres.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B939613B03107002FAE05 /* icon-launch-highres.png */; };
-		3A9B939A13B03107002FAE05 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B939713B03107002FAE05 /* Default.png */; };
-		3A9B939B13B03107002FAE05 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B939713B03107002FAE05 /* Default.png */; };
+		3A9B939813B03107002FAE05 /* launch-highres.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B939613B03107002FAE05 /* launch-highres.png */; };
+		3A9B939913B03107002FAE05 /* launch-highres.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B939613B03107002FAE05 /* launch-highres.png */; };
+		3A9B939A13B03107002FAE05 /* launch-lowres.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B939713B03107002FAE05 /* launch-lowres.png */; };
+		3A9B939B13B03107002FAE05 /* launch-lowres.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B939713B03107002FAE05 /* launch-lowres.png */; };
 		3A9B939F13B04AF8002FAE05 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9B939E13B04AF8002FAE05 /* QuartzCore.framework */; };
 		3A9B93A013B05302002FAE05 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9B939E13B04AF8002FAE05 /* QuartzCore.framework */; };
 		3A9E6C4A13295D120055628C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9E6C4913295D120055628C /* UIKit.framework */; };
@@ -261,11 +261,11 @@
 		3A9B938D13B02919002FAE05 /* icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-57.png"; sourceTree = "<group>"; };
 		3A9B938E13B02919002FAE05 /* icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-114.png"; sourceTree = "<group>"; };
 		3A9B938F13B02919002FAE05 /* icon-appstore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-appstore.png"; path = "../icon-appstore.png"; sourceTree = "<group>"; };
-		3A9B939613B03107002FAE05 /* icon-launch-highres.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-launch-highres.png"; sourceTree = "<group>"; };
-		3A9B939713B03107002FAE05 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		3A9B939613B03107002FAE05 /* launch-highres.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch-highres.png"; sourceTree = "<group>"; };
+		3A9B939713B03107002FAE05 /* launch-lowres.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch-lowres.png"; sourceTree = "<group>"; };
 		3A9B939E13B04AF8002FAE05 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3A9BAA42138D765800D57AE2 /* rootViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rootViewDelegate.h; sourceTree = "<group>"; };
-		3A9E6C4513295D120055628C /* Sudokubot sim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sudokubot sim.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A9E6C4513295D120055628C /* SudokuResolv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SudokuResolv.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9E6C4913295D120055628C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3A9E6C4B13295D120055628C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3A9E6C4D13295D120055628C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -285,7 +285,7 @@
 		3A9E6C7513295D130055628C /* SudokubotTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SudokubotTests-Prefix.pch"; sourceTree = "<group>"; };
 		3A9E6C7613295D130055628C /* solverTests.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = solverTests.hpp; sourceTree = "<group>"; };
 		3A9E6C7813295D130055628C /* solverTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = solverTests.mm; sourceTree = "<group>"; };
-		3A9EDD3D139F589300D7C521 /* SudokuResolve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SudokuResolve.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A9EDD3D139F589300D7C521 /* SudokuResolv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SudokuResolv.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9F132913860C9100B01591 /* OCRTemplateSet3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OCRTemplateSet3.png; path = Sudokubot/OCRTemplateSet3.png; sourceTree = "<group>"; };
 		3A9FE1241354243700B4E21A /* ArchiveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveTableViewController.h; sourceTree = "<group>"; };
 		3A9FE1251354243700B4E21A /* ArchiveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveTableViewController.m; sourceTree = "<group>"; };
@@ -445,9 +445,9 @@
 		3A9E6C4613295D120055628C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3A9E6C4513295D120055628C /* Sudokubot sim.app */,
+				3A9E6C4513295D120055628C /* SudokuResolv.app */,
 				3A9E6C6913295D120055628C /* SudokubotTests.octest */,
-				3A9EDD3D139F589300D7C521 /* SudokuResolve.app */,
+				3A9EDD3D139F589300D7C521 /* SudokuResolv.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -529,8 +529,8 @@
 		3A9F132813860C5B00B01591 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				3A9B939613B03107002FAE05 /* icon-launch-highres.png */,
-				3A9B939713B03107002FAE05 /* Default.png */,
+				3A9B939613B03107002FAE05 /* launch-highres.png */,
+				3A9B939713B03107002FAE05 /* launch-lowres.png */,
 				3A9B938D13B02919002FAE05 /* icon-57.png */,
 				3A9B938E13B02919002FAE05 /* icon-114.png */,
 				3A9F132913860C9100B01591 /* OCRTemplateSet3.png */,
@@ -611,7 +611,7 @@
 			);
 			name = "Sudokubot sim";
 			productName = Sudokubot;
-			productReference = 3A9E6C4513295D120055628C /* Sudokubot sim.app */;
+			productReference = 3A9E6C4513295D120055628C /* SudokuResolv.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3A9E6C6813295D120055628C /* SudokubotTests */ = {
@@ -647,7 +647,7 @@
 			);
 			name = "Sudokubot device";
 			productName = Sudokubot;
-			productReference = 3A9EDD3D139F589300D7C521 /* SudokuResolve.app */;
+			productReference = 3A9EDD3D139F589300D7C521 /* SudokuResolv.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -704,8 +704,8 @@
 				3ACE518113A1F8BD00CC8717 /* OCRTemplateSet1.png in Resources */,
 				3A9B939013B02919002FAE05 /* icon-57.png in Resources */,
 				3A9B939213B02919002FAE05 /* icon-114.png in Resources */,
-				3A9B939813B03107002FAE05 /* icon-launch-highres.png in Resources */,
-				3A9B939A13B03107002FAE05 /* Default.png in Resources */,
+				3A9B939813B03107002FAE05 /* launch-highres.png in Resources */,
+				3A9B939A13B03107002FAE05 /* launch-lowres.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -791,8 +791,8 @@
 				3ACE51D513A1FD6300CC8717 /* OCRTemplateSet1.png in Resources */,
 				3A9B939113B02919002FAE05 /* icon-57.png in Resources */,
 				3A9B939313B02919002FAE05 /* icon-114.png in Resources */,
-				3A9B939913B03107002FAE05 /* icon-launch-highres.png in Resources */,
-				3A9B939B13B03107002FAE05 /* Default.png in Resources */,
+				3A9B939913B03107002FAE05 /* launch-highres.png in Resources */,
+				3A9B939B13B03107002FAE05 /* launch-lowres.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -977,7 +977,7 @@
 					"-lopencv_imgproc",
 					"-lopencv_ml",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SudokuResolv;
 				TARGETED_DEVICE_FAMILY = 1;
 				TEST_AFTER_BUILD = YES;
 				VALIDATE_PRODUCT = YES;
@@ -1009,7 +1009,7 @@
 					"-lopencv_imgproc",
 					"-lopencv_ml",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SudokuResolv;
 				TARGETED_DEVICE_FAMILY = 1;
 				TEST_AFTER_BUILD = YES;
 				VALIDATE_PRODUCT = YES;
@@ -1110,7 +1110,7 @@
 					"-lopencv_imgproc",
 					"-lopencv_ml",
 				);
-				PRODUCT_NAME = SudokuResolve;
+				PRODUCT_NAME = SudokuResolv;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -1144,7 +1144,7 @@
 					"-lopencv_imgproc",
 					"-lopencv_ml",
 				);
-				PRODUCT_NAME = SudokuResolve;
+				PRODUCT_NAME = SudokuResolv;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
