@@ -39,8 +39,6 @@
 @property(nonatomic, retain) PreviewViewController* previewViewController;
 @property(nonatomic, retain) HelpViewController* helpViewController;
 
--(void) showPreview: (UIImage*) imageWithSudokuBoard;
-
 @end
 
 

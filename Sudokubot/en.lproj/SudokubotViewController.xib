@@ -118,7 +118,7 @@
 					<object class="IBUIButton" id="754753928">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{120, 307}, {80, 37}}</string>
+						<string key="NSFrame">{{120, 296}, {80, 37}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="645022224"/>
@@ -286,10 +286,10 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="721319331"/>
-							<reference ref="754753928"/>
 							<reference ref="645022224"/>
 							<reference ref="274328858"/>
 							<reference ref="221246322"/>
+							<reference ref="754753928"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>

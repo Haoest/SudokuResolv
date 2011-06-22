@@ -15,6 +15,16 @@
 		3A7E57D6134EB3D4003CCF9D /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E57D4134EB3D3003CCF9D /* HelpViewController.m */; };
 		3A7E57D7134EB3D4003CCF9D /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E57D5134EB3D4003CCF9D /* HelpViewController.xib */; };
 		3A90FFF71390D6A900027FB5 /* PreviewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A90FFF61390D6A900027FB5 /* PreviewViewController.mm */; };
+		3A917CD513B19B0A00DEC89C /* sample-puzzle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A917CD413B19B0A00DEC89C /* sample-puzzle.jpg */; };
+		3A917CD613B19B0A00DEC89C /* sample-puzzle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A917CD413B19B0A00DEC89C /* sample-puzzle.jpg */; };
+		3A917CD813B19B8F00DEC89C /* help-intro.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A917CD713B19B8F00DEC89C /* help-intro.html */; };
+		3A917CD913B19B8F00DEC89C /* help-intro.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A917CD713B19B8F00DEC89C /* help-intro.html */; };
+		3A917CDE13B1A86200DEC89C /* help-thanks.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A917CDD13B1A86200DEC89C /* help-thanks.html */; };
+		3A917CE013B1B01F00DEC89C /* help-tips.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A917CDF13B1B01F00DEC89C /* help-tips.html */; };
+		3A917CE113B1B01F00DEC89C /* help-tips.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A917CDF13B1B01F00DEC89C /* help-tips.html */; };
+		3A917CE213B1B02D00DEC89C /* help-thanks.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A917CDD13B1A86200DEC89C /* help-thanks.html */; };
+		3A917CE713B1C29F00DEC89C /* isaac.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A917CE613B1C29F00DEC89C /* isaac.jpg */; };
+		3A917CE813B1C29F00DEC89C /* isaac.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A917CE613B1C29F00DEC89C /* isaac.jpg */; };
 		3A94CC911331B5F700B380B2 /* basicOCR.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A94CC891331B5F700B380B2 /* basicOCR.mm */; };
 		3A94CC941331B5F700B380B2 /* preprocessing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A94CC8D1331B5F700B380B2 /* preprocessing.cpp */; };
 		3A951C1E1352CE17006ACF0C /* ArchiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A951C1C1352CE13006ACF0C /* ArchiveViewController.m */; };
@@ -193,10 +203,15 @@
 		3A91390613463DC80058CB15 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		3A91390713463DC80058CB15 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3A91390813463DC80058CB15 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		3A94CC891331B5F700B380B2 /* basicOCR.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = basicOCR.mm; sourceTree = "<group>"; };
-		3A94CC8A1331B5F700B380B2 /* basicOCR.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = basicOCR.hpp; sourceTree = "<group>"; };
-		3A94CC8D1331B5F700B380B2 /* preprocessing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = preprocessing.cpp; sourceTree = "<group>"; };
-		3A94CC8E1331B5F700B380B2 /* preprocessing.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = preprocessing.h; sourceTree = "<group>"; };
+		3A917CD413B19B0A00DEC89C /* sample-puzzle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "sample-puzzle.jpg"; sourceTree = "<group>"; };
+		3A917CD713B19B8F00DEC89C /* help-intro.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "help-intro.html"; sourceTree = "<group>"; };
+		3A917CDD13B1A86200DEC89C /* help-thanks.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "help-thanks.html"; sourceTree = "<group>"; };
+		3A917CDF13B1B01F00DEC89C /* help-tips.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "help-tips.html"; sourceTree = "<group>"; };
+		3A917CE613B1C29F00DEC89C /* isaac.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = isaac.jpg; sourceTree = "<group>"; };
+		3A94CC891331B5F700B380B2 /* basicOCR.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = basicOCR.mm; path = basicOCR/basicOCR.mm; sourceTree = "<group>"; };
+		3A94CC8A1331B5F700B380B2 /* basicOCR.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = basicOCR.hpp; path = basicOCR/basicOCR.hpp; sourceTree = "<group>"; };
+		3A94CC8D1331B5F700B380B2 /* preprocessing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = preprocessing.cpp; path = basicOCR/preprocessing.cpp; sourceTree = "<group>"; };
+		3A94CC8E1331B5F700B380B2 /* preprocessing.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = preprocessing.h; path = basicOCR/preprocessing.h; sourceTree = "<group>"; };
 		3A951C1B1352CE12006ACF0C /* ArchiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveViewController.h; sourceTree = "<group>"; };
 		3A951C1C1352CE13006ACF0C /* ArchiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveViewController.m; sourceTree = "<group>"; };
 		3A951C1D1352CE14006ACF0C /* ArchiveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArchiveViewController.xib; sourceTree = "<group>"; };
@@ -350,17 +365,6 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		3A94CC861331B5F700B380B2 /* basicOCR */ = {
-			isa = PBXGroup;
-			children = (
-				3A94CC891331B5F700B380B2 /* basicOCR.mm */,
-				3A94CC8A1331B5F700B380B2 /* basicOCR.hpp */,
-				3A94CC8D1331B5F700B380B2 /* preprocessing.cpp */,
-				3A94CC8E1331B5F700B380B2 /* preprocessing.h */,
-			);
-			path = basicOCR;
-			sourceTree = "<group>";
-		};
 		3A967F42139699F500A52AD4 /* numpad */ = {
 			isa = PBXGroup;
 			children = (
@@ -472,9 +476,8 @@
 				3AA37E49135524BC009521E2 /* AppConfig.m */,
 				3A9F132813860C5B00B01591 /* resources */,
 				3AA37E4C13554550009521E2 /* UI */,
-				3AA37E4B135544FF009521E2 /* solver and utilities */,
+				3AA37E4B135544FF009521E2 /* solver and OCR */,
 				3AA37E441355226D009521E2 /* models and managers */,
-				3A94CC861331B5F700B380B2 /* basicOCR */,
 				3A9E6C8213296AFB0055628C /* Development Resources */,
 				3A9E6C5013295D120055628C /* Supporting Files */,
 			);
@@ -529,6 +532,11 @@
 		3A9F132813860C5B00B01591 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				3A917CE613B1C29F00DEC89C /* isaac.jpg */,
+				3A917CD713B19B8F00DEC89C /* help-intro.html */,
+				3A917CDF13B1B01F00DEC89C /* help-tips.html */,
+				3A917CDD13B1A86200DEC89C /* help-thanks.html */,
+				3A917CD413B19B0A00DEC89C /* sample-puzzle.jpg */,
 				3A9B939613B03107002FAE05 /* launch-highres.png */,
 				3A9B939713B03107002FAE05 /* launch-lowres.png */,
 				3A9B938D13B02919002FAE05 /* icon-57.png */,
@@ -552,9 +560,13 @@
 			name = "models and managers";
 			sourceTree = "<group>";
 		};
-		3AA37E4B135544FF009521E2 /* solver and utilities */ = {
+		3AA37E4B135544FF009521E2 /* solver and OCR */ = {
 			isa = PBXGroup;
 			children = (
+				3A94CC891331B5F700B380B2 /* basicOCR.mm */,
+				3A94CC8A1331B5F700B380B2 /* basicOCR.hpp */,
+				3A94CC8D1331B5F700B380B2 /* preprocessing.cpp */,
+				3A94CC8E1331B5F700B380B2 /* preprocessing.h */,
 				3A5416DD13AB047A0082676B /* solver.hpp */,
 				3A5416DE13AB047A0082676B /* solver.mm */,
 				3A8FEDCD132CD99F00654072 /* cvutil.hpp */,
@@ -562,7 +574,7 @@
 				3AC35C72133466F80099F669 /* boardRecognizer.h */,
 				3AC35C73133466F90099F669 /* boardRecognizer.cpp */,
 			);
-			name = "solver and utilities";
+			name = "solver and OCR";
 			sourceTree = "<group>";
 		};
 		3AA37E4C13554550009521E2 /* UI */ = {
@@ -706,6 +718,11 @@
 				3A9B939213B02919002FAE05 /* icon-114.png in Resources */,
 				3A9B939813B03107002FAE05 /* launch-highres.png in Resources */,
 				3A9B939A13B03107002FAE05 /* launch-lowres.png in Resources */,
+				3A917CD513B19B0A00DEC89C /* sample-puzzle.jpg in Resources */,
+				3A917CD813B19B8F00DEC89C /* help-intro.html in Resources */,
+				3A917CDE13B1A86200DEC89C /* help-thanks.html in Resources */,
+				3A917CE013B1B01F00DEC89C /* help-tips.html in Resources */,
+				3A917CE713B1C29F00DEC89C /* isaac.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -793,6 +810,11 @@
 				3A9B939313B02919002FAE05 /* icon-114.png in Resources */,
 				3A9B939913B03107002FAE05 /* launch-highres.png in Resources */,
 				3A9B939B13B03107002FAE05 /* launch-lowres.png in Resources */,
+				3A917CD613B19B0A00DEC89C /* sample-puzzle.jpg in Resources */,
+				3A917CD913B19B8F00DEC89C /* help-intro.html in Resources */,
+				3A917CE113B1B01F00DEC89C /* help-tips.html in Resources */,
+				3A917CE213B1B02D00DEC89C /* help-thanks.html in Resources */,
+				3A917CE813B1C29F00DEC89C /* isaac.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -78,6 +78,8 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
                        (id)[[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1] CGColor],
                        (id)[[UIColor colorWithRed:0.0 green:0.0 blue:0.7 alpha:1] CGColor], nil];
     [self.view.layer insertSublayer:gradient atIndex:0];
+    [self.previewImage.layer setBorderWidth:1];
+    [self.previewImage.layer setBorderColor:[[UIColor whiteColor]CGColor]];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }

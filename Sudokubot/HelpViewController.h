@@ -10,10 +10,16 @@
 #import "rootViewDelegate.h"
 
 
-@interface HelpViewController : UIViewController {
+@interface HelpViewController : UIViewController <UIWebViewDelegate> {
     
 }
 @property(nonatomic, retain) IBOutlet UISegmentedControl* pagingTabs;
+@property(nonatomic, retain) IBOutlet UIWebView* webView;
+@property(nonatomic, retain) IBOutlet UIButton* solveButton;
+
+
 @property(nonatomic, assign) id<RootViewDelegate> rootViewDelegate;
+
+-(IBAction) solveButton_tap;
 
 @end

@@ -19,6 +19,7 @@
 -(void) refreshArchiveView;
 -(void) showRootView;
 -(void) showHelpView;
+-(void) showPreview: (UIImage*) imageWithSudokuBoard;
 
 @end
 
