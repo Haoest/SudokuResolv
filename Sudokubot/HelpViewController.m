@@ -31,6 +31,10 @@
 
 - (void)dealloc
 {
+    self.pagingTabs = nil;
+    self.webView = nil;
+    self.solveButton = nil;
+    
     [super dealloc];
 }
 
@@ -69,11 +73,9 @@
  -(void) pagingTabIndexChanged:(id)sender{
      if (pagingTabs.selectedSegmentIndex == 0){
          [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"help-intro" ofType:@"html"] isDirectory:false]]];
-//         [webView setBounds:CGRectMake(9, 45, 302, 353)];
          [solveButton setHidden:false];
      }else{
          [solveButton setHidden:true];
-//         [webView setBounds:CGRectMake(9,0, 302, 405)];
          if (pagingTabs.selectedSegmentIndex==1){
              [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"help-tips" ofType:@"html"] isDirectory:false]]];
          }else{

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A105783139C39DF00089373 /* acknowledgement.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A105782139C39DF00089373 /* acknowledgement.txt */; };
 		3A5416DF13AB047A0082676B /* solver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A5416DE13AB047A0082676B /* solver.mm */; };
 		3A5416E013AB04B00082676B /* solver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A5416DE13AB047A0082676B /* solver.mm */; };
 		3A7E57D1134EB0B7003CCF9D /* BoardViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E57CF134EB0B7003CCF9D /* BoardViewController.mm */; };
@@ -147,7 +146,6 @@
 		3A9EDD36139F589300D7C521 /* numpad_8.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A967F4A13969A1100A52AD4 /* numpad_8.png */; };
 		3A9EDD37139F589300D7C521 /* numpad_9.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A967F4B13969A1100A52AD4 /* numpad_9.png */; };
 		3A9EDD38139F589300D7C521 /* numpad_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A967F4C13969A1100A52AD4 /* numpad_0.png */; };
-		3A9EDD39139F589300D7C521 /* acknowledgement.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A105782139C39DF00089373 /* acknowledgement.txt */; };
 		3A9F132A13860C9100B01591 /* OCRTemplateSet3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9F132913860C9100B01591 /* OCRTemplateSet3.png */; };
 		3A9FE1261354243700B4E21A /* ArchiveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FE1251354243700B4E21A /* ArchiveTableViewController.m */; };
 		3AA37E471355228E009521E2 /* ArchiveEntry.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3AA37E461355228D009521E2 /* ArchiveEntry.mm */; };
@@ -712,7 +710,6 @@
 				3A967F5413969A1100A52AD4 /* numpad_8.png in Resources */,
 				3A967F5513969A1100A52AD4 /* numpad_9.png in Resources */,
 				3A967F5613969A1100A52AD4 /* numpad_0.png in Resources */,
-				3A105783139C39DF00089373 /* acknowledgement.txt in Resources */,
 				3ACE518113A1F8BD00CC8717 /* OCRTemplateSet1.png in Resources */,
 				3A9B939013B02919002FAE05 /* icon-57.png in Resources */,
 				3A9B939213B02919002FAE05 /* icon-114.png in Resources */,
@@ -804,7 +801,6 @@
 				3A9EDD36139F589300D7C521 /* numpad_8.png in Resources */,
 				3A9EDD37139F589300D7C521 /* numpad_9.png in Resources */,
 				3A9EDD38139F589300D7C521 /* numpad_0.png in Resources */,
-				3A9EDD39139F589300D7C521 /* acknowledgement.txt in Resources */,
 				3ACE51D513A1FD6300CC8717 /* OCRTemplateSet1.png in Resources */,
 				3A9B939113B02919002FAE05 /* icon-57.png in Resources */,
 				3A9B939313B02919002FAE05 /* icon-114.png in Resources */,
