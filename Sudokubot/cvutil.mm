@@ -18,6 +18,9 @@ using namespace cv;
 
 // NOTE you SHOULD cvReleaseImage() for the return value when end of the code.
 +(IplImage *) CreateIplImageFromUIImage: (UIImage*) image ignoreUIOrientation:(bool) ignoreUIOrientation{
+    if (!image){
+        return 0;
+    }
     // Getting CGImage from UIImage
     CGImageRef imageRef = image.CGImage;
     
@@ -45,7 +48,7 @@ using namespace cv;
     IplImage *ret = cvCreateImage(cvGetSize(iplimage), IPL_DEPTH_8U, 3);
     cvCvtColor(iplimage, ret, CV_RGBA2BGR);
     cvReleaseImage(&iplimage);
-    if (ignoreUIOrientation){
+    if (true||ignoreUIOrientation){
         return ret;
     }
     CGFloat imageOrientationInDegree = [cvutil getImageOrientationInDegrees:image];
@@ -124,9 +127,9 @@ using namespace cv;
     return ret;  
 }
 
-+(IplImage*) LoadUIImageAsIplImage: (NSString*) fileName asGrayscale:(BOOL) asGrayscale{
++(IplImage*) LoadUIImageAsIplImage: (NSString*) fileName asGrayscale:(BOOL) asGrayscale ignoreOrientation:(bool)ignoreOrientation{
     UIImage *img = [UIImage imageNamed:fileName];
-    IplImage *rv = [cvutil CreateIplImageFromUIImage:img ignoreUIOrientation:true];
+    IplImage *rv = [cvutil CreateIplImageFromUIImage:img ignoreUIOrientation:ignoreOrientation];
     if (asGrayscale){
         IplImage *gray = cvCreateImage(cvGetSize(rv), 8, 1);
         cvCvtColor(rv, gray, CV_BGR2GRAY);

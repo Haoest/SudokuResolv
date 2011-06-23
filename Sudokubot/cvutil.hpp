@@ -20,7 +20,7 @@
 +(int**) ReadBoardFromFile:(NSString*) fileName;
 +(NSString*) SerializeBoard:(int**)board;
 +(int**) DeserializedBoard:(NSString*) board;
-+(IplImage*) LoadUIImageAsIplImage: (NSString*) fileName asGrayscale:(BOOL) asGrayscale;
++(IplImage*) LoadUIImageAsIplImage: (NSString*) fileName asGrayscale:(BOOL) asGrayscale ignoreOrientation:(bool)ignoreOrientation;
 
 +(int**) loadStringAsBoard: (char[89]) boardAsString;
 
