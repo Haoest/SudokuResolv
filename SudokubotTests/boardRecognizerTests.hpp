@@ -10,7 +10,7 @@ struct testPack{
 };
 
 @interface BoardRecognizerTests : SenTestCase {
-    
+
 }
 
 class boardRecognizerTests{

@@ -17,6 +17,11 @@
 
 @implementation BoardRecognizerTests
 
+int totalNumPuzzlesTried;
+int numPuzzlesRecognized;
+int totalNumCharactersTried;
+int numCharactersRecognized;
+
 - (void)setUp
 {
     [super setUp];
@@ -33,11 +38,22 @@
 
 
 -(void) testRunAllBoardRecognizerTests{
-	    boardRecognizerTests t; t.runAll();
+    totalNumPuzzlesTried = 0;
+    totalNumCharactersTried = 0;
+    numPuzzlesRecognized = 0;
+    numCharactersRecognized = 0;
+    NSDate* start = [NSDate date];
+    boardRecognizerTests t; t.runAll();
+    NSDate* end = [NSDate date];
+    NSString *puzzle = [NSString stringWithFormat:@"Puzzles: total (%d) recognized(%d) missed(%d) accuracy (%f)", totalNumPuzzlesTried,numPuzzlesRecognized, totalNumPuzzlesTried - numPuzzlesRecognized, (float)numPuzzlesRecognized / totalNumPuzzlesTried ];
+    NSString *characters = [NSString stringWithFormat:@"Characters: total (%d) recognized(%d) missed(%d) accuracy(%f)", totalNumCharactersTried, numCharactersRecognized, totalNumCharactersTried-numCharactersRecognized, (float)numCharactersRecognized/totalNumCharactersTried];
+    NSString *time = [NSString stringWithFormat:@"Time elapsed: %f", [end timeIntervalSinceDate:start]];
+    NSLog([NSString stringWithFormat:@"===========================\nRecognition Summary:\n%@\n%@\n%@\n==============================\n", puzzle, characters, time]);
+    
 }
 
 -(void) testReadBoard{
-    IplImage *img = [cvutil LoadUIImageAsIplImage:@"puzzle1.png" asGrayscale:false];
+    IplImage *img = [cvutil LoadUIImageAsIplImage:@"simple.png" asGrayscale:false ignoreOrientation:false];
     recognizerResultPack recog;
     recog = recognizeBoardFromPhoto(img);
     int** actualBoard = [cvutil loadStringAsBoard:"530070000 600195000 098000060 800060003 400803001 700020006 060000280 000419005 000080079"];
@@ -106,12 +122,14 @@ void checkResult(int solution[][9], recognizerResultPack recog){
 		}
 	}
 	printf("\ttotal mistakes: %d\tAccuracy: %0.1f%%\n\n", totalWrong, ((double)totalRight)/(totalWrong+totalRight)*100);
+    totalNumCharactersTried += totalWrong + totalRight;
+    numCharactersRecognized += totalRight;
 }
 
 
 IplImage *cvLoadImage(char fileName[255]){
     NSString* fn = [NSString stringWithCString:fileName encoding:NSASCIIStringEncoding];
-    return [cvutil LoadUIImageAsIplImage:fn asGrayscale:false];
+    return [cvutil LoadUIImageAsIplImage:fn asGrayscale:false ignoreOrientation:false];
 }
 
 testPack::testPack(char InputFile[50], char boardHintAsString[89]){
@@ -184,6 +202,10 @@ void boardRecognizerTests::runAll(){
     for(it = tests.begin(); it!= tests.end(); it++){
         IplImage *img = cvLoadImage( (*it)->inputFile );
         recognizerResultPack res = recognizeBoardFromPhoto(img);
+        totalNumPuzzlesTried ++;
+        if (res.success){
+            numPuzzlesRecognized ++;
+        }
         int** hints = [cvutil loadStringAsBoard:(*it)->hints];
         printf("testing %s...", (*it)->inputFile);
         checkResult(hints, res);
