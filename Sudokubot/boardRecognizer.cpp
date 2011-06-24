@@ -121,6 +121,9 @@ recognizerResultPack recognizeFromBoard(IplImage *boardGray, int initialBoardThr
         cvResetImageROI(rv.boardGray);
         rv.grids = grids;
         rv.success = true;
+        //there seems to be a bug in OpenCV's ML module that is not cleaning up training data
+        //even if you dealloacte it explicitly. So instead of leaking for every OCR engine
+        //allocated, just suck up the shame and not deallocate it and leak once
 //        if (OCREngine){
 //            delete OCREngine;
 //            OCREngine = 0;

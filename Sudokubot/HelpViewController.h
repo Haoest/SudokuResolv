@@ -16,6 +16,7 @@
 @property(nonatomic, retain) IBOutlet UISegmentedControl* pagingTabs;
 @property(nonatomic, retain) IBOutlet UIWebView* webView;
 @property(nonatomic, retain) IBOutlet UIButton* solveButton;
+@property(nonatomic, retain) IBOutlet UIButton* mainMenuButton;
 
 
 @property(nonatomic, assign) id<RootViewDelegate> rootViewDelegate;

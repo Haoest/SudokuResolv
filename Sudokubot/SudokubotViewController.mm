@@ -67,12 +67,19 @@
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
-    [self.boardViewController.view removeFromSuperview];
-    [self.archiveViewController.view removeFromSuperview];
-    self.boardViewController = nil;
-    self.archiveViewController = nil;
+    if (boardViewController.view.window == nil){
+        [self.boardViewController.view removeFromSuperview];
+        self.boardViewController = nil;
+    }
+    if (archiveViewController.view.window ==nil){
+        [self.archiveViewController.view removeFromSuperview];
+        self.archiveViewController = nil;
+    }
     self.imagePicker = nil;
-    self.helpViewController = nil;
+    if (helpViewController.view.window ==nil){
+        [helpViewController.view removeFromSuperview];
+        self.helpViewController = nil;
+    }
     if (previewViewController.view.window == nil){
         [previewViewController.view removeFromSuperview];
         previewViewController = nil;
@@ -126,6 +133,7 @@
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [self presentModalViewController:imagePicker animated:true];
     }
+    [self.imagePicker release];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -186,6 +194,7 @@
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         [self presentModalViewController:imagePicker animated:true];
     }
+    [self.imagePicker release];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

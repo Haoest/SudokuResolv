@@ -12,13 +12,14 @@
 @interface HelpViewController()
 
 -(void) pagingTabIndexChanged:(id)sender;
+-(IBAction) mainMenuButton_tapped;
 
 @end
 
 @implementation HelpViewController
 
 @synthesize rootViewDelegate;
-@synthesize pagingTabs, webView, solveButton;
+@synthesize pagingTabs, webView, solveButton, mainMenuButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,7 +35,7 @@
     self.pagingTabs = nil;
     self.webView = nil;
     self.solveButton = nil;
-    
+    self.mainMenuButton = nil;
     [super dealloc];
 }
 
@@ -106,6 +107,10 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     }
     [ requestURL release ];
     return YES;
+}
+
+-(IBAction) mainMenuButton_tapped{
+    [rootViewDelegate showRootView];
 }
 
 @end

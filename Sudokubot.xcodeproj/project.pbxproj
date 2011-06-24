@@ -38,6 +38,67 @@
 		3A967F5413969A1100A52AD4 /* numpad_8.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A967F4A13969A1100A52AD4 /* numpad_8.png */; };
 		3A967F5513969A1100A52AD4 /* numpad_9.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A967F4B13969A1100A52AD4 /* numpad_9.png */; };
 		3A967F5613969A1100A52AD4 /* numpad_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A967F4C13969A1100A52AD4 /* numpad_0.png */; };
+		3A982DB713B3DA74007C2BFF /* simple.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAE01386F61000FF570D /* simple.png */; };
+		3A982DE413B3DC9B007C2BFF /* blackwhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB21386F61000FF570D /* blackwhite.png */; };
+		3A982DE513B3DC9B007C2BFF /* camera_blurry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB31386F61000FF570D /* camera_blurry.jpg */; };
+		3A982DE613B3DC9B007C2BFF /* camera_book1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB41386F61000FF570D /* camera_book1.jpg */; };
+		3A982DE713B3DC9B007C2BFF /* camera_book1_small.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB51386F61000FF570D /* camera_book1_small.jpg */; };
+		3A982DE813B3DC9B007C2BFF /* camera_book2_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB61386F61000FF570D /* camera_book2_1.jpg */; };
+		3A982DE913B3DC9B007C2BFF /* camera_book2_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB71386F61000FF570D /* camera_book2_2.png */; };
+		3A982DEA13B3DC9B007C2BFF /* camera_book3_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB81386F61000FF570D /* camera_book3_1.jpg */; };
+		3A982DEB13B3DC9B007C2BFF /* camera_book3_10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB91386F61000FF570D /* camera_book3_10.jpg */; };
+		3A982DEC13B3DC9B007C2BFF /* camera_book3_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BABA1386F61000FF570D /* camera_book3_2.jpg */; };
+		3A982DED13B3DC9B007C2BFF /* camera_book3_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BABB1386F61000FF570D /* camera_book3_3.jpg */; };
+		3A982DEE13B3DC9B007C2BFF /* camera_book3_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BABC1386F61000FF570D /* camera_book3_4.jpg */; };
+		3A982DEF13B3DC9B007C2BFF /* camera_book3_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BABD1386F61000FF570D /* camera_book3_5.jpg */; };
+		3A982DF013B3DC9B007C2BFF /* camera_book3_6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BABE1386F61000FF570D /* camera_book3_6.jpg */; };
+		3A982DF113B3DC9B007C2BFF /* camera_book3_7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BABF1386F61000FF570D /* camera_book3_7.jpg */; };
+		3A982DF213B3DC9B007C2BFF /* camera_book3_8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAC01386F61000FF570D /* camera_book3_8.jpg */; };
+		3A982DF313B3DC9B007C2BFF /* camera_book3_9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAC11386F61000FF570D /* camera_book3_9.jpg */; };
+		3A982DF413B3DC9B007C2BFF /* camera_curl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAC21386F61000FF570D /* camera_curl.jpg */; };
+		3A982DF513B3DC9B007C2BFF /* camera_doubleshadow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAC31386F61000FF570D /* camera_doubleshadow.jpg */; };
+		3A982DF613B3DC9B007C2BFF /* camera_doubleshadow_small.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAC41386F61000FF570D /* camera_doubleshadow_small.jpg */; };
+		3A982DF713B3DC9B007C2BFF /* camera_lcd1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAC51386F61000FF570D /* camera_lcd1.jpg */; };
+		3A982DF813B3DC9B007C2BFF /* camera_lcd2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAC61386F61000FF570D /* camera_lcd2.jpg */; };
+		3A982DF913B3DC9B007C2BFF /* camera_lcd3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAC71386F61000FF570D /* camera_lcd3.jpg */; };
+		3A982DFA13B3DC9B007C2BFF /* camera_noisy.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAC81386F61000FF570D /* camera_noisy.JPG */; };
+		3A982DFB13B3DC9B007C2BFF /* camera_noisy.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAC91386F61000FF570D /* camera_noisy.png */; };
+		3A982DFC13B3DC9B007C2BFF /* camera_shadow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BACA1386F61000FF570D /* camera_shadow.jpg */; };
+		3A982DFD13B3DC9B007C2BFF /* camera_shadow2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BACB1386F61000FF570D /* camera_shadow2.jpg */; };
+		3A982DFE13B3DC9B007C2BFF /* camera_verynoisy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BACC1386F61000FF570D /* camera_verynoisy.jpg */; };
+		3A982DFF13B3DC9B007C2BFF /* clipped.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BACD1386F61000FF570D /* clipped.png */; };
+		3A982E0013B3DC9B007C2BFF /* font2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BACE1386F61000FF570D /* font2.png */; };
+		3A982E0113B3DC9B007C2BFF /* grid_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BACF1386F61000FF570D /* grid_1.jpg */; };
+		3A982E0213B3DC9B007C2BFF /* grid_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAD01386F61000FF570D /* grid_4.jpg */; };
+		3A982E0313B3DC9B007C2BFF /* grid_9_shadow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAD11386F61000FF570D /* grid_9_shadow.jpg */; };
+		3A982E0413B3DC9B007C2BFF /* grid_blank.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAD21386F61000FF570D /* grid_blank.jpg */; };
+		3A982E0513B3DC9B007C2BFF /* grid_noise.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAD31386F61000FF570D /* grid_noise.png */; };
+		3A982E0613B3DC9B007C2BFF /* iphone_ss1.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAD41386F61000FF570D /* iphone_ss1.PNG */; };
+		3A982E0713B3DC9B007C2BFF /* iphone_ss2.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAD51386F61000FF570D /* iphone_ss2.PNG */; };
+		3A982E0813B3DC9B007C2BFF /* iphone_ss3.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAD61386F61000FF570D /* iphone_ss3.PNG */; };
+		3A982E0913B3DC9B007C2BFF /* noisy.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAD71386F61000FF570D /* noisy.png */; };
+		3A982E0A13B3DC9B007C2BFF /* noisy_rotated.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAD81386F61000FF570D /* noisy_rotated.png */; };
+		3A982E0B13B3DC9B007C2BFF /* rotated2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAD91386F61000FF570D /* rotated2.png */; };
+		3A982E0C13B3DC9B007C2BFF /* rotated25.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BADA1386F61000FF570D /* rotated25.jpg */; };
+		3A982E0D13B3DC9B007C2BFF /* rotated345.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BADB1386F61000FF570D /* rotated345.png */; };
+		3A982E0E13B3DC9B007C2BFF /* rotated5.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BADC1386F61000FF570D /* rotated5.png */; };
+		3A982E0F13B3DC9B007C2BFF /* shaded.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BADD1386F61000FF570D /* shaded.png */; };
+		3A982E1013B3DD3B007C2BFF /* shaded_colorfg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BADE1386F61000FF570D /* shaded_colorfg.png */; };
+		3A982E1113B3DD44007C2BFF /* shaded_colorfg_noisy.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BADF1386F61000FF570D /* shaded_colorfg_noisy.png */; };
+		3A982E1913B3DE13007C2BFF /* book_lowlight_1.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A982E1213B3DE12007C2BFF /* book_lowlight_1.JPG */; };
+		3A982E1A13B3DE13007C2BFF /* book_lowlight_1.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A982E1213B3DE12007C2BFF /* book_lowlight_1.JPG */; };
+		3A982E1B13B3DE13007C2BFF /* news_flash_1.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A982E1313B3DE12007C2BFF /* news_flash_1.JPG */; };
+		3A982E1C13B3DE13007C2BFF /* news_flash_1.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A982E1313B3DE12007C2BFF /* news_flash_1.JPG */; };
+		3A982E1D13B3DE13007C2BFF /* news_flash_2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A982E1413B3DE13007C2BFF /* news_flash_2.JPG */; };
+		3A982E1E13B3DE13007C2BFF /* news_flash_2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A982E1413B3DE13007C2BFF /* news_flash_2.JPG */; };
+		3A982E1F13B3DE13007C2BFF /* news_flash_3.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A982E1513B3DE13007C2BFF /* news_flash_3.JPG */; };
+		3A982E2013B3DE13007C2BFF /* news_flash_3.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A982E1513B3DE13007C2BFF /* news_flash_3.JPG */; };
+		3A982E2113B3DE13007C2BFF /* news_lowlight_1.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A982E1613B3DE13007C2BFF /* news_lowlight_1.JPG */; };
+		3A982E2213B3DE13007C2BFF /* news_lowlight_1.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A982E1613B3DE13007C2BFF /* news_lowlight_1.JPG */; };
+		3A982E2313B3DE13007C2BFF /* news_lowlight_2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A982E1713B3DE13007C2BFF /* news_lowlight_2.JPG */; };
+		3A982E2413B3DE13007C2BFF /* news_lowlight_2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A982E1713B3DE13007C2BFF /* news_lowlight_2.JPG */; };
+		3A982E2513B3DE13007C2BFF /* news_lowlight_3.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A982E1813B3DE13007C2BFF /* news_lowlight_3.JPG */; };
+		3A982E2613B3DE13007C2BFF /* news_lowlight_3.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A982E1813B3DE13007C2BFF /* news_lowlight_3.JPG */; };
 		3A9925AB13916F3D0085CA6C /* PreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A9925AA13916F3C0085CA6C /* PreviewViewController.xib */; };
 		3A9AC49C139F5FA00014847C /* blackwhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB21386F61000FF570D /* blackwhite.png */; };
 		3A9AC49D139F5FA00014847C /* camera_blurry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB31386F61000FF570D /* camera_blurry.jpg */; };
@@ -223,6 +284,13 @@
 		3A967F4A13969A1100A52AD4 /* numpad_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = numpad_8.png; path = Sudokubot/numpadImages/numpad_8.png; sourceTree = "<group>"; };
 		3A967F4B13969A1100A52AD4 /* numpad_9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = numpad_9.png; path = Sudokubot/numpadImages/numpad_9.png; sourceTree = "<group>"; };
 		3A967F4C13969A1100A52AD4 /* numpad_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = numpad_0.png; path = Sudokubot/numpadImages/numpad_0.png; sourceTree = "<group>"; };
+		3A982E1213B3DE12007C2BFF /* book_lowlight_1.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = book_lowlight_1.JPG; sourceTree = "<group>"; };
+		3A982E1313B3DE12007C2BFF /* news_flash_1.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = news_flash_1.JPG; sourceTree = "<group>"; };
+		3A982E1413B3DE13007C2BFF /* news_flash_2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = news_flash_2.JPG; sourceTree = "<group>"; };
+		3A982E1513B3DE13007C2BFF /* news_flash_3.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = news_flash_3.JPG; sourceTree = "<group>"; };
+		3A982E1613B3DE13007C2BFF /* news_lowlight_1.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = news_lowlight_1.JPG; sourceTree = "<group>"; };
+		3A982E1713B3DE13007C2BFF /* news_lowlight_2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = news_lowlight_2.JPG; sourceTree = "<group>"; };
+		3A982E1813B3DE13007C2BFF /* news_lowlight_3.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = news_lowlight_3.JPG; sourceTree = "<group>"; };
 		3A9925AA13916F3C0085CA6C /* PreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewViewController.xib; sourceTree = "<group>"; };
 		3A99BAB21386F61000FF570D /* blackwhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackwhite.png; sourceTree = "<group>"; };
 		3A99BAB31386F61000FF570D /* camera_blurry.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = camera_blurry.jpg; sourceTree = "<group>"; };
@@ -383,6 +451,13 @@
 		3A99BAB11386F61000FF570D /* testData */ = {
 			isa = PBXGroup;
 			children = (
+				3A982E1213B3DE12007C2BFF /* book_lowlight_1.JPG */,
+				3A982E1313B3DE12007C2BFF /* news_flash_1.JPG */,
+				3A982E1413B3DE13007C2BFF /* news_flash_2.JPG */,
+				3A982E1513B3DE13007C2BFF /* news_flash_3.JPG */,
+				3A982E1613B3DE13007C2BFF /* news_lowlight_1.JPG */,
+				3A982E1713B3DE13007C2BFF /* news_lowlight_2.JPG */,
+				3A982E1813B3DE13007C2BFF /* news_lowlight_3.JPG */,
 				3A99BAB21386F61000FF570D /* blackwhite.png */,
 				3A99BAB31386F61000FF570D /* camera_blurry.jpg */,
 				3A99BAB41386F61000FF570D /* camera_book1.jpg */,
@@ -720,6 +795,60 @@
 				3A917CDE13B1A86200DEC89C /* help-thanks.html in Resources */,
 				3A917CE013B1B01F00DEC89C /* help-tips.html in Resources */,
 				3A917CE713B1C29F00DEC89C /* isaac.jpg in Resources */,
+				3A982DB713B3DA74007C2BFF /* simple.png in Resources */,
+				3A982DE413B3DC9B007C2BFF /* blackwhite.png in Resources */,
+				3A982DE513B3DC9B007C2BFF /* camera_blurry.jpg in Resources */,
+				3A982DE613B3DC9B007C2BFF /* camera_book1.jpg in Resources */,
+				3A982DE713B3DC9B007C2BFF /* camera_book1_small.jpg in Resources */,
+				3A982DE813B3DC9B007C2BFF /* camera_book2_1.jpg in Resources */,
+				3A982DE913B3DC9B007C2BFF /* camera_book2_2.png in Resources */,
+				3A982DEA13B3DC9B007C2BFF /* camera_book3_1.jpg in Resources */,
+				3A982DEB13B3DC9B007C2BFF /* camera_book3_10.jpg in Resources */,
+				3A982DEC13B3DC9B007C2BFF /* camera_book3_2.jpg in Resources */,
+				3A982DED13B3DC9B007C2BFF /* camera_book3_3.jpg in Resources */,
+				3A982DEE13B3DC9B007C2BFF /* camera_book3_4.jpg in Resources */,
+				3A982DEF13B3DC9B007C2BFF /* camera_book3_5.jpg in Resources */,
+				3A982DF013B3DC9B007C2BFF /* camera_book3_6.jpg in Resources */,
+				3A982DF113B3DC9B007C2BFF /* camera_book3_7.jpg in Resources */,
+				3A982DF213B3DC9B007C2BFF /* camera_book3_8.jpg in Resources */,
+				3A982DF313B3DC9B007C2BFF /* camera_book3_9.jpg in Resources */,
+				3A982DF413B3DC9B007C2BFF /* camera_curl.jpg in Resources */,
+				3A982DF513B3DC9B007C2BFF /* camera_doubleshadow.jpg in Resources */,
+				3A982DF613B3DC9B007C2BFF /* camera_doubleshadow_small.jpg in Resources */,
+				3A982DF713B3DC9B007C2BFF /* camera_lcd1.jpg in Resources */,
+				3A982DF813B3DC9B007C2BFF /* camera_lcd2.jpg in Resources */,
+				3A982DF913B3DC9B007C2BFF /* camera_lcd3.jpg in Resources */,
+				3A982DFA13B3DC9B007C2BFF /* camera_noisy.JPG in Resources */,
+				3A982DFB13B3DC9B007C2BFF /* camera_noisy.png in Resources */,
+				3A982DFC13B3DC9B007C2BFF /* camera_shadow.jpg in Resources */,
+				3A982DFD13B3DC9B007C2BFF /* camera_shadow2.jpg in Resources */,
+				3A982DFE13B3DC9B007C2BFF /* camera_verynoisy.jpg in Resources */,
+				3A982DFF13B3DC9B007C2BFF /* clipped.png in Resources */,
+				3A982E0013B3DC9B007C2BFF /* font2.png in Resources */,
+				3A982E0113B3DC9B007C2BFF /* grid_1.jpg in Resources */,
+				3A982E0213B3DC9B007C2BFF /* grid_4.jpg in Resources */,
+				3A982E0313B3DC9B007C2BFF /* grid_9_shadow.jpg in Resources */,
+				3A982E0413B3DC9B007C2BFF /* grid_blank.jpg in Resources */,
+				3A982E0513B3DC9B007C2BFF /* grid_noise.png in Resources */,
+				3A982E0613B3DC9B007C2BFF /* iphone_ss1.PNG in Resources */,
+				3A982E0713B3DC9B007C2BFF /* iphone_ss2.PNG in Resources */,
+				3A982E0813B3DC9B007C2BFF /* iphone_ss3.PNG in Resources */,
+				3A982E0913B3DC9B007C2BFF /* noisy.png in Resources */,
+				3A982E0A13B3DC9B007C2BFF /* noisy_rotated.png in Resources */,
+				3A982E0B13B3DC9B007C2BFF /* rotated2.png in Resources */,
+				3A982E0C13B3DC9B007C2BFF /* rotated25.jpg in Resources */,
+				3A982E0D13B3DC9B007C2BFF /* rotated345.png in Resources */,
+				3A982E0E13B3DC9B007C2BFF /* rotated5.png in Resources */,
+				3A982E0F13B3DC9B007C2BFF /* shaded.png in Resources */,
+				3A982E1013B3DD3B007C2BFF /* shaded_colorfg.png in Resources */,
+				3A982E1113B3DD44007C2BFF /* shaded_colorfg_noisy.png in Resources */,
+				3A982E1913B3DE13007C2BFF /* book_lowlight_1.JPG in Resources */,
+				3A982E1B13B3DE13007C2BFF /* news_flash_1.JPG in Resources */,
+				3A982E1D13B3DE13007C2BFF /* news_flash_2.JPG in Resources */,
+				3A982E1F13B3DE13007C2BFF /* news_flash_3.JPG in Resources */,
+				3A982E2113B3DE13007C2BFF /* news_lowlight_1.JPG in Resources */,
+				3A982E2313B3DE13007C2BFF /* news_lowlight_2.JPG in Resources */,
+				3A982E2513B3DE13007C2BFF /* news_lowlight_3.JPG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,6 +905,13 @@
 				3A9AC4C8139F5FA00014847C /* shaded_colorfg.png in Resources */,
 				3A9AC4C9139F5FA00014847C /* shaded_colorfg_noisy.png in Resources */,
 				3A9AC4CA139F5FA00014847C /* simple.png in Resources */,
+				3A982E1A13B3DE13007C2BFF /* book_lowlight_1.JPG in Resources */,
+				3A982E1C13B3DE13007C2BFF /* news_flash_1.JPG in Resources */,
+				3A982E1E13B3DE13007C2BFF /* news_flash_2.JPG in Resources */,
+				3A982E2013B3DE13007C2BFF /* news_flash_3.JPG in Resources */,
+				3A982E2213B3DE13007C2BFF /* news_lowlight_1.JPG in Resources */,
+				3A982E2413B3DE13007C2BFF /* news_lowlight_2.JPG in Resources */,
+				3A982E2613B3DE13007C2BFF /* news_lowlight_3.JPG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -976,15 +1112,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sudokubot/Sudokubot-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv/**",
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv2/**",
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv2/**",
 				);
 				INFOPLIST_FILE = "Sudokubot/Sudokubot-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-iphonesimulator/**",
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-universal/**",
-				);
+				LIBRARY_SEARCH_PATHS = "/Users/haoest/Development/opencv-2.3.0-build/lib/debug-universal/**";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-lz",
@@ -1011,12 +1144,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sudokubot/Sudokubot-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv/**",
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv2/**",
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv2/**",
 				);
 				INFOPLIST_FILE = "Sudokubot/Sudokubot-Info.plist";
-				LIBRARY_SEARCH_PATHS = "/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/release-iphonesimulator/**";
+				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-lz",
@@ -1039,7 +1172,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Sudokubot.app/Sudokubot";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SudokuResolv.app/SudokuResolv";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
@@ -1047,15 +1180,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SudokubotTests/SudokubotTests-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv/**",
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv2/**",
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv2/**",
 				);
 				INFOPLIST_FILE = "SudokubotTests/SudokubotTests-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-iphonesimulator/**",
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/lib/debug-universal/**",
-				);
+				LIBRARY_SEARCH_PATHS = "/Users/haoest/Development/opencv-2.3.0-build/lib/debug-universal/**";
 				OTHER_LDFLAGS = (
 					"-framework",
 					SenTestingKit,
@@ -1079,9 +1209,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SudokubotTests/SudokubotTests-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv/**",
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv2/**",
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv2/**",
 				);
 				INFOPLIST_FILE = "SudokubotTests/SudokubotTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = "";
@@ -1107,9 +1237,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sudokubot/Sudokubot-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv/**",
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv2/**",
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv2/**",
 				);
 				INFOPLIST_FILE = "Sudokubot/Sudokubot-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -1146,9 +1276,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sudokubot/Sudokubot-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv/**",
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/opencv2/**",
-					"/Users/haoest/Development/opencv_svn/opencv_ios_build/include/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv/**",
+					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv2/**",
 				);
 				INFOPLIST_FILE = "Sudokubot/Sudokubot-Info.plist";
 				LIBRARY_SEARCH_PATHS = "";

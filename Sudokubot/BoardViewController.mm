@@ -254,7 +254,14 @@
     }
     solver* sol = [solver solverWithHints:self.hints];
     self.solution = [sol trySolve];
-    [self drawGridsView];
+    if (self.solution){
+        [self drawGridsView];
+    }else{
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"This puzzle has solution or something went wrong. Sorry!" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        [alert show];
+        [alert release];
+    }
+    
     [sol release];
 }
 
