@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3A5416DF13AB047A0082676B /* solver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A5416DE13AB047A0082676B /* solver.mm */; };
 		3A5416E013AB04B00082676B /* solver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A5416DE13AB047A0082676B /* solver.mm */; };
+		3A588D3B13B5B576001D0F13 /* icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A588D3A13B5B576001D0F13 /* icon-72.png */; };
+		3A588D3C13B5B576001D0F13 /* icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A588D3A13B5B576001D0F13 /* icon-72.png */; };
 		3A7E57D1134EB0B7003CCF9D /* BoardViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E57CF134EB0B7003CCF9D /* BoardViewController.mm */; };
 		3A7E57D2134EB0B7003CCF9D /* BoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E57D0134EB0B7003CCF9D /* BoardViewController.xib */; };
 		3A7E57D6134EB3D4003CCF9D /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E57D4134EB3D3003CCF9D /* HelpViewController.m */; };
@@ -245,6 +247,7 @@
 		3A105782139C39DF00089373 /* acknowledgement.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = acknowledgement.txt; path = devres/acknowledgement.txt; sourceTree = "<group>"; };
 		3A5416DD13AB047A0082676B /* solver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = solver.hpp; sourceTree = "<group>"; };
 		3A5416DE13AB047A0082676B /* solver.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = solver.mm; sourceTree = "<group>"; };
+		3A588D3A13B5B576001D0F13 /* icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72.png"; sourceTree = "<group>"; };
 		3A7E57CE134EB0B7003CCF9D /* BoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardViewController.h; sourceTree = "<group>"; };
 		3A7E57CF134EB0B7003CCF9D /* BoardViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BoardViewController.mm; sourceTree = "<group>"; };
 		3A7E57D0134EB0B7003CCF9D /* BoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BoardViewController.xib; sourceTree = "<group>"; };
@@ -607,6 +610,7 @@
 		3A9F132813860C5B00B01591 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				3A588D3A13B5B576001D0F13 /* icon-72.png */,
 				3A917CE613B1C29F00DEC89C /* isaac.jpg */,
 				3A917CD713B19B8F00DEC89C /* help-intro.html */,
 				3A917CDF13B1B01F00DEC89C /* help-tips.html */,
@@ -849,6 +853,7 @@
 				3A982E2113B3DE13007C2BFF /* news_lowlight_1.JPG in Resources */,
 				3A982E2313B3DE13007C2BFF /* news_lowlight_2.JPG in Resources */,
 				3A982E2513B3DE13007C2BFF /* news_lowlight_3.JPG in Resources */,
+				3A588D3B13B5B576001D0F13 /* icon-72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -945,6 +950,7 @@
 				3A917CE113B1B01F00DEC89C /* help-tips.html in Resources */,
 				3A917CE213B1B02D00DEC89C /* help-thanks.html in Resources */,
 				3A917CE813B1C29F00DEC89C /* isaac.jpg in Resources */,
+				3A588D3C13B5B576001D0F13 /* icon-72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1115,6 +1121,7 @@
 					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv2/**",
 				);
 				INFOPLIST_FILE = "Sudokubot/Sudokubot-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = "/Users/haoest/Development/opencv-2.3.0-build/lib/debug-universal/**";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -1127,7 +1134,7 @@
 					"-lopencv_ml",
 				);
 				PRODUCT_NAME = SudokuResolv;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_AFTER_BUILD = YES;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -1147,6 +1154,7 @@
 					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv2/**",
 				);
 				INFOPLIST_FILE = "Sudokubot/Sudokubot-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -1159,7 +1167,7 @@
 					"-lopencv_ml",
 				);
 				PRODUCT_NAME = SudokuResolv;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_AFTER_BUILD = YES;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -1183,6 +1191,7 @@
 					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv2/**",
 				);
 				INFOPLIST_FILE = "SudokubotTests/SudokubotTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = "/Users/haoest/Development/opencv-2.3.0-build/lib/debug-universal/**";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1212,6 +1221,7 @@
 					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv2/**",
 				);
 				INFOPLIST_FILE = "SudokubotTests/SudokubotTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1240,6 +1250,7 @@
 					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv2/**",
 				);
 				INFOPLIST_FILE = "Sudokubot/Sudokubot-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = "/Users/haoest/Development/opencv-2.3.0-build/lib/debug-universal/**";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -1253,7 +1264,7 @@
 				);
 				PRODUCT_NAME = SudokuResolv;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1275,6 +1286,7 @@
 					"/Users/haoest/Development/opencv-2.3.0-build/include/opencv2/**",
 				);
 				INFOPLIST_FILE = "Sudokubot/Sudokubot-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = "";
 				"LIBRARY_SEARCH_PATHS[arch=armv6]" = "/Users/haoest/Development/opencv-2.3.0-build/lib/release-iphoneos-armv6/**";
 				"LIBRARY_SEARCH_PATHS[arch=armv7]" = "/Users/haoest/Development/opencv-2.3.0-build/lib/release-iphoneos-armv7/**";
@@ -1291,7 +1303,7 @@
 				PRODUCT_NAME = SudokuResolv;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

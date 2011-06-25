@@ -16,6 +16,7 @@
 	<array>
 		<string>icon-57</string>
 		<string>icon-114</string>
+		<string>icon-72</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.haoest.com.sudokuresolv</string>
