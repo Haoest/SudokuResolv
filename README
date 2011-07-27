@@ -1,0 +1,10 @@
+This file describe the software requirement in order to get the project compile and run.
+
+First, xcode 4 is required. 
+
+Second, a copy of the OpenCV library files compiled for Mac should be present. If you need a guide on how to get a copy real quick, visit this page: http://computer-vision-talks.com/2011/02/building-opencv-for-iphone-in-one-click/. This project is developed with OpenCV 2.3. 
+
+Third, change the Search Paths in project setting to point to the correct location where your OpenCV library files are. 
+
+Off you go.
+
