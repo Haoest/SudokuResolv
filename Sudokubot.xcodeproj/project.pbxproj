@@ -16,6 +16,7 @@
 		3A7E57D6134EB3D4003CCF9D /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E57D4134EB3D3003CCF9D /* HelpViewController.m */; };
 		3A7E57D7134EB3D4003CCF9D /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E57D5134EB3D4003CCF9D /* HelpViewController.xib */; };
 		3A90FFF71390D6A900027FB5 /* PreviewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A90FFF61390D6A900027FB5 /* PreviewViewController.mm */; };
+		3A910CDD13DFD73E00F3CC32 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 3A910CDC13DFD73E00F3CC32 /* README */; };
 		3A917CD513B19B0A00DEC89C /* sample-puzzle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A917CD413B19B0A00DEC89C /* sample-puzzle.jpg */; };
 		3A917CD613B19B0A00DEC89C /* sample-puzzle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A917CD413B19B0A00DEC89C /* sample-puzzle.jpg */; };
 		3A917CD813B19B8F00DEC89C /* help-intro.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A917CD713B19B8F00DEC89C /* help-intro.html */; };
@@ -258,6 +259,7 @@
 		3A8FEDCE132CD99F00654072 /* cvutil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cvutil.mm; sourceTree = "<group>"; };
 		3A90FFF51390D6A900027FB5 /* PreviewViewController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PreviewViewController.hpp; sourceTree = "<group>"; };
 		3A90FFF61390D6A900027FB5 /* PreviewViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PreviewViewController.mm; sourceTree = "<group>"; };
+		3A910CDC13DFD73E00F3CC32 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		3A91390613463DC80058CB15 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		3A91390713463DC80058CB15 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3A91390813463DC80058CB15 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -603,6 +605,7 @@
 				3AA2231613B5A16B00A12515 /* ss-preview.png */,
 				3A9B938F13B02919002FAE05 /* icon-appstore.png */,
 				3A105782139C39DF00089373 /* acknowledgement.txt */,
+				3A910CDC13DFD73E00F3CC32 /* README */,
 			);
 			name = "Development Resources";
 			sourceTree = "<group>";
@@ -854,6 +857,7 @@
 				3A982E2313B3DE13007C2BFF /* news_lowlight_2.JPG in Resources */,
 				3A982E2513B3DE13007C2BFF /* news_lowlight_3.JPG in Resources */,
 				3A588D3B13B5B576001D0F13 /* icon-72.png in Resources */,
+				3A910CDD13DFD73E00F3CC32 /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

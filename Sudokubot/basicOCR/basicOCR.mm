@@ -5,6 +5,7 @@
  *  Created by damiles on 18/11/08.
  *  Copyright 2008 Damiles. GPL License
  *
+ *  Modified by haoest on 7/27/2011 (mm/dd/yyyy)
  */
 
 #include <opencv/cv.h>
