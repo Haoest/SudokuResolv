@@ -56,7 +56,24 @@ void findXExtramas(IplImage* mask,int* min, int* max);
 void drawContour(IplImage*, CvSeq *contour, int level = 1);
 void findExtremas(CvSeq* contour, int &left, int &right, int &top, int &bottom);
 
-void drawGrids(IplImage* background, vector<CvRect> grids);
+
+void findExtremasFromSumVector(int* sumVector, vector<int>&extremas, int lowerBound, int upperBound, int minSpace);
+
+//find the grids by suming pixel values for every row to discover y-position of the horizontal lines
+//and then suming pixel values for every column to discover x-position of the veritical lines
+//crossing the x- and y- positions will ultimately form 81 grids.
+vector<CvRect> findGridsByXYVectors(IplImage *boardGray, int initialThreshold);
+
+//when summing pixel values of each row, partition the image vertically into 9 equal parts; a row of black pixels yeild very low sum value
+//search is conducted to find all 10 low extremas from the resulting sum array, and these are the y positions of all the soduko boxes. 
+//Similar partitioning is performed when summing the pixel values of each column. 
+//Reason for paritioning is to offset image distortion towards corners and edges of the puzzle. 
+void calcLocalizedSumVectors(IplImage *boardGray, int*** xsum, int*** ysum);
+
+//when pixel value sum is used to find extremas, this ratio is used to calculate how far the extrema is away from
+//the next extrema in order for the next to be considered a valid candidate.
+// this value is uesd to multiply the expected width or height of one grid
+const float ExtremaSearchMinSpaceRatio = 0.75;
 
 void cleanUpScatteredNoise(IplImage* grid, int noiseThreshold);
 //142 is a magic number found by performing blur with block size of 3 on a 2x2 square black pixel cluster contained inside white background
@@ -89,6 +106,13 @@ const int CharacterSearchThresholdIncrementAmount = 255/10;
 
 //if input image is large, try to resize it to this size proportionally. The longer leg between width and height will use this size
 const double InputImageNormalizeLength = 800;
+
+//debug function
+void showImage(IplImage* img, char* title, bool forceDisplay=false);
+void debug_dump_array(int *arr, int size, char* fileName);
+void drawGrids(IplImage* background, vector<CvRect> grids);
+
+
 
 static int BoardThresholdCandidateSize  = 12;
 static int BoardThresholdCandidates[] = {1,5, 10,20, 30,40, 50,60, 70,80, 90,100};
@@ -125,7 +149,8 @@ recognizerResultPack recognizeFromBoard(IplImage *boardGray, int initialBoardThr
     recognizerResultPack rv;
     rv.success = false;
 	vector<CvRect> grids;
-	grids = findGridsByThreshold(boardGray, initialBoardThreshold);
+	//grids = findGridsByThreshold(boardGray, initialBoardThreshold);
+	grids = findGridsByXYVectors(boardGray, initialBoardThreshold);
 	if (grids.size() == 81){
 		grids = getSortedGridsByCoord(grids);
         if(!OCREngine){
@@ -136,15 +161,124 @@ recognizerResultPack recognizeFromBoard(IplImage *boardGray, int initialBoardThr
         cvResetImageROI(rv.boardGray);
         rv.grids = grids;
         rv.success = true;
-        //there seems to be a bug in OpenCV's ML module that is not cleaning up training data
-        //even if you dealloacte it explicitly. So instead of leaking for every OCR engine
-        //allocated, just suck up the shame and not deallocate it and leak once
-//        if (OCREngine){
-//            delete OCREngine;
-//            OCREngine = 0;
-//        }
+        //        if (OCREngine){
+        //            delete OCREngine;
+        //            OCREngine = 0;
+        //        }
 	}
 	return rv;
+}
+
+vector<CvRect> findGridsByXYVectors(IplImage *boardGray, int initialThreshold){
+	int blockSize = MIN(boardGray->width, boardGray->height) / 9 |1; // quarter of a grid as block size
+	int **rowSum, **colSum;
+	IplImage* boardBinary = cvCreateImage(cvGetSize(boardGray), 8, 1);
+	cvAdaptiveThreshold(boardGray, boardBinary, 255, CV_ADAPTIVE_THRESH_GAUSSIAN_C, CV_THRESH_BINARY, blockSize);
+	calcLocalizedSumVectors(boardBinary, &rowSum, &colSum);
+	//debug_dump_array(xsum, boardBlur->height, "d:\\plot\\x.txt");
+	//debug_dump_array(colSum[0], boardBinary->width, "d:\\plot\\colsum0.txt");
+	vector<int> horizontal_extremas[9];
+	vector<int> vertical_extremas[9];
+	bool isGridValid = true;
+	//build get extremas from vector sum
+	for(int i=0; i<9 && isGridValid; i++){
+		horizontal_extremas[i].reserve(10);
+		vertical_extremas[i].reserve(10);
+		findExtremasFromSumVector(colSum[i], vertical_extremas[i], 0, boardGray->width-1, ExtremaSearchMinSpaceRatio * boardGray->width / 9);
+		sort(vertical_extremas[i].begin(), vertical_extremas[i].end());
+		findExtremasFromSumVector(rowSum[i], horizontal_extremas[i], 0, boardGray->height-1, ExtremaSearchMinSpaceRatio * boardGray->height / 9);
+		sort(horizontal_extremas[i].begin(), horizontal_extremas[i].end());
+		isGridValid = vertical_extremas[i].size() >= 10 && horizontal_extremas[i].size() >= 10;
+		if(!isGridValid){
+			//debug_dump_array(rowSum[i], boardGray->height, "d:\\plot\\he.txt");
+			//debug_dump_array(colSum[i], boardGray->width, "d:\\plot\\ve.txt");
+ 			//showImage(boardGray, "horizontal sum");
+		}
+	}
+	//free vector sum
+	for(int i=0; i<9; i++){
+		delete colSum[i];
+		delete rowSum[i];
+	}
+	delete colSum;
+	delete rowSum;
+	vector<CvRect> rv;
+	if (!isGridValid){
+		return rv;
+	}
+	rv.reserve(81);
+	for(int row = 0; row < 9; row++){
+		for(int col = 0; col <9; col++){
+			rv.push_back(cvRect(
+                                vertical_extremas[row].at(col), 
+                                horizontal_extremas[col].at(row), 
+                                vertical_extremas[row].at(col+1) - vertical_extremas[row].at(col),
+                                horizontal_extremas[col].at(row+1) - horizontal_extremas[col].at(row)));
+		}
+	}
+ 	//drawGrids(boardGray, rv);
+	return rv;
+}
+
+void calcLocalizedSumVectors(IplImage *boardGray, int*** rowSum, int*** colSum){
+	(*rowSum) = new int*[9];
+	(*colSum) = new int*[9];
+	for(int i =0; i<9; i++){
+		(*colSum)[i] = new int[boardGray->width];
+		for(int j=0; j<boardGray->width; j++){
+			(*colSum)[i][j] = 0;
+		}
+		(*rowSum)[i] = new int[boardGray->height];
+		for(int j=0; j<boardGray->height; j++){
+			(*rowSum)[i][j] = 0;
+		}
+	}
+	float bracketSizeRow = (float) boardGray->width / 9;
+	float bracketSizeCol = (float) boardGray->height / 9;
+	IplConvKernel *kerode_horiz = cvCreateStructuringElementEx(3, 1, 1, 0, CV_SHAPE_RECT);
+	IplConvKernel *kerode_vert = cvCreateStructuringElementEx(1, 3, 0, 1, CV_SHAPE_RECT);
+	IplImage* eroded_hor = cvCreateImage(cvGetSize(boardGray), 8, 1);
+	IplImage* eroded_ver = cvCreateImage(cvGetSize(boardGray), 8, 1);
+	cvErode(boardGray, eroded_hor, kerode_horiz);
+	cvErode(boardGray, eroded_ver, kerode_vert);
+	cvReleaseStructuringElement(&kerode_horiz);
+	cvReleaseStructuringElement(&kerode_vert);
+	//showImage(eroded_hor, "eroded hor");
+	//showImage(eroded_ver, "eroded vert");
+	for(int y=0; y<boardGray->height; y++){
+		uchar* rowbegin_hor = (uchar*) (eroded_hor->imageData + y * boardGray->widthStep);
+		uchar* rowbegin_ver = (uchar*) (eroded_ver->imageData + y * boardGray->widthStep);
+		int colBracket = floor((float)y/bracketSizeCol);
+		for(int x=0; x<boardGray->width; x++){
+			int rowBracket = floor((float)x/bracketSizeRow);
+			(*rowSum)[rowBracket][y] += (uchar) rowbegin_ver[x];
+			(*colSum)[colBracket][x] += (uchar) rowbegin_hor[x];
+		}
+	}
+	cvReleaseImage(&eroded_hor);
+	cvReleaseImage(&eroded_ver);
+}
+
+void findExtremasFromSumVector(int* sumVector, vector<int>&extremaIndice, int lowerBound, int upperBound, int minSpace){
+	if (upperBound <= lowerBound){
+		return;
+	}
+	int minIndex  = lowerBound;
+	int extremaThickness = 1;
+	for(int i=lowerBound+1; i<upperBound; i++){
+		if (sumVector[minIndex] >= sumVector[i]){
+			if(i == minIndex+1 && sumVector[minIndex] == sumVector[i]){
+				extremaThickness ++;
+			}else{
+				extremaThickness = 1;
+			}
+			minIndex = i;
+		}
+	}
+	minIndex -= extremaThickness /2 ;
+	extremaIndice.push_back(minIndex);
+	findExtremasFromSumVector(sumVector, extremaIndice, lowerBound, minIndex-minSpace, minSpace);
+	findExtremasFromSumVector(sumVector, extremaIndice, minSpace+minIndex, upperBound, minSpace);
 }
 
 vector<CvRect> findGridsByThreshold(IplImage *board, int initialThreshold){
@@ -159,7 +293,7 @@ vector<CvRect> findGridsByThreshold(IplImage *board, int initialThreshold){
 	cvAdaptiveThreshold(expanded, expanded, 255,CV_ADAPTIVE_THRESH_GAUSSIAN_C, CV_THRESH_BINARY, blockSize, initialThreshold);
 	cvSetImageROI(expanded, expandedRoi);
 	cvCopy(expanded, boardBinary);
-	//showImage(boardBinary, "recognize high contrast ratio 1");
+	showImage(boardBinary, "recognize high contrast ratio 1");
 	vector<CvRect> grids = getAllGrids(boardBinary);
 	//drawGrids(board, grids);
 	for(int i=2; i<10 && grids.size()<81; i++){
@@ -172,9 +306,9 @@ vector<CvRect> findGridsByThreshold(IplImage *board, int initialThreshold){
 		cvAdaptiveThreshold(expanded, expanded, 255,CV_ADAPTIVE_THRESH_GAUSSIAN_C, CV_THRESH_BINARY, blockSize, gridThreshold);
 		cvSetImageROI(expanded, expandedRoi);
 		cvCopy(expanded, boardBinary);
-		//showImage(boardBinary, "recognize high contrast ratio loop");
+		showImage(boardBinary, "recognize high contrast ratio loop");
 		grids = getAllGrids(boardBinary);
-		//drawGrids(board, grids);
+		drawGrids(board, grids);
 	}
 	cvReleaseImage(&boardBinary);
 	cvReleaseImage(&expanded);
@@ -199,11 +333,11 @@ int ** extractNumbersFromBoard(IplImage *boardGray, vector<CvRect> &grids){
 		setNoiselessGridRoi(grid, 0, 0, grid->width, grid->height);
 		IplImage *noiselessGrid = cvCreateImage(cvGetSize(grid), 8, 1);
 		cvCopy(grid, noiselessGrid);
-		cvReleaseImage(&grid);
 		cleanUpScatteredNoise(noiselessGrid, NoiseThreshold);
 		int allWhiteSum = noiselessGrid->width * noiselessGrid->height * 255;
 		int sum = cvSum(noiselessGrid).val[0];
-		if ( sum > 0.97 * allWhiteSum || sum < allWhiteSum * 0.03){
+		cvReleaseImage(&grid);
+		if ( sum > 0.98 * allWhiteSum || sum < allWhiteSum * 0.03){
 			rv[index/9][index%9] = 0;
 		}else{
 			int guess = (int) OCREngine->classify(noiselessGrid, showOcrResult);
@@ -229,7 +363,7 @@ IplImage* findSudokuBoard(IplImage *fullSrc, int &backgroundThresholdUsed){
 		cvReleaseImage(&fullSrcGray);
 		fullSrcGray = resized;
 	}
-//	showImage(fullSrcGray, "findSudokuBoard original gray");
+	showImage(fullSrcGray, "findSudokuBoard original gray");
 	IplImage *fullSrcGrayBlurred = cvCloneImage(fullSrcGray);
 	IplImage *rv = 0;
 	cvSmooth(fullSrcGray, fullSrcGrayBlurred, CV_GAUSSIAN);
@@ -242,14 +376,14 @@ IplImage* findSudokuBoard(IplImage *fullSrc, int &backgroundThresholdUsed){
 		CvSeq* contours = 0;
 		cvAdaptiveThreshold(fullSrcGrayBlurred, fullSrcInverted, 255, CV_ADAPTIVE_THRESH_MEAN_C, CV_THRESH_BINARY_INV, blockSize, backgroundThresholdUsed);
 		cvAdaptiveThreshold(fullSrcGrayBlurred, fullSrcBinary, 255, CV_ADAPTIVE_THRESH_MEAN_C, CV_THRESH_BINARY, blockSize, backgroundThresholdUsed);
-//		showImage(fullSrcInverted, "findSudokuBoard inverted");
+		showImage(fullSrcInverted, "findSudokuBoard inverted");
 		cvFindContours(fullSrcInverted, storage, &contours, sizeof(CvContour), CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE);
 		rv = findBoardFromContour(contours, fullSrcGray, fullSrcBinary);
 		cvReleaseImage(&fullSrcInverted);
 		cvReleaseImage(&fullSrcBinary);
 		cvReleaseMemStorage(&storage);
 	} 
-//	showImage(rv, "found board");
+	showImage(rv, "found board");
 	cvReleaseImage(&fullSrcGray);
 	cvReleaseImage(&fullSrcGrayBlurred);
 	return rv;
@@ -317,35 +451,36 @@ CvRect setNoiselessGridRoi(IplImage* boardBinary, int x, int y, int width, int h
 		hasNoise = false;
 		roi = cvRect(x, y, width, height);
 		cvSetImageROI(boardBinary, roi);
-		//contract top
+        
+		//detect noise top
 		cvGetRow(boardBinary, &border, 0);
 		CvScalar top = cvSum(&border);
 		if (top.val[0] != roi.width*255){
-			y++;
-			height--;
 			hasNoise = true;
 		}
 		//contract bottom
 		cvGetRow(boardBinary, &border, roi.height-1);
 		CvScalar bottom = cvSum(&border);
 		if (bottom.val[0] != roi.width* 255){
-			height--;
 			hasNoise = true;
 		}
 		//contract left
 		cvGetCol(boardBinary, &border, 0);
 		CvScalar left = cvSum(&border);
 		if (left.val[0] != roi.height * 255){
-			x++;
-			width--;
 			hasNoise = true;
 		}
 		//contract right
 		cvGetCol(boardBinary, &border, roi.width-1);
 		CvScalar right = cvSum(&border);
 		if (right.val[0] != roi.height * 255){
-			width --;
 			hasNoise = true;
+		}
+		if (hasNoise){
+			x++;
+			y++;
+			width-=2;
+			height-=2;
 		}
 	}
 	if (hasNoise && limit <0){
@@ -366,7 +501,7 @@ IplImage* findBoardFromContour(CvSeq* curNode, IplImage* fullSrcGray, IplImage *
 			return board;
 		}
 	}
-	if (numSiblings >= 9*7 && numSiblings<=9*11 && (board = doesResembleBoard(curNode->v_prev, fullSrcGray, fullSrcBinary))!=0){
+	if (numSiblings >= 72 && numSiblings<=90 && (board = doesResembleBoard(curNode->v_prev, fullSrcGray, fullSrcBinary))!=0){
 		//drawContour(fullSrcGray, curNode);
 		return board;
 	}
@@ -395,7 +530,7 @@ IplImage* doesResembleBoard(CvSeq* contours, IplImage* fullSrcGray, IplImage *fu
 	int houghThreshold = MIN(cvGetSize(potentialBoardRoi).width, cvGetSize(potentialBoardRoi).height) /3;
 	boardLines = cvHoughLines2(roiEdges, storage, CV_HOUGH_STANDARD, 1, CV_PI/180, houghThreshold, 0, 0);
 	cvReleaseImage(&roiEdges);
-	if (boardLines->total >= 20) { // must have at least 20 lines to form a 9x9 grid
+	if (boardLines->total >= 16) { // must have at least 20 lines to form a 9x9 grid
 		CvScalar* lineSlopeFreq = new CvScalar[boardLines->total];
 		int freqLineCount = 0;
 		for(int i = 0; i < boardLines->total; i++ )
@@ -444,7 +579,7 @@ IplImage* doesResembleBoard(CvSeq* contours, IplImage* fullSrcGray, IplImage *fu
 		}
 		delete lineSlopeFreq;
 	}
-//	showImage(color_dst, "potential board with line overlay");
+	showImage(color_dst, "potential board with line overlay");
 	if (color_dst){
 		cvReleaseImage(&color_dst);
 	}
@@ -495,7 +630,7 @@ bool checkLineDistributionByRho(CvSeq *boardLines, float pivotLineTheta, int boa
 	for(int i=0; i<numDistributionMarks; i++){
 		matches += distributionMark[i];
 	}
-	return matches > 5;
+	return matches >= 5;
 }
 
 void findLineOccurenceBySlope(CvScalar *lineSlopeFreq, int freqLineCount, int &highestCount, int &secondHighest, int &highIndex, int &secondIndex){
@@ -532,6 +667,7 @@ IplImage* extractAndSetBoardUpRight(CvSeq* contours, const CvPoint& contourOffse
 		points[i].y -= contourOffset.y;
 	}
 	cvFillConvexPoly(mask_src, points, contours->total, cvScalar(255));
+	
 	delete points;
 	Mat src = potentialBoardRoi;
 	Mat dst = upRight;
@@ -554,11 +690,12 @@ IplImage* extractAndSetBoardUpRight(CvSeq* contours, const CvPoint& contourOffse
 	warpAffine(mat_mask_src, mat_mask_dst, rot_mat, src.size());
 	cvReleaseImage(&mask_src);
 	CvRect boardRoi = findRectFromMask(mask_dst);
-	cvReleaseImage(&mask_dst);
 	cvSetImageROI(upRight, boardRoi);
+	cvSetImageROI(mask_dst, boardRoi);
 	IplImage *rv = cvCreateImage(cvSize(boardRoi.width, boardRoi.height), 8, 1);
-	cvZero(rv);
-	cvCopy(upRight, rv);
+	cvSet(rv, cvScalar(255));
+	cvCopy(upRight, rv, mask_dst);
+	cvReleaseImage(&mask_dst);
 	cvReleaseImage(&upRight);
 	return rv;
 }
@@ -599,27 +736,11 @@ void findExtremas(CvSeq* contour, int &left, int &right, int &top, int &bottom){
 }
 
 void showImage(IplImage* img, char* title, bool forceDisplay){
-//	if (debug_showImage || forceDisplay){
-//		cvNamedWindow(title, CV_WINDOW_AUTOSIZE);
-//		cvShowImage(title, img);
-//		cvWaitKey(0);
-//		cvDestroyWindow(title);
-//	}
+    
 }
 
 void drawContour(IplImage* background, CvSeq *contours, int level){
-//	if (!debug_showImage) return;
-//    CvSeq* _contours = contours;
-//    IplImage* cnt_img = cvCreateImage(cvGetSize(background), 8, 3);
-//	if (background->nChannels==1){
-//		cvCvtColor(background, cnt_img, CV_GRAY2BGR);
-//	}else{
-//		cvCopy(background, cnt_img);
-//	}
-//    cvDrawContours(cnt_img, _contours, CV_RGB(255,0,0), CV_RGB(0,255,0), level, 1, CV_AA, cvPoint(0,0) );
-//    showImage(cnt_img, "contour");
-//	cvWaitKey(0);
-//    cvReleaseImage( &cnt_img );
+    
 }
 
 int findCharacterShadingThreshold(IplImage* img){
@@ -675,14 +796,15 @@ IplImage *normalizeSourceImageSize(IplImage *sourceImage){
 		int normalizedWidth, normalizedHeight;
 		if(sourceImage->width > sourceImage->height){
 			normalizedWidth = InputImageNormalizeLength;
-			normalizedHeight = (float)InputImageNormalizeLength / sourceImage->width * sourceImage->height;
+			normalizedHeight = InputImageNormalizeLength / sourceImage->width * sourceImage->height;
 		}else{
 			normalizedHeight = InputImageNormalizeLength;
-			normalizedWidth = (float)InputImageNormalizeLength / sourceImage->height * sourceImage->width;
+			normalizedWidth = InputImageNormalizeLength / sourceImage->height * sourceImage->width;
 		}
 		rv = cvCreateImage(cvSize(normalizedWidth, normalizedHeight), sourceImage->depth, sourceImage->nChannels);
 		cvResize(sourceImage, rv);
 	}
+	
 	return rv;
 }
 
@@ -701,7 +823,7 @@ void drawGrids(IplImage* background, vector<CvRect> grids){
 		cvRectangle(bg, cvPoint(it->x, it->y), cvPoint(it->x + it->width, it->y + it->height), color);
 		index++;
 	}
-//	showImage(bg, "draw grids", 0);
+	showImage(bg, "draw grids", 0);
 }
 
 void findXExtramas(IplImage* mask,int* min, int* max){
@@ -750,6 +872,10 @@ CvRect findRectFromMask(IplImage* mask){
 	findYExtremas(mask, &ymin, &ymax);
 	aux=cvRect(xmin, ymin, xmax-xmin, ymax-ymin);
 	return aux;
+}
+
+void debug_dump_array(int *arr, int size, char* fileName){
+    
 }
 
 
