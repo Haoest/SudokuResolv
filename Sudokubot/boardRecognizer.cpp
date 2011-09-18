@@ -28,22 +28,20 @@ using namespace cv;
 
 static bool debug_showImage = 0;
 static bool showOcrResult = 0;
-
+	
 static basicOCR *OCREngine = 0;
 
-//dummy method declaration to avoid compilation error, this method is used in Windows port for debugging
-//void showImage(IplImage*, char *title="no name", bool forceDisplay=0);
 
 IplImage* findBoardFromContour(CvSeq* contours, IplImage*fullSrcGray, IplImage *fullSrcBinary );
 IplImage* doesResembleBoard(CvSeq* contours, IplImage*fullSrc, IplImage *fullSrcBinary);
 void findExtremas(CvSeq* contour, int &left, int &right, int &top, int &bottom);
-void updateLineSlopeFreq(CvScalar* lineSlopeFreq, int *lineCount, float theta);
+void updateLineSlopeFreq(CvScalar* lineSlopeFreq, int lineCount, int theta);
 int findCharacterShadingThreshold(IplImage* gridBinary);
 IplImage *getROIAsImageRef(IplImage* img, int left, int right, int top, int bottom);
 static bool rectangleCmpByPositionX(const CvRect &a, const CvRect &b);
 static bool rectangleCmpByPositionY(const CvRect &a, const CvRect &b);
 std::vector<CvRect> getAllGrids(IplImage *boardBinary);
-void findLineOccurenceBySlope(CvScalar *lineSlopeFreq, int freqLineCount, int &highestCount, int &secondHighest, int &highIndex, int &secondIndex);
+void findLineOccurenceBySlope(CvScalar *lineSlopeFreq, int freqLineCount, int &highIndex, int &secondIndex);
 bool checkLineDistributionByRho(CvSeq *boardLines, float pivotLineTheta, int boardSpace);
 bool areLinesSimilarInSlope(float theta1, float theta2);
 int ** extractNumbersFromBoard(IplImage *boardGray, vector<CvRect> &grids);
@@ -55,7 +53,8 @@ void findYExtremas(IplImage* mask,int* min, int* max);
 void findXExtramas(IplImage* mask,int* min, int* max);
 void drawContour(IplImage*, CvSeq *contour, int level = 1);
 void findExtremas(CvSeq* contour, int &left, int &right, int &top, int &bottom);
-
+inline float radiantToDegree(float radiant){return 180.0/CV_PI * radiant;}
+inline float degreeToRadiant(float degree){return CV_PI/180 * degree;}
 
 void findExtremasFromSumVector(int* sumVector, vector<int>&extremas, int lowerBound, int upperBound, int minSpace);
 
@@ -93,7 +92,10 @@ IplImage* extractAndSetBoardUpRight(CvSeq* contours, const CvPoint &contourOffse
 
 //when parsing lines which form a potential sudoku board, consider multiple lines 
 //the same degree as long as they fall in this tolerance
-static double SlopeLineTolerance = CV_PI / 180 *5;
+static double SlopeLineToleranceInDegree = 5;
+
+//only accept images that are titled no more than this angle
+static int BoardTiltTolerance = 30;
 
 //when locating the board region from a photo, threshold value is used to produce a contour
 //which helps to determine the location. In the next phase when grids are being located from
@@ -108,14 +110,14 @@ const int CharacterSearchThresholdIncrementAmount = 255/10;
 const double InputImageNormalizeLength = 800;
 
 //debug function
-void showImage(IplImage* img, char* title, bool forceDisplay=false);
+void showImage(IplImage* img, char* title, bool forceDisplay=0);
 void debug_dump_array(int *arr, int size, char* fileName);
 void drawGrids(IplImage* background, vector<CvRect> grids);
+void debug_dump_array(CvScalar* arr, int count, char* fileName);
 
 
-
-static int BoardThresholdCandidateSize  = 12;
-static int BoardThresholdCandidates[] = {1,5, 10,20, 30,40, 50,60, 70,80, 90,100};
+static int BoardThresholdCandidateSize  = 4;
+static int BoardThresholdCandidates[] = {1,5, 10,20};
 
 void recognizerResultPack::destroy(){
     if (boardGray){
@@ -216,7 +218,7 @@ vector<CvRect> findGridsByXYVectors(IplImage *boardGray, int initialThreshold){
                                 horizontal_extremas[col].at(row+1) - horizontal_extremas[col].at(row)));
 		}
 	}
- 	//drawGrids(boardGray, rv);
+ 	drawGrids(boardGray, rv);
 	return rv;
 }
 
@@ -527,18 +529,26 @@ IplImage* doesResembleBoard(CvSeq* contours, IplImage* fullSrcGray, IplImage *fu
     CvSeq *boardLines = 0;
     IplImage* roiEdges = cvCreateImage(cvGetSize(potentialBoardRoi), 8, 1);
 	cvCanny(potentialBoardRoi, roiEdges, 50, 200);
+	
 	int houghThreshold = MIN(cvGetSize(potentialBoardRoi).width, cvGetSize(potentialBoardRoi).height) /3;
 	boardLines = cvHoughLines2(roiEdges, storage, CV_HOUGH_STANDARD, 1, CV_PI/180, houghThreshold, 0, 0);
 	cvReleaseImage(&roiEdges);
-	if (boardLines->total >= 16) { // must have at least 20 lines to form a 9x9 grid
-		CvScalar* lineSlopeFreq = new CvScalar[boardLines->total];
-		int freqLineCount = 0;
+	if (boardLines->total >= 16) { // must have at least 20 lines to form a 9x9 grid, but do allow approximation
+		CvScalar lineSlopeFreq[18]; // make 18 bins to hold the lines, so that every 10 degrees get 1 bin
+		for(int i=0; i<18; i++){
+			lineSlopeFreq[i] = cvScalar(0,0);
+		}
+		//also for every CvScalar quadruplet:
+		//[0] contains the count of the number of lines that are in the bin
+		//[1] contains the average degree of tilt calculated from the degrees of the individual lines
+		int freqLineCount = 18;
 		for(int i = 0; i < boardLines->total; i++ )
 		{
 			float* line = (float*)cvGetSeqElem(boardLines,i);
 			float theta = line[1];
 			float rho = line[0];
-			updateLineSlopeFreq(lineSlopeFreq, &freqLineCount, theta);
+			float degree = radiantToDegree(theta);
+			updateLineSlopeFreq(lineSlopeFreq, freqLineCount, degree);
 			// show lines
 			if (debug_showImage){
 				CvPoint pt1, pt2;
@@ -551,33 +561,39 @@ IplImage* doesResembleBoard(CvSeq* contours, IplImage* fullSrcGray, IplImage *fu
 				cvLine(color_dst, pt1, pt2, CV_RGB(255,0,0), 1, 8); 
 			}
 		}
-		int highestCount = -1, secondHighest =-2, highIndex=-1, secondIndex=-2;
-		findLineOccurenceBySlope(lineSlopeFreq, freqLineCount, highestCount, secondHighest, highIndex, secondIndex);
-		int boardSpace;
-		if (highestCount == secondHighest){
-			boardSpace = MAX(right-left, bottom-top);
-		}else{
-			boardSpace = lineSlopeFreq[highIndex] .val[0] > CV_PI *0.25 && lineSlopeFreq[highIndex] .val[0] < CV_PI *0.75 ? right-left : bottom - top;
-		}
-		bool distributionCheck = checkLineDistributionByRho(boardLines, lineSlopeFreq[highIndex].val[0], boardSpace);
-		if (distributionCheck){
-			distributionCheck = checkLineDistributionByRho(boardLines, lineSlopeFreq[secondIndex].val[0], boardSpace);
-		}
-		if (distributionCheck){
-			float slopeDifference = abs(lineSlopeFreq[highIndex].val[0] - lineSlopeFreq[secondIndex].val[0]);
-			if (slopeDifference > CV_PI /2 - SlopeLineTolerance && slopeDifference < CV_PI /2 + SlopeLineTolerance){
-				int padding = (right-left) / 18;
-				float degreeOfHighestCount = lineSlopeFreq[highIndex].val[0];
-				int roiLeft = MAX(left-padding, 0);
-				int roiRight = MIN(right+padding, fullSrcGray->width);
-				int roiTop = MAX(top-padding, 0);
-				int roiBottom = MIN(bottom+padding, fullSrcGray->height);
-                IplImage* potentialBoardNoBorder = getROIAsImageRef(fullSrcGray,roiLeft, roiRight, roiTop, roiBottom);
-				rv = extractAndSetBoardUpRight(contours,cvPoint(roiLeft, roiTop), potentialBoardNoBorder, degreeOfHighestCount);
-                cvReleaseImageHeader(&potentialBoardNoBorder);
-			}
-		}
-		delete lineSlopeFreq;
+		int highIndex=-1, secondIndex=-2;
+		//debug_dump_array(lineSlopeFreq, freqLineCount, "d:\\plot\\slopeCount.txt");
+		findLineOccurenceBySlope(lineSlopeFreq, freqLineCount, highIndex, secondIndex);
+		// check to see if lines of highest and second highest counts (in degree) are somewhat perpendicular, and that they are not tilted too badly
+		float slopeDifference = abs(lineSlopeFreq[highIndex].val[1] - lineSlopeFreq[secondIndex].val[1]);
+		float degreeOfTilt = lineSlopeFreq[highIndex].val[1];
+		if ( abs(slopeDifference-90) < SlopeLineToleranceInDegree && 
+			(degreeOfTilt < BoardTiltTolerance || 
+             degreeOfTilt > 180 - BoardTiltTolerance || 
+             (degreeOfTilt > 90 - BoardTiltTolerance && degreeOfTilt < 90 + BoardTiltTolerance))){
+                // pick a side (width or height) as the number to be checked against in rho distribution check
+                int boardSpace;
+                if (lineSlopeFreq[highIndex].val[0] == lineSlopeFreq[secondIndex].val[0]){
+                    boardSpace = MAX(right-left, bottom-top);
+                }else{
+                    
+                    boardSpace = lineSlopeFreq[highIndex] .val[1] > 45 && lineSlopeFreq[highIndex] .val[1] < 135 ? bottom - top:  right-left;
+                }
+                bool distributionCheck = checkLineDistributionByRho(boardLines, lineSlopeFreq[highIndex].val[1], boardSpace);
+                if (distributionCheck){
+                    distributionCheck = checkLineDistributionByRho(boardLines, lineSlopeFreq[secondIndex].val[1], boardSpace);
+                }
+                if (distributionCheck){
+                    int padding = (right-left) / 18;
+                    int roiLeft = MAX(left-padding, 0);
+                    int roiRight = MIN(right+padding, fullSrcGray->width);
+                    int roiTop = MAX(top-padding, 0);
+                    int roiBottom = MIN(bottom+padding, fullSrcGray->height);
+                    IplImage* potentialBoardNoBorder = getROIAsImageRef(fullSrcGray,roiLeft, roiRight, roiTop, roiBottom);
+                    rv = extractAndSetBoardUpRight(contours,cvPoint(roiLeft, roiTop), potentialBoardNoBorder, degreeOfTilt);
+                    cvReleaseImageHeader(&potentialBoardNoBorder);
+                }
+            }
 	}
 	showImage(color_dst, "potential board with line overlay");
 	if (color_dst){
@@ -595,9 +611,12 @@ bool checkLineDistributionByRho(CvSeq *boardLines, float pivotLineTheta, int boa
 	for(int i=0; i<boardLines->total ; i++){
 		float* line = (float*)cvGetSeqElem(boardLines,i);
 		float theta = line[1], rho = line[0];
-		if (areLinesSimilarInSlope(theta, pivotLineTheta)){
+		if (areLinesSimilarInSlope(radiantToDegree(theta), pivotLineTheta)){
 			rhos.push_back(rho);
 		}
+	}
+	if(rhos.size() < 1){
+		return false;
 	}
 	int firstRho=rhos[0], lastRho=rhos[0];
 	for(int i=1; i<rhos.size(); i++){
@@ -633,16 +652,21 @@ bool checkLineDistributionByRho(CvSeq *boardLines, float pivotLineTheta, int boa
 	return matches >= 5;
 }
 
-void findLineOccurenceBySlope(CvScalar *lineSlopeFreq, int freqLineCount, int &highestCount, int &secondHighest, int &highIndex, int &secondIndex){
-	for (int i=0; i<freqLineCount; i++){
-		int count = lineSlopeFreq[i].val[1];
-		if (count >= highestCount && count > secondHighest){
-			secondHighest = highestCount;
-			highestCount = count;
+void findLineOccurenceBySlope(CvScalar *lineSlopeFreq, int freqLineCount, int &highIndex, int &secondIndex){
+	if (lineSlopeFreq[0].val[0] > lineSlopeFreq[1].val[0]){
+		highIndex = 0;
+		secondIndex = 1;
+	}else{
+		highIndex = 1;
+		secondIndex = 0;
+	}
+	for (int i=2; i<freqLineCount; i++){
+		int count = lineSlopeFreq[i].val[0];
+		if (count >= lineSlopeFreq[highIndex].val[0] && 
+			count > lineSlopeFreq[secondIndex].val[0]){
 			secondIndex = highIndex;
 			highIndex = i;
-		}else if (count > secondHighest){
-			secondHighest = count;
+		}else if (count > lineSlopeFreq[secondIndex].val[0]){
 			secondIndex = i;
 		}
 	}
@@ -674,17 +698,13 @@ IplImage* extractAndSetBoardUpRight(CvSeq* contours, const CvPoint& contourOffse
 	Mat mat_mask_src = mask_src;
 	Mat mat_mask_dst = mask_dst;
 	Point2f src_center(src.cols/2.0F, src.rows/2.0F);
-	//strangely enough, the slope of the lines produced by cvHoughLines2() 
-	//uses a different polar orientation than the standard.
-	//Its 0 degree starts at 9 o'clock and go clockwise
-	double degree = abs(degreeOfHighestCount);
-	if (abs(degree) >  abs(CV_PI/2-degreeOfHighestCount)){
-		degree = -(CV_PI/2-degreeOfHighestCount);
+    
+	double angle = degreeOfHighestCount - 90; // assume horizontal
+	if (degreeOfHighestCount < 45){ // somewhat horizontal
+		angle = degreeOfHighestCount;
+	}else if (degreeOfHighestCount>135){ // tilted counter-clockwise, re-orient by rotating clock-wise
+		angle = degreeOfHighestCount - 180;
 	}
-	if (abs(degree) > abs(CV_PI-degreeOfHighestCount)){
-		degree = -abs(CV_PI-degreeOfHighestCount);
-	}
-	double angle = degree * (180/CV_PI);
 	Mat rot_mat = getRotationMatrix2D(src_center, angle, 1.0);
     warpAffine(src, dst, rot_mat, src.size());
 	warpAffine(mat_mask_src, mat_mask_dst, rot_mat, src.size());
@@ -703,22 +723,21 @@ IplImage* extractAndSetBoardUpRight(CvSeq* contours, const CvPoint& contourOffse
 /*
  count the occurence of lines by their degree of tilt 
  */
-void updateLineSlopeFreq(CvScalar* lineSlopeFreq, int *lineCount, float theta){
-	bool found = false;
-	for (int i=0; i<*lineCount; i++){
-		if ( areLinesSimilarInSlope(theta, lineSlopeFreq[i].val[0]) ){
-			lineSlopeFreq[i].val[1] ++;
-			found = true;
-		}
-	}
-	if (!found){
-		lineSlopeFreq[*lineCount] = cvScalar(theta, 0.0);
-		(*lineCount) ++;
+void updateLineSlopeFreq(CvScalar* lineSlopeFreq, int lineCount, int degree){
+	int bin = degree / (180/lineCount);
+	lineSlopeFreq[bin].val[0] += 1;
+	if (lineSlopeFreq[bin].val[1] == 0){
+		lineSlopeFreq[bin].val[1] = degree;
+	}else{
+		lineSlopeFreq[bin].val[1] = (lineSlopeFreq[bin].val[1] + degree) /2;
 	}
 }
 
 bool areLinesSimilarInSlope(float theta1, float theta2){
-	return (theta1 > theta2 - SlopeLineTolerance && theta1 < theta2 + SlopeLineTolerance) || (CV_PI - abs(theta2 - theta1) < SlopeLineTolerance);
+	//theta1 and theta2 are in degrees (as supposed to radiant)
+	//return (theta1 > theta2 - SlopeLineToleranceInDegree && theta1 < theta2 + SlopeLineTolerance) || (CV_PI - abs(theta2 - theta1) < SlopeLineTolerance);
+	return abs(theta1-theta2) < SlopeLineToleranceInDegree || 
+    180-max(theta1, theta2) + min(theta1, theta2) < SlopeLineToleranceInDegree;
 }
 
 //inclusive
@@ -735,13 +754,6 @@ void findExtremas(CvSeq* contour, int &left, int &right, int &top, int &bottom){
 	}
 }
 
-void showImage(IplImage* img, char* title, bool forceDisplay){
-    
-}
-
-void drawContour(IplImage* background, CvSeq *contours, int level){
-    
-}
 
 int findCharacterShadingThreshold(IplImage* img){
 	// look for 2 gray scale value with highest frequencies, the first and second highest gray values should be at least a certain distance apart
@@ -875,7 +887,18 @@ CvRect findRectFromMask(IplImage* mask){
 }
 
 void debug_dump_array(int *arr, int size, char* fileName){
-    
+
+}
+
+void debug_dump_array(CvScalar* arr, int count, char* fileName){
+
+}
+
+void showImage(IplImage* img, char* title, bool forceDisplay){
+
 }
 
 
+void drawContour(IplImage* background, CvSeq *contours, int level){
+
+}
