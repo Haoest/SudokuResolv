@@ -143,10 +143,10 @@ testPack::testPack(char InputFile[50], char boardHintAsString[89]){
 
 boardRecognizerTests::boardRecognizerTests(){
     tests.push_back(new testPack("camera_book2_1.jpg",      "050609030 210000065 400000007 003941600 000000000 004728500 300000006 160000078 080305020"));
-    tests.push_back(new testPack("iphone_ss3.png",          "000000700 150408900 640090815 070900008 000184000 800006090 724030081 009607032 001000000"));
+    //tests.push_back(new testPack("iphone_ss3.png",          "000000700 150408900 640090815 070900008 000184000 800006090 724030081 009607032 001000000"));
     tests.push_back(new testPack("iphone_ss2.png",          "000000700 150408900 640090815 070900008 000184000 800006090 724030081 009607032 001000000"));
     tests.push_back(new testPack("iphone_ss1.png",          "040000760 026104000 500003008 000040007 200010900 600300080 000400509 075000040 000058100"));    
-    tests.push_back(new testPack("camera_lcd1.jpg",         "000910560 000000001 073000240 000051008 080000050 400720000 092000870 700000000 051076000"));
+    //tests.push_back(new testPack("camera_lcd1.jpg",         "000910560 000000001 073000240 000051008 080000050 400720000 092000870 700000000 051076000"));
     tests.push_back(new testPack("camera_lcd2.jpg",         "405800900 060500201 030060708 090000006 050000070 800000030 503090080 602007090 001004605"));
     tests.push_back(new testPack("camera_lcd3.jpg",         "608407103 300658000 700030008 940200800 037806940 006009031 100080009 000925004 409701305"));
     tests.push_back(new testPack("camera_book2_1.jpg",      "050609030 210000065 400000007 003941600 000000000 004728500 300000006 160000078 080305020"));
@@ -163,11 +163,11 @@ boardRecognizerTests::boardRecognizerTests(){
     tests.push_back(new testPack("shaded_colorfg.png",      "004018060 050090380 000360001 008070005 007000200 900020600 400035000 083040090 070280400"));
     tests.push_back(new testPack("shaded_colorfg_noisy.png","004018060 050090380 000360001 008070005 007000200 900020600 400035000 083040090 070280400"));
     tests.push_back(new testPack("shaded.png",              "000600908 930150700 068300010 090200804 700803006 402007050 040001320 003096041 507002000"));
-    tests.push_back(new testPack("rotated5.png",            "020009060 109000002 460200000 290801000 007030500 000504097 000003025 900000708 070600010"));
+    //tests.push_back(new testPack("rotated5.png",            "020009060 109000002 460200000 290801000 007030500 000504097 000003025 900000708 070600010"));
     tests.push_back(new testPack("rotated25.jpg",           "530070000 600195000 098000060 800060003 400803001 700020006 060000280 000419005 000080079"));
     tests.push_back(new testPack("noisy.png",               "530070000 600195000 098000060 800060003 400803001 700020006 060000280 000419005 000080079"));
     tests.push_back(new testPack("rotated345.png",          "530070000 600195000 098000060 800060003 400803001 700020006 060000280 000419005 000080079"));
-    tests.push_back(new testPack("noisy_rotated.png",       "600040300 900001007 510000429 302100040 001000500 080002906 237000094 100700003 009020005"));
+    //tests.push_back(new testPack("noisy_rotated.png",       "600040300 900001007 510000429 302100040 001000500 080002906 237000094 100700003 009020005"));
     tests.push_back(new testPack("simple.png",              "530070000 600195000 098000060 800060003 400803001 700020006 060000280 000419005 000080079"));
     tests.push_back(new testPack("rotated2.png",            "002067080 900030506 070000401 080002004 010000090 500700030 406000010 701020008 020190700"));
     
@@ -189,6 +189,12 @@ boardRecognizerTests::boardRecognizerTests(){
 	tests.push_back(new testPack("news_lowlight_1.jpg",	    "070041800 806007001 000062070 030000250 609000308 085000040 050470000 900200507 001590030"));
 	tests.push_back(new testPack("news_lowlight_2.jpg",	    "070041800 806007001 000062070 030000250 609000308 085000040 050470000 900200507 001590030"));
 	tests.push_back(new testPack("news_lowlight_3.jpg",	    "070041800 806007001 000062070 030000250 609000308 085000040 050470000 900200507 001590030"));
+    
+    tests.push_back(new testPack("book_lowquality_2.jpg",	"000380090 001002700 000740608 000890000 056000830 000067000 800036000 002400900 000025000"));
+	tests.push_back(new testPack("book_lowquality_1.jpg",	"000380090 001002700 000740608 000890000 056000830 000067000 800036000 002400900 000025000"));
+	tests.push_back(new testPack("book_demo.jpg",			"080002307 010600002 003005900 502000000 060000080 000000704 008500100 600003020 109800030"));
+	tests.push_back(new testPack("newspaper_dotted.jpg",	"000000000 703190800 500068000 040300090 600000005 010002060 000680002 004071309 000000000"));
+	tests.push_back(new testPack("blank.png",				"000000000 000000000 000000000 000000000 000000000 000000000 000000000 000000000 000000000"));
 }
 
 boardRecognizerTests::~boardRecognizerTests(){
@@ -199,19 +205,27 @@ boardRecognizerTests::~boardRecognizerTests(){
 
 void boardRecognizerTests::runAll(){
     list<testPack*>::iterator it;
+    NSTimeInterval *totalDuration;
     for(it = tests.begin(); it!= tests.end(); it++){
         IplImage *img = cvLoadImage( (*it)->inputFile );
+        NSDate *start = [NSDate date];
         recognizerResultPack res = recognizeBoardFromPhoto(img);
+        NSTimeInterval duration = [start timeIntervalSinceNow];
+
         totalNumPuzzlesTried ++;
         if (res.success){
             numPuzzlesRecognized ++;
+            int** hints = [cvutil loadStringAsBoard:(*it)->hints];
+            printf("testing %s...", (*it)->inputFile);
+            checkResult(hints, res);
+            printf("Time took: %.1f\n", duration);
+            cvReleaseImage(&img);
+            for(int i=0; i<9; i++) delete hints[i];
+            delete hints;
+        }else{
+            printf("no puzzle found\n");
         }
-        int** hints = [cvutil loadStringAsBoard:(*it)->hints];
-        printf("testing %s...", (*it)->inputFile);
-        checkResult(hints, res);
-        cvReleaseImage(&img);
-        for(int i=0; i<9; i++) delete hints[i];
-        delete hints;
+
     }
 }
 
