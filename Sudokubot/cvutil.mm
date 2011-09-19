@@ -151,7 +151,6 @@ using namespace cv;
         cvReleaseImage(&rv);
         rv = gray;
     }
-    [img release];
     return rv;
 }
 

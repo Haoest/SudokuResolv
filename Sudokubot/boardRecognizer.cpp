@@ -35,7 +35,7 @@ static basicOCR *OCREngine = 0;
 IplImage* findBoardFromContour(CvSeq* contours, IplImage*fullSrcGray, IplImage *fullSrcBinary );
 IplImage* doesResembleBoard(CvSeq* contours, IplImage*fullSrc, IplImage *fullSrcBinary);
 void findExtremas(CvSeq* contour, int &left, int &right, int &top, int &bottom);
-void updateLineSlopeFreq(CvScalar* lineSlopeFreq, int lineCount, int theta);
+void updateLineSlopeFreq(CvScalar* lineSlopeFreq, int lineCount, float theta);
 int findCharacterShadingThreshold(IplImage* gridBinary);
 IplImage *getROIAsImageRef(IplImage* img, int left, int right, int top, int bottom);
 static bool rectangleCmpByPositionX(const CvRect &a, const CvRect &b);
@@ -586,9 +586,9 @@ IplImage* doesResembleBoard(CvSeq* contours, IplImage* fullSrcGray, IplImage *fu
                 if (distributionCheck){
                     int padding = (right-left) / 18;
                     int roiLeft = MAX(left-padding, 0);
-                    int roiRight = MIN(right+padding, fullSrcGray->width);
+                    int roiRight = MIN(right+padding, fullSrcGray->width-1);
                     int roiTop = MAX(top-padding, 0);
-                    int roiBottom = MIN(bottom+padding, fullSrcGray->height);
+                    int roiBottom = MIN(bottom+padding, fullSrcGray->height-1);
                     IplImage* potentialBoardNoBorder = getROIAsImageRef(fullSrcGray,roiLeft, roiRight, roiTop, roiBottom);
                     rv = extractAndSetBoardUpRight(contours,cvPoint(roiLeft, roiTop), potentialBoardNoBorder, degreeOfTilt);
                     cvReleaseImageHeader(&potentialBoardNoBorder);
@@ -723,7 +723,7 @@ IplImage* extractAndSetBoardUpRight(CvSeq* contours, const CvPoint& contourOffse
 /*
  count the occurence of lines by their degree of tilt 
  */
-void updateLineSlopeFreq(CvScalar* lineSlopeFreq, int lineCount, int degree){
+void updateLineSlopeFreq(CvScalar* lineSlopeFreq, int lineCount, float degree){
 	int bin = degree / (180/lineCount);
 	lineSlopeFreq[bin].val[0] += 1;
 	if (lineSlopeFreq[bin].val[1] == 0){
