@@ -21,18 +21,7 @@
 
 - (void) removeSubviews;
 
-@property (nonatomic, retain) IBOutlet UIButton *btnCaptureFromCamera;
-@property (nonatomic, retain) IBOutlet UIButton *btnOpenFromPhotoLibrary;
-@property (nonatomic, retain) IBOutlet UIButton *btnOpenFromClipboard;
-@property (nonatomic, retain) IBOutlet UIButton *btnArchive;
-@property (nonatomic, retain) IBOutlet UIButton *btnHelp;
-@property (nonatomic, retain) UIImagePickerController *imagePicker;
 
--(IBAction) btnCaptureFromCamera_touchDown;
--(IBAction) btnOpenFromPhotoLibrary_touchDown;
--(IBAction) btnOpenFromClipboard_touchDown;
--(IBAction) btnArchive_touchDown;
--(IBAction) btnHelp_touchDown;
 
 @property(nonatomic, retain) BoardViewController* boardViewController;
 @property(nonatomic, retain) ArchiveViewController* archiveViewController;
@@ -51,6 +40,7 @@
 @synthesize btnArchive;
 @synthesize btnHelp;
 @synthesize imagePicker;
+@synthesize btnBlankSheet;
 
 @synthesize boardViewController, archiveViewController, previewViewController, helpViewController;
 
@@ -197,6 +187,14 @@
     [self.imagePicker release];
 }
 
+-(IBAction) btnBlankSheet_touchDown{
+    UIImage* img = [UIImage imageNamed:@"blankSheet.png"];
+    if (img){
+        [self showPreview:img];
+    }
+    
+}
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissModalViewControllerAnimated:YES];
@@ -221,6 +219,7 @@
         self.previewViewController.rootViewDelegate = self;
     }
     [self.view addSubview: previewViewController.view];
+    [previewViewController viewWillAppear:false];
     [self.previewViewController loadImageWithSudokuBoard:imageWithSudokuBoard];
 }
 
@@ -267,6 +266,7 @@
     }
     [self.boardViewController refreshBoardWithHints:hints];    
     [self.view addSubview: self.boardViewController.view];
+    [self.boardViewController viewWillAppear:false];
 }
 
 -(void) removeSubviews{

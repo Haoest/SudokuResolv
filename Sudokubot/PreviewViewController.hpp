@@ -24,8 +24,9 @@
 #import "rootViewDelegate.h"
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import <iAd/iAd.h>
 
-@interface PreviewViewController : UIViewController {
+@interface PreviewViewController : UIViewController<UINavigationControllerDelegate, ADBannerViewDelegate> {
     NSMutableArray* gridViews;
     NSMutableArray* gridNumberLabels;
     int selectedGridId;
@@ -37,6 +38,7 @@
 }
 
 @property(nonatomic, assign) id<RootViewDelegate> rootViewDelegate;
+
 
 -(void) loadImageWithSudokuBoard:(UIImage*) img;
 

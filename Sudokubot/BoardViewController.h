@@ -23,8 +23,10 @@
 #import <UIKit/UIKit.h>
 #import "ArchiveEntry.h"
 #import "rootViewDelegate.h"
+#import <iAd/iAd.h>
+#import "SudokubotAppDelegate.h"
 
-@interface BoardViewController : UIViewController<UITextFieldDelegate> {
+@interface BoardViewController : UIViewController<UITextFieldDelegate, ADBannerViewDelegate> {
 
 }
 @property(nonatomic, retain) IBOutlet UIView* contentsView;

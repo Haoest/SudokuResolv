@@ -117,6 +117,13 @@
     [self wireupControls];
 }
 
+-(void) viewWillAppear:(BOOL)animated{
+    [SharedAdBannerView removeFromSuperview];
+    [SharedAdBannerView setFrame:CGRectMake(0, 44, 320, 50)];
+    SharedAdBannerView.delegate = self;
+    [self.view addSubview:SharedAdBannerView];
+}
+
 -(void) resetData{
     archiveEntryId = -1;
     if(self.hints){
@@ -150,7 +157,7 @@
         unitFrames = [[NSMutableArray alloc]initWithCapacity:9];
         int unitSize = 96;
         int gridSize = 32;
-        boardViewContainer = [[UIView alloc] initWithFrame:CGRectMake(20, 70, 288, 288)];
+        boardViewContainer = [[UIView alloc] initWithFrame:CGRectMake(20, 104, 288, 288)];
         [self.boardViewContainer.layer setBorderWidth:1];
         [self.boardViewContainer.layer setBorderColor:[[UIColor blackColor] CGColor]];
         for(int i=0; i<9; i++){
@@ -251,7 +258,9 @@
     [UIView beginAnimations: @"anim" context: nil];
     [UIView setAnimationBeginsFromCurrentState: YES];
     [UIView setAnimationDuration: movementDuration];
-    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+//    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    boardViewContainer.frame = CGRectOffset(boardViewContainer.frame, 0, movement);
+    commentTextField.frame = CGRectOffset(commentTextField.frame, 0, movement);
     [UIView commitAnimations];
 }
 
@@ -287,6 +296,25 @@
     self.hints = [cvutil DeserializedBoard:[entry sudokuHints]];
     self.commentTextField.text = entry.comments;
     [self drawGridsView];
+}
+
+-(BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
+{
+    return YES;
+}
+
+-(void)bannerViewActionDidFinish:(ADBannerView *)banner
+{
+    [self.view.superview bringSubviewToFront:self.view];
+}
+
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+    
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
 }
 
 @end

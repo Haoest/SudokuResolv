@@ -13,15 +13,20 @@
 
 
 @synthesize window=_window;
-
 @synthesize viewController=_viewController;
+@synthesize adBannerView;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-     
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    
+    adBannerView = [[ADBannerView alloc] initWithFrame:CGRectZero];
+    adBannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+    adBannerView.backgroundColor = [UIColor clearColor];
+    adBannerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
+    
     return YES;
 }
 
@@ -67,7 +72,12 @@
 {
     [_window release];
     [_viewController release];
+    [adBannerView release];
     [super dealloc];
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
 }
 
 @end

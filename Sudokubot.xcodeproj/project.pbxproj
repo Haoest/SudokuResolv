@@ -102,6 +102,7 @@
 		3A982E2513B3DE13007C2BFF /* news_lowlight_3.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A982E1813B3DE13007C2BFF /* news_lowlight_3.JPG */; };
 		3A982E2613B3DE13007C2BFF /* news_lowlight_3.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3A982E1813B3DE13007C2BFF /* news_lowlight_3.JPG */; };
 		3A9925AB13916F3D0085CA6C /* PreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A9925AA13916F3C0085CA6C /* PreviewViewController.xib */; };
+		3A9AB7ED1426DB2D00213B67 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB62BD814263A0C00F15C8F /* iAd.framework */; };
 		3A9AC49C139F5FA00014847C /* blackwhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB21386F61000FF570D /* blackwhite.png */; };
 		3A9AC49D139F5FA00014847C /* camera_blurry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB31386F61000FF570D /* camera_blurry.jpg */; };
 		3A9AC49E139F5FA00014847C /* camera_book1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A99BAB41386F61000FF570D /* camera_book1.jpg */; };
@@ -216,6 +217,7 @@
 		3AB62BD41425ECB300F15C8F /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB62BCF1425ECB300F15C8F /* blank.png */; };
 		3AB62BD61425EEC500F15C8F /* blankSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB62BD51425EEC500F15C8F /* blankSheet.png */; };
 		3AB62BD71425EEC500F15C8F /* blankSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB62BD51425EEC500F15C8F /* blankSheet.png */; };
+		3AB62BD914263A0C00F15C8F /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB62BD814263A0C00F15C8F /* iAd.framework */; };
 		3AB77E341398BAD900657E89 /* cvutil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8FEDCE132CD99F00654072 /* cvutil.mm */; };
 		3AB77E371398BDBE00657E89 /* ArchiveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ABFB6CD138AECD100912353 /* ArchiveTests.m */; };
 		3AB77E381398BE6400657E89 /* solverTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E6C7813295D130055628C /* solverTests.mm */; };
@@ -389,6 +391,7 @@
 		3AB62BCE1425ECB300F15C8F /* newspaper_dotted.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = newspaper_dotted.jpg; sourceTree = "<group>"; };
 		3AB62BCF1425ECB300F15C8F /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
 		3AB62BD51425EEC500F15C8F /* blankSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blankSheet.png; sourceTree = "<group>"; };
+		3AB62BD814263A0C00F15C8F /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		3AB7AFE5138A3C7600F7EB36 /* ArchiveManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveManager.h; sourceTree = "<group>"; };
 		3AB7AFE6138A3C7600F7EB36 /* ArchiveManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveManager.m; sourceTree = "<group>"; };
 		3ABFB6CC138AECD100912353 /* ArchiveTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveTests.h; sourceTree = "<group>"; };
@@ -408,6 +411,7 @@
 				3A9E6C4C13295D120055628C /* Foundation.framework in Frameworks */,
 				3A9E6C4E13295D120055628C /* CoreGraphics.framework in Frameworks */,
 				3A9B93A013B05302002FAE05 /* QuartzCore.framework in Frameworks */,
+				3A9AB7ED1426DB2D00213B67 /* iAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +430,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AB62BD914263A0C00F15C8F /* iAd.framework in Frameworks */,
 				3A9B939F13B04AF8002FAE05 /* QuartzCore.framework in Frameworks */,
 				3A9EDCF0139F589300D7C521 /* UIKit.framework in Frameworks */,
 				3A9EDCF1139F589300D7C521 /* Foundation.framework in Frameworks */,
@@ -552,6 +557,7 @@
 		3A9E6C4813295D120055628C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3AB62BD814263A0C00F15C8F /* iAd.framework */,
 				3A9B939E13B04AF8002FAE05 /* QuartzCore.framework */,
 				3ABFB6D2138AF2CC00912353 /* SenTestingKit.framework */,
 				3A9E6C4913295D120055628C /* UIKit.framework */,

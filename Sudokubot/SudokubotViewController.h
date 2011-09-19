@@ -20,6 +20,21 @@ RootViewDelegate> {
     
 }
 
+@property (nonatomic, retain) IBOutlet UIButton *btnCaptureFromCamera;
+@property (nonatomic, retain) IBOutlet UIButton *btnOpenFromPhotoLibrary;
+@property (nonatomic, retain) IBOutlet UIButton *btnOpenFromClipboard;
+@property (nonatomic, retain) IBOutlet UIButton *btnArchive;
+@property (nonatomic, retain) IBOutlet UIButton *btnHelp;
+@property (nonatomic, retain) UIImagePickerController *imagePicker;
+@property (nonatomic, retain) IBOutlet UIButton *btnBlankSheet;
+
+-(IBAction) btnCaptureFromCamera_touchDown;
+-(IBAction) btnOpenFromPhotoLibrary_touchDown;
+-(IBAction) btnOpenFromClipboard_touchDown;
+-(IBAction) btnArchive_touchDown;
+-(IBAction) btnHelp_touchDown;
+-(IBAction) btnBlankSheet_touchDown;
+
 - (void) reevaluateClipboardButton;
 
 @end

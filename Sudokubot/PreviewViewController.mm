@@ -28,6 +28,8 @@
 #import "AppConfig.h"
 #import "solver.hpp"
 #import <QuartzCore/QuartzCore.h>
+#import <iAd/iAd.h>
+#import "SudokubotAppDelegate.h"
 
 @interface PreviewViewController()
 
@@ -44,15 +46,13 @@
 
 -(void) boardRecognizingThread:(UIImage*) img;
 
-
 @end
 
 
 
 @implementation PreviewViewController
 
-CGPoint const boardGridOffset = CGPointMake(20, 20);
-CGPoint const gridLabelOffset = CGPointMake(0,-8);
+
 
 @synthesize previewImage, solveButton, cancelButton;
 @synthesize rootViewDelegate;
@@ -108,6 +108,14 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
     // e.g. self.myOutlet = nil;
 }
 
+-(void) viewWillAppear:(BOOL)animated{
+    [SharedAdBannerView removeFromSuperview];
+    [SharedAdBannerView setFrame:CGRectMake(0, 0, 320, 50)];
+    SharedAdBannerView.delegate = self;
+    [self.view addSubview:SharedAdBannerView];
+}
+
+
 -(void) resetFields{
     [numpadContainer setHidden:true];
     if (selectedNumpadId > -1){
@@ -150,13 +158,12 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
         [gv setAlpha:0.5];
         int gridNumber = hints[i/9][i%9];
         [self.view addSubview:gv];
-        UILabel* lbl = [[UILabel alloc] initWithFrame:CGRectMake(gv.frame.origin.x+gridLabelOffset.x, 
-                                                                 gv.frame.origin.y+gridLabelOffset.y, 
+        int offsetx = 0;
+        int offsety = -5;
+        UILabel* lbl = [[UILabel alloc] initWithFrame:CGRectMake(gv.frame.origin.x + offsetx, 
+                                                                 gv.frame.origin.y + offsety, 
                                                                  gv.frame.size.width, 
                                                                  gv.frame.size.height)];
-        lbl.frame.origin.x += gridLabelOffset.x;
-        lbl.frame.origin.y += gridLabelOffset.y;
-        lbl.frame.origin.y = 0;
         [lbl setTextColor:[UIColor redColor]];
         [lbl setTextAlignment:UITextAlignmentRight];
         [lbl setBackgroundColor:[UIColor clearColor]];
@@ -173,11 +180,11 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
 -(void) loadImageWithSudokuBoard:(UIImage*) img{
     [previewImage setImage:img];
     if (!busyViewTop){
-        busyViewTop = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 320)];
+        busyViewTop = [[UIView alloc] initWithFrame:CGRectMake(0, 60, 320, 281)];
         [busyViewTop setBackgroundColor:[UIColor blackColor]];
         [busyViewTop setAlpha:0.5];
         [self.view addSubview:busyViewTop];
-        busyViewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 320, 320, 140)];
+        busyViewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 341, 320, 480 - 341)];
         [busyViewBottom setBackgroundColor:[UIColor blackColor]];
         busyIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         [busyIndicator startAnimating];
@@ -211,7 +218,9 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
         gridViews = [[NSMutableArray alloc] initWithCapacity:81];
         for(int i=0; i<81; i++){
             CvRect r = result.grids[i];
-            CGRect grid = CGRectMake(r.x *HRatio + boardGridOffset.x , r.y*VRatio+boardGridOffset.y, r.width*HRatio, r.height*VRatio);
+            int offsetx = previewImage.frame.origin.x;
+            int offsety = previewImage.frame.origin.y;
+            CGRect grid = CGRectMake(r.x *HRatio + offsetx , r.y*VRatio+offsety, r.width*HRatio, r.height*VRatio);
             UIView* v = [[UIView alloc] initWithFrame:grid];
             [gridViews addObject: v];
             [v release];
@@ -448,5 +457,23 @@ CGPoint const gridLabelOffset = CGPointMake(0,-8);
     [rootViewDelegate showRootView];
 }
 
+-(BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
+{
+    return YES;
+}
+
+-(void)bannerViewActionDidFinish:(ADBannerView *)banner
+{
+    [self.view.superview bringSubviewToFront:self.view];
+}
+
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+}
 
 @end
