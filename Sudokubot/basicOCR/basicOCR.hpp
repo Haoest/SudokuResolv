@@ -8,6 +8,9 @@
  *  Modified by haoest on 7/27/2011 (mm/dd/yyyy)
  
  */
+#ifndef __BASICOCR_HPP__
+#define __BASICOCR_HPP__
+
 
 #include <opencv/cv.h>
 //#include <opencv/highgui.h>
@@ -34,3 +37,5 @@ private:
     void getData(IplImage* OCRTemplate);
     void train();
 };
+
+#endif
