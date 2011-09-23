@@ -101,7 +101,8 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     
     NSURL *requestURL = [ [ request URL ] retain ];
     if ( ( [ [ requestURL scheme ] isEqualToString: @"http" ] ||
-          [[requestURL scheme] isEqualToString:@"mailto"])
+          [[requestURL scheme] isEqualToString:@"mailto"] ||
+          [[requestURL scheme] isEqualToString:@"itms-apps"])
         && ( navigationType == UIWebViewNavigationTypeLinkClicked ) ) {
         return ![ [ UIApplication sharedApplication ] openURL: [ requestURL autorelease ] ];
     }

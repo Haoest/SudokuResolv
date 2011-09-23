@@ -63,7 +63,7 @@ using namespace cv;
     IplImage *ret = cvCreateImage(cvGetSize(iplimage), IPL_DEPTH_8U, 3);
     cvCvtColor(iplimage, ret, CV_RGBA2BGR);
     cvReleaseImage(&iplimage);
-    if (true||ignoreUIOrientation){
+    if (false||ignoreUIOrientation){
         return ret;
     }
     CGFloat imageOrientationInDegree = [cvutil getImageOrientationInDegrees:image];
