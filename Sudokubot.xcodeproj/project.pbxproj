@@ -253,7 +253,6 @@
 /* Begin PBXFileReference section */
 		3A0FB73C138620920050361A /* boardRecognizerTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = boardRecognizerTests.mm; sourceTree = "<group>"; };
 		3A0FB73D138620920050361A /* boardRecognizerTests.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = boardRecognizerTests.hpp; sourceTree = "<group>"; };
-		3A105782139C39DF00089373 /* acknowledgement.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = acknowledgement.txt; path = devres/acknowledgement.txt; sourceTree = "<group>"; };
 		3A5416DD13AB047A0082676B /* solver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = solver.hpp; sourceTree = "<group>"; };
 		3A5416DE13AB047A0082676B /* solver.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = solver.mm; sourceTree = "<group>"; };
 		3A588D3A13B5B576001D0F13 /* icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72.png"; sourceTree = "<group>"; };
@@ -400,6 +399,8 @@
 		3AC35C72133466F80099F669 /* boardRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = boardRecognizer.h; sourceTree = "<group>"; };
 		3AC35C73133466F90099F669 /* boardRecognizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = boardRecognizer.cpp; sourceTree = "<group>"; };
 		3ACE518013A1F8BD00CC8717 /* OCRTemplateSet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OCRTemplateSet1.png; path = Sudokubot/OCRTemplateSet1.png; sourceTree = "<group>"; };
+		3AEFF4CF14352B060097E3F7 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		3AEFF4D014352B060097E3F7 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -622,11 +623,12 @@
 		3A9E6C8213296AFB0055628C /* Development Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3AEFF4CF14352B060097E3F7 /* LICENSE */,
+				3AEFF4D014352B060097E3F7 /* README */,
 				3AA2231413B5A16B00A12515 /* ss-archive.png */,
 				3AA2231513B5A16B00A12515 /* ss-home.png */,
 				3AA2231613B5A16B00A12515 /* ss-preview.png */,
 				3A9B938F13B02919002FAE05 /* icon-appstore.png */,
-				3A105782139C39DF00089373 /* acknowledgement.txt */,
 			);
 			name = "Development Resources";
 			sourceTree = "<group>";
