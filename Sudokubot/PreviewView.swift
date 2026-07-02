@@ -132,7 +132,7 @@ struct PreviewView: View {
         }.value
 
         isRecognizing = false
-        if let result, result.success, let nsBoard = result.board as? [[NSNumber]] {
+        if result.success, let nsBoard = result.board {
             board = nsBoard.map { $0.map { $0.intValue } }
         } else {
             recognitionFailed = true

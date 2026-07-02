@@ -13,32 +13,28 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
-
-//#include <opencv2\imgproc\imgproc_c.h>
-//#include "core\core_c.h"
-//c++ includes
-//#include "opencv2/highgui/highgui.hpp"
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/core/core.hpp>
-#include <vector>
-
+// Ported to the OpenCV 4 C++ API (cv::Mat) in 2026.
 
 #ifndef BOARDRECOGNIZER_H
 #define BOARDRECOGNIZER_H
 
+#include <opencv2/core.hpp>
+#include <vector>
+
 struct recognizerResultPack{
-    IplImage *boardGray;
-    int ** boardArr;
-    std::vector<CvRect> grids;
-    bool success;
+    cv::Mat boardGray;
+    int **boardArr = nullptr;
+    std::vector<cv::Rect> grids;
+    bool success = false;
     void destroy();
 };
 
-recognizerResultPack recognizeBoardFromPhoto(IplImage *imageInput);
-recognizerResultPack recognizeFromBoard(IplImage *boardGray, int initialBoardThreshold);
+// imageInput may be single channel (gray), 3-channel BGR, or 4-channel RGBA
+recognizerResultPack recognizeBoardFromPhoto(const cv::Mat &imageInput);
+recognizerResultPack recognizeFromBoard(const cv::Mat &boardGray, int initialBoardThreshold);
 
-// given original image as input, find the image containing just the board as gray scale image
-IplImage* findSudokuBoard(IplImage *fullSrc, int &backgroundThresholdUsed);
+// given original image as input, find the image containing just the board as
+// a gray scale image; empty Mat when no board is found
+cv::Mat findSudokuBoard(const cv::Mat &fullSrc, int &backgroundThresholdUsed);
 
 #endif
-

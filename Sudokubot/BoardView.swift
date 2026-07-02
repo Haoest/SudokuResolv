@@ -6,7 +6,7 @@ struct BoardView: View {
     @State private var solution: [[Int]]? = nil
     @State private var isSolving = true
     @State private var comment = ""
-    @State private var savedEntryId: Int32 = -1
+    @State private var savedEntryId: Int = -1
     @State private var showSaveConfirmation = false
     @State private var errorMessage: String? = nil
 
@@ -83,27 +83,33 @@ struct BoardView: View {
 
     @MainActor
     private func solve() async {
-        let hintsNS = hints.map { $0.map { NSNumber(value: $0) } }
+        let hints = self.hints
         let result = await Task.detached(priority: .userInitiated) {
-            SudokuBridge.solve(hintsNS)
+            Solver.solve(hints)
         }.value
 
         isSolving = false
-        if let nsResult = result as? [[NSNumber]] {
-            solution = nsResult.map { $0.map { $0.intValue } }
+        if let result {
+            solution = result
         } else {
             errorMessage = "This puzzle has no solution or something went wrong."
         }
     }
 
     private func saveOrUpdate(_ sol: [[Int]]) {
-        let solNS = sol.map { $0.map { NSNumber(value: $0) } }
-        let hintsNS = hints.map { $0.map { NSNumber(value: $0) } }
+        let manager = ArchiveManager()
         if savedEntryId < 0 {
-            let newId = SudokuBridge.save(toArchive: solNS, hints: hintsNS, comment: comment)
-            if newId >= 0 { savedEntryId = Int32(newId) }
-        } else {
-            SudokuBridge.updateArchiveEntry(Int32(savedEntryId), comment: comment)
+            var entry = ArchiveEntry(entryId: -1,
+                                     solution: Board.serialize(sol),
+                                     hints: Board.serialize(hints),
+                                     secondsSince1970: Date().timeIntervalSince1970,
+                                     comments: comment)
+            let newId = manager.add(&entry)
+            if manager.save() && newId >= 0 { savedEntryId = newId }
+        } else if var entry = manager.entry(byId: savedEntryId) {
+            entry.comments = comment
+            manager.update(entry)
+            manager.save()
         }
         showSaveConfirmation = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { showSaveConfirmation = false }

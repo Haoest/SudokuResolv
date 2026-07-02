@@ -1,8 +1,15 @@
-import SwiftUI
-import UIKit
+//
+//  SudokubotApp.swift
+//  Sudokubot
+//
 
-@objc class RootViewControllerFactory: NSObject {
-    @objc static func makeRootViewController() -> UIViewController {
-        UIHostingController(rootView: HomeView())
+import SwiftUI
+
+@main
+struct SudokubotApp: App {
+    var body: some Scene {
+        WindowGroup {
+            HomeView()
+        }
     }
 }

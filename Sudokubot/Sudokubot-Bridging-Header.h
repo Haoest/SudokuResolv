@@ -1,4 +1,6 @@
+//
+//  Sudokubot-Bridging-Header.h
+//  Sudokubot
+//
+
 #import "SudokuBridge.h"
-#import "ArchiveManager.h"
-#import "ArchiveEntry.h"
-#import "AppConfig.h"

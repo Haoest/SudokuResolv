@@ -19,17 +19,17 @@ struct ArchiveView: View {
                     .foregroundStyle(.white)
             } else {
                 List {
-                    ForEach(entries, id: \.entryId) { entry in
+                    ForEach(entries) { entry in
                         Button {
                             selectedEntry = entry
                             navigateToBoard = true
                         } label: {
                             VStack(alignment: .leading) {
-                                Text(formattedDate(entry.getCreationDateGMT()))
+                                Text(formattedDate(entry.creationDateGMT))
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
-                                if let comment = entry.comments, !comment.isEmpty {
-                                    Text(comment)
+                                if !entry.comments.isEmpty {
+                                    Text(entry.comments)
                                         .font(.body)
                                 }
                             }
@@ -45,9 +45,7 @@ struct ArchiveView: View {
         .toolbar { EditButton() }
         .navigationDestination(isPresented: $navigateToBoard) {
             if let entry = selectedEntry,
-               let hintStr = entry.sudokuHints,
-               let hintsNS = SudokuBridge.deserializeBoard(hintStr) as? [[NSNumber]] {
-                let hints = hintsNS.map { $0.map { $0.intValue } }
+               let hints = Board.deserialize(entry.sudokuHints) {
                 BoardView(hints: hints)
             }
         }
@@ -55,20 +53,21 @@ struct ArchiveView: View {
     }
 
     private func loadEntries() {
-        entries = SudokuBridge.loadAllArchiveEntries() as? [ArchiveEntry] ?? []
+        entries = ArchiveManager().allEntriesSorted()
     }
 
     private func deleteEntries(at offsets: IndexSet) {
+        let manager = ArchiveManager()
         for idx in offsets {
-            SudokuBridge.deleteArchiveEntry(Int32(entries[idx].entryId))
+            manager.remove(entryId: entries[idx].entryId)
         }
+        manager.save()
         entries.remove(atOffsets: offsets)
     }
 
-    private func formattedDate(_ date: Date?) -> String {
-        guard let date else { return "" }
+    private func formattedDate(_ date: Date) -> String {
         let f = DateFormatter()
-        f.dateFormat = AppConfig.archiveDateFormat()
+        f.dateFormat = AppConfig.archiveDateFormat
         return f.string(from: date)
     }
 }
