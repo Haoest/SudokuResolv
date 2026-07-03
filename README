@@ -1,17 +1,55 @@
-This file describe the software requirement in order to get the project compile and run.
+Sudoku Resolv
+=============
 
-First, xcode 4 is required. 
+Photograph a sudoku puzzle, let OpenCV find the board and read the digits,
+then solve it. Originally a 2011 iOS 3.2 app; modernized in 2026 to iOS 16+,
+SwiftUI, and OpenCV 4.13.
 
-Second, a copy of the OpenCV library files compiled for Mac should be present. 
-If you need a guide on how to get a copy real quick, visit this page: 
-http://computer-vision-talks.com/2011/02/building-opencv-for-iphone-in-one-click/. 
-This project is developed with OpenCV 2.3. 
+Requirements
+------------
 
-Third, change the Search Paths in project setting to point to the correct location where 
-your OpenCV library files are. 
+- Xcode 16 or newer
+- opencv2.xcframework (OpenCV 4.13.0) at the repository root (see below)
 
-Off you go.
+Getting opencv2.xcframework
+---------------------------
 
+The xcframework is not checked in (it is ~37 MB of build output). Build it
+once from the official OpenCV 4.13.0 sources (needs cmake and python3):
 
-App Store product page:
+    git clone --depth 1 --branch 4.13.0 https://github.com/opencv/opencv.git
+    python3 opencv/platforms/apple/build_xcframework.py --out build \
+        --iphoneos_archs arm64 --iphonesimulator_archs arm64 \
+        --build_only_specified_archs \
+        --without objc --without dnn --without gapi --without stitching \
+        --without video --without videoio --without objdetect --without photo \
+        --without calib3d --without features2d --without flann
+    cp -R build/opencv2.xcframework <this repo>/
+
+(The official release asset opencv-4.13.0-ios-framework.zip is a fat
+framework without an arm64-simulator slice, so it cannot be used for
+simulator builds on Apple Silicon — hence the source build.)
+
+Building and testing
+--------------------
+
+    xcodebuild -project Sudokubot.xcodeproj -scheme Sudokubot \
+        -destination 'platform=iOS Simulator,name=iPhone 16' build
+
+    xcodebuild -project Sudokubot.xcodeproj -scheme Sudokubot \
+        -destination 'platform=iOS Simulator,name=iPhone 16' test
+
+Architecture
+------------
+
+- SwiftUI app (SudokubotApp, HomeView, PreviewView, BoardView, ArchiveView,
+  HelpView) with a Swift solver (Solver.swift) and archive layer
+  (ArchiveEntry/ArchiveManager.swift — same on-disk format as the 2011 app).
+- C++/Objective-C++ vision core on the OpenCV 4 C++ API: boardRecognizer
+  (board detection + grid extraction), basicOCR (cv::ml::KNearest digit
+  classifier), cvutil (UIImage <-> cv::Mat).
+- SudokuBridge is the single thin Objective-C++ bridge Swift calls for
+  board recognition.
+
+App Store product page (original release):
 http://itunes.apple.com/us/app/sudoku-resolv/id446583583?ls=1&mt=8

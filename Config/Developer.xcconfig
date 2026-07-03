@@ -1,0 +1,5 @@
+// Committed, shared build settings entry point. Optionally pulls in a
+// machine-local, gitignored Developer-Local.xcconfig (create one next to
+// this file with e.g. `DEVELOPMENT_TEAM = YOURTEAMID` to sign for a device).
+// Simulator builds work fine with no local file present.
+#include? "Developer-Local.xcconfig"

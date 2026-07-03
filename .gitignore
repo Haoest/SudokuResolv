@@ -1,0 +1,10 @@
+build/
+DerivedData/
+xcuserdata/
+*.xcworkspace/xcuserdata/
+.DS_Store
+.claude/
+opencv2.xcframework/
+opencv2.framework/
+*.zip
+Config/Developer-Local.xcconfig
