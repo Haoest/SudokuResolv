@@ -23,6 +23,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA0000000000000000000070 /* Developer.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Config/Developer.xcconfig"; sourceTree = "<group>"; };
 		AA0000000000000000000020 /* opencv2.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = opencv2.xcframework; sourceTree = "<group>"; };
 		AA0000000000000000000023 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		AA0000000000000000000025 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -53,10 +54,6 @@
 			exceptions = (
 				AA0000000000000000000012 /* Exceptions for "Sudokubot" folder in "Sudokubot" target */,
 			);
-			explicitFileTypes = {
-			};
-			explicitFolders = (
-			);
 			path = Sudokubot;
 			sourceTree = "<group>";
 		};
@@ -64,10 +61,6 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				AA0000000000000000000013 /* Exceptions for "SudokubotTests" folder in "SudokubotTests" target */,
-			);
-			explicitFileTypes = {
-			};
-			explicitFolders = (
 			);
 			path = SudokubotTests;
 			sourceTree = "<group>";
@@ -98,6 +91,7 @@
 		AA0000000000000000000002 = {
 			isa = PBXGroup;
 			children = (
+				AA0000000000000000000070 /* Developer.xcconfig */,
 				AA0000000000000000000010 /* Sudokubot */,
 				AA0000000000000000000011 /* SudokubotTests */,
 				AA0000000000000000000004 /* Frameworks */,
@@ -309,6 +303,7 @@
 		};
 		AA0000000000000000000064 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA0000000000000000000070 /* Developer.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = (
@@ -328,6 +323,7 @@
 		};
 		AA0000000000000000000065 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA0000000000000000000070 /* Developer.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = (
@@ -347,6 +343,7 @@
 		};
 		AA0000000000000000000067 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA0000000000000000000070 /* Developer.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -370,6 +367,7 @@
 		};
 		AA0000000000000000000068 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA0000000000000000000070 /* Developer.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;

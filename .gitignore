@@ -7,3 +7,4 @@ xcuserdata/
 opencv2.xcframework/
 opencv2.framework/
 *.zip
+Config/Developer-Local.xcconfig
