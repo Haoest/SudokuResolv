@@ -30,6 +30,25 @@ once from the official OpenCV 4.13.0 sources (needs cmake and python3):
 framework without an arm64-simulator slice, so it cannot be used for
 simulator builds on Apple Silicon — hence the source build.)
 
+Caching the built xcframework
+-----------------------------
+
+Building takes 20+ minutes, so after a successful build we keep a
+tarball outside the repo. If opencv2.xcframework/ ever gets wiped
+(e.g. by `git clean -fdx`), restore it from the cache instead of
+rebuilding:
+
+    # save (run once, after building)
+    tar -czf ~/Library/Caches/opencv2.xcframework.tar.gz \
+        -C <this repo> opencv2.xcframework
+
+    # restore
+    tar -xzf ~/Library/Caches/opencv2.xcframework.tar.gz \
+        -C <this repo>
+
+Note: `git clean -fdx` will remove the xcframework because it is
+gitignored. Use `git clean -fdx -e opencv2.xcframework` to preserve it.
+
 Building and testing
 --------------------
 
